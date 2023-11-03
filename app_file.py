@@ -27,7 +27,6 @@ if st.button("Zur Vorlage"):
         st.write("**Beratungsgrund:** V.a. genetisch bedingte XX")
         if Titel == "Herr":
         st.write("Sehr geehrter", Titel, Name,",")
-        else:
         st.write("Sehr geehrte", Titel, Name,",")
         st.write("am", current_datetime.strftime('%d.%m.%Y'), "stellten Sie Ihren Sohn/Ihre Tochter  in unserer genetischen Sprechstunde vor.")
         st.write("**Eigenanamnese:**")
