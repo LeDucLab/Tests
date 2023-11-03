@@ -22,7 +22,7 @@ if st.button("Zur Vorlage"):
     # Display text based on the selected option
     if option == "Erstberatung Exom":
         st.write("**Beratungsgrund:** V.a. genetisch bedingte XX")
-        st.write("Sehr geehrte Frau/Herr," Name)
+        st.write("Sehr geehrte Frau/Herr,", Name)
         st.write("am", current_datetime.strftime('%d.%m.%Y'), "stellten Sie Ihren Sohn/Ihre Tochter  in unserer genetischen Sprechstunde vor.")
         st.write("**Eigenanamnese:**")
         st.write("Sie berichteten, dass XX nach un/auffälliger Schwangerschaft in der Schwangerschaftswoche (per Sectio/als hypotrophes Neugeborenes/mit …) geboren wurde. Ihre/Seine Geburtsmaße betrugen … [Daten aus pedz].")
