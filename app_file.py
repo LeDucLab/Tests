@@ -24,7 +24,7 @@ if st.button("Zu Vorlage"):
         st.write("Hinsichtlich der aktuellen Fragestellung berichteten Sie, dass bei Unterlagen zu den genannten Familienmitgliedern liegen uns nicht vor. Ein drei Generationen umfassender Stammbaum befindet sich im Anhang. Sie berichteten keine für die Fragestellung relevanten Krankheitsbilder in Ihrer Familie.")
         st.write("**Körperliche Untersuchung:**")
         st.write("Wir sahen im Alter von  Jahren. Ihre/Seine Körpermaße zur Vorstellung betrugen:[Daten aus pedz]. Fazial ergeben sich keine Auffälligkeiten/Fazial fielen … auf.")
-        st.write("**Beurteilung:**)
+        st.write("**Beurteilung:**")
         st.write("Bei Ihrem Sohn/Ihrer Tochter besteht der Verdacht auf ein . Aus der Sicht unseres Fachgebietes ist eine genetische Diagnostik indiziert. Wir veranlassten daher eine molekulargenetische Paneldiagnostik in den hierfür ursächlichen Genen bei ihm/ihr. Sobald der Befund der genetischen Diagnostik vorliegt, werden wir Sie informieren und weiterführend Stellung nehmen.")
     elif option == "Option 2":
         st.write("You chose Option 2!")
