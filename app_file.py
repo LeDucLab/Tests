@@ -4,6 +4,9 @@ import streamlit as st
 # Create a Streamlit app
 st.title("Briefe Textbausteine")
 
+# Get the current date and time
+current_datetime = datetime.now()
+
 # Add a selectbox for choosing an option
 option = st.selectbox("Wählen Sie die Art der Beratung", ["Erstberatung Exom", "Erstberatung NDD", "Erstberatung NDD+Epilepsie", "Erstberatung gezielt", "Erstberatung CA unauff"])
 
