@@ -2,7 +2,7 @@ import streamlit as st
 
 
 # Create a Streamlit app
-st.title("Briefe Textbbausteine")
+st.title("Briefe Textbausteine")
 
 # Add a selectbox for choosing an option
 option = st.selectbox("Wählen Sie die Art der Beratung", ["Erstberatung Exom", "Erstberatung NDD", "Erstberatung NDD+Epilepsie", "Erstberatung gezielt", "Erstberatung CA unauff"])
@@ -11,8 +11,9 @@ option = st.selectbox("Wählen Sie die Art der Beratung", ["Erstberatung Exom", 
 if st.button("Zu Vorlage"):
     # Display text based on the selected option
     if option == "Erstberatung Exom":
-        st.write("Beratungsgrund: V.a. genetisch bedingte …
-        Sehr geehrte Frau/Herr XX,
+        st.write("Beratungsgrund: V.a. genetisch bedingte 
+    
+      Sehr geehrte Frau/Herr XX,
         
       am ... stellten Sie Ihren Sohn/Ihre Tochter ... in unserer genetischen Sprechstunde vor.
       
