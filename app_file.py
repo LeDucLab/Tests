@@ -23,9 +23,8 @@ option = st.selectbox("Wählen Sie die Art der Beratung", ["Erstberatung Exom", 
 # Create a button
 if st.button("Zur Vorlage"):
     # Display text based on the selected option
-    if option == "Erstberatung Exom":
+    if option == "Erstberatung Exom" and Titel == "Herr":
         st.write("**Beratungsgrund:** V.a. genetisch bedingte XX")
-        if Titel == "Herr":
         st.write("Sehr geehrter", Titel, Name,",")
         st.write("Sehr geehrte", Titel, Name,",")
         st.write("am", current_datetime.strftime('%d.%m.%Y'), "stellten Sie Ihren Sohn/Ihre Tochter  in unserer genetischen Sprechstunde vor.")
