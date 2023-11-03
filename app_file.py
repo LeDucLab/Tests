@@ -5,7 +5,7 @@ import streamlit as st
 st.title("Briefe Textbbausteine")
 
 # Add a selectbox for choosing an option
-option = st.selectbox("Wählen Sie die Art der Beratung", ["Erstberatung Exom", "Erstbberatung NDD", "Erstberatung NDD+Epilepsie", "Erstberatung gezielt", "Erstberatung CA unauff"])
+option = st.selectbox("Wählen Sie die Art der Beratung", ["Erstberatung Exom", "Erstberatung NDD", "Erstberatung NDD+Epilepsie", "Erstberatung gezielt", "Erstberatung CA unauff"])
 
 # Create a button
 if st.button("Zu Vorlage"):
