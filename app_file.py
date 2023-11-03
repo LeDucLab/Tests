@@ -7,7 +7,9 @@ st.title("Briefe Textbausteine")
 
 # Get the current date and time
 current_datetime = datetime.now()
+st.write("You entered:", user_input)
 
+user_input = st.text_input("Enter some text:")
 # Add a selectbox for choosing an option
 option = st.selectbox("Wählen Sie die Art der Beratung", ["Erstberatung Exom", "Erstberatung NDD", "Erstberatung NDD+Epilepsie", "Erstberatung gezielt", "Erstberatung CA unauff"])
 
