@@ -10,10 +10,11 @@ current_datetime = datetime.now()
 
 #Get patient data
  # Create a selectbox to choose an option for the gender
-Titel = st.selectbox("Titel", ["Frau", "Herr", "Familie"])
+col1, col2, col3 = st.columns(3)
+Titel = col1.selectbox("Titel", ["Frau", "Herr", "Familie"])
 
-Vorname = st.text_input("Vorame")
-Name = st.text_input("Name")
+Vorname = col2.text_input("Vorame")
+Name = col3.text_input("Name")
 
 
 
