@@ -42,7 +42,28 @@ elif Titel != "Herr":
 first_line= f"am {current_datetime.strftime('%d.%m.%Y')} stellten Sie Ihren Sohn/Ihre Tochter  in unserer genetischen Sprechstunde vor."
 #Eigenanamnese
 anamnese="""**Eigenanamnese:**\n
-Sie berichteten, dass … nach un/auffälliger Schwangerschaft in der … Schwangerschaftswoche (per Sectio/als hypotrophes Neugeborenes/mit …) geboren wurde. Ihre/Seine Geburtsmaße betrugen … [Daten aus pedz]."""
+Sie berichteten, dass … nach un/auffälliger Schwangerschaft in der … Schwangerschaftswoche (per Sectio/als hypotrophes Neugeborenes/mit …) geboren wurde. Ihre/Seine Geburtsmaße betrugen … [Daten aus pedz].
+In Bezug af die aktuelle Fragestellung wurden folgende Aspkete in der Anamnese erfasst:\n
+1. Geburtshintergrund:
+Geburtsart
+Geburtstermin (frühzeitig, pünktlich, verspätet)
+Geburtsmaßen
+2. Frühe Entwicklung:
+Meilensteine der motorischen Entwicklung – Sitzen, Krabbeln, Gehen
+Sprachliche Entwicklung (erste Laute, Worte)
+3. Soziale und emotionale Entwicklung:
+Bindung an Eltern oder Betreuer
+Interaktion mit Gleichaltrigen
+Kindertagesstätte oder Kindergartenbesuch
+Familienumfeld und -unterstützung
+4. Aktuelle Symptome und Beobachtungen:
+Art der Entwicklungsverzögerung (motorisch, sprachlich, sozial)
+Verhaltensauffälligkeiten
+Kommunikationsfähigkeiten des Kindes
+5. Bisherige Untersuchungen und Interventionen:
+Frühere Arztbesuche oder Therapieansätze
+Diagnosen oder Empfehlungen"""
+"""
 
 # Create a button
 if st.button("Zur Vorlage"):
