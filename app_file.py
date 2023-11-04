@@ -23,10 +23,10 @@ question = st.text_input("Fragestellung")
 # Add a selectbox for choosing the type of counciling
 st.markdown("### Art der Beratung und Analyse")
 col1, col2, col3, col4 = st.columns(4)
-council = col1.selectbox("Wählen Sie die Art der Beratung", ["Erstberatung", "Befundbesprechung"])
-person = col2.selectbox("Wählen Sie den Patiententyp", ["Kind", "Erwachsen"])
-disease = col3.selectbox("Wählen Sie die Fragestellung", ["NDD", "NDD und Epilepsie", "Syndrom", "HNPCC", "FBrEK", "SCA", "HTT"])
-analysis = col3.selectbox("Wählen Sie die Art der genetischen Testung", ["Exom", "Exom+CNV+CA", "gezielt", "HNPCC", "FBrEK", "SCA", "HTT"])
+council = col1.selectbox("Art der Beratung", ["Erstberatung", "Befundbesprechung"])
+person = col2.selectbox("Patiententyp", ["Kind", "Erwachsen"])
+disease = col3.selectbox("Fragestellung", ["NDD", "NDD und Epilepsie", "Syndrom", "HNPCC", "FBrEK", "SCA", "HTT"])
+analysis = col3.selectbox("Art der genetischen Testung", ["Exom", "Exom+CNV+CA", "gezielt", "HNPCC", "FBrEK", "SCA", "HTT"])
 
 # Create a button
 if st.button("Zur Vorlage"):
