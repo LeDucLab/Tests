@@ -45,8 +45,9 @@ if st.button("Zur Vorlage"):
         st.write("Bei Ihrem Sohn/Ihrer Tochter besteht der Verdacht auf eine genetisch bedingte Entwicklungsstörung/Intelligenzminderung. Aus der Sicht unseres Fachgebietes ist eine genetische Diagnostik indiziert. Wir veranlassten daher eine molekulargenetische Exomdiagnostik mit Beurteilung der hierfür ursächlichen Genen bei ihm/ihr. Sobald der Befund der genetischen Diagnostik vorliegt, werden wir Sie informieren und weiterführend Stellung nehmen.")
         st.write("Wir hoffen, Sie mit unserem Gespräch und diesem Brief vorerst ausreichend informiert zu haben. Bei Rückfragen stehen wir gerne auch telefonisch zur Verfügung.")
         st.write("Mit freundlichen Grüßen")
+        st.write("")
         st.write("PD Dr. D. Le Duc, MD/PhD")
-        st.write("<font size='8'> FÄ für Humangenetik")
+        st.write("<font size='8'> FÄ für Humangenetik</font>")
 
     elif council == "Erstberatung" and Titel != "Herr" and person == "Kind" and disease == "NDD" and analysis == "Exom" :
         st.write("**Beratungsgrund:** V.a. genetisch bedingte", question)
@@ -62,8 +63,9 @@ if st.button("Zur Vorlage"):
         st.write("Bei Ihrem Sohn/Ihrer Tochter besteht der Verdacht auf eine genetisch bedingte Entwicklungsstörung/Intelligenzminderung. Aus der Sicht unseres Fachgebietes ist eine genetische Diagnostik indiziert. Wir veranlassten daher eine molekulargenetische Exomdiagnostik mit Beurteilung der hierfür ursächlichen Genen bei ihm/ihr. Sobald der Befund der genetischen Diagnostik vorliegt, werden wir Sie informieren und weiterführend Stellung nehmen.")
         st.write("Wir hoffen, Sie mit unserem Gespräch und diesem Brief vorerst ausreichend informiert zu haben. Bei Rückfragen stehen wir gerne auch telefonisch zur Verfügung.")
         st.write("Mit freundlichen Grüßen")
+        st.write("")
         st.write("PD Dr. D. Le Duc, MD/PhD")
-        st.write("<font size='8'> FÄ für Humangenetik")
+        st.write("<font size='8'> FÄ für Humangenetik</font>")
    
 # elif option == "Option 2":
     #    st.write("You chose Option 2!")
