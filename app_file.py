@@ -80,7 +80,7 @@ if st.button("Zur Vorlage"):
         st.write("PD Dr. D. Le Duc, MD/PhD")
         st.markdown("<br>", unsafe_allow_html=True)
         st.write("<font size='2'>FÄ für Humangenetik</font>", unsafe_allow_html=True)
-    elif council == "Erstberatung" and Titel == "Herr" and person == "Kind" and disease == "NDD +/- Epilepsie" and analysis == "Exom+CNV+CA" :
+   # elif council == "Erstberatung" and Titel == "Herr" and person == "Kind" and disease == "NDD +/- Epilepsie" and analysis == "Exom+CNV+CA" :
         
        
    
