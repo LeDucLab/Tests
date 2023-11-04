@@ -39,7 +39,7 @@ elif Titel != "Herr":
     hello_line = f"Sehr geehrte {Titel} {Name},"
 
 #Date of Beratung
-  first_line= f"am {current_datetime.strftime('%d.%m.%Y')} stellten Sie Ihren Sohn/Ihre Tochter  in unserer genetischen Sprechstunde vor."
+first_line= f"am {current_datetime.strftime('%d.%m.%Y')} stellten Sie Ihren Sohn/Ihre Tochter  in unserer genetischen Sprechstunde vor."
 # Create a button
 if st.button("Zur Vorlage"):
     # Display text based on the selected option
