@@ -30,7 +30,7 @@ analysis = col4.selectbox("Art der genetischen Testung", ["Exom", "Exom+CNV+CA",
 
 # Letter Structure
 #Beratungsgrund
-beratung_line = f"**Beratungsgrund:** V.a. genetisch bedingte {questio}"
+beratung_line = f"**Beratungsgrund:** V.a. genetisch bedingte {question}"
 
 #Begrüßung
 if Titel== "Herr":
