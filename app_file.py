@@ -40,6 +40,10 @@ elif Titel != "Herr":
 
 #Date of Beratung
 first_line= f"am {current_datetime.strftime('%d.%m.%Y')} stellten Sie Ihren Sohn/Ihre Tochter  in unserer genetischen Sprechstunde vor."
+#Eigenanamnese
+anamnese="""**Eigenanamnese:**
+Sie berichteten, dass … nach un/auffälliger Schwangerschaft in der … Schwangerschaftswoche (per Sectio/als hypotrophes Neugeborenes/mit …) geboren wurde. Ihre/Seine Geburtsmaße betrugen … [Daten aus pedz]."""
+
 # Create a button
 if st.button("Zur Vorlage"):
     # Display text based on the selected option
@@ -48,10 +52,11 @@ if st.button("Zur Vorlage"):
         st.markdown(beratung_line, unsafe_allow_html=True)
         #st.write("Sehr geehrter", Titel, Name,",")
         st.markdown(hello_line, unsafe_allow_html=True)
-        st.write("am", current_datetime.strftime('%d.%m.%Y'), "stellten Sie Ihren Sohn/Ihre Tochter  in unserer genetischen Sprechstunde vor.")
+        #st.write("am", current_datetime.strftime('%d.%m.%Y'), "stellten Sie Ihren Sohn/Ihre Tochter  in unserer genetischen Sprechstunde vor.")
         st.markdown(first_line, unsafe_allow_html=True)
-        st.write("**Eigenanamnese:**")
-        st.write("Sie berichteten, dass XX nach un/auffälliger Schwangerschaft in der Schwangerschaftswoche (per Sectio/als hypotrophes Neugeborenes/mit …) geboren wurde. Ihre/Seine Geburtsmaße betrugen … [Daten aus pedz].")
+        #st.write("**Eigenanamnese:**")
+        #st.write("Sie berichteten, dass XX nach un/auffälliger Schwangerschaft in der Schwangerschaftswoche (per Sectio/als hypotrophes Neugeborenes/mit …) geboren wurde. Ihre/Seine Geburtsmaße betrugen … [Daten aus pedz].")
+        st.markdown(anamnese, unsafe_allow_html=True)
         st.write ("**Familienanamnese:**")
         st.write("Hinsichtlich der aktuellen Fragestellung berichteten Sie, dass bei XX eine XX vorliegt. Unterlagen zu den genannten Familienmitgliedern liegen uns nicht vor. Ein drei Generationen umfassender Stammbaum befindet sich im Anhang. Sie berichteten keine für die Fragestellung relevanten Krankheitsbilder in Ihrer Familie.")
         st.write("**Körperliche Untersuchung:**")
