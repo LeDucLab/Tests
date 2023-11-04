@@ -46,10 +46,21 @@ if st.button("Zur Vorlage"):
         st.write("Wir hoffen, Sie mit unserem Gespräch und diesem Brief vorerst ausreichend informiert zu haben. Bei Rückfragen stehen wir gerne auch telefonisch zur Verfügung.")
         st.write("Mit freundlichen Grüßen")
         st.write("")
-        st.write("PD Dr. D. Le Duc, MD/PhD")
-        st.markdown("<br>", unsafe_allow_html=True)
-        st.write("<font size='2'>FÄ für Humangenetik</font>", unsafe_allow_html=True)
-
+        st.write("PD Dr. D. Le Duc, MD/PhD", unsafe_allow_html=True)
+        # Apply CSS for smaller font size and reduced paragraph spacing
+        st.write(
+        """
+        <style>
+        .smaller-text {
+        font-size: smaller;
+        margin-top: -0.5em;
+        }
+        </style>
+        """
+        , unsafe_allow_html=True
+        )
+        # Apply the CSS class to the following text
+        st.markdown("<p class='smaller-text'>FÄ für Humangenetik</p>", unsafe_allow_html=True)
     elif council == "Erstberatung" and Titel != "Herr" and person == "Kind" and disease == "NDD" and analysis == "Exom" :
         st.write("**Beratungsgrund:** V.a. genetisch bedingte", question)
         st.write("Sehr geehrte", Titel, Name,",")
@@ -67,7 +78,21 @@ if st.button("Zur Vorlage"):
         st.write("")
         st.write("PD Dr. D. Le Duc, MD/PhD")
         st.markdown("<br>", unsafe_allow_html=True)
-        st.write("<font size='2'>FÄ für Humangenetik</font>", unsafe_allow_html=True)
+        st.write("<font size='2'>FÄ für Humangenetik</font>", unsafe_allow_html=True)st.write("PD Dr. D. Le Duc, MD/PhD", unsafe_allow_html=True)
+        # Apply CSS for smaller font size and reduced paragraph spacing
+        st.write(
+        """
+        <style>
+        .smaller-text {
+        font-size: smaller;
+        margin-top: -0.5em;
+        }
+        </style>
+        """
+        , unsafe_allow_html=True
+        )
+        # Apply the CSS class to the following text
+        st.markdown("<p class='smaller-text'>FÄ für Humangenetik</p>", unsafe_allow_html=True)
    
 # elif option == "Option 2":
     #    st.write("You chose Option 2!")
