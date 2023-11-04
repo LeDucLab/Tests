@@ -63,7 +63,6 @@ Kommunikationsfähigkeiten des Kindes
 5. Bisherige Untersuchungen und Interventionen:
 Frühere Arztbesuche oder Therapieansätze
 Diagnosen oder Empfehlungen"""
-"""
 
 # Create a button
 if st.button("Zur Vorlage"):
