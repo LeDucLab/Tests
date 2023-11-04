@@ -11,7 +11,7 @@ current_datetime = datetime.now()
 #Get patient data
 # Create a selectbox to choose an option for the gender
 st.markdown("### Patienten Daten")
-col1, col2, col3 = st.columns(3)
+col1, col2, col3= st.columns(3)
 Titel = col1.selectbox("Titel", ["Frau", "Herr", "Familie"])
 
 Vorname = col2.text_input("Vorame")
@@ -25,14 +25,27 @@ st.markdown("### Art der Beratung und Analyse")
 col1, col2, col3, col4 = st.columns(4)
 council = col1.selectbox("Art der Beratung", ["Erstberatung", "Befundbesprechung"])
 person = col2.selectbox("Patiententyp", ["Kind", "Erwachsen"])
-disease = col3.selectbox("Fragestellung", ["NDD", "NDD und Epilepsie", "Syndrom", "HNPCC", "FBrEK", "SCA", "HTT"])
+disease = col3.selectbox("Fragestellung", ["NDD +/- Epilepsie", "unspezifisch", "HNPCC", "FBrEK", "SCA", "HTT"])
 analysis = col4.selectbox("Art der genetischen Testung", ["Exom", "Exom+CNV+CA", "gezielt", "HNPCC", "FBrEK", "SCA", "HTT"])
 
+# Letter Structure
+#Beratungsgrund
+beratung_line = f"**Beratungsgrund:** V.a. genetisch bedingte {questio}"
+
+#Begrüßung
+if Titel== "Herr":
+    hello_line = f"Sehr geehrter {Titel} {Name},"
+elif Titel !≠ "Herr":
+    hello_line = f"Sehr geehrte {Titel} {Name},"
+
+#Date of Beratung
+  first_line= f"am {current_datetime.strftime('%d.%m.%Y')} stellten Sie Ihren Sohn/Ihre Tochter  in unserer genetischen Sprechstunde vor."
 # Create a button
 if st.button("Zur Vorlage"):
     # Display text based on the selected option
-    if council == "Erstberatung" and Titel == "Herr" and person == "Kind" and disease == "NDD" and analysis == "Exom" :
+    if council == "Erstberatung" and Titel == "Herr" and person == "Kind" and disease == "unspezifisch" and analysis == "Exom" :
         st.write("**Beratungsgrund:** V.a. genetisch bedingte", question)
+        st.markdown(beratung_line, unsafe_allow_html=True)
         st.write("Sehr geehrter", Titel, Name,",")
         st.write("am", current_datetime.strftime('%d.%m.%Y'), "stellten Sie Ihren Sohn/Ihre Tochter  in unserer genetischen Sprechstunde vor.")
         st.write("**Eigenanamnese:**")
@@ -47,21 +60,9 @@ if st.button("Zur Vorlage"):
         st.write("Mit freundlichen Grüßen")
         st.write("")
         st.write("PD Dr. D. Le Duc, MD/PhD", unsafe_allow_html=True)
-        # Apply CSS for smaller font size and reduced paragraph spacing
-        st.write(
-        """
-        <style>
-        .smaller-text {
-        font-size: smaller;
-        margin-top: -0.5em;
-        }
-        </style>
-        """
-        , unsafe_allow_html=True
-        )
-        # Apply the CSS class to the following text
-        st.markdown("<p class='smaller-text'>FÄ für Humangenetik</p>", unsafe_allow_html=True)
-    elif council == "Erstberatung" and Titel != "Herr" and person == "Kind" and disease == "NDD" and analysis == "Exom" :
+        st.markdown("<br>", unsafe_allow_html=True)
+        st.write("<font size='2'>FÄ für Humangenetik</font>", unsafe_allow_html=True)
+    elif council == "Erstberatung" and Titel != "Herr" and person == "Kind" and disease == "unspezifisch" and analysis == "Exom" :
         st.write("**Beratungsgrund:** V.a. genetisch bedingte", question)
         st.write("Sehr geehrte", Titel, Name,",")
         st.write("am", current_datetime.strftime('%d.%m.%Y'), "stellten Sie Ihren Sohn/Ihre Tochter  in unserer genetischen Sprechstunde vor.")
@@ -79,20 +80,9 @@ if st.button("Zur Vorlage"):
         st.write("PD Dr. D. Le Duc, MD/PhD")
         st.markdown("<br>", unsafe_allow_html=True)
         st.write("<font size='2'>FÄ für Humangenetik</font>", unsafe_allow_html=True)
-        # Apply CSS for smaller font size and reduced paragraph spacing
-        st.write(
-        """
-        <style>
-        .smaller-text {
-        font-size: smaller;
-        margin-top: -0.5em;
-        }
-        </style>
-        """
-        , unsafe_allow_html=True
-        )
-        # Apply the CSS class to the following text
-        st.markdown("<p class='smaller-text'>FÄ für Humangenetik</p>", unsafe_allow_html=True)
+    elif council == "Erstberatung" and Titel == "Herr" and person == "Kind" and disease == "NDD +/- Epilepsie" and analysis == "Exom+CNV+CA" :
+        
+       
    
 # elif option == "Option 2":
     #    st.write("You chose Option 2!")
