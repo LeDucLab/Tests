@@ -78,7 +78,7 @@ if st.button("Zur Vorlage"):
         st.write("")
         st.write("PD Dr. D. Le Duc, MD/PhD")
         st.markdown("<br>", unsafe_allow_html=True)
-        st.write("<font size='2'>FÄ für Humangenetik</font>", unsafe_allow_html=True)st.write("PD Dr. D. Le Duc, MD/PhD", unsafe_allow_html=True)
+        st.write("<font size='2'>FÄ für Humangenetik</font>", unsafe_allow_html=True)
         # Apply CSS for smaller font size and reduced paragraph spacing
         st.write(
         """
