@@ -43,6 +43,11 @@ if st.button("Zur Vorlage"):
         st.write("Wir sahen XX im Alter von  Jahren. Ihre/Seine Körpermaße zur Vorstellung betrugen:[Daten aus pedz]. Fazial ergeben sich keine Auffälligkeiten/Fazial fielen … auf.")
         st.write("**Beurteilung:**")
         st.write("Bei Ihrem Sohn/Ihrer Tochter besteht der Verdacht auf eine genetisch bedingte Entwicklungsstörung/Intelligenzminderung. Aus der Sicht unseres Fachgebietes ist eine genetische Diagnostik indiziert. Wir veranlassten daher eine molekulargenetische Exomdiagnostik mit Beurteilung der hierfür ursächlichen Genen bei ihm/ihr. Sobald der Befund der genetischen Diagnostik vorliegt, werden wir Sie informieren und weiterführend Stellung nehmen.")
+        st.write("Wir hoffen, Sie mit unserem Gespräch und diesem Brief vorerst ausreichend informiert zu haben. Bei Rückfragen stehen wir gerne auch telefonisch zur Verfügung.")
+        st.write("Mit freundlichen Grüßen")
+        st.write("PD Dr. D. Le Duc, MD/PhD")
+        st.write("<font size='8'> FÄ für Humangenetik")
+
     elif council == "Erstberatung" and Titel != "Herr" and person == "Kind" and disease == "NDD" and analysis == "Exom" :
         st.write("**Beratungsgrund:** V.a. genetisch bedingte", question)
         st.write("Sehr geehrte", Titel, Name,",")
@@ -55,7 +60,12 @@ if st.button("Zur Vorlage"):
         st.write("Wir sahen XX im Alter von  Jahren. Ihre/Seine Körpermaße zur Vorstellung betrugen:[Daten aus pedz]. Fazial ergeben sich keine Auffälligkeiten/Fazial fielen … auf.")
         st.write("**Beurteilung:**")
         st.write("Bei Ihrem Sohn/Ihrer Tochter besteht der Verdacht auf eine genetisch bedingte Entwicklungsstörung/Intelligenzminderung. Aus der Sicht unseres Fachgebietes ist eine genetische Diagnostik indiziert. Wir veranlassten daher eine molekulargenetische Exomdiagnostik mit Beurteilung der hierfür ursächlichen Genen bei ihm/ihr. Sobald der Befund der genetischen Diagnostik vorliegt, werden wir Sie informieren und weiterführend Stellung nehmen.")
-   # elif option == "Option 2":
+        st.write("Wir hoffen, Sie mit unserem Gespräch und diesem Brief vorerst ausreichend informiert zu haben. Bei Rückfragen stehen wir gerne auch telefonisch zur Verfügung.")
+        st.write("Mit freundlichen Grüßen")
+        st.write("PD Dr. D. Le Duc, MD/PhD")
+        st.write("<font size='8'> FÄ für Humangenetik")
+   
+# elif option == "Option 2":
     #    st.write("You chose Option 2!")
     #elif option == "Option 3":
      #   st.write("You chose Option 3!")
