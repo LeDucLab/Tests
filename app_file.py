@@ -44,10 +44,12 @@ first_line= f"am {current_datetime.strftime('%d.%m.%Y')} stellten Sie Ihren Sohn
 if st.button("Zur Vorlage"):
     # Display text based on the selected option
     if council == "Erstberatung" and Titel == "Herr" and person == "Kind" and disease == "unspezifisch" and analysis == "Exom" :
-        st.write("**Beratungsgrund:** V.a. genetisch bedingte", question)
+        #st.write("**Beratungsgrund:** V.a. genetisch bedingte", question)
         st.markdown(beratung_line, unsafe_allow_html=True)
-        st.write("Sehr geehrter", Titel, Name,",")
+        #st.write("Sehr geehrter", Titel, Name,",")
+        st.markdown(hello_line, unsafe_allow_html=True)
         st.write("am", current_datetime.strftime('%d.%m.%Y'), "stellten Sie Ihren Sohn/Ihre Tochter  in unserer genetischen Sprechstunde vor.")
+        st.markdown(first_line, unsafe_allow_html=True)
         st.write("**Eigenanamnese:**")
         st.write("Sie berichteten, dass XX nach un/auffälliger Schwangerschaft in der Schwangerschaftswoche (per Sectio/als hypotrophes Neugeborenes/mit …) geboren wurde. Ihre/Seine Geburtsmaße betrugen … [Daten aus pedz].")
         st.write ("**Familienanamnese:**")
