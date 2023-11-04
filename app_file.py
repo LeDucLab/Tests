@@ -35,7 +35,7 @@ beratung_line = f"**Beratungsgrund:** V.a. genetisch bedingte {questio}"
 #Begrüßung
 if Titel== "Herr":
     hello_line = f"Sehr geehrter {Titel} {Name},"
-elif Titel !≠ "Herr":
+elif Titel != "Herr":
     hello_line = f"Sehr geehrte {Titel} {Name},"
 
 #Date of Beratung
