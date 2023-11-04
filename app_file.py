@@ -41,7 +41,7 @@ elif Titel != "Herr":
 #Date of Beratung
 first_line= f"am {current_datetime.strftime('%d.%m.%Y')} stellten Sie Ihren Sohn/Ihre Tochter  in unserer genetischen Sprechstunde vor."
 #Eigenanamnese
-anamnese="""**Eigenanamnese:**
+anamnese="""**Eigenanamnese:**\n
 Sie berichteten, dass … nach un/auffälliger Schwangerschaft in der … Schwangerschaftswoche (per Sectio/als hypotrophes Neugeborenes/mit …) geboren wurde. Ihre/Seine Geburtsmaße betrugen … [Daten aus pedz]."""
 
 # Create a button
