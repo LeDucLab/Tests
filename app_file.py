@@ -28,6 +28,15 @@ person = col2.selectbox("Patiententyp", ["Kind", "Erwachsen"])
 disease = col3.selectbox("Fragestellung", ["NDD +/- Epilepsie", "unspezifisch", "HNPCC", "FBrEK", "SCA", "HTT"])
 analysis = col4.selectbox("Art der genetischen Testung", ["Exom", "Exom+CNV+CA", "gezielt", "HNPCC", "FBrEK", "SCA", "HTT"])
 
+# Add anamnesis button
+if council == "Erstberatung" and person == "Kind":
+    st.markdown("### Anamnese")
+    st.markdown("### Geburtstagshintergrund")
+    col1, col2, col3 = st.columns(3)
+    Geburtsart=col1.text_input("Geburtsart")
+    Geburtstermin=col2.text_input("Geburtstermin")
+    Gebburtsmaßen=col3.text_input("Geburtsmaßen")
+    
 # Letter Structure
 #Beratungsgrund
 beratung_line = f"**Beratungsgrund:** V.a. genetisch bedingte {question}"
