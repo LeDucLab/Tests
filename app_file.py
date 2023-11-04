@@ -47,7 +47,7 @@ if st.button("Zur Vorlage"):
         st.write("Mit freundlichen Grüßen")
         st.write("")
         st.write("PD Dr. D. Le Duc, MD/PhD")
-        st.write("<font size='2'>FÄ für Humangenetik</font>")
+        st.write("<font size='2'>FÄ für Humangenetik</font>", unsafe_allow_html=True)
 
     elif council == "Erstberatung" and Titel != "Herr" and person == "Kind" and disease == "NDD" and analysis == "Exom" :
         st.write("**Beratungsgrund:** V.a. genetisch bedingte", question)
@@ -65,7 +65,7 @@ if st.button("Zur Vorlage"):
         st.write("Mit freundlichen Grüßen")
         st.write("")
         st.write("PD Dr. D. Le Duc, MD/PhD")
-        st.write("<font size='2'>FÄ für Humangenetik</font>")
+        st.write("<font size='2'>FÄ für Humangenetik</font>", unsafe_allow_html=True)
    
 # elif option == "Option 2":
     #    st.write("You chose Option 2!")
