@@ -121,7 +121,7 @@ with tab1:
             st.markdown(last_line, unsafe_allow_html=True)
             st.markdown("<br>", unsafe_allow_html=True)
             st.write("<font size='2'>FÄ für Humangenetik</font>", unsafe_allow_html=True)
-        elif council == "Erstberatung" and person == "Erwachsen" and body_box=="Nein":
+        elif council == "Erstberatung" and person == "Erwachsen" and body_box == "Nein":
             st.markdown(beratung_line, unsafe_allow_html=True)
             st.markdown(hello_line, unsafe_allow_html=True)
             st.write("**Eigenanamnese:**")
