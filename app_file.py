@@ -45,7 +45,7 @@ elif council == "Erstberatung" and disease == "NDD +/- Epilepsie":
     free_anamnesis= st.text_area("Relevante Symptome und Vorgeschichte für die aktuelle Fragestellung", default_text)
     
 #Add Familienanamnese button
- st.markdown("### Familienanamnese")
+st.markdown("### Familienanamnese")
 familienanamnese = st.selectbox("Familienanamnese", ["auffällig", "unauffällig"])
   
     
