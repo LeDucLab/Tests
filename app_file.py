@@ -47,6 +47,12 @@ elif council == "Erstberatung" and disease == "NDD +/- Epilepsie":
 #Add Familienanamnese button
 st.markdown("### Familienanamnese")
 familienanamnese = st.selectbox("Familienanamnese", ["auffällig", "unauffällig"])
+if familienanamnese == "unauffällig":
+    family="""Sie berichteten keine für die Fragestellung relevanten Krankheitsbilder in Ihrer Familie."""
+elif familienanamnese == "auffällig":
+    fam_text="""Hinsichtlich der aktuellen Fragestellung berichteten Sie, dass bei XX eine XX vorliegt. Unterlagen zu den genannten Familienmitgliedern liegen uns nicht vor. Ein drei Generationen umfassender Stammbaum befindet sich im Anhang."""
+    family=st.text_area("Relevante Erkrankungen in der Familie", fam_text)
+    
   
     
     
@@ -82,7 +88,8 @@ if st.button("Zur Vorlage"):
         #st.write("Sie berichteten, dass XX nach un/auffälliger Schwangerschaft in der Schwangerschaftswoche (per Sectio/als hypotrophes Neugeborenes/mit …) geboren wurde. Ihre/Seine Geburtsmaße betrugen … [Daten aus pedz].")
         st.markdown(free_anamnesis, unsafe_allow_html=True)
         st.write ("**Familienanamnese:**")
-        st.write("Hinsichtlich der aktuellen Fragestellung berichteten Sie, dass bei XX eine XX vorliegt. Unterlagen zu den genannten Familienmitgliedern liegen uns nicht vor. Ein drei Generationen umfassender Stammbaum befindet sich im Anhang. Sie berichteten keine für die Fragestellung relevanten Krankheitsbilder in Ihrer Familie.")
+        st.markdown(family, unsafe_allow_html=True)
+        #st.write("Hinsichtlich der aktuellen Fragestellung berichteten Sie, dass bei XX eine XX vorliegt. Unterlagen zu den genannten Familienmitgliedern liegen uns nicht vor. Ein drei Generationen umfassender Stammbaum befindet sich im Anhang. Sie berichteten keine für die Fragestellung relevanten Krankheitsbilder in Ihrer Familie.")
         st.write("**Körperliche Untersuchung:**")
         st.write("Wir sahen XX im Alter von  Jahren. Ihre/Seine Körpermaße zur Vorstellung betrugen:[Daten aus pedz]. Fazial ergeben sich keine Auffälligkeiten/Fazial fielen … auf.")
         st.write("**Beurteilung:**")
