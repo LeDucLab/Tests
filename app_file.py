@@ -59,8 +59,16 @@ if person == "Kind":
     body=st.text_area("Untersuchung", body_text)
 
 #Add Anaylsis
+st.markdown("### Genetische Diagnostik")
 analysis = st.selectbox("Art der genetischen Testung", ["Exom", "Exom+CNV+CA", "gezielt", "Cancer Panel", "Repeat Expansion", "keine"])
-
+if analysis == "Exom" and person=="Kind":
+    beurteilung="""Bei Ihrem Sohn/Ihrer Tochter besteht der Verdacht auf eine genetisch bedingte Entwicklungsstörung/Intelligenzminderung. Aus der Sicht unseres Fachgebietes ist eine genetische Diagnostik indiziert. Wir veranlassten daher eine molekulargenetische Exomdiagnostik mit Beurteilung der hierfür ursächlichen Genen bei ihm/ihr. Sobald der Befund der genetischen Diagnostik vorliegt, werden wir Sie informieren und weiterführend Stellung nehmen."""
+elif analysis == "Exom+CNV+CA" and person=="Kind":
+    beurteilung="""Bei Ihrem Sohn/Ihrer Tochter besteht der Verdacht auf eine genetisch bedingte Entwicklungsverzögerung/Entwicklungsstörung/Intelligenzminderung mit Epilepsie. Aus der Sicht unseres Fachgebietes ist eine genetische Diagnostik indiziert. Wir veranlassten daher eine konventionelle Chromosomenanalyse, eine molekulargenetische Diagnostik im FMR1-Gen bezüglich des Fragilen-X-Syndroms, eine genomweite molekulargenetische Analyse von Dosisveränderungen (Copy Number Repeats, vergleichbar mit Arraydiagnostik) sowie eine molekulargenetische Multigen-Paneldiagnostik in den für eine genetisch bedingte Entwicklungsverzögerung/Entwicklungsstörung/Intelligenzminderung ursächlichen Genen bei ihm/ihr. 
+Sobald die Befunde der genetischen Diagnostik vorliegen, werden wir Sie informieren und weiterführend Stellung nehmen."""
+elif analysis == "gezielt" and person== "Kind":
+    beurteilung="""Bei … wurde im Vorfeld die o.g. pathogene Variante im ...-Gen nachgewiesen. Somit weist Ihr Sohn/Ihre Tochter mit ...%iger Wahrscheinlichkeit die in Ihrer Familie bekannte pathogene Variante ebenfalls auf.  Mit Ihrem Einverständnis veranlassten wir die gezielte Diagnostik auf die o.g. pathogene …-Variante bei .... Sobald der Befund der genetischen Diagnostik vorliegt, werden wir Sie informieren und weiterführend Stellung nehmen."""
+    
 
   
     
@@ -78,56 +86,31 @@ elif Titel != "Herr":
 
 #Date of Beratung
 first_line= f"am {current_datetime.strftime('%d.%m.%Y')} stellten Sie Ihren Sohn/Ihre Tochter in unserer genetischen Sprechstunde vor."
-#Eigenanamnese
-anamnese_first_line="""**Eigenanamnese:**\n
-In Bezug af die aktuelle Fragestellung wurden folgende Aspkete in der Anamnese erfasst:\n"""
+#Final lines
+last_line=""""Wir hoffen, Sie mit unserem Gespräch und diesem Brief vorerst ausreichend informiert zu haben. Bei Rückfragen stehen wir gerne auch telefonisch zur Verfügung.\n
+Mit freundlichen Grüßen,\n
+PD Dr. D. Le Duc, MD/PhD"""
+
 
 
 # Create a button
 if st.button("Zur Vorlage"):
     # Display text based on the selected option
     if council == "Erstberatung" and Titel == "Herr" and person == "Kind" and disease == "unspezifisch" and analysis == "Exom" :
-        #st.write("**Beratungsgrund:** V.a. genetisch bedingte", question)
         st.markdown(beratung_line, unsafe_allow_html=True)
-        #st.write("Sehr geehrter", Titel, Name,",")
         st.markdown(hello_line, unsafe_allow_html=True)
-        #st.write("am", current_datetime.strftime('%d.%m.%Y'), "stellten Sie Ihren Sohn/Ihre Tochter  in unserer genetischen Sprechstunde vor.")
-        st.markdown(first_line, unsafe_allow_html=True)
         st.write("**Eigenanamnese:**")
-        #st.write("Sie berichteten, dass XX nach un/auffälliger Schwangerschaft in der Schwangerschaftswoche (per Sectio/als hypotrophes Neugeborenes/mit …) geboren wurde. Ihre/Seine Geburtsmaße betrugen … [Daten aus pedz].")
         st.markdown(free_anamnesis, unsafe_allow_html=True)
         st.write ("**Familienanamnese:**")
         st.markdown(family, unsafe_allow_html=True)
-        #st.write("Hinsichtlich der aktuellen Fragestellung berichteten Sie, dass bei XX eine XX vorliegt. Unterlagen zu den genannten Familienmitgliedern liegen uns nicht vor. Ein drei Generationen umfassender Stammbaum befindet sich im Anhang. Sie berichteten keine für die Fragestellung relevanten Krankheitsbilder in Ihrer Familie.")
         st.write("**Körperliche Untersuchung:**")
         st.markdown(body, unsafe_allow_html=True)
-        #st.write("Wir sahen XX im Alter von  Jahren. Ihre/Seine Körpermaße zur Vorstellung betrugen:[Daten aus pedz]. Fazial ergeben sich keine Auffälligkeiten/Fazial fielen … auf.")
         st.write("**Beurteilung:**")
-        st.write("Bei Ihrem Sohn/Ihrer Tochter besteht der Verdacht auf eine genetisch bedingte Entwicklungsstörung/Intelligenzminderung. Aus der Sicht unseres Fachgebietes ist eine genetische Diagnostik indiziert. Wir veranlassten daher eine molekulargenetische Exomdiagnostik mit Beurteilung der hierfür ursächlichen Genen bei ihm/ihr. Sobald der Befund der genetischen Diagnostik vorliegt, werden wir Sie informieren und weiterführend Stellung nehmen.")
-        st.write("Wir hoffen, Sie mit unserem Gespräch und diesem Brief vorerst ausreichend informiert zu haben. Bei Rückfragen stehen wir gerne auch telefonisch zur Verfügung.")
-        st.write("Mit freundlichen Grüßen")
-        st.write("")
-        st.write("PD Dr. D. Le Duc, MD/PhD", unsafe_allow_html=True)
+        st.markdown(beurteilung, unsafe_allow_html=True)
+        st.markdown(last_line, unsafe_allow_html=True)
         st.markdown("<br>", unsafe_allow_html=True)
         st.write("<font size='2'>FÄ für Humangenetik</font>", unsafe_allow_html=True)
-    elif council == "Erstberatung" and Titel != "Herr" and person == "Kind" and disease == "unspezifisch" and analysis == "Exom" :
-        st.write("**Beratungsgrund:** V.a. genetisch bedingte", question)
-        st.write("Sehr geehrte", Titel, Name,",")
-        st.write("am", current_datetime.strftime('%d.%m.%Y'), "stellten Sie Ihren Sohn/Ihre Tochter  in unserer genetischen Sprechstunde vor.")
-        st.write("**Eigenanamnese:**")
-        st.write("Sie berichteten, dass XX nach un/auffälliger Schwangerschaft in der Schwangerschaftswoche (per Sectio/als hypotrophes Neugeborenes/mit …) geboren wurde. Ihre/Seine Geburtsmaße betrugen … [Daten aus pedz].")
-        st.write ("**Familienanamnese:**")
-        st.write("Hinsichtlich der aktuellen Fragestellung berichteten Sie, dass bei XX eine XX vorliegt. Unterlagen zu den genannten Familienmitgliedern liegen uns nicht vor. Ein drei Generationen umfassender Stammbaum befindet sich im Anhang. Sie berichteten keine für die Fragestellung relevanten Krankheitsbilder in Ihrer Familie.")
-        st.write("**Körperliche Untersuchung:**")
-        st.write("Wir sahen XX im Alter von  Jahren. Ihre/Seine Körpermaße zur Vorstellung betrugen:[Daten aus pedz]. Fazial ergeben sich keine Auffälligkeiten/Fazial fielen … auf.")
-        st.write("**Beurteilung:**")
-        st.write("Bei Ihrem Sohn/Ihrer Tochter besteht der Verdacht auf eine genetisch bedingte Entwicklungsstörung/Intelligenzminderung. Aus der Sicht unseres Fachgebietes ist eine genetische Diagnostik indiziert. Wir veranlassten daher eine molekulargenetische Exomdiagnostik mit Beurteilung der hierfür ursächlichen Genen bei ihm/ihr. Sobald der Befund der genetischen Diagnostik vorliegt, werden wir Sie informieren und weiterführend Stellung nehmen.")
-        st.write("Wir hoffen, Sie mit unserem Gespräch und diesem Brief vorerst ausreichend informiert zu haben. Bei Rückfragen stehen wir gerne auch telefonisch zur Verfügung.")
-        st.write("Mit freundlichen Grüßen")
-        st.write("")
-        st.write("PD Dr. D. Le Duc, MD/PhD")
-        st.markdown("<br>", unsafe_allow_html=True)
-        st.write("<font size='2'>FÄ für Humangenetik</font>", unsafe_allow_html=True)
+
    # elif council == "Erstberatung" and Titel == "Herr" and person == "Kind" and disease == "NDD +/- Epilepsie" and analysis == "Exom+CNV+CA" :
         
        
