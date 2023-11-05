@@ -1,7 +1,7 @@
 import streamlit as st
 from datetime import datetime
 
-tab1, tab2= st.tabs(["Beratung", "Erkrankung Textbausteine"])
+tab1, tab2= st.tabs(["Beratung", "Krankheitsbild Textbausteine"])
 
 with tab1:
     # Create a Streamlit app
@@ -27,7 +27,7 @@ with tab1:
     col1, col2, col3= st.columns(3)
     council = col1.selectbox("Art der Beratung", ["Erstberatung", "Befundbesprechung"])
     person = col2.selectbox("Patiententyp", ["Kind", "Erwachsen"])
-    disease = col3.selectbox("Fragestellung", ["NDD +/- Epilepsie", "unspezifisch", "HNPCC", "FBrEK", "SCA", "HTT"])
+    disease = col3.selectbox("Krankheitsbild", ["NDD +/- Epilepsie", "unspezifisch", "HNPCC", "FBrEK", "SCA", "HTT"])
     
     # Add anamnesis button
     if council == "Erstberatung" and disease == "unspezifisch":
@@ -44,6 +44,13 @@ with tab1:
         - Aktuelle Symptome und Beobachtungen: Art der Entwicklungsverzögerung XX, Verhaltensauffälligkeiten XX, Kommunikationsfähigkeiten XX, Epilepsie XX
         - Bisherige Untersuchungen und Interventionen: Frühere Arztbesuche oder Therapieansätze XX, Diagnosen oder Empfehlungen XX"""
         free_anamnesis= st.text_area("Relevante Symptome und Vorgeschichte für die aktuelle Fragestellung", default_text)
+     elif council == "Erstberatung" and disease == "HNPCC":
+        st.markdown("### Anamnese")
+        default_text = """In Bezug af die aktuelle Fragestellung wurden folgende Aspkete in der Anamnese erfasst:
+        - Diagnose eines Darmkrebs im Alter von XX (Brief XX von XX)
+        - Behandlung: operative Tumorentfernung, adjuvante Chemotherapie
+        - pathologische Untersuchung am Tumormaterial: unauffällige Befunde bezüglich einer Mikrosatelliteninstabilität und in der Immunhistochemie der Mismatch-Repair-Proteine (Arztbrief vom …, Klinik). / In der pathologischen Untersuchung am Tumormaterial wurde eine … Mikrosatelliteninstabilität sowie in der Immunhistochemie wurde ein Verlust der Kernexpression für XX nachgewiesen. Weiterhin wurde am Tumormaterial die somatische Variante p.Val600Gly im BRAF-Gen (nicht) nachgewiesen (Arztbrief vom …, Klinik)."""
+        free_anamnesis= st.text_area("Relevante Symptome und Vorgeschichte für die aktuelle Fragestellung", default_text)
         
     #Add Familienanamnese button
     st.markdown("### Familienanamnese")
@@ -59,6 +66,8 @@ with tab1:
     if person == "Kind":
         body_text= """\Wir sahen XX im Alter von XX Jahren. Ihre/Seine Körpermaße zur Vorstellung betrugen: [pedz] (https://www.pedz.de/de/bmi.html). Fazial ergaben sich keine Auffälligkeiten/Fazial fielen … auf."""
         body=st.text_area("Untersuchung", body_text)
+    elif person == "Erwachsen"
+        body_box= st.selectbox("Körperliche Untersuchung", ["Ja", "Nein"])
     
     #Add Anaylsis
     st.markdown("### Genetische Diagnostik")
@@ -107,6 +116,18 @@ with tab1:
             st.markdown(family, unsafe_allow_html=True)
             st.write("**Körperliche Untersuchung:**")
             st.markdown(body, unsafe_allow_html=True)
+            st.write("**Beurteilung:**")
+            st.markdown(beurteilung, unsafe_allow_html=True)
+            st.markdown(last_line, unsafe_allow_html=True)
+            st.markdown("<br>", unsafe_allow_html=True)
+            st.write("<font size='2'>FÄ für Humangenetik</font>", unsafe_allow_html=True)
+        elif council == "Erstberatung" and person == "Erwachsen" and body_box=="Nein":
+            st.markdown(beratung_line, unsafe_allow_html=True)
+            st.markdown(hello_line, unsafe_allow_html=True)
+            st.write("**Eigenanamnese:**")
+            st.markdown(free_anamnesis, unsafe_allow_html=True)
+            st.write ("**Familienanamnese:**")
+            st.markdown(family, unsafe_allow_html=True)
             st.write("**Beurteilung:**")
             st.markdown(beurteilung, unsafe_allow_html=True)
             st.markdown(last_line, unsafe_allow_html=True)
