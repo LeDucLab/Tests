@@ -31,8 +31,9 @@ analysis = col4.selectbox("Art der genetischen Testung", ["Exom", "Exom+CNV+CA",
 # Add anamnesis button
 if council == "Erstberatung" and disease == "unspezifisch":
     st.markdown("### Anamnese")
-    default_text = "This is the default text."
-    free_anamnesis= st.text_area("Enter some text:", default_text)
+    default_text = "In Bezug af die aktuelle Fragestellung wurden folgende Aspkete in der Anamnese erfasst:\n
+    x"
+    free_anamnesis= st.text_area("relevante Symptome und Vorgeschichte für die aktuelle Fragestellung", default_text)
     
 elif council == "Erstberatung" and disease == "NDD +/- Epilepsie":
     st.markdown("### Anamnese")
