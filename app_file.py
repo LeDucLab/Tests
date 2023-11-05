@@ -2,9 +2,9 @@ import streamlit as st
 from datetime import datetime
 from stqdm import stqdm
 
-tabs = stqdm()
+tab1, tab2= st.tabs(["Beratung", "Erkrankung Textbausteine"])
 
-with tabs.tab("Beratung"):
+with tab1:
     # Create a Streamlit app
     st.title("Arzt Brief Generator")
         
@@ -125,6 +125,11 @@ with tabs.tab("Beratung"):
     
     # You can also add more text or content below the button
     st.write("This is some additional text below the button and options.")
+
+with tab2:
+    st.header("A dog")
+    st.image("https://static.streamlit.io/examples/dog.jpg", width=200)
+    
     
     #elif council == "Erstberatung" and disease == "NDD +/- Epilepsie":
     #    st.markdown("### Anamnese")
