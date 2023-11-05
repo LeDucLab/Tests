@@ -44,9 +44,9 @@ elif council == "Erstberatung" and disease == "NDD +/- Epilepsie":
     - Bisherige Untersuchungen und Interventionen: Frühere Arztbesuche oder Therapieansätze XX, Diagnosen oder Empfehlungen XX"""
     free_anamnesis= st.text_area("Relevante Symptome und Vorgeschichte für die aktuelle Fragestellung", default_text)
     
-
-
 #Add Familienanamnese button
+ st.markdown("### Familienanamnese")
+familienanamnese = st.selectbox("Familienanamnese", ["auffällig", "unauffällig"])
   
     
     
