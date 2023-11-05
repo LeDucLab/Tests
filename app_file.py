@@ -1,6 +1,5 @@
 import streamlit as st
 from datetime import datetime
-from stqdm import stqdm
 
 tab1, tab2= st.tabs(["Beratung", "Erkrankung Textbausteine"])
 
