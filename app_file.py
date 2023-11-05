@@ -83,75 +83,75 @@ with tabs:
         #Begrüßung
         if Titel== "Herr":
             hello_line = f"Sehr geehrter {Titel} {Name},"
-elif Titel != "Herr":
-    hello_line = f"Sehr geehrte {Titel} {Name},"
+        elif Titel != "Herr":
+            hello_line = f"Sehr geehrte {Titel} {Name},"
 
-#Date of Beratung
-first_line= f"am {current_datetime.strftime('%d.%m.%Y')} stellten Sie Ihren Sohn/Ihre Tochter in unserer genetischen Sprechstunde vor."
-#Final lines
-last_line=""""Wir hoffen, Sie mit unserem Gespräch und diesem Brief vorerst ausreichend informiert zu haben. Bei Rückfragen stehen wir gerne auch telefonisch zur Verfügung.\n
-Mit freundlichen Grüßen,\n
-PD Dr. D. Le Duc, MD/PhD"""
-
-
-
-# Create a button
-if st.button("Zur Vorlage"):
-    # Display text based on the selected option
-    if council == "Erstberatung" and person == "Kind":
-        st.markdown(beratung_line, unsafe_allow_html=True)
-        st.markdown(hello_line, unsafe_allow_html=True)
-        st.write("**Eigenanamnese:**")
-        st.markdown(free_anamnesis, unsafe_allow_html=True)
-        st.write ("**Familienanamnese:**")
-        st.markdown(family, unsafe_allow_html=True)
-        st.write("**Körperliche Untersuchung:**")
-        st.markdown(body, unsafe_allow_html=True)
-        st.write("**Beurteilung:**")
-        st.markdown(beurteilung, unsafe_allow_html=True)
-        st.markdown(last_line, unsafe_allow_html=True)
-        st.markdown("<br>", unsafe_allow_html=True)
-        st.write("<font size='2'>FÄ für Humangenetik</font>", unsafe_allow_html=True)
-
-   # elif council == "Erstberatung" and Titel == "Herr" and person == "Kind" and disease == "NDD +/- Epilepsie" and analysis == "Exom+CNV+CA" :
+        #Date of Beratung
+        first_line= f"am {current_datetime.strftime('%d.%m.%Y')} stellten Sie Ihren Sohn/Ihre Tochter in unserer genetischen Sprechstunde vor."
+        #Final lines
+        last_line=""""Wir hoffen, Sie mit unserem Gespräch und diesem Brief vorerst ausreichend informiert zu haben. Bei Rückfragen stehen wir gerne auch telefonisch zur Verfügung.\n
+        Mit freundlichen Grüßen,\n
+        PD Dr. D. Le Duc, MD/PhD"""
         
-       
-   
-# elif option == "Option 2":
-    #    st.write("You chose Option 2!")
-    #elif option == "Option 3":
-     #   st.write("You chose Option 3!")
 
-# You can also add more text or content below the button
-st.write("This is some additional text below the button and options.")
-
-#elif council == "Erstberatung" and disease == "NDD +/- Epilepsie":
-#    st.markdown("### Anamnese")
-#    st.markdown("Geburtshintergrund")
-#   col1, col2, col3 = st.columns(3)
-#    Geburtsart=col1.text_input("Geburtsart")
-#    Geburtstermin=col2.text_input("Geburtstermin")
-#    Geburtsmaßen=col3.text_input("Geburtsmaßen")
-#    st.markdown("Frühe Entwicklung")
-#    st.markdown("Meilensteine der motorischen Entwicklung")
-#    col1, col2, col3 = st.columns(3)
-#    Drehen=col1.text_input("Drehen")
-#    Sitzen=col2.text_input("Sitzen")
-#    Gehen=col3.text_input("Gehen")
-#    st.markdown("Meilensteine der sprachlichen Entwicklung")
-#    col1, col2 = st.columns(2)
-#    Words=col1.text_input("Erste Laute/Worte")
-#    Aktuell=col2.text_input("Aktueller Status")
-#    st.markdown("Soziale Entwicklung")
-#    col1, col2 = st.columns(2)
-#    Kita=col1.text_input("Kita/Schulbbesuch")
-#    Interaktion=col2.text_input("Interaktion mit Familie/Gleichaltrigen")
-#    st.markdown("Aktuelle Symptome und Beobachtungen")
-#    col1, col2= st.columns(2)
-#    Entwicklung=col1.text_input("Art der Entwicklungsverzögerung")
-#    Verhalten=col2.text_input("Verhaltensauffälligkeiten")
-#    Kommunikation=col1.text_input("Kommunikationsfähigkeiten")
-#    Epilepsie=col2.text_input("Epilepsie")
-#    st.markdown("Bisherige Untersuchungen und Interventionen")
-#    Vorbefunde=st.text_area("Frühere Arztbesuche oder Therapieansätze")
-#    Diagnose=st.text_area("Diagnosen oder Empfehlungen")
+        
+        # Create a button
+        if st.button("Zur Vorlage"):
+            # Display text based on the selected option
+            if council == "Erstberatung" and person == "Kind":
+                st.markdown(beratung_line, unsafe_allow_html=True)
+                st.markdown(hello_line, unsafe_allow_html=True)
+                st.write("**Eigenanamnese:**")
+                st.markdown(free_anamnesis, unsafe_allow_html=True)
+                st.write ("**Familienanamnese:**")
+                st.markdown(family, unsafe_allow_html=True)
+                st.write("**Körperliche Untersuchung:**")
+                st.markdown(body, unsafe_allow_html=True)
+                st.write("**Beurteilung:**")
+                st.markdown(beurteilung, unsafe_allow_html=True)
+                st.markdown(last_line, unsafe_allow_html=True)
+                st.markdown("<br>", unsafe_allow_html=True)
+                st.write("<font size='2'>FÄ für Humangenetik</font>", unsafe_allow_html=True)
+        
+           # elif council == "Erstberatung" and Titel == "Herr" and person == "Kind" and disease == "NDD +/- Epilepsie" and analysis == "Exom+CNV+CA" :
+                
+               
+           
+        # elif option == "Option 2":
+            #    st.write("You chose Option 2!")
+            #elif option == "Option 3":
+             #   st.write("You chose Option 3!")
+        
+        # You can also add more text or content below the button
+        st.write("This is some additional text below the button and options.")
+        
+        #elif council == "Erstberatung" and disease == "NDD +/- Epilepsie":
+        #    st.markdown("### Anamnese")
+        #    st.markdown("Geburtshintergrund")
+        #   col1, col2, col3 = st.columns(3)
+        #    Geburtsart=col1.text_input("Geburtsart")
+        #    Geburtstermin=col2.text_input("Geburtstermin")
+        #    Geburtsmaßen=col3.text_input("Geburtsmaßen")
+        #    st.markdown("Frühe Entwicklung")
+        #    st.markdown("Meilensteine der motorischen Entwicklung")
+        #    col1, col2, col3 = st.columns(3)
+        #    Drehen=col1.text_input("Drehen")
+        #    Sitzen=col2.text_input("Sitzen")
+        #    Gehen=col3.text_input("Gehen")
+        #    st.markdown("Meilensteine der sprachlichen Entwicklung")
+        #    col1, col2 = st.columns(2)
+        #    Words=col1.text_input("Erste Laute/Worte")
+        #    Aktuell=col2.text_input("Aktueller Status")
+        #    st.markdown("Soziale Entwicklung")
+        #    col1, col2 = st.columns(2)
+        #    Kita=col1.text_input("Kita/Schulbbesuch")
+        #    Interaktion=col2.text_input("Interaktion mit Familie/Gleichaltrigen")
+        #    st.markdown("Aktuelle Symptome und Beobachtungen")
+        #    col1, col2= st.columns(2)
+        #    Entwicklung=col1.text_input("Art der Entwicklungsverzögerung")
+        #    Verhalten=col2.text_input("Verhaltensauffälligkeiten")
+        #    Kommunikation=col1.text_input("Kommunikationsfähigkeiten")
+        #    Epilepsie=col2.text_input("Epilepsie")
+        #    st.markdown("Bisherige Untersuchungen und Interventionen")
+        #    Vorbefunde=st.text_area("Frühere Arztbesuche oder Therapieansätze")
+        #    Diagnose=st.text_area("Diagnosen oder Empfehlungen")
