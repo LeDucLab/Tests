@@ -31,44 +31,49 @@ analysis = col4.selectbox("Art der genetischen Testung", ["Exom", "Exom+CNV+CA",
 # Add anamnesis button
 if council == "Erstberatung" and disease == "unspezifisch":
     st.markdown("### Anamnese")
-    default_text = """In Bezug af die aktuelle Fragestellung wurden folgende Aspkete in der Anamnese erfasst:
-- This is the first bullet point.
-- This is the second bullet point.
-This is a new line without a bullet point.
-"""
-
+    default_text = """In Bezug af die aktuelle Fragestellung wurden folgende Aspkete in der Anamnese erfasst:"""
     free_anamnesis= st.text_area("relevante Symptome und Vorgeschichte für die aktuelle Fragestellung", default_text)
-    
 elif council == "Erstberatung" and disease == "NDD +/- Epilepsie":
     st.markdown("### Anamnese")
-    st.markdown("Geburtshintergrund")
-    col1, col2, col3 = st.columns(3)
-    Geburtsart=col1.text_input("Geburtsart")
-    Geburtstermin=col2.text_input("Geburtstermin")
-    Geburtsmaßen=col3.text_input("Geburtsmaßen")
-    st.markdown("Frühe Entwicklung")
-    st.markdown("Meilensteine der motorischen Entwicklung")
-    col1, col2, col3 = st.columns(3)
-    Drehen=col1.text_input("Drehen")
-    Sitzen=col2.text_input("Sitzen")
-    Gehen=col3.text_input("Gehen")
-    st.markdown("Meilensteine der sprachlichen Entwicklung")
-    col1, col2 = st.columns(2)
-    Words=col1.text_input("Erste Laute/Worte")
-    Aktuell=col2.text_input("Aktueller Status")
-    st.markdown("Soziale Entwicklung")
-    col1, col2 = st.columns(2)
-    Kita=col1.text_input("Kita/Schulbbesuch")
-    Interaktion=col2.text_input("Interaktion mit Familie/Gleichaltrigen")
-    st.markdown("Aktuelle Symptome und Beobachtungen")
-    col1, col2= st.columns(2)
-    Entwicklung=col1.text_input("Art der Entwicklungsverzögerung")
-    Verhalten=col2.text_input("Verhaltensauffälligkeiten")
-    Kommunikation=col1.text_input("Kommunikationsfähigkeiten")
-    Epilepsie=col2.text_input("Epilepsie")
-    st.markdown("Bisherige Untersuchungen und Interventionen")
-    Vorbefunde=st.text_area("Frühere Arztbesuche oder Therapieansätze")
-    Diagnose=st.text_area("Diagnosen oder Empfehlungen")
+    default_text = """In Bezug af die aktuelle Fragestellung wurden folgende Aspkete in der Anamnese erfasst:
+    - Geburtshintergrund: Geburtsart XX, Geburtstermin XX, Geburtsmaßen
+    - Meilensteine der motorischen Entwicklung: Drehen XX, Sitzen XX, Gehen XX
+    - Meilensteine der sprachlichen Entwicklung: esrte Laute/Worte XX, aktueller Status XX
+    - Soziale Entwicklung: Kita/Schulbesuch XX, Interaktion mit der Familie/Gleichaltrigen XX
+    - Aktuelle Symptome und Beobachtungen: Art der Entwicklungsverzögerung XX, Verhaltensauffälligkeiten XX, Kommunikationsfähigkeiten XX, Epilepsie XX
+    - Bisherige Untersuchungen und Interventionen: Frühere Arztbesuche oder Therapieansätze XX, Diagnosen oder Empfehlungen XX"""
+    free_anamnesis= st.text_area("relevante Symptome und Vorgeschichte für die aktuelle Fragestellung", default_text)
+    
+#elif council == "Erstberatung" and disease == "NDD +/- Epilepsie":
+#    st.markdown("### Anamnese")
+#    st.markdown("Geburtshintergrund")
+#   col1, col2, col3 = st.columns(3)
+#    Geburtsart=col1.text_input("Geburtsart")
+#    Geburtstermin=col2.text_input("Geburtstermin")
+#    Geburtsmaßen=col3.text_input("Geburtsmaßen")
+#    st.markdown("Frühe Entwicklung")
+#    st.markdown("Meilensteine der motorischen Entwicklung")
+#    col1, col2, col3 = st.columns(3)
+#    Drehen=col1.text_input("Drehen")
+#    Sitzen=col2.text_input("Sitzen")
+#    Gehen=col3.text_input("Gehen")
+#    st.markdown("Meilensteine der sprachlichen Entwicklung")
+#    col1, col2 = st.columns(2)
+#    Words=col1.text_input("Erste Laute/Worte")
+#    Aktuell=col2.text_input("Aktueller Status")
+#    st.markdown("Soziale Entwicklung")
+#    col1, col2 = st.columns(2)
+#    Kita=col1.text_input("Kita/Schulbbesuch")
+#    Interaktion=col2.text_input("Interaktion mit Familie/Gleichaltrigen")
+#    st.markdown("Aktuelle Symptome und Beobachtungen")
+#    col1, col2= st.columns(2)
+#    Entwicklung=col1.text_input("Art der Entwicklungsverzögerung")
+#    Verhalten=col2.text_input("Verhaltensauffälligkeiten")
+#    Kommunikation=col1.text_input("Kommunikationsfähigkeiten")
+#    Epilepsie=col2.text_input("Epilepsie")
+#    st.markdown("Bisherige Untersuchungen und Interventionen")
+#    Vorbefunde=st.text_area("Frühere Arztbesuche oder Therapieansätze")
+#    Diagnose=st.text_area("Diagnosen oder Empfehlungen")
 
 #Add Familienanamnese button
   
