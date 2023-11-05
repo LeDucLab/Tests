@@ -31,7 +31,7 @@ analysis = col4.selectbox("Art der genetischen Testung", ["Exom", "Exom+CNV+CA",
 # Add anamnesis button
 if council == "Erstberatung" and person == "Kind":
     st.markdown("### Anamnese")
-    st.markdown("### Geburtstagshintergrund")
+    st.markdown("##### Geburtstagshintergrund")
     col1, col2, col3 = st.columns(3)
     Geburtsart=col1.text_input("Geburtsart")
     Geburtstermin=col2.text_input("Geburtstermin")
