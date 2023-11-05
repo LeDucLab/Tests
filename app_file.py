@@ -44,36 +44,7 @@ elif council == "Erstberatung" and disease == "NDD +/- Epilepsie":
     - Bisherige Untersuchungen und Interventionen: Frühere Arztbesuche oder Therapieansätze XX, Diagnosen oder Empfehlungen XX"""
     free_anamnesis= st.text_area("Relevante Symptome und Vorgeschichte für die aktuelle Fragestellung", default_text)
     
-#elif council == "Erstberatung" and disease == "NDD +/- Epilepsie":
-#    st.markdown("### Anamnese")
-#    st.markdown("Geburtshintergrund")
-#   col1, col2, col3 = st.columns(3)
-#    Geburtsart=col1.text_input("Geburtsart")
-#    Geburtstermin=col2.text_input("Geburtstermin")
-#    Geburtsmaßen=col3.text_input("Geburtsmaßen")
-#    st.markdown("Frühe Entwicklung")
-#    st.markdown("Meilensteine der motorischen Entwicklung")
-#    col1, col2, col3 = st.columns(3)
-#    Drehen=col1.text_input("Drehen")
-#    Sitzen=col2.text_input("Sitzen")
-#    Gehen=col3.text_input("Gehen")
-#    st.markdown("Meilensteine der sprachlichen Entwicklung")
-#    col1, col2 = st.columns(2)
-#    Words=col1.text_input("Erste Laute/Worte")
-#    Aktuell=col2.text_input("Aktueller Status")
-#    st.markdown("Soziale Entwicklung")
-#    col1, col2 = st.columns(2)
-#    Kita=col1.text_input("Kita/Schulbbesuch")
-#    Interaktion=col2.text_input("Interaktion mit Familie/Gleichaltrigen")
-#    st.markdown("Aktuelle Symptome und Beobachtungen")
-#    col1, col2= st.columns(2)
-#    Entwicklung=col1.text_input("Art der Entwicklungsverzögerung")
-#    Verhalten=col2.text_input("Verhaltensauffälligkeiten")
-#    Kommunikation=col1.text_input("Kommunikationsfähigkeiten")
-#    Epilepsie=col2.text_input("Epilepsie")
-#    st.markdown("Bisherige Untersuchungen und Interventionen")
-#    Vorbefunde=st.text_area("Frühere Arztbesuche oder Therapieansätze")
-#    Diagnose=st.text_area("Diagnosen oder Empfehlungen")
+
 
 #Add Familienanamnese button
   
@@ -95,25 +66,7 @@ first_line= f"am {current_datetime.strftime('%d.%m.%Y')} stellten Sie Ihren Sohn
 #Eigenanamnese
 anamnese_first_line="""**Eigenanamnese:**\n
 In Bezug af die aktuelle Fragestellung wurden folgende Aspkete in der Anamnese erfasst:\n"""
-#1. Geburtshintergrund:
-#Geburtsart
-#Geburtstermin (frühzeitig, pünktlich, verspätet)
-#Geburtsmaßen
-#2. Frühe Entwicklung:
-#Meilensteine der motorischen Entwicklung – Sitzen, Krabbeln, Gehen
-#Sprachliche Entwicklung (erste Laute, Worte)
-#3. Soziale und emotionale Entwicklung:
-#Bindung an Eltern oder Betreuer
-#Interaktion mit Gleichaltrigen
-#Kindertagesstätte oder Kindergartenbesuch
-#Familienumfeld und -unterstützung
-#4. Aktuelle Symptome und Beobachtungen:
-#Art der Entwicklungsverzögerung (motorisch, sprachlich, sozial)
-#Verhaltensauffälligkeiten
-#Kommunikationsfähigkeiten des Kindes
-#5. Bisherige Untersuchungen und Interventionen:
-#Frühere Arztbesuche oder Therapieansätze
-#Diagnosen oder Empfehlungen"""
+
 
 # Create a button
 if st.button("Zur Vorlage"):
@@ -125,9 +78,9 @@ if st.button("Zur Vorlage"):
         st.markdown(hello_line, unsafe_allow_html=True)
         #st.write("am", current_datetime.strftime('%d.%m.%Y'), "stellten Sie Ihren Sohn/Ihre Tochter  in unserer genetischen Sprechstunde vor.")
         st.markdown(first_line, unsafe_allow_html=True)
-        #st.write("**Eigenanamnese:**")
+        st.write("**Eigenanamnese:**")
         #st.write("Sie berichteten, dass XX nach un/auffälliger Schwangerschaft in der Schwangerschaftswoche (per Sectio/als hypotrophes Neugeborenes/mit …) geboren wurde. Ihre/Seine Geburtsmaße betrugen … [Daten aus pedz].")
-        st.markdown(anamnese, unsafe_allow_html=True)
+        st.markdown(free_anamnesis, unsafe_allow_html=True)
         st.write ("**Familienanamnese:**")
         st.write("Hinsichtlich der aktuellen Fragestellung berichteten Sie, dass bei XX eine XX vorliegt. Unterlagen zu den genannten Familienmitgliedern liegen uns nicht vor. Ein drei Generationen umfassender Stammbaum befindet sich im Anhang. Sie berichteten keine für die Fragestellung relevanten Krankheitsbilder in Ihrer Familie.")
         st.write("**Körperliche Untersuchung:**")
@@ -169,3 +122,34 @@ if st.button("Zur Vorlage"):
 
 # You can also add more text or content below the button
 st.write("This is some additional text below the button and options.")
+
+#elif council == "Erstberatung" and disease == "NDD +/- Epilepsie":
+#    st.markdown("### Anamnese")
+#    st.markdown("Geburtshintergrund")
+#   col1, col2, col3 = st.columns(3)
+#    Geburtsart=col1.text_input("Geburtsart")
+#    Geburtstermin=col2.text_input("Geburtstermin")
+#    Geburtsmaßen=col3.text_input("Geburtsmaßen")
+#    st.markdown("Frühe Entwicklung")
+#    st.markdown("Meilensteine der motorischen Entwicklung")
+#    col1, col2, col3 = st.columns(3)
+#    Drehen=col1.text_input("Drehen")
+#    Sitzen=col2.text_input("Sitzen")
+#    Gehen=col3.text_input("Gehen")
+#    st.markdown("Meilensteine der sprachlichen Entwicklung")
+#    col1, col2 = st.columns(2)
+#    Words=col1.text_input("Erste Laute/Worte")
+#    Aktuell=col2.text_input("Aktueller Status")
+#    st.markdown("Soziale Entwicklung")
+#    col1, col2 = st.columns(2)
+#    Kita=col1.text_input("Kita/Schulbbesuch")
+#    Interaktion=col2.text_input("Interaktion mit Familie/Gleichaltrigen")
+#    st.markdown("Aktuelle Symptome und Beobachtungen")
+#    col1, col2= st.columns(2)
+#    Entwicklung=col1.text_input("Art der Entwicklungsverzögerung")
+#    Verhalten=col2.text_input("Verhaltensauffälligkeiten")
+#    Kommunikation=col1.text_input("Kommunikationsfähigkeiten")
+#    Epilepsie=col2.text_input("Epilepsie")
+#    st.markdown("Bisherige Untersuchungen und Interventionen")
+#    Vorbefunde=st.text_area("Frühere Arztbesuche oder Therapieansätze")
+#    Diagnose=st.text_area("Diagnosen oder Empfehlungen")
