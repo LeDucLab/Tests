@@ -66,7 +66,7 @@ with tab1:
     if person == "Kind":
         body_text= """\Wir sahen XX im Alter von XX Jahren. Ihre/Seine Körpermaße zur Vorstellung betrugen: [pedz] (https://www.pedz.de/de/bmi.html). Fazial ergaben sich keine Auffälligkeiten/Fazial fielen … auf."""
         body=st.text_area("Untersuchung", body_text)
-    elif person == "Erwachsen"
+    elif person == "Erwachsen":
         body_box= st.selectbox("Körperliche Untersuchung", ["Ja", "Nein"])
     
     #Add Anaylsis
@@ -121,7 +121,7 @@ with tab1:
             st.markdown(last_line, unsafe_allow_html=True)
             st.markdown("<br>", unsafe_allow_html=True)
             st.write("<font size='2'>FÄ für Humangenetik</font>", unsafe_allow_html=True)
-        elif council == "Erstberatung" and person == "Kind" and body_box == "Nein":
+        elif council == "Erstberatung" and person == "Erwachsen" and body_box == "Nein":
             st.markdown(beratung_line, unsafe_allow_html=True)
             st.markdown(hello_line, unsafe_allow_html=True)
             st.write("**Eigenanamnese:**")
