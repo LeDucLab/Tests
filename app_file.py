@@ -56,7 +56,7 @@ elif familienanamnese == "auffällig":
 #Add Körperliche Untersuchung
 st.markdown("### Körperliche Untersuchung")
 if person == "Kind":
-    body_text= """Wir sahen XX im Alter von XX Jahren. Ihre/Seine Körpermaße zur Vorstellung betrugen: https://www.pedz.de/de/bmi.html [Daten aus pedz]. Fazial ergaben sich keine Auffälligkeiten/Fazial fielen … auf."""
+    body_text= """Wir sahen XX im Alter von XX Jahren. Ihre/Seine Körpermaße zur Vorstellung betrugen: [pedz] (https://www.pedz.de/de/bmi.html). Fazial ergaben sich keine Auffälligkeiten/Fazial fielen … auf."""
     body=st.text_area("Untersuchung", body_text)
 
 
