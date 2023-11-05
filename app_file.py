@@ -96,7 +96,7 @@ PD Dr. D. Le Duc, MD/PhD"""
 # Create a button
 if st.button("Zur Vorlage"):
     # Display text based on the selected option
-    if council == "Erstberatung" and Titel == "Herr" and person == "Kind" and disease == "unspezifisch" and analysis == "Exom" :
+    if council == "Erstberatung" and person == "Kind":
         st.markdown(beratung_line, unsafe_allow_html=True)
         st.markdown(hello_line, unsafe_allow_html=True)
         st.write("**Eigenanamnese:**")
