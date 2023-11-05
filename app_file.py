@@ -51,15 +51,14 @@ if council == "Erstberatung" and person == "Kind":
     Kita=col1.text_input("Kita/Schulbbesuch")
     Interaktion=col2.text_input("Interaktion mit Familie/Gleichaltrigen")
     st.markdown("Aktuelle Symptome und Beobachtungen")
-    col1, col2, col3, col4 = st.columns(4)
+    col1, col2= st.columns(2)
     Entwicklung=col1.text_input("Art der Entwicklungsverzögerung")
     Verhalten=col2.text_input("Verhaltensauffälligkeiten")
-    Kommunikation=col3.text_input("Kommunikationsfähigkeiten")
-    Epilepsie=col4.text_input("Epilepsie")
+    Kommunikation=col1.text_input("Kommunikationsfähigkeiten")
+    Epilepsie=col2.text_input("Epilepsie")
     st.markdown("Bisherige Untersuchungen und Interventionen")
-    col1, col2 = st.columns(2)
-    Vorbefunde=col1.text_input("Frühere Arztbesuche oder Therapieansätze")
-    Diagnose=col2.text_input("Diagnosen oder Empfehlungen")
+    Vorbefunde=st.text_input("Frühere Arztbesuche oder Therapieansätze")
+    Diagnose=st.text_input("Diagnosen oder Empfehlungen")
   
     
     
