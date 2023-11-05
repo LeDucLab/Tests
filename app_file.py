@@ -22,11 +22,10 @@ question = st.text_input("Fragestellung")
 
 # Add a selectbox for choosing the type of counciling
 st.markdown("### Art der Beratung und Analyse")
-col1, col2, col3, col4 = st.columns(4)
+col1, col2, col3= st.columns(3)
 council = col1.selectbox("Art der Beratung", ["Erstberatung", "Befundbesprechung"])
 person = col2.selectbox("Patiententyp", ["Kind", "Erwachsen"])
 disease = col3.selectbox("Fragestellung", ["NDD +/- Epilepsie", "unspezifisch", "HNPCC", "FBrEK", "SCA", "HTT"])
-analysis = col4.selectbox("Art der genetischen Testung", ["Exom", "Exom+CNV+CA", "gezielt", "HNPCC", "FBrEK", "SCA", "HTT"])
 
 # Add anamnesis button
 if council == "Erstberatung" and disease == "unspezifisch":
@@ -58,6 +57,9 @@ st.markdown("### Körperliche Untersuchung")
 if person == "Kind":
     body_text= """\Wir sahen XX im Alter von XX Jahren. Ihre/Seine Körpermaße zur Vorstellung betrugen: [pedz] (https://www.pedz.de/de/bmi.html). Fazial ergaben sich keine Auffälligkeiten/Fazial fielen … auf."""
     body=st.text_area("Untersuchung", body_text)
+
+#Add Anaylsis
+analysis = st.selectbox("Art der genetischen Testung", ["Exom", "Exom+CNV+CA", "gezielt", "Cancer Panel", "Repeat Expansion", "keine"])
 
 
   
