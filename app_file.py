@@ -44,7 +44,7 @@ with tab1:
         - Aktuelle Symptome und Beobachtungen: Art der Entwicklungsverzögerung XX, Verhaltensauffälligkeiten XX, Kommunikationsfähigkeiten XX, Epilepsie XX
         - Bisherige Untersuchungen und Interventionen: Frühere Arztbesuche oder Therapieansätze XX, Diagnosen oder Empfehlungen XX"""
         free_anamnesis= st.text_area("Relevante Symptome und Vorgeschichte für die aktuelle Fragestellung", default_text)
-     elif council == "Erstberatung" and disease == "HNPCC":
+    elif council == "Erstberatung" and disease == "HNPCC":
         st.markdown("### Anamnese")
         default_text = """In Bezug af die aktuelle Fragestellung wurden folgende Aspkete in der Anamnese erfasst:
         - Diagnose eines Darmkrebs im Alter von XX (Brief XX von XX)
