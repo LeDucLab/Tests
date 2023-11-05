@@ -29,7 +29,12 @@ disease = col3.selectbox("Fragestellung", ["NDD +/- Epilepsie", "unspezifisch", 
 analysis = col4.selectbox("Art der genetischen Testung", ["Exom", "Exom+CNV+CA", "gezielt", "HNPCC", "FBrEK", "SCA", "HTT"])
 
 # Add anamnesis button
-if council == "Erstberatung" and person == "Kind":
+if council == "Erstberatung" and disease == "unspezifisch":
+    st.markdown("### Anamnese")
+    default_text = "This is the default text."
+    free_anamnesis= st.text_area("Enter some text:", default_text)
+    
+elif council == "Erstberatung" and disease == "NDD +/- Epilepsie":
     st.markdown("### Anamnese")
     st.markdown("Geburtshintergrund")
     col1, col2, col3 = st.columns(3)
@@ -59,6 +64,8 @@ if council == "Erstberatung" and person == "Kind":
     st.markdown("Bisherige Untersuchungen und Interventionen")
     Vorbefunde=st.text_area("Frühere Arztbesuche oder Therapieansätze")
     Diagnose=st.text_area("Diagnosen oder Empfehlungen")
+
+#Add Familienanamnese button
   
     
     
