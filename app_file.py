@@ -57,8 +57,8 @@ if council == "Erstberatung" and person == "Kind":
     Kommunikation=col1.text_input("Kommunikationsfähigkeiten")
     Epilepsie=col2.text_input("Epilepsie")
     st.markdown("Bisherige Untersuchungen und Interventionen")
-    Vorbefunde=st.text_input("Frühere Arztbesuche oder Therapieansätze")
-    Diagnose=st.text_input("Diagnosen oder Empfehlungen")
+    Vorbefunde=st.text_area("Frühere Arztbesuche oder Therapieansätze")
+    Diagnose=st.text_area("Diagnosen oder Empfehlungen")
   
     
     
