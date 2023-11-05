@@ -32,7 +32,7 @@ analysis = col4.selectbox("Art der genetischen Testung", ["Exom", "Exom+CNV+CA",
 if council == "Erstberatung" and disease == "unspezifisch":
     st.markdown("### Anamnese")
     default_text = """In Bezug af die aktuelle Fragestellung wurden folgende Aspkete in der Anamnese erfasst:"""
-    free_anamnesis= st.text_area("relevante Symptome und Vorgeschichte für die aktuelle Fragestellung", default_text)
+    free_anamnesis= st.text_area("Relevante Symptome und Vorgeschichte für die aktuelle Fragestellung", default_text)
 elif council == "Erstberatung" and disease == "NDD +/- Epilepsie":
     st.markdown("### Anamnese")
     default_text = """In Bezug af die aktuelle Fragestellung wurden folgende Aspkete in der Anamnese erfasst:
@@ -42,7 +42,7 @@ elif council == "Erstberatung" and disease == "NDD +/- Epilepsie":
     - Soziale Entwicklung: Kita/Schulbesuch XX, Interaktion mit der Familie/Gleichaltrigen XX
     - Aktuelle Symptome und Beobachtungen: Art der Entwicklungsverzögerung XX, Verhaltensauffälligkeiten XX, Kommunikationsfähigkeiten XX, Epilepsie XX
     - Bisherige Untersuchungen und Interventionen: Frühere Arztbesuche oder Therapieansätze XX, Diagnosen oder Empfehlungen XX"""
-    free_anamnesis= st.text_area("relevante Symptome und Vorgeschichte für die aktuelle Fragestellung", default_text)
+    free_anamnesis= st.text_area("Relevante Symptome und Vorgeschichte für die aktuelle Fragestellung", default_text)
     
 #elif council == "Erstberatung" and disease == "NDD +/- Epilepsie":
 #    st.markdown("### Anamnese")
