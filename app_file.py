@@ -52,7 +52,12 @@ if familienanamnese == "unauffällig":
 elif familienanamnese == "auffällig":
     fam_text="""Hinsichtlich der aktuellen Fragestellung berichteten Sie, dass bei XX eine XX vorliegt. Unterlagen zu den genannten Familienmitgliedern liegen uns nicht vor. Ein drei Generationen umfassender Stammbaum befindet sich im Anhang."""
     family=st.text_area("Relevante Erkrankungen in der Familie", fam_text)
-    
+
+#Add Körperliche Untersuchung
+st.markdown("### Körperliche Untersuchung")
+if person == "Kind":
+    body_text= """Wir sahen XX im Alter von XX Jahren. Ihre/Seine Körpermaße zur Vorstellung betrugen: https://www.pedz.de/de/bmi.html [Daten aus pedz]. Fazial ergaben sich keine Auffälligkeiten/Fazial fielen … auf."""
+
   
     
     
