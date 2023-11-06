@@ -41,7 +41,7 @@ with tab1:
     col1, col2, col3= st.columns(3)
     council = col1.selectbox("Art der Beratung", ["Erstberatung", "Befundbesprechung"])
     person = col2.selectbox("Patiententyp", ["Kind", "Erwachsen"])
-    disease = col3.selectbox("Krankheitsbild", ["NDD +/- Epilepsie", "unspezifisch", "HNPCC", "FBrEK", "SCA", "HTT"])
+    disease = col3.selectbox("Krankheitsbild", ["NDD +/- Epilepsie", "unspezifisch", "HNPCC", "FBrEK", "SCA", "HTT", "Geschlechtsinkongruenz"])
 
     #
     
@@ -79,6 +79,15 @@ with tab1:
         In Bezug af die aktuelle Fragestellung wurden folgende Aspkete in der Anamnese erfasst:
         - Typische Symptome einer Huntington Erkrankung: Motorische Symptome wie Unkontrollierte Bewegungen (Chorea), Muskelsteifigkeit, Verlust der Koordination im Alter von XX, kognitive Einschränkung und Gedächtnisstörungen im Alter von XX, psychiatrische Manifestationen wie Depression, Ängstlichkeit, Stimmungsschwankungen, Persönlichkeitsveränderungen im Alter von XX
         - Krankheitsgeschichte: neurologische Diagnostik –⁠ XX, cMRT Untersuchung –⁠ keine pathologische Befunde (Arztbrief vom XX, Klinik XX)"""
+        free_anamnesis= st.text_area("Relevante Symptome und Vorgeschichte für die aktuelle Fragestellung", default_text)
+     elif council == "Erstberatung" and disease == "Geschlechtsinkongruenz":
+        st.markdown("### Anamnese")
+        default_text = """In Bezug af die aktuelle Fragestellung wurden folgende Aspkete in der Anamnese erfasst:
+        - Geschlechtsidentität und Entwicklung: keine Auffälligkeiten in der Pubertät, erste Zeichen einer Geschlechtsinkongruenz in XX
+        - Soziale und familiäre Akzeptanz: familiäre Unterstuzung, Akzeptanz durch Freundekreis
+        - Vorerkrankungen: keine
+        - Psychische Gesundheit: Depression, Stimmungsschwankungen
+        - Transition, weitere Aspekte: Hormontherapie seit XX, eine Geschlechtsumwandlungsoperationen ist geplannt XX"""
         free_anamnesis= st.text_area("Relevante Symptome und Vorgeschichte für die aktuelle Fragestellung", default_text)
         
     #Add Familienanamnese button
