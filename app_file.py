@@ -1,6 +1,16 @@
 import streamlit as st
 from datetime import datetime
 
+#Create a custom Paragraph spacing
+custom_css = """
+<style>
+.custom-paragraph {
+    margin: 0; /* Remove default paragraph margin */
+    margin-bottom: 0.5em; /* Add a custom margin-bottom to control spacing */
+}
+</style>
+"""
+
 tab1, tab2= st.tabs(["Beratung", "Krankheitsbild Textbausteine"])
 
 with tab1:
@@ -32,11 +42,11 @@ with tab1:
     # Add anamnesis button
     if council == "Erstberatung" and disease == "unspezifisch":
         st.markdown("### Anamnese")
-        default_text = """In Bezug af die aktuelle Fragestellung wurden folgende Aspkete in der Anamnese erfasst:"""
+        default_text = """In Bezug auf die aktuelle Fragestellung wurden folgende Aspkete in der Anamnese erfasst:"""
         free_anamnesis= st.text_area("Relevante Symptome und Vorgeschichte für die aktuelle Fragestellung", default_text)
     elif council == "Erstberatung" and disease == "NDD +/- Epilepsie":
         st.markdown("### Anamnese")
-        default_text = """In Bezug af die aktuelle Fragestellung wurden folgende Aspkete in der Anamnese erfasst:
+        default_text = """In Bezug auf die aktuelle Fragestellung wurden folgende Aspkete in der Anamnese erfasst:
         - Geburtshintergrund: Geburtsart XX, Geburtstermin XX, Geburtsmaßen XX
         - Meilensteine der motorischen Entwicklung: Drehen XX, Sitzen XX, Gehen XX
         - Meilensteine der sprachlichen Entwicklung: esrte Laute/Worte XX, aktueller Status XX
@@ -111,9 +121,9 @@ with tab1:
 
     #Info zum Krankheitsbild
     if disease=="HNPCC":
-        disease_info_line="""Dickdarmkrebs (Kolonkarzinom) zählt zu den häufigsten bösartigen Tumoren in Westeuropa. Die meisten Fälle treten sporadisch auf und sind vermutlich multifaktoriell verursacht. In ca. 3-5 % der Fälle ist eine familiäre Häufung durch eine monogene, autosomal dominant erbliche Ursache zu erklären. Beim familiären Darmkrebs unterscheidet man mehrere Unterformen. Hierzu zählen die FAP (Familiäre Adenomatöse Poly-posis) mit hunderten bis tausenden Polypen im Darm, die MUTYH-assoziierte Polyposis mit zehn bis eini-gen hundert Polypen im Darm und das HNPCC-Syndrom (auch Lynch-Syndrom genannt) ohne Polyposis. Das Lynch-Syndrom ist ein Tumorprädispositionssyndrom, das mit einem erhöhten Risiko für kolorektale Karzinome, Karzinome des weiteren Verdauungstrakts, Endometriumkarzinome, Karzinome des Harntrakts, Ovarialkarzinome und Hirntumoren einhergeht.
+        disease_info_line="""Dickdarmkrebs (Kolonkarzinom) zählt zu den häufigsten bösartigen Tumoren in Westeuropa. Die meisten Fälle treten sporadisch auf und sind vermutlich multifaktoriell verursacht. In ca. 3–⁠5 % der Fälle ist eine familiäre Häufung durch eine monogene, autosomal dominant erbliche Ursache zu erklären. Beim familiären Darmkrebs unterscheidet man mehrere Unterformen. Hierzu zählen die FAP (Familiäre Adenomatöse Poly-posis) mit hunderten bis tausenden Polypen im Darm, die MUTYH-assoziierte Polyposis mit zehn bis eini-gen hundert Polypen im Darm und das HNPCC-Syndrom (auch Lynch-Syndrom genannt) ohne Polyposis. Das Lynch-Syndrom ist ein Tumorprädispositionssyndrom, das mit einem erhöhten Risiko für kolorektale Karzinome, Karzinome des weiteren Verdauungstrakts, Endometriumkarzinome, Karzinome des Harntrakts, Ovarialkarzinome und Hirntumoren einhergeht.
 
-Ursächlich für das Lynch-Syndrom sind pathogene Varianten in den Genen MLH1, MSH2, MSH6, PMS2 und EPCAM. Diese werden autosomal dominant vererbt. Das bedeutet, dass heterozygote Anlageträger die Erkrankung ausbilden. Damit besteht für die Nachkommen von Anlageträgern eine 50%ige Wahrscheinlichkeit, diese zu erben und die Erkrankung ebenfalls auszubilden. Es ist eine unvollständige Penetranz bekannt. Das bedeutet, nicht jeder Anlageträger bildet die Erkrankung aus.
+Ursächlich für das Lynch-Syndrom sind pathogene Varianten in den Genen <i>MLH1<\i>, <i>MSH2<\i>, <i>MSH6<\i>, <i>PMS2<\i> und <i>EPCAM<\i>. Diese werden autosomal dominant vererbt. Das bedeutet, dass heterozygote Anlageträger die Erkrankung ausbilden. Damit besteht für die Nachkommen von Anlageträgern eine 50%ige Wahrscheinlichkeit, diese zu erben und die Erkrankung ebenfalls auszubilden. Es ist eine unvollständige Penetranz bekannt. Das bedeutet, nicht jeder Anlageträger bildet die Erkrankung aus.
 Um Patienten mit einem HNPCC-Syndrom (hereditäres nicht-polypöses Kolonkarzinom) zu identifizieren, wurden klinische Kriterien definiert. Sind in einer Familie die Amsterdam-Kriterien für HNPCC (Auftreten von Kolonkarzinom, Nierenbecken- oder Ureterkarzinom und anderen assoziierten Tumorerkrankungen bei drei Familienangehörigen in zwei aufeinanderfolgenden Generationen, ein Familienmitglied erstgradig verwandt mit den beiden anderen, Erkrankungsalter bei einem Betroffenen vor dem 50. Lebensjahr) erfüllt, kann bereits klinisch die Diagnose eines HNPCC-Syndroms gestellt werden.
 Die Bethesda-Kriterien für HNPCC (Kolonkarzinom vor dem 50. Lebensjahr, synchrones oder metachrones Auftreten von Kolonkarzinom oder anderen assoziierten Tumorerkrankungen, Kolonkarzinom mit spezieller MSI-H-Histologie, Patient mit Kolonkarzinom mit einem erstgradig Verwandten mit Kolonkarzinom oder assoziierter Tumorerkrankung vor dem 50. Lebensjahr, Patient mit Kolonkarzinom mit min. zwei erst- oder zweitgradig Verwandten mit Kolonkarzinom oder assoziierter Tumorerkrankung) stellen hingegen lediglich klinische Verdachtskriterien dar. 
 
@@ -137,7 +147,7 @@ Seltenere Tumorprädispositionssyndrome sind das Peutz-Jeghers-Syndrom, das durc
         if council == "Erstberatung" and person == "Kind":
             st.markdown(beratung_line, unsafe_allow_html=True)
             st.markdown(hello_line, unsafe_allow_html=True)
-            st.write("**Eigenanamnese:**")
+            st.write("<div class='custom-paragraph'>**Eigenanamnese:**</div>")
             st.markdown(free_anamnesis, unsafe_allow_html=True)
             st.write ("**Familienanamnese:**")
             st.markdown(family, unsafe_allow_html=True)
