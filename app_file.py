@@ -58,7 +58,7 @@ with tab1:
         - Meilensteine der sprachlichen Entwicklung: esrte Laute/Worte XX, aktueller Status XX<br>
         - Soziale Entwicklung: Kita/Schulbesuch XX, Interaktion mit der Familie/Gleichaltrigen XX<br>
         - Aktuelle Symptome und Beobachtungen: Art der Entwicklungsverzögerung XX, Verhaltensauffälligkeiten XX, Kommunikationsfähigkeiten XX, Epilepsie XX<br>
-        - Bisherige Untersuchungen und Interventionen: Frühere Arztbesuche oder Therapieansätze XX, Diagnosen oder Empfehlungen XX"""
+        - Bisherige Untersuchungen und Interventionen: Frühere Arztbesuche oder Therapieansätze XX, Diagnosen oder Empfehlungen XX</br>"""
         free_anamnesis= st.text_area("Relevante Symptome und Vorgeschichte für die aktuelle Fragestellung", default_text)
     elif council == "Erstberatung" and disease == "HNPCC":
         st.markdown("### Anamnese")
@@ -94,7 +94,7 @@ with tab1:
     st.markdown("### Körperliche Untersuchung")
     if person == "Kind":
         body_text= """Wir sahen XX im Alter von XX Jahren. Ihre/Seine Körpermaße zur Vorstellung betrugen: [pedz] (https://www.pedz.de/de/bmi.html). Fazial ergaben sich keine Auffälligkeiten/Fazial fielen XX auf."""
-        body=st.text_area("Untersuchung", body_text)
+        body=st.text_area("", body_text)
     elif person == "Erwachsen":
         body_box= st.selectbox("Körperliche Untersuchung", ["Ja", "Nein"])
     
