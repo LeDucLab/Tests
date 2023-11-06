@@ -38,11 +38,13 @@ with tab1:
     council = col1.selectbox("Art der Beratung", ["Erstberatung", "Befundbesprechung"])
     person = col2.selectbox("Patiententyp", ["Kind", "Erwachsen"])
     disease = col3.selectbox("Krankheitsbild", ["NDD +/- Epilepsie", "unspezifisch", "HNPCC", "FBrEK", "SCA", "HTT"])
+
+    #
     
     # Add anamnesis button
     if council == "Erstberatung" and disease == "unspezifisch":
         st.markdown("### Anamnese")
-        default_text = """In Bezug auf die aktuelle Fragestellung wurden folgende Aspkete in der Anamnese erfasst:"""
+        default_text = """In Bezug auf die aktuelle Fragestellung wurden folgende Aspkete in der Anamnese erfasst: / Sie berichteten, dass bei Ihnen keine für die Fragestellung relevanten Symptome/ Erkrankungen/ keine Tumorerkrankungen bekannt seien."""
         free_anamnesis= st.text_area("Relevante Symptome und Vorgeschichte für die aktuelle Fragestellung", default_text)
     elif council == "Erstberatung" and disease == "NDD +/- Epilepsie":
         st.markdown("### Anamnese")
@@ -57,9 +59,21 @@ with tab1:
     elif council == "Erstberatung" and disease == "HNPCC":
         st.markdown("### Anamnese")
         default_text = """In Bezug af die aktuelle Fragestellung wurden folgende Aspkete in der Anamnese erfasst:
-        - Diagnose eines Darmkrebs im Alter von XX (Brief XX von XX)
+        - Diagnose eines Darmkrebs im Alter von XX (Brief XX vom XX)
         - Behandlung: operative Tumorentfernung, adjuvante Chemotherapie
         - Pathologische Untersuchung am Tumormaterial: unauffällige Befunde bezüglich einer Mikrosatelliteninstabilität und in der Immunhistochemie der Mismatch-Repair-Proteine (Arztbrief vom …, Klinik). / In der pathologischen Untersuchung am Tumormaterial wurde eine … Mikrosatelliteninstabilität sowie in der Immunhistochemie wurde ein Verlust der Kernexpression für XX nachgewiesen. Weiterhin wurde am Tumormaterial die somatische Variante p.Val600Gly im BRAF-Gen (nicht) nachgewiesen (Arztbrief vom …, Klinik)."""
+        free_anamnesis= st.text_area("Relevante Symptome und Vorgeschichte für die aktuelle Fragestellung", default_text)
+    elif council == "Erstberatung" and disease == "SCA":
+        st.markdown("### Anamnese")
+        default_text = """In Bezug af die aktuelle Fragestellung wurden folgende Aspkete in der Anamnese erfasst:
+        - Typische Symptome einer spinozerebellären Ataxie: Gangstörung im Alter von XX, Dysarthrie im Alter von XX, Orientierungsstörungen –⁠ XX, Augenbewegungsstörungen –⁠ XX 
+        - Krankheitsgeschichte: neurologische Diagnostik –⁠ XX, cMRT Untersuchung –⁠ keine pathologische Befunde (Arztbrief vom XX, Klinik XX)"""
+        free_anamnesis= st.text_area("Relevante Symptome und Vorgeschichte für die aktuelle Fragestellung", default_text)
+    elif council == "Erstberatung" and disease == "HTT":
+        st.markdown("### Anamnese")
+        default_text = """In Bezug af die aktuelle Fragestellung wurden folgende Aspkete in der Anamnese erfasst:
+        - Typische Symptome einer Huntington Erkrankung: Motorische Symptome wie Unkontrollierte Bewegungen (Chorea), Muskelsteifigkeit, Verlust der Koordination im Alter von XX, kognitive Einschränkung und Gedächtnisstörungen im Alter von XX, psychiatrische Manifestationen wie Depression, Ängstlichkeit, Stimmungsschwankungen, Persönlichkeitsveränderungen im Alter von XX 
+        - Krankheitsgeschichte: neurologische Diagnostik –⁠ XX, cMRT Untersuchung –⁠ keine pathologische Befunde (Arztbrief vom XX, Klinik XX)"""
         free_anamnesis= st.text_area("Relevante Symptome und Vorgeschichte für die aktuelle Fragestellung", default_text)
         
     #Add Familienanamnese button
@@ -88,14 +102,24 @@ with tab1:
         beurteilung="""Bei Ihrem Sohn/Ihrer Tochter/Ihnen besteht der Verdacht auf eine genetisch bedingte Entwicklungsverzögerung/Entwicklungsstörung/Intelligenzminderung mit Epilepsie. Aus der Sicht unseres Fachgebietes ist eine genetische Diagnostik indiziert. Wir veranlassten daher eine konventionelle Chromosomenanalyse, eine molekulargenetische Diagnostik im FMR1-Gen bezüglich des Fragilen-X-Syndroms, eine genomweite molekulargenetische Analyse von Dosisveränderungen (Copy Number Repeats, vergleichbar mit Arraydiagnostik) sowie eine molekulargenetische Multigen-Paneldiagnostik in den für eine genetisch bedingte Entwicklungsverzögerung/Entwicklungsstörung/Intelligenzminderung ursächlichen Genen bei ihm/ihr. 
     Sobald die Befunde der genetischen Diagnostik vorliegen, werden wir Sie informieren und weiterführend Stellung nehmen."""
     elif analysis == "gezielt":
-        beurteilung="""Bei  Ihren Angehörigen/ Ihrer Mutter / Ihrem Vater / Ihrer Großmutter / Ihrem Großvater / väterlicherseits/ mütterlicherseits wurde im Vorfeld die o.g. pathogene Variante im XX-Gen nachgewiesen. Somit weist Ihr Sohn/Ihre Tochter // weisen Sie mit XX%iger Wahrscheinlichkeit die in Ihrer Familie bekannte pathogene Variante ebenfalls auf.  Mit Ihrem Einverständnis veranlassten wir die gezielte Diagnostik auf die o.g. pathogene XX-Variante bei Ihrem Sohn/Ihrer Tochter/Ihnen. Sobald der Befund der genetischen Diagnostik vorliegt, werden wir Sie informieren und weiterführend Stellung nehmen."""
+        beurteilung="""Bei  Ihren Angehörigen/ Ihrer Mutter / Ihrem Vater / Ihrer Großmutter / Ihrem Großvater / väterlicherseits/ mütterlicherseits wurde im Vorfeld die o.g. pathogene Variante im XX-Gen nachgewiesen. Somit weist Ihr Sohn/Ihre Tochter // weisen Sie mit XX%iger Wahrscheinlichkeit die in Ihrer Familie bekannte pathogene Variante ebenfalls auf.  Mit Ihrem Einverständnis veranlassten wir die gezielte Diagnostik auf die o.g. pathogene XX-Variante bei Ihrem Sohn/Ihrer Tochter/Ihnen. // Zur Abklärung einer möglichen Anlageträgerschaft bezüglich XX veranlassten wir bei Ihnen eine molekulargenetische Einzelgen-Diagnostik und MLPA-Untersuchung bezüglich Veränderungen im ...-Gen. // Sobald der Befund der genetischen Diagnostik vorliegt, werden wir Sie informieren und weiterführend Stellung nehmen."""
     elif analysis == "Cancer Panel" and disease == "HNPCC":
         beurteilung="""Bei Ihnen besteht der Verdacht auf eine genetisch bedingte Darmkrebserkrankung. Die Bethesda-Kriterien und Amsterdam-Kriterien sind erfüllt. Die molekularpathologischen Untersuchungen am Tumormaterial von Ihnen ergaben einen auffälligen Befund. Zur Abklärung veranlassten wir daher bei Ihnen eine molekulargenetische Paneldiagnostik in den für genetisch bedingten Darmkrebs ursächlichen Genen. / Zur weiteren Abklärung forderten wir die molekularpathologische Untersuchung bezüglich einer Mikrosatelliteninstabilität, eine immunhistochemische Diagnostik sowie die molekularpathologische Diagnostik bezüglich der somatischen Mutation p.(Val600Glu) im BRAF-Gen an.
 Sobald die Befunde der eingeleiteten Diagnostik vorliegen, werden wir Sie informieren und weiterführend Stellung nehmen.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
 
 / Wir besprachen, dass aufgrund Ihrer Angaben zur Eigen- und Familienanamnese die klinischen Kriterien (Bethesda- und Amsterdam-Kriterien) für ein HNPCC-Syndrom nicht erfüllt sind. Zudem erwiesen sich die im Vorfeld durchgeführten molekularpathologischen und immunhistochemischen Untersuchungen am Tumormaterial bei Ihnen als unauffällig. Hinweise auf ein polypöses Tumorprädispositionssyndrom ergaben sich bei Ihnen nicht. Wir empfehlen Ihnen daher im Anschluss an die Tumornachsorge die Teilnahme an der Regelvorsorge für Darmkrebs/ eine Koloskopie alle 3–⁠5 Jahre. Das Risiko eines Verwandten ersten Grades eines Patienten mit kolorektalem Karzinom, ebenfalls an einem kolorektalen Karzinom zu erkranken, ist auch ohne das Vorliegen eines erblichen Tumorsyndroms statistisch erhöht. Ihre Verwandten ersten Grades sollten daher mit spätestens XX Jahren erstmals komplett koloskopiert werden (10 Jahre vor dem Alterszeitpunkt des Auftretens des Karzinoms beim Indexpatienten gemäß S3-Leitlinie Kolorektales Karzinom).
 Sollten im weiteren Verlauf Sie bzw. andere Familienmitglieder an weiteren Krebserkrankungen erkranken, ist eine Wiedervorstellung in unserer Sprechstunde zur Re-Evaluation und ggf. Einleitung einer weiterführenden genetischen Diagnostik möglich."""
-    
+    elif analysis == "Repeat expansion" and disease == "SCA":
+        beurteilung="""Bei Ihnen besteht der Verdacht auf eine genetisch bedingte Ataxie. Wir veranlassten daher bei Ihnen die molekulargenetische Diagnostik bezüglich des Fragilen-X-assoziierten Tremor-Ataxie-Syndroms (FXTAS) im FMR1-Gen. Weiterhin werden wir die molekulargenetische Diagnostik bezüglich der Spinozerebellären Ataxie Typ 1, 2, 3, 6, 7, 8, 10, 12 und 17 sowie eine molekulargenetische Paneldiagnostik in weiteren hierfür ursächlichen Genen durchführen. Sobald die Befunde der genetischen Diagnostik vorliegen, werden wir Sie informieren und weiterführend Stellung nehmen. Wir hoffen, Sie mit unserem Gespräch und diesem Brief ausreichend informiert zu haben. Bei Rückfragen stehen wir gerne auch telefonisch zur Verfügung."""
+    elif analysis == "gezielt" and disease == "HTT":
+        beurteilung="""Bei XX wurde mit dem Nachweis einer pathogenen CAG-Repeat-Verlängerung im <i>HTT</i>-Gen eine Huntington-Erkrankung molekulargenetisch nachgewiesen. Damit besteht für Sie eine 50%ige Wahrscheinlichkeit, diese geerbt zu haben und ebenfalls eine Huntington-Erkrankung auszubilden. 
+
+Im Rahmen der Beratung besprachen wir psychologische, soziale und versicherungsrechtliche Aspekte, die sich aus dem Ergebnis der genetischen Diagnostik ergeben könnten. Zudem empfahlen wir eine psychologische Beratung im Hinblick auf eine mögliche prädiktive Diagnostik im HTT-Gen. Sollten Sie sich nach angemessener Bedenkzeit für die molekulargenetische Untersuchung im HTT-Gen entscheiden, ist eine erneute Terminvereinbarung in unserer genetischen Sprechstunde zur Entnahme einer Blutprobe und Einleitung der genetischen Diagnostik möglich. 
+
+Wir hoffen, Sie mit unserem Gespräch und diesem Brief vorerst ausreichend informiert zu haben. Bei Rückfragen stehen wir gerne auch telefonisch zur Verfügung."""
+    elif analysis == "Repeat Expansion" and disease == "HTT":
+         beurteilung="""Bei Ihnen besteht der Verdacht auf eine Huntington Erkrankung. Wir veranlassten daher bei Ihnen eine molekulargenetische Diagnostik im Hinblick auf eine Huntington Erkrankung. Sollte diese Diagnostik unauffällig sein werden wir eine weiterführende genetische Diagnostik im Hinblick Huntington-like Erkrankungen einleiten. Sobald die Befunde der genetischen Diagnostik vorliegen, werden wir Sie informieren und weiterführend Stellung nehmen.""" 
+
     #Add Signature boxes
     st.markdown("### Behandelnde Ärzte")
     col1, col2 = st.columns(2)
@@ -148,7 +172,7 @@ Seltenere Tumorprädispositionssyndrome sind das Peutz-Jeghers-Syndrom, das durc
 
     
     # Create a button
-    if st.button("Zur Vorlage"):
+    if st.button("Arzt Brief"):
         # Display text based on the selected option
         if council == "Erstberatung" and person == "Kind":
             st.markdown(beratung_line, unsafe_allow_html=True)
@@ -159,6 +183,17 @@ Seltenere Tumorprädispositionssyndrome sind das Peutz-Jeghers-Syndrom, das durc
             st.markdown(family, unsafe_allow_html=True)
             st.markdown("<div class='custom-paragraph'><b>Körperliche Untersuchung:</b></div>",  unsafe_allow_html=True)
             st.markdown(body, unsafe_allow_html=True)
+            st.markdown("<div class='custom-paragraph'><b>Beurteilung und Procedere:</b></div>",  unsafe_allow_html=True)
+            st.markdown(beurteilung, unsafe_allow_html=True)
+            st.markdown(last_line, unsafe_allow_html=True)
+            st.markdown(signature, unsafe_allow_html=True)
+         elif council == "Erstberatung" and person == "Erwachsen":
+            st.markdown(beratung_line, unsafe_allow_html=True)
+            st.markdown(hello_line, unsafe_allow_html=True)
+            st.markdown("<div class='custom-paragraph'><b>Eigenanamnese:</b></div>",  unsafe_allow_html=True)
+            st.markdown(free_anamnesis, unsafe_allow_html=True)
+            st.markdown("<div class='custom-paragraph'><b>Familienanamnese:</b></div>",  unsafe_allow_html=True)
+            st.markdown(family, unsafe_allow_html=True)
             st.markdown("<div class='custom-paragraph'><b>Beurteilung und Procedere:</b></div>",  unsafe_allow_html=True)
             st.markdown(beurteilung, unsafe_allow_html=True)
             st.markdown(last_line, unsafe_allow_html=True)
