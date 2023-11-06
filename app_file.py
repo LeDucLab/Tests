@@ -115,8 +115,8 @@ Seltenere Tumorprädispositionssyndrome sind das Peutz-Jeghers-Syndrom, das durc
     
     
     #Final lines
-    last_line=""""Wir hoffen, Sie mit unserem Gespräch und diesem Brief vorerst ausreichend informiert zu haben. Bei Rückfragen stehen wir gerne auch telefonisch zur Verfügung.\n
-    Mit freundlichen Grüßen,\n
+    last_line=""""Wir hoffen, Sie mit unserem Gespräch und diesem Brief vorerst ausreichend informiert zu haben. Bei Rückfragen stehen wir gerne auch telefonisch zur Verfügung.
+    Mit freundlichen Grüßen,
     PD Dr. D. Le Duc, MD/PhD"""
     
 
