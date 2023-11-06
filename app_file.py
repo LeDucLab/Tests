@@ -302,10 +302,10 @@ with tab2:
     # Create a selectbox to choose an option for the gender
     st.markdown("### Patienten Daten")
     col1, col2, col3= st.columns(3)
-    Titel2 = col1.selectbox("Titel2", ["Frau", "Herr", "Familie"])
+    Titel_2 = col1.selectbox("Titel", ["Frau", "Herr", "Familie"], key="Titel_2")
         
-    Vorname2 = col2.text_input("Vorame2")
-    Name2 = col3.text_input("Name2")
+    Vorname_2 = col2.text_input("Vorname",key="Vorname_2")
+    Name_2 = col3.text_input("Name", key="Name_2")
         
     #st.markdown("### Fragestellung")
     question2 = st.text_input("Fragestellung")
