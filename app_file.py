@@ -79,7 +79,16 @@ with tab1:
     Sobald die Befunde der genetischen Diagnostik vorliegen, werden wir Sie informieren und weiterführend Stellung nehmen."""
     elif analysis == "gezielt":
         beurteilung="""Bei  Ihren Angehörigen/ Ihrer Mutter / Ihrem Vater / Ihrer Großmutter / Ihrem Großvater / väterlicherseits/ mütterlicherseits wurde im Vorfeld die o.g. pathogene Variante im XX-Gen nachgewiesen. Somit weist Ihr Sohn/Ihre Tochter // weisen Sie mit XX%iger Wahrscheinlichkeit die in Ihrer Familie bekannte pathogene Variante ebenfalls auf.  Mit Ihrem Einverständnis veranlassten wir die gezielte Diagnostik auf die o.g. pathogene XX-Variante bei Ihrem Sohn/Ihrer Tochter/Ihnen. Sobald der Befund der genetischen Diagnostik vorliegt, werden wir Sie informieren und weiterführend Stellung nehmen."""
-        
+
+    #Add Signature boxes
+    st.markdown("### Behandelnde Ärzte")
+    col1, col2, col3= st.columns(3)
+    Arzt1 = col1.selectbox("Arzt 1", ["Diana Le Duc", "Albrecht Kobelt"])
+    Arzt2 = col2.selectbox("Arzt 2", ["Diana Le Duc", "Albrecht Kobelt"])
+    Arzt3 = col3.selectbox("Arzt 2", ["Diana Le Duc", "Albrecht Kobelt"])
+    
+
+    
     
       
         
@@ -115,7 +124,11 @@ Seltenere Tumorprädispositionssyndrome sind das Peutz-Jeghers-Syndrom, das durc
     
     
     #Final lines
-    last_line=""""Wir hoffen, Sie mit unserem Gespräch und diesem Brief vorerst ausreichend informiert zu haben. Bei Rückfragen stehen wir gerne auch telefonisch zur Verfügung.<br>Mit freundlichen Grüßen,<br>PD Dr. D. Le Duc, MD/PhD"""
+    last_line=""""Wir hoffen, Sie mit unserem Gespräch und diesem Brief vorerst ausreichend informiert zu haben. Bei Rückfragen stehen wir gerne auch telefonisch zur Verfügung.<br><br>Mit freundlichen Grüßen,"""
+
+    #Signatures
+    if Arzt1 =="Diana Le Duc"
+        signature="""PD Dr. D Le Duc, MD/PhD<br><small>FÄ für Humangenetik>/small>"""
     
 
     
@@ -134,8 +147,7 @@ Seltenere Tumorprädispositionssyndrome sind das Peutz-Jeghers-Syndrom, das durc
             st.write("**Beurteilung:**")
             st.markdown(beurteilung, unsafe_allow_html=True)
             st.markdown(last_line, unsafe_allow_html=True)
-            st.markdown("<br>", unsafe_allow_html=True)
-            st.write("<font size='2'>FÄ für Humangenetik</font>", unsafe_allow_html=True)
+            st.markdown(signature, unsafe_allow_html=True)
         elif council == "Erstberatung" and person == "Erwachsen" and body_box == "Nein":
             st.markdown(beratung_line, unsafe_allow_html=True)
             st.markdown(hello_line, unsafe_allow_html=True)
@@ -146,8 +158,7 @@ Seltenere Tumorprädispositionssyndrome sind das Peutz-Jeghers-Syndrom, das durc
             st.write("**Beurteilung:**")
             st.markdown(beurteilung, unsafe_allow_html=True)
             st.markdown(last_line, unsafe_allow_html=True)
-            st.markdown("<br>", unsafe_allow_html=True)
-            st.write("<font size='2'>FÄ für Humangenetik</font>", unsafe_allow_html=True)
+            st.markdown(signature, unsafe_allow_html=True)
     
        # elif council == "Erstberatung" and Titel == "Herr" and person == "Kind" and disease == "NDD +/- Epilepsie" and analysis == "Exom+CNV+CA" :
             
