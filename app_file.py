@@ -353,9 +353,9 @@ with tab2:
     
     #Date of Beratung
     if result_2=="unauffällig":
-        first_line="""wir berichten vom Ergebnis der bei Ihnen durchgeführten genetischen Diagnostik. Zur Vorgeschichte verweisen wir auf unseren Brief vom XX."""
+        first_line_2="""wir berichten vom Ergebnis der bei Ihnen durchgeführten genetischen Diagnostik. Zur Vorgeschichte verweisen wir auf unseren Brief vom XX."""
     elif result_2=="auffällig": 
-        f"am {current_datetime.strftime('%d.%m.%Y')} stellten Sie sich/Ihren Sohn/Ihre Tochter in unserer genetischen Sprechstunde vor. Zur Vorgeschichte verweisen wir auf unseren Brief vom XX."
+        first_line_2=f"am {current_datetime.strftime('%d.%m.%Y')} stellten Sie sich/Ihren Sohn/Ihre Tochter in unserer genetischen Sprechstunde vor. Zur Vorgeschichte verweisen wir auf unseren Brief vom XX."
 
 
     if st.button("Arzt Brief Befundbesprechung"):
@@ -363,7 +363,7 @@ with tab2:
         if council_2 == "Befundbesprechung" and person_2 == "Kind":
             st.markdown(beratung_line_2, unsafe_allow_html=True)
             st.markdown(hello_line_2, unsafe_allow_html=True)
-            #st.markdown(first_line, unsafe_allow_html=True)
+            st.markdown(first_line_2, unsafe_allow_html=True)
             #st.markdown("<div class='custom-paragraph'><b>Eigenanamnese:</b></div>",  unsafe_allow_html=True)
             #st.markdown(free_anamnesis, unsafe_allow_html=True)
             #st.markdown("<div class='custom-paragraph'><b>Familienanamnese:</b></div>",  unsafe_allow_html=True)
