@@ -9,7 +9,7 @@ custom_css = """
     margin-bottom: 0.5em; /* Add a custom margin-bottom to control spacing */
 }
 h1, h2, h3, h4, h5, h6 {
-    font-size: 8px; /* Change the font size to your desired value */
+    font-size: 14px; /* Change the font size to your desired value */
 }
 </style>
 """
@@ -19,7 +19,7 @@ tab1, tab2= st.tabs(["Beratung", "Krankheitsbild Textbausteine"])
 
 with tab1:
     # Create a Streamlit app
-    st.markdown("<h1 style='font-size: 20px;'>Arzt Brief Generator</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='font-size: 30px;'>Arzt Brief Generator</h1>", unsafe_allow_html=True)
         
     # Get the current date and time
     current_datetime = datetime.now()
