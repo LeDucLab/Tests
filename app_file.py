@@ -354,7 +354,7 @@ with tab2:
     #Date of Beratung
     if result_2=="unauffällig":
         first_line_2="""wir berichten vom Ergebnis der bei Ihnen/bei Ihrem Sohn/bei Ihrer Tochter durchgeführten genetischen Diagnostik. Zur Vorgeschichte verweisen wir auf unseren Brief vom XX."""
-    elif result_2=="auffällig": 
+    elif result_2!="unauffällig": 
         first_line_2=f"am {current_datetime.strftime('%d.%m.%Y')} stellten Sie sich/Ihren Sohn/Ihre Tochter in unserer genetischen Sprechstunde vor. Zur Vorgeschichte verweisen wir auf unseren Brief vom XX."
 
     #Genetic diagnostic
