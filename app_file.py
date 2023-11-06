@@ -58,9 +58,9 @@ with tab1:
         free_anamnesis= st.text_area("Relevante Symptome und Vorgeschichte für die aktuelle Fragestellung", default_text)
     elif council == "Erstberatung" and disease == "HNPCC":
         st.markdown("### Anamnese")
-        default_text = """In Bezug af die aktuelle Fragestellung wurden folgende Aspkete in der Anamnese erfasst:\n
-        - Diagnose eines Darmkrebs im Alter von XX (Brief XX vom XX)\n
-        - Behandlung: operative Tumorentfernung, adjuvante Chemotherapie\n
+        default_text = """In Bezug af die aktuelle Fragestellung wurden folgende Aspkete in der Anamnese erfasst:<br>
+        - Diagnose eines Darmkrebs im Alter von XX (Brief XX vom XX)<br>
+        - Behandlung: operative Tumorentfernung, adjuvante Chemotherapie<br>
         - Pathologische Untersuchung am Tumormaterial: unauffällige Befunde bezüglich einer Mikrosatelliteninstabilität und in der Immunhistochemie der Mismatch-Repair-Proteine (Arztbrief vom …, Klinik). / In der pathologischen Untersuchung am Tumormaterial wurde eine … Mikrosatelliteninstabilität sowie in der Immunhistochemie wurde ein Verlust der Kernexpression für XX nachgewiesen. Weiterhin wurde am Tumormaterial die somatische Variante p.Val600Gly im BRAF-Gen (nicht) nachgewiesen (Arztbrief vom …, Klinik)."""
         free_anamnesis= st.text_area("Relevante Symptome und Vorgeschichte für die aktuelle Fragestellung", default_text)
     elif council == "Erstberatung" and disease == "SCA":
