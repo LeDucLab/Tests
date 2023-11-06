@@ -146,10 +146,13 @@ with tab1:
     st.markdown("### Genetische Diagnostik")
     analysis = st.selectbox("Art der genetischen Testung", ["Exom", "Exom+CNV+CA", "gezielt", "Cancer Panel", "Repeat Expansion", "CA", "keine"])
     if analysis == "Exom" and disease != "Marfan/EDS":
-        beurteilung="""Bei Ihrem Sohn/Ihrer Tochter/Ihnen besteht der Verdacht auf eine genetisch bedingte Entwicklungsstörung/Intelligenzminderung/Erkrankung. Aus der Sicht unseres Fachgebietes ist eine genetische Diagnostik indiziert. Wir veranlassten daher eine molekulargenetische Exomdiagnostik mit Beurteilung der hierfür ursächlichen Genen. Sobald der Befund der genetischen Diagnostik vorliegt, werden wir Sie informieren und weiterführend Stellung nehmen."""
+        beurteilung="""Bei Ihrem Sohn/Ihrer Tochter/Ihnen besteht der Verdacht auf eine genetisch bedingte Entwicklungsstörung/Intelligenzminderung/Erkrankung. Aus der Sicht unseres Fachgebietes ist eine genetische Diagnostik indiziert. Wir veranlassten daher eine molekulargenetische Exomdiagnostik mit Beurteilung der hierfür ursächlichen Genen.
+        Sobald der Befund der genetischen Diagnostik vorliegt, werden wir Sie informieren und weiterführend Stellung nehmen."""
     elif analysis == "Exom+CNV+CA" and disease=="NDD +/- Epilepsie":
-        beurteilung="""Bei Ihrem Sohn/Ihrer Tochter/Ihnen besteht der Verdacht auf eine genetisch bedingte Entwicklungsverzögerung/Entwicklungsstörung/Intelligenzminderung mit Epilepsie. Aus der Sicht unseres Fachgebietes ist eine genetische Diagnostik indiziert. Wir veranlassten daher eine konventionelle Chromosomenanalyse, eine molekulargenetische Diagnostik im FMR1-Gen bezüglich des Fragilen-X-Syndroms, eine genomweite molekulargenetische Analyse von Dosisveränderungen (Copy Number Repeats, vergleichbar mit Arraydiagnostik) sowie eine molekulargenetische Multigen-Paneldiagnostik in den für eine genetisch bedingte Entwicklungsverzögerung/Entwicklungsstörung/Intelligenzminderung ursächlichen Genen bei ihm/ihr. 
-    Sobald die Befunde der genetischen Diagnostik vorliegen, werden wir Sie informieren und weiterführend Stellung nehmen."""
+        beurteilung=f"Bei Ihrem Sohn/Ihrer Tochter/Ihnen besteht der Verdacht auf eine genetisch bedingte Entwicklungsverzögerung/Entwicklungsstörung/Intelligenzminderung mit Epilepsie. Aus der Sicht unseres Fachgebietes ist eine genetische Diagnostik indiziert. Wir veranlassten daher eine konventionelle Chromosomenanalyse, eine molekulargenetische Diagnostik im FMR1-Gen bezüglich des Fragilen-X-Syndroms, eine genomweite molekulargenetische Analyse von Dosisveränderungen (Copy Number Repeats, vergleichbar mit Arraydiagnostik) sowie eine molekulargenetische Exomdiagnostik in den für eine genetisch bedingte Entwicklungsverzögerung/Entwicklungsstörung/Intelligenzminderung ursächlichen Genen bei ihm/ihr.
+        Weiterhin besteht bei einem unauffälligen Ergebnis der Routinediagnostik die Möglichkeit der Teilnahme an einem Forschungsprojekt des Instituts für Humangenetik am Uniklinikum Leipzig. In diesem Rahmen könnte eine Trio-Genom-Diagnostik auf Forschungsbasis durchgeführt werden. Hierbei wird das Erbmaterial des betroffenen Patienten im Vergleich zu seinen Eltern untersucht. Es können vor allem beim Indexpatienten neu entstandene genetische Veränderungen, jedoch auch andere Ursachen wie z.B. autosomal rezessiv erbliche genetische Erkrankungen detektiert werden. Die Klärungsrate mittels Trio-Analyse bei Patienten mit einer Intelligenzminderung, Epilepsie bzw. dem V.a. eine übergeordnete genetische Erkrankung kann bis zu 50 % und mehr betragen (Vissers et al., Nat Rev Genet 2016, PMID: 26503795). Wir halten eine entsprechende Diagnostik ebenfalls für indiziert.
+        Wir nahmen Ihnen beiden, Frau und Herr {Nachname}, bereits eine Blutprobe ab, um gegebenenfalls eine Segregationsanalyse oder eine Trio-Analyse durchführen zu können. Sie gaben uns dazu bereits Ihr schriftliches Einverständnis.
+    Sobald die Befunde der genetischen Diagnostik vorliegen, werden wir Sie informieren und weiterführend Stellung nehmen."
     elif analysis == "gezielt" and disease !="HTT":
         beurteilung="""Bei  Ihren Angehörigen/ Ihrer Mutter / Ihrem Vater / Ihrer Großmutter / Ihrem Großvater / väterlicherseits/ mütterlicherseits wurde im Vorfeld die o.g. pathogene Variante im XX-Gen nachgewiesen. Somit weist Ihr Sohn/Ihre Tochter // weisen Sie mit XX%iger Wahrscheinlichkeit die in Ihrer Familie bekannte pathogene Variante ebenfalls auf.  Mit Ihrem Einverständnis veranlassten wir die gezielte Diagnostik auf die o.g. pathogene XX-Variante bei Ihrem Sohn/Ihrer Tochter/Ihnen. // Zur Abklärung einer möglichen Anlageträgerschaft bezüglich XX veranlassten wir bei Ihnen eine molekulargenetische Einzelgen-Diagnostik und MLPA-Untersuchung bezüglich Veränderungen im ...-Gen. // Sobald der Befund der genetischen Diagnostik vorliegt, werden wir Sie informieren und weiterführend Stellung nehmen."""
     elif analysis == "Cancer Panel" and disease == "HNPCC":
@@ -316,7 +319,7 @@ with tab2:
     person_2 = col2.selectbox("Patiententyp", ["Kind", "Erwachsen"], key="person_2")
     disease_2 = col3.selectbox("Krankheitsbild", ["NDD +/- Epilepsie", "unspezifisch", "HNPCC", "SCA", "HTT", "Marfan/EDS", "Geschlechtsinkongruenz"], key="disease_2")
 
-    analysis_2 = st.selectbox("Art der genetischen Testung", ["Exom", "Exom+CNV+CA", "gezielt", "Cancer Panel", "Repeat Expansion", "CA", "keine"], key="analysis_2")
+    analysis_2 = st.selectbox("Art der genetischen Testung", ["Exom", "Exom+CNV+CA", "Trio", "gezielt", "Cancer Panel", "Repeat Expansion", "CA", "keine"], key="analysis_2")
     result_2 = st.selectbox ("Ergebnis",  ["unauffällig", "VUS", "auffällig"])
     if result_2=="unauffällig" and analysis_2!="gezielt":
         result_default_text = """Kein Nachweis einer klinisch relevanten Variante in der molekulargenetischen Diagnostik"""
@@ -335,6 +338,7 @@ with tab2:
         result_text=st.text_area("Ergebnis der genetischen Diagnostik", result_default_text)
 
     # Letter Structure for all types of letters
+    
     #Beratungsgrund
     if analysis_2 != "gezielt":
         beratung_line_2 = f"**Beratungsgrund:** V.a. genetisch bedingte {question_2}"
@@ -343,9 +347,7 @@ with tab2:
 
     #Ergebnis
     ergebnis=f"**Ergebnis:** {result_text}"
-
     
-
     #Begrüßung
     if Titel_2== "Herr":
         hello_line_2 = f"Sehr geehrter {Titel} {Name},"
@@ -357,6 +359,11 @@ with tab2:
         first_line_2="""wir berichten vom Ergebnis der bei Ihnen/bei Ihrem Sohn/bei Ihrer Tochter durchgeführten genetischen Diagnostik. Zur Vorgeschichte verweisen wir auf unseren Brief vom XX."""
     elif result_2=="auffällig": 
         first_line_2=f"am {current_datetime.strftime('%d.%m.%Y')} stellten Sie sich/Ihren Sohn/Ihre Tochter in unserer genetischen Sprechstunde vor. Zur Vorgeschichte verweisen wir auf unseren Brief vom XX."
+
+    #Genetic diagnostic
+    if result_2=="unauffällig" and person_2=="Kind" and analysis_2=="Exom+CNV+CA":
+        diagnostic="""Die anhand einer Blutprobe von Ihrer Tochter/Ihrem Sohn durchgeführte konventionelle Chromosomenanalyse ergab einen strukturell und numerisch unauffälligen männlichen/weiblichen Karyotyp (Befund vom...). Zur weiteren Abklärung des Verdachts auf eine genetisch bedingte ... führten wir bei Ihrer Tochter/Ihrem Sohn die molekulargenetische Diagnostik im FMR1-Gen bezüglich eines Fragilen-X-Syndroms durch. Diese ergab einen unauffälligen Befund (Befund vom ...). Auch die molekulargenetische Karyotypisierung mittels genomweiter CNV-Analyse ergab keinen Nachweis von klinisch relevanten Kopienzahlvarianten (unser Befund vom ...). Weiterhin führten wir eine molekulargenetische Exomdiagnostik bezüglich Veränderungen in den für ihre/seine Auffälligkeiten ursächlichen Genen durch. Diese ergab keinen Nachweis einer klinisch relevanten Variante (Befund vom ...)."""
+    if result_2=="unauffällig" and person_2=="Kind" and analysis_2=="Trio":
 
 
     if st.button("Arzt Brief Befundbesprechung"):
