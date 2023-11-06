@@ -366,6 +366,12 @@ with tab2:
         diagnostic=f"Zur Abklärung des Verdachts auf eine genetisch bedingte Entwicklungsstörung führten wir bei Ihrem Sohn/Ihrer Tochter eine molekulargenetische Paneldiagnostik in den hierfür ursächlichen Genen durch. Hierbei wurde die heterozygote Variante unklarer Signifikanz c.xxxx>x, p.(XX) im XX-Gen bei Ihrem Sohn/Ihrer Tochter nachgewiesen (Befund vom XX). Diese XX-Variante liegt bei Ihnen, Herr/Frau {Name}, nicht vor. Bei Ihnen, Herr/Frau {Name}, war die o.g. Variante ebenfalls nachweisbar (Befund vom XX)."
     elif result_2=="auffällig" and person_2=="Kind" and analysis_2=="Exom+CNV+CA":
         diagnostic=f"Zur Abklärung des Verdachts auf eine genetisch bedingte Entwicklungsstörung führten wir bei Ihrem Sohn/Ihrer Tochter eine molekulargenetische Paneldiagnostik in den hierfür ursächlichen Genen durch.  Hierbei wurde die heterozygote wahrscheinlich/pathogene Variante c.xxxx>x, p.(XX) im XX-Gen bei Ihrem Sohn/Ihrer Tochter nachgewiesen (Befund vom XX). Diese XX-Variante liegt bei Ihnen, Herr/Frau {Name}, nicht vor. Bei Ihnen, Herr/Frau {Name}, war die o.g. Variante ebenfalls nachweisbar (Befund vom XX)."
+    elif result_2=="unauffällig" and analysis_2=="gezielt":
+        diagnostic="""Wir führten eine gezielte Diagnostik bezüglich der familiär bekannten (wahrscheinlich) pathogenen c.XX,p.(XX) im XX-Gen bei Ihnen/Ihrem Sohn/Ihrer Tochter durch. Hierbei konnte diese bei Ihnen/ihm/ihr nicht nachgewiesen werden (Befund vom XX).
+        // Zur Abklärung einer möglichen Anlageträgerschaft bezüglich XX veranlassten wir bei Ihnen eine molekulargenetische Einzelgen-Diagnostik und MLPA-Untersuchung bezüglich Veränderungen im XX-Gen. Diese ergab keinen Nachweis einer klinisch relevanten Variante im XX-Gen (Befund vom XX)."""
+    elif result_2=="auffällig" and analysis_2=="gezielt":
+        diagnostic="""Wir führten eine gezielte Diagnostik bezüglich der familiär bekannten (wahrscheinlich) pathogenen c.XX,p.(XX) im XX-Gen bei Ihnen/Ihrem Sohn/Ihrer Tochter durch. Hierbei konnte diese bei Ihnen/ihm/ihr nachgewiesen werden (Befund vom XX).
+        Zur Abklärung einer möglichen Anlageträgerschaft bezüglich XX veranlassten wir bei Ihnen eine molekulargenetische Einzelgen-Diagnostik und MLPA-Untersuchung bezüglich Veränderungen im XX-Gen. Diese ergab eine heterozygote wahrscheinlich/pathogene Variante c.XX,p.(XX) im XX-Gen (Befund vom XX)."""
     
     if st.button("Arzt Brief Befundbesprechung"):
         # Display text based on the selected option
