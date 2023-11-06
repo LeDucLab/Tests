@@ -310,20 +310,20 @@ with tab2:
     #st.markdown("### Fragestellung")
     question_2 = st.text_input("Fragestellung", key="question_2")
     analysis_2 = st.selectbox("Art der genetischen Testung", ["Exom", "Exom+CNV+CA", "gezielt", "Cancer Panel", "Repeat Expansion", "CA", "keine"], key="analysis_2")
-    result2 = st.selectbox ("Ergebnis",  ["unauffällig", "VUS", "auffällig"])
-    if result2=="unauffällig" and analysis2!="gezielt":
+    result_2 = st.selectbox ("Ergebnis",  ["unauffällig", "VUS", "auffällig"])
+    if result_2=="unauffällig" and analysis_2!="gezielt":
         result_default_text = """Kein Nachweis einer klinisch relevanten Variante in der molekulargenetischen Diagnostik"""
         result_text=st.text_area("Ergebnis der genetischen Diagnostik", result_default_text)
-    elif result2=="VUS" and analysis2!="gezielt":
+    elif result_2=="VUS" and analysis_2!="gezielt":
         result_default_text = """Nachweis einer Variante unklarer Signifikanz c.XX, p.(XX) im XX-Gen"""
         result_text=st.text_area("Ergebnis der genetischen Diagnostik", result_default_text)
-    elif result2=="auffällig" and analysis2!="gezielt":
+    elif result_2=="auffällig" and analysis_2!="gezielt":
         result_default_text = """Diagnose: …, molekulargenetisch nachgewiesen"""
         result_text=st.text_area("Ergebnis der genetischen Diagnostik", result_default_text)
-    elif result2=="unauffällig" and analysis2=="gezielt":
+    elif result_2=="unauffällig" and analysis_2=="gezielt":
         result_default_text = """Ausschluss der familiär bekannten Variante im XX-Gen/ Kein Nachweis einer klinisch relevanten Variante im XX-Gen"""
         result_text=st.text_area("Ergebnis der genetischen Diagnostik", result_default_text)
-    elif result2=="auffällig" and analysis2=="gezielt":
+    elif result_2=="auffällig" and analysis_2=="gezielt":
         result_default_text = """Nachweis der familiär bekannten Variante …. im …..-Gen/Heterozygoter Nachweis der familiär bekannten Variante c.XX,p.(XX) im XX-Gen"""
         result_text=st.text_area("Ergebnis der genetischen Diagnostik", result_default_text)
     
