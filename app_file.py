@@ -41,7 +41,7 @@ with tab1:
     col1, col2, col3= st.columns(3)
     council = col1.selectbox("Art der Beratung", ["Erstberatung", "Befundbesprechung"])
     person = col2.selectbox("Patiententyp", ["Kind", "Erwachsen"])
-    disease = col3.selectbox("Krankheitsbild", ["NDD +/- Epilepsie", "unspezifisch", "HNPCC", "FBrEK", "SCA", "HTT", "Geschlechtsinkongruenz"])
+    disease = col3.selectbox("Krankheitsbild", ["NDD +/- Epilepsie", "unspezifisch", "HNPCC", "FBrEK", "SCA", "HTT", "Marfan/EDS", "Geschlechtsinkongruenz"])
 
 
     
@@ -89,6 +89,26 @@ with tab1:
         - Psychische Gesundheit: Depression, Stimmungsschwankungen
         - Transition, weitere Aspekte: Hormontherapie seit XX, eine Geschlechtsumwandlungoperation ist geplannt XX"""
         free_anamnesis= st.text_area("Relevante Symptome und Vorgeschichte für die aktuelle Fragestellung", default_text)
+     elif council == "Erstberatung" and disease == "Marfan/EDS":
+        st.markdown("### Anamnese")
+        default_text = """In Bezug af die aktuelle Fragestellung wurden folgende Aspkete in der Anamnese erfasst:
+        - Systemische Ghent-Kriterien anamnestisch:
+            - spontaner Pneumothorax (2P) ⁠–⁠ nein/ja
+            - Duralektasie (2P) ⁠–⁠ nein/ja
+            - Protrusio acetabulae (Hüftauffälligkeiten) (2P) –⁠ nein/ja
+            - Dehnungsstreifen (1P) –⁠ nein/ja⁠⁠
+        - Symptome eines Ehler-Danlos-Syndroms:
+            - Organ- oder Gefäßrupturen ⁠–⁠ nein/ja
+            - Hernien ⁠–⁠ nein/ja
+            - Pneumothorax ⁠–⁠ nein/ja
+            - Gelenks(sub)luxationen ⁠–⁠ nein/ja
+            - Hämatomneigung/Dehnungsstreifen ⁠–⁠ nein/ja
+            - atrophe Narbenbildung ⁠–⁠ nein/ja
+            - Akrogerie ⁠–⁠ nein/ja
+        - Kariologische Untersuchung ⁠–⁠ unauffällig XX (Brief vom XX, Klinik XX)
+        - Augenärztliche Untersuchungund ⁠–⁠ unauffällig XX (Brief vom XX, Klinik XX)"""
+        free_anamnesis= st.text_area("Relevante Symptome und Vorgeschichte für die aktuelle Fragestellung", default_text)
+         
         
     #Add Familienanamnese button
     st.markdown("### Familienanamnese")
@@ -102,10 +122,20 @@ with tab1:
     #Add Körperliche Untersuchung
     st.markdown("### Körperliche Untersuchung")
     if person == "Kind":
-        body_text= """Wir sahen XX im Alter von XX Jahren. Ihre/Seine Körpermaße zur Vorstellung betrugen: [pedz] (https://www.pedz.de/de/bmi.html). Fazial ergaben sich keine Auffälligkeiten/Fazial fielen XX auf."""
+        body_text="""Wir sahen XX im Alter von XX Jahren. Ihre/Seine Körpermaße zur Vorstellung betrugen: [pedz] (https://www.pedz.de/de/bmi.html). Fazial ergaben sich keine Auffälligkeiten/Fazial fielen XX auf."""
         body=st.text_area("", body_text)
     elif person == "Erwachsen":
         body_box= st.selectbox("Körperliche Untersuchung", ["Ja", "Nein"])
+    elif body_box=="Ja" and disease=="Marfan/EDS":
+        body_text="""Die systemischen Kriterien der // https://marfan.org/dx/score/ // revidierten Ghent-Kriterien ergaben XX von 20 Punkten (positiv für XX) (≥ 7 Punkte zeigt systemische Beteiligung an; Loeys et al., 2010, PMID: 20591885). Der Z-Score der Aortenwurzeldurchmesser (XX mm) beträgt XX (Normwert ≤ 2). Die Verhältnisse zwischen Ober- und Unterlänge sowie Armspanne zu Körpergröße ergaben un/auffällige Werte (OL/UL XX; AS/KG XX).
+        Der Beighton Hypermobilitäts-Score ergab XX von 9 Punkten // https://www.ndr.de/ratgeber/gesundheit/Hypermobilitaet-Wenn-Gelenke-nicht-stabil-sind,hypermobilitaet106.html // (3–4 Punkte zeigte eine moderate Hypermobilität, ≥ 5 Punkte generalisierte Hypermobilität)."""
+        body=st.text_area("", body_text)
+    elif body_box=="Ja" and disease=="unspezifisch"
+        body=st.text_area()
+    
+        
+    
+        
     
     #Add Anaylsis
     st.markdown("### Genetische Diagnostik")
@@ -132,8 +162,9 @@ Im Rahmen der Beratung besprachen wir psychologische, soziale und versicherungsr
     elif analysis == "Repeat Expansion" and disease == "HTT":
         beurteilung="""Bei Ihnen besteht der Verdacht auf eine Huntington Erkrankung. Wir veranlassten daher bei Ihnen eine molekulargenetische Diagnostik im Hinblick auf eine Huntington Erkrankung. Sollte diese Diagnostik unauffällig sein werden wir eine weiterführende genetische Diagnostik im Hinblick Huntington-like Erkrankungen einleiten. Sobald die Befunde der genetischen Diagnostik vorliegen, werden wir Sie informieren und weiterführend Stellung nehmen."""
     elif  analysis == "CA" and disease == "Geschlechtsinkongruenz":
-        beurteilung="Zur Abklärung des genetischen Geschlechts veranlassten wir eine konventionelle Chromosomenanalyse. Sobald die Befunde der genetischen Diagnostik vorliegen, werden wir Sie informieren und weiterführend Stellung nehmen."
-
+        beurteilung="""Zur Abklärung des genetischen Geschlechts veranlassten wir eine konventionelle Chromosomenanalyse. Sobald die Befunde der genetischen Diagnostik vorliegen, werden wir Sie informieren und weiterführend Stellung nehmen."""
+    elif  analysis == "Exom" and disease == "Marfan/EDS":
+        beurteilung="""Bei Ihnen besteht der Verdacht auf eine eine genetisch bedingte Bindegewebestörung. Die klinischen Kriterien für ein Marfan- bzw. ein Ehlers-Danlos-Syndrom sind bei Ihnen nicht erfüllt/erfüllt XX. Zur Abklärung von weiteren/einer XX genetisch bedingten Bindegewebestörungen/Bindegewebestörung ist aus der Sicht unseres Fachgebietes eine genetische Diagnostik indiziert. Wir veranlassten daher eine molekulargenetische Paneldiagnostik in den hierfür ursächlichen Genen. Sobald der Befund der genetischen Diagnostik vorliegt, werden wir Sie informieren und weiterführend Stellung nehmen."""
     #Add Signature boxes
     st.markdown("### Behandelnde Ärzte")
     col1, col2 = st.columns(2)
@@ -201,13 +232,26 @@ Seltenere Tumorprädispositionssyndrome sind das Peutz-Jeghers-Syndrom, das durc
             st.markdown(beurteilung, unsafe_allow_html=True)
             st.markdown(last_line, unsafe_allow_html=True)
             st.markdown(signature, unsafe_allow_html=True)
-        elif council == "Erstberatung" and person == "Erwachsen":
+        elif council == "Erstberatung" and person == "Erwachsen" and body_box=="Nein":
             st.markdown(beratung_line, unsafe_allow_html=True)
             st.markdown(hello_line, unsafe_allow_html=True)
             st.markdown("<div class='custom-paragraph'><b>Eigenanamnese:</b></div>",  unsafe_allow_html=True)
             st.markdown(free_anamnesis, unsafe_allow_html=True)
             st.markdown("<div class='custom-paragraph'><b>Familienanamnese:</b></div>",  unsafe_allow_html=True)
             st.markdown(family, unsafe_allow_html=True)
+            st.markdown("<div class='custom-paragraph'><b>Beurteilung und Procedere:</b></div>",  unsafe_allow_html=True)
+            st.markdown(beurteilung, unsafe_allow_html=True)
+            st.markdown(last_line, unsafe_allow_html=True)
+            st.markdown(signature, unsafe_allow_html=True)
+        elif council == "Erstberatung" and person == "Erwachsen" and body_box=="Ja":
+            st.markdown(beratung_line, unsafe_allow_html=True)
+            st.markdown(hello_line, unsafe_allow_html=True)
+            st.markdown("<div class='custom-paragraph'><b>Eigenanamnese:</b></div>",  unsafe_allow_html=True)
+            st.markdown(free_anamnesis, unsafe_allow_html=True)
+            st.markdown("<div class='custom-paragraph'><b>Familienanamnese:</b></div>",  unsafe_allow_html=True)
+            st.markdown(family, unsafe_allow_html=True)
+            st.markdown("<div class='custom-paragraph'><b>Körperliche Untersuchung:</b></div>",  unsafe_allow_html=True)
+            st.markdown(body, unsafe_allow_html=True)
             st.markdown("<div class='custom-paragraph'><b>Beurteilung und Procedere:</b></div>",  unsafe_allow_html=True)
             st.markdown(beurteilung, unsafe_allow_html=True)
             st.markdown(last_line, unsafe_allow_html=True)
