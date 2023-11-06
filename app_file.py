@@ -187,7 +187,7 @@ Seltenere Tumorprädispositionssyndrome sind das Peutz-Jeghers-Syndrom, das durc
             st.markdown(beurteilung, unsafe_allow_html=True)
             st.markdown(last_line, unsafe_allow_html=True)
             st.markdown(signature, unsafe_allow_html=True)
-         elif council == "Erstberatung" and person == "Erwachsen":
+        elif council == "Erstberatung" and person == "Erwachsen":
             st.markdown(beratung_line, unsafe_allow_html=True)
             st.markdown(hello_line, unsafe_allow_html=True)
             st.markdown("<div class='custom-paragraph'><b>Eigenanamnese:</b></div>",  unsafe_allow_html=True)
