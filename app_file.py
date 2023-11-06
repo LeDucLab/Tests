@@ -87,7 +87,7 @@ with tab1:
         - Soziale und familiäre Akzeptanz: familiäre Unterstuzung, Akzeptanz durch Freundekreis
         - Vorerkrankungen: keine
         - Psychische Gesundheit: Depression, Stimmungsschwankungen
-        - Transition, weitere Aspekte: Hormontherapie seit XX, eine Geschlechtsumwandlungsoperationen ist geplannt XX"""
+        - Transition, weitere Aspekte: Hormontherapie seit XX, eine Geschlechtsumwandlungoperation ist geplannt XX"""
         free_anamnesis= st.text_area("Relevante Symptome und Vorgeschichte für die aktuelle Fragestellung", default_text)
         
     #Add Familienanamnese button
