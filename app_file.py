@@ -342,6 +342,7 @@ with tab2:
         beratung_line_2 = f"**Beratungsgrund:** Eine (wahrscheinlich) pathogene Variante c.XX, p.XX im XX-Gen in der Familienanamnese"
 
     #Ergebnis
+    ergebnis=f"**Ergebnis:** {result_text}"
 
     
 
@@ -353,7 +354,7 @@ with tab2:
     
     #Date of Beratung
     if result_2=="unauffällig":
-        first_line_2="""wir berichten vom Ergebnis der bei Ihnen durchgeführten genetischen Diagnostik. Zur Vorgeschichte verweisen wir auf unseren Brief vom XX."""
+        first_line_2="""wir berichten vom Ergebnis der bei Ihnen/bei Ihrem Sohn/bei Ihrer Tochter durchgeführten genetischen Diagnostik. Zur Vorgeschichte verweisen wir auf unseren Brief vom XX."""
     elif result_2=="auffällig": 
         first_line_2=f"am {current_datetime.strftime('%d.%m.%Y')} stellten Sie sich/Ihren Sohn/Ihre Tochter in unserer genetischen Sprechstunde vor. Zur Vorgeschichte verweisen wir auf unseren Brief vom XX."
 
@@ -362,6 +363,7 @@ with tab2:
         # Display text based on the selected option
         if council_2 == "Befundbesprechung" and person_2 == "Kind":
             st.markdown(beratung_line_2, unsafe_allow_html=True)
+            st.markdown(ergebnis, unsafe_allow_html=True)
             st.markdown(hello_line_2, unsafe_allow_html=True)
             st.markdown(first_line_2, unsafe_allow_html=True)
             #st.markdown("<div class='custom-paragraph'><b>Eigenanamnese:</b></div>",  unsafe_allow_html=True)
