@@ -33,11 +33,11 @@ with tab1:
     Vorname = col2.text_input("Vorame")
     Name = col3.text_input("Name")
         
-    st.markdown("### Fragestellung")
+    #st.markdown("### Fragestellung")
     question = st.text_input("Fragestellung")
         
     # Add a selectbox for choosing the type of counciling
-    st.markdown("### Art der Beratung und Analyse")
+    #st.markdown("### Art der Beratung und Analyse")
     col1, col2, col3= st.columns(3)
     council = col1.selectbox("Art der Beratung", ["Erstberatung", "Befundbesprechung"])
     person = col2.selectbox("Patiententyp", ["Kind", "Erwachsen"])
@@ -83,7 +83,7 @@ with tab1:
         
     #Add Familienanamnese button
     st.markdown("### Familienanamnese")
-    familienanamnese = st.selectbox("Familienanamnese", ["auffällig", "unauffällig"])
+    familienanamnese = st.selectbox("", ["auffällig", "unauffällig"])
     if familienanamnese == "unauffällig":
         family="""Sie berichteten keine für die Fragestellung relevanten Krankheitsbilder in Ihrer Familie."""
     elif familienanamnese == "auffällig":
