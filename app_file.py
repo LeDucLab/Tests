@@ -222,7 +222,7 @@ Seltenere Tumorprädispositionssyndrome sind das Peutz-Jeghers-Syndrom, das durc
 
     
     # Create a button
-    if st.button("Arzt Brief"):
+    if st.button("Arzt Brief Erstberatung"):
         # Display text based on the selected option
         if council == "Erstberatung" and person == "Kind":
             st.markdown(beratung_line, unsafe_allow_html=True)
@@ -333,6 +333,38 @@ with tab2:
     elif result_2=="auffällig" and analysis_2=="gezielt":
         result_default_text = """Nachweis der familiär bekannten Variante …. im …..-Gen/Heterozygoter Nachweis der familiär bekannten Variante c.XX,p.(XX) im XX-Gen"""
         result_text=st.text_area("Ergebnis der genetischen Diagnostik", result_default_text)
+
+    # Letter Structure for all types of letters
+    #Beratungsgrund
+    if analysis_2 != "gezielt":
+        beratung_line_2 = f"**Beratungsgrund:** V.a. genetisch bedingte {question_2}"
+    elif analysis_2 == "gezielt":
+        beratung_line_2 = f"**Beratungsgrund:** Eine (wahrscheinlich) pathogene Variante c.XX, p.XX im XX-Gen in der Familienanamnese"
+
+    #Begrüßung
+    if Titel_2== "Herr":
+        hello_line_2 = f"Sehr geehrter {Titel} {Name},"
+    elif Titel_2 != "Herr":
+        hello_line_2 = f"Sehr geehrte {Titel} {Name},"
+
+
+    if st.button("Arzt Brief Befundbesprechung"):
+        # Display text based on the selected option
+        if council_2 == "Befundbesprechung" and person_2 == "Kind":
+            st.markdown(beratung_line_2, unsafe_allow_html=True)
+            st.markdown(hello_line_2, unsafe_allow_html=True)
+            #st.markdown(first_line, unsafe_allow_html=True)
+            #st.markdown("<div class='custom-paragraph'><b>Eigenanamnese:</b></div>",  unsafe_allow_html=True)
+            #st.markdown(free_anamnesis, unsafe_allow_html=True)
+            #st.markdown("<div class='custom-paragraph'><b>Familienanamnese:</b></div>",  unsafe_allow_html=True)
+            #st.markdown(family, unsafe_allow_html=True)
+            #st.markdown("<div class='custom-paragraph'><b>Körperliche Untersuchung:</b></div>",  unsafe_allow_html=True)
+            #st.markdown(body, unsafe_allow_html=True)
+            #st.markdown("<div class='custom-paragraph'><b>Beurteilung und Procedere:</b></div>",  unsafe_allow_html=True)
+            #st.markdown(beurteilung, unsafe_allow_html=True)
+            #st.markdown(last_line, unsafe_allow_html=True)
+            #st.markdown(signature, unsafe_allow_html=True)
+        
     
     
         
