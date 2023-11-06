@@ -81,7 +81,7 @@ with tab1:
         st.markdown("### Anamnese")
         default_text = """Sie berichteten, dass bei Ihnen keine für die Huntington-Erkrankung typischen psychiatrischen oder motorischen Störungen bekannt seien.
         In Bezug af die aktuelle Fragestellung wurden folgende Aspkete in der Anamnese erfasst:
-        - Typische Symptome einer Huntington Erkrankung: Motorische Symptome wie Unkontrollierte Bewegungen (Chorea), Muskelsteifigkeit, Verlust der Koordination im Alter von XX, kognitive Einschränkung und Gedächtnisstörungen im Alter von XX, psychiatrische Manifestationen wie Depression, Ängstlichkeit, Stimmungsschwankungen, Persönlichkeitsveränderungen im Alter von XX
+        - Typische Symptome einer Huntington Erkrankung: Motorische Symptome wie unkontrollierte Bewegungen (Chorea), Muskelsteifigkeit, Verlust der Koordination im Alter von XX, kognitive Einschränkung und Gedächtnisstörungen im Alter von XX, psychiatrische Manifestationen wie Depression, Ängstlichkeit, Stimmungsschwankungen, Persönlichkeitsveränderungen im Alter von XX
         - Krankheitsgeschichte: neurologische Diagnostik –⁠ XX, cMRT Untersuchung –⁠ keine pathologische Befunde (Arztbrief vom XX, Klinik XX)"""
         free_anamnesis= st.text_area("Relevante Symptome und Vorgeschichte für die aktuelle Fragestellung", default_text)
     elif council == "Erstberatung" and disease == "Geschlechtsinkongruenz":
