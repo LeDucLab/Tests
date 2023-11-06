@@ -41,7 +41,10 @@ with tab1:
     col1, col2, col3= st.columns(3)
     council = col1.selectbox("Art der Beratung", ["Erstberatung", "Befundbesprechung"])
     person = col2.selectbox("Patiententyp", ["Kind", "Erwachsen"])
-    disease = col3.selectbox("Krankheitsbild", ["NDD +/- Epilepsie", "unspezifisch", "HNPCC", "SCA", "HTT", "Marfan/EDS", "Geschlechtsinkongruenz"])
+    if council=="Erstberatung":
+        disease = col3.selectbox("Krankheitsbild", ["NDD +/- Epilepsie", "unspezifisch", "HNPCC", "SCA", "HTT", "Marfan/EDS", "Geschlechtsinkongruenz"])
+    elif council=="Befundbesprechung":
+        result = col3.selectbox("Ergebnis", ["unauffällig", "auffällig"])
 
 
     
