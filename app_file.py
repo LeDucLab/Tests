@@ -359,11 +359,11 @@ with tab2:
 
     #Genetic diagnostic
     if result_2=="unauffällig" and person_2=="Kind" and analysis_2=="Exom+CNV+CA":
-        diagnostic="""Die anhand einer Blutprobe von Ihrer Tochter/Ihrem Sohn durchgeführte konventionelle Chromosomenanalyse ergab einen strukturell und numerisch unauffälligen männlichen/weiblichen Karyotyp (Befund vom...). Zur weiteren Abklärung des Verdachts auf eine genetisch bedingte ... führten wir bei Ihrer Tochter/Ihrem Sohn die molekulargenetische Diagnostik im FMR1-Gen bezüglich eines Fragilen-X-Syndroms durch. Diese ergab einen unauffälligen Befund (Befund vom ...). Auch die molekulargenetische Karyotypisierung mittels genomweiter CNV-Analyse ergab keinen Nachweis von klinisch relevanten Kopienzahlvarianten (unser Befund vom ...). Weiterhin führten wir eine molekulargenetische Exomdiagnostik bezüglich Veränderungen in den für ihre/seine Auffälligkeiten ursächlichen Genen durch. Diese ergab keinen Nachweis einer klinisch relevanten Variante (Befund vom ...)."""
-    if result_2=="unauffällig" and person_2=="Kind" and analysis_2=="Trio":
+        diagnostic="""Die anhand einer Blutprobe von Ihrer Tochter/Ihrem Sohn durchgeführte konventionelle Chromosomenanalyse ergab einen strukturell und numerisch unauffälligen männlichen/weiblichen Karyotyp (Befund vom XX). Zur weiteren Abklärung des Verdachts auf eine genetisch bedingte Entwicklungsstörung führten wir bei Ihrer Tochter/Ihrem Sohn die molekulargenetische Diagnostik im FMR1-Gen bezüglich eines Fragilen-X-Syndroms durch. Diese ergab einen unauffälligen Befund (Befund vom XX). Auch die molekulargenetische Karyotypisierung mittels genomweiter CNV-Analyse ergab keinen Nachweis von klinisch relevanten Kopienzahlvarianten (Befund vom XX). Weiterhin führten wir eine molekulargenetische Exomdiagnostik bezüglich Veränderungen in den für ihre/seine Auffälligkeiten ursächlichen Genen durch. Diese ergab keinen Nachweis einer klinisch relevanten Variante (Befund vom ...)."""
+    elif result_2=="unauffällig" and person_2=="Kind" and analysis_2=="Trio":
         diagnostic="""Zur Abklärung des Verdachts auf eine genetisch bedingte Entwicklungsstörung bei Ihrem Sohn/Ihrer Tochter veranlassten wir eine Trio-Exom-Analyse auf Forschungsbasis. Hierbei ergab sich ein unauffälliger Befund (Befund vom XX, Institut für Humangenetik am Universitätsklinikum Leipzig)."""
-
-
+    elif result_2=="VUS" and person_2=="Kind" and analysis_2=="Exom+CNV+CA":
+        diagnostic=f"Zur Abklärung des Verdachts auf eine genetisch bedingte Entwicklungsstörung führten wir bei Ihrem Sohn/Ihrer Tochter eine molekulargenetische Paneldiagnostik in den hierfür ursächlichen Genen durch. Hierbei wurde die heterozygote Variante unklarer Signifikanz c.xxxx>x, p.(XX) im XX-Gen bei Ihrem Sohn/Ihrer Tochter nachgewiesen (Befund vom XX). Diese XX-Variante liegt bei Ihnen, Herr/Frau {Name}, nicht vor. Bei Ihnen, Herr/Frau {Name}, war die o.g. Variante ebenfalls nachweisbar (Befund vom X)."
     if st.button("Arzt Brief Befundbesprechung"):
         # Display text based on the selected option
         if council_2 == "Befundbesprechung" and person_2 == "Kind":
@@ -371,8 +371,8 @@ with tab2:
             st.markdown(ergebnis, unsafe_allow_html=True)
             st.markdown(hello_line_2, unsafe_allow_html=True)
             st.markdown(first_line_2, unsafe_allow_html=True)
-            #st.markdown("<div class='custom-paragraph'><b>Eigenanamnese:</b></div>",  unsafe_allow_html=True)
-            #st.markdown(free_anamnesis, unsafe_allow_html=True)
+            st.markdown("<div class='custom-paragraph'><b>Genetische Diagnostik:</b></div>",  unsafe_allow_html=True)
+            st.markdown(diagnostic, unsafe_allow_html=True)
             #st.markdown("<div class='custom-paragraph'><b>Familienanamnese:</b></div>",  unsafe_allow_html=True)
             #st.markdown(family, unsafe_allow_html=True)
             #st.markdown("<div class='custom-paragraph'><b>Körperliche Untersuchung:</b></div>",  unsafe_allow_html=True)
