@@ -109,7 +109,7 @@ with tab1:
     
     #Add Anaylsis
     st.markdown("### Genetische Diagnostik")
-    analysis = st.selectbox("Art der genetischen Testung", ["Exom", "Exom+CNV+CA", "gezielt", "Cancer Panel", "Repeat Expansion", "keine"])
+    analysis = st.selectbox("Art der genetischen Testung", ["Exom", "Exom+CNV+CA", "gezielt", "Cancer Panel", "Repeat Expansion", "CA", "keine"])
     if analysis == "Exom":
         beurteilung="""Bei Ihrem Sohn/Ihrer Tochter/Ihnen besteht der Verdacht auf eine genetisch bedingte Entwicklungsstörung/Intelligenzminderung/Erkrankung. Aus der Sicht unseres Fachgebietes ist eine genetische Diagnostik indiziert. Wir veranlassten daher eine molekulargenetische Exomdiagnostik mit Beurteilung der hierfür ursächlichen Genen. Sobald der Befund der genetischen Diagnostik vorliegt, werden wir Sie informieren und weiterführend Stellung nehmen."""
     elif analysis == "Exom+CNV+CA" and disease=="NDD +/- Epilepsie":
@@ -128,11 +128,11 @@ Sollten im weiteren Verlauf Sie bzw. andere Familienmitglieder an weiteren Krebs
     elif analysis == "gezielt" and disease == "HTT":
         beurteilung="""Bei XX wurde mit dem Nachweis einer pathogenen CAG-Repeat-Verlängerung im <i>HTT</i>-Gen eine Huntington-Erkrankung molekulargenetisch nachgewiesen. Damit besteht für Sie eine 50%ige Wahrscheinlichkeit, diese geerbt zu haben und ebenfalls eine Huntington-Erkrankung auszubilden. 
 
-Im Rahmen der Beratung besprachen wir psychologische, soziale und versicherungsrechtliche Aspekte, die sich aus dem Ergebnis der genetischen Diagnostik ergeben könnten. Zudem empfahlen wir eine psychologische Beratung im Hinblick auf eine mögliche prädiktive Diagnostik im HTT-Gen. Sollten Sie sich nach angemessener Bedenkzeit für die molekulargenetische Untersuchung im HTT-Gen entscheiden, ist eine erneute Terminvereinbarung in unserer genetischen Sprechstunde zur Entnahme einer Blutprobe und Einleitung der genetischen Diagnostik möglich. 
-
-Wir hoffen, Sie mit unserem Gespräch und diesem Brief vorerst ausreichend informiert zu haben. Bei Rückfragen stehen wir gerne auch telefonisch zur Verfügung."""
+Im Rahmen der Beratung besprachen wir psychologische, soziale und versicherungsrechtliche Aspekte, die sich aus dem Ergebnis der genetischen Diagnostik ergeben könnten. Zudem empfahlen wir eine psychologische Beratung im Hinblick auf eine mögliche prädiktive Diagnostik im HTT-Gen. Sollten Sie sich nach angemessener Bedenkzeit für die molekulargenetische Untersuchung im HTT-Gen entscheiden, ist eine erneute Terminvereinbarung in unserer genetischen Sprechstunde zur Entnahme einer Blutprobe und Einleitung der genetischen Diagnostik möglich."""
     elif analysis == "Repeat Expansion" and disease == "HTT":
-         beurteilung="""Bei Ihnen besteht der Verdacht auf eine Huntington Erkrankung. Wir veranlassten daher bei Ihnen eine molekulargenetische Diagnostik im Hinblick auf eine Huntington Erkrankung. Sollte diese Diagnostik unauffällig sein werden wir eine weiterführende genetische Diagnostik im Hinblick Huntington-like Erkrankungen einleiten. Sobald die Befunde der genetischen Diagnostik vorliegen, werden wir Sie informieren und weiterführend Stellung nehmen.""" 
+        beurteilung="""Bei Ihnen besteht der Verdacht auf eine Huntington Erkrankung. Wir veranlassten daher bei Ihnen eine molekulargenetische Diagnostik im Hinblick auf eine Huntington Erkrankung. Sollte diese Diagnostik unauffällig sein werden wir eine weiterführende genetische Diagnostik im Hinblick Huntington-like Erkrankungen einleiten. Sobald die Befunde der genetischen Diagnostik vorliegen, werden wir Sie informieren und weiterführend Stellung nehmen."""
+    elif  analysis == "CA" and disease == "Geschlechtsinkongruenz":
+        beurteilung="Zur Abklärung des genetischen Geschlechts veranlassten wir eine konventionelle Chromosomenanalyse. Sobald die Befunde der genetischen Diagnostik vorliegen, werden wir Sie informieren und weiterführend Stellung nehmen."
 
     #Add Signature boxes
     st.markdown("### Behandelnde Ärzte")
