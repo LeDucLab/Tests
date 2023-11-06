@@ -82,10 +82,9 @@ with tab1:
 
     #Add Signature boxes
     st.markdown("### Behandelnde Ärzte")
-    col1, col2, col3= st.columns(3)
+    col1, col2 = st.columns(2)
     Arzt1 = col1.selectbox("Arzt 1", ["Diana Le Duc", "Albrecht Kobelt"])
     Arzt2 = col2.selectbox("Arzt 2", ["Diana Le Duc", "Albrecht Kobelt"])
-    Arzt3 = col3.selectbox("Arzt 3", ["Diana Le Duc", "Albrecht Kobelt"])
     
 
     
