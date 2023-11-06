@@ -227,6 +227,7 @@ Seltenere Tumorprädispositionssyndrome sind das Peutz-Jeghers-Syndrom, das durc
         if council == "Erstberatung" and person == "Kind":
             st.markdown(beratung_line, unsafe_allow_html=True)
             st.markdown(hello_line, unsafe_allow_html=True)
+            st.markdown(first_line, unsafe_allow_html=True)
             st.markdown("<div class='custom-paragraph'><b>Eigenanamnese:</b></div>",  unsafe_allow_html=True)
             st.markdown(free_anamnesis, unsafe_allow_html=True)
             st.markdown("<div class='custom-paragraph'><b>Familienanamnese:</b></div>",  unsafe_allow_html=True)
@@ -240,6 +241,7 @@ Seltenere Tumorprädispositionssyndrome sind das Peutz-Jeghers-Syndrom, das durc
         elif council == "Erstberatung" and person == "Erwachsen" and body_box=="Nein":
             st.markdown(beratung_line, unsafe_allow_html=True)
             st.markdown(hello_line, unsafe_allow_html=True)
+            st.markdown(first_line, unsafe_allow_html=True)
             st.markdown("<div class='custom-paragraph'><b>Eigenanamnese:</b></div>",  unsafe_allow_html=True)
             st.markdown(free_anamnesis, unsafe_allow_html=True)
             st.markdown("<div class='custom-paragraph'><b>Familienanamnese:</b></div>",  unsafe_allow_html=True)
@@ -251,6 +253,7 @@ Seltenere Tumorprädispositionssyndrome sind das Peutz-Jeghers-Syndrom, das durc
         elif council == "Erstberatung" and person == "Erwachsen" and body_box=="Ja":
             st.markdown(beratung_line, unsafe_allow_html=True)
             st.markdown(hello_line, unsafe_allow_html=True)
+            st.markdown(first_line, unsafe_allow_html=True)
             st.markdown("<div class='custom-paragraph'><b>Eigenanamnese:</b></div>",  unsafe_allow_html=True)
             st.markdown(free_anamnesis, unsafe_allow_html=True)
             st.markdown("<div class='custom-paragraph'><b>Familienanamnese:</b></div>",  unsafe_allow_html=True)
@@ -264,6 +267,7 @@ Seltenere Tumorprädispositionssyndrome sind das Peutz-Jeghers-Syndrom, das durc
         elif council == "Erstberatung" and person == "Erwachsen" and disease == "HNPCC":
             st.markdown(beratung_line, unsafe_allow_html=True)
             st.markdown(hello_line, unsafe_allow_html=True)
+            st.markdown(first_line, unsafe_allow_html=True)
             st.markdown("<div class='custom-paragraph'><b>Eigenanamnese:</b></div>",  unsafe_allow_html=True)
             st.markdown(free_anamnesis, unsafe_allow_html=True)
             st.markdown("<div class='custom-paragraph'><b>Familienanamnese:</b></div>",  unsafe_allow_html=True)
