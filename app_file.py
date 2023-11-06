@@ -15,7 +15,7 @@ h1, h2, h3, h4, h5, h6 {
 """
 st.markdown(custom_css, unsafe_allow_html=True)
 
-tab1, tab2, tab3= st.tabs(["EBM_Beratung", "FBrEK", "Krankheitsbild Textbausteine"])
+tab1, tab2, tab3, tab4= st.tabs(["EBM_Erstberatung", "EBM_Befundbesprechung", "FBrEK", "Krankheitsbild Textbausteine"])
 
 with tab1:
     # Create a Streamlit app
@@ -39,12 +39,9 @@ with tab1:
     # Add a selectbox for choosing the type of counciling
     #st.markdown("### Art der Beratung und Analyse")
     col1, col2, col3= st.columns(3)
-    council = col1.selectbox("Art der Beratung", ["Erstberatung", "Befundbesprechung"])
+    council = col1.selectbox("Art der Beratung", ["Erstberatung"])
     person = col2.selectbox("Patiententyp", ["Kind", "Erwachsen"])
-    if council=="Erstberatung":
-        disease = col3.selectbox("Krankheitsbild", ["NDD +/- Epilepsie", "unspezifisch", "HNPCC", "SCA", "HTT", "Marfan/EDS", "Geschlechtsinkongruenz"])
-    elif council=="Befundbesprechung":
-        result = col3.selectbox("Ergebnis", ["unauffällig", "auffällig"])
+    disease = col3.selectbox("Krankheitsbild", ["NDD +/- Epilepsie", "unspezifisch", "HNPCC", "SCA", "HTT", "Marfan/EDS", "Geschlechtsinkongruenz"])
 
 
     
@@ -299,6 +296,10 @@ with tab2:
     st.image("https://static.streamlit.io/examples/dog.jpg", width=200)
 
 with tab3:
+    st.header("A dog")
+    st.image("https://static.streamlit.io/examples/dog.jpg", width=200)
+
+with tab4:
     st.header("A dog")
     st.image("https://static.streamlit.io/examples/dog.jpg", width=200)
     
