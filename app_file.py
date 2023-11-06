@@ -19,7 +19,7 @@ tab1, tab2= st.tabs(["Beratung", "Krankheitsbild Textbausteine"])
 
 with tab1:
     # Create a Streamlit app
-    st.title("Arzt Brief Generator")
+    st.markdown("<h1 style='font-size: 14px;'>Arzt Brief Generator</h1>")
         
     # Get the current date and time
     current_datetime = datetime.now()
