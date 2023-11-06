@@ -309,6 +309,13 @@ with tab2:
         
     #st.markdown("### Fragestellung")
     question_2 = st.text_input("Fragestellung", key="question_2")
+    # Add a selectbox for choosing the type of counciling
+    #st.markdown("### Art der Beratung und Analyse")
+    col1, col2, col3= st.columns(3)
+    council_2 = col1.selectbox("Art der Beratung", ["Befundbesprechung"], key="council_2")
+    person_2 = col2.selectbox("Patiententyp", ["Kind", "Erwachsen"], key="person_2")
+    disease_2 = col3.selectbox("Krankheitsbild", ["NDD +/- Epilepsie", "unspezifisch", "HNPCC", "SCA", "HTT", "Marfan/EDS", "Geschlechtsinkongruenz"], key="disease_2")
+
     analysis_2 = st.selectbox("Art der genetischen Testung", ["Exom", "Exom+CNV+CA", "gezielt", "Cancer Panel", "Repeat Expansion", "CA", "keine"], key="analysis_2")
     result_2 = st.selectbox ("Ergebnis",  ["unauffällig", "VUS", "auffällig"])
     if result_2=="unauffällig" and analysis_2!="gezielt":
@@ -333,13 +340,7 @@ with tab2:
         
     
         
-    # Add a selectbox for choosing the type of counciling
-    #st.markdown("### Art der Beratung und Analyse")
-    col1, col2, col3= st.columns(3)
-    council_2 = col1.selectbox("Art der Beratung", ["Befundbesprechung"], key="council_2")
-    person_2 = col2.selectbox("Patiententyp", ["Kind", "Erwachsen"], key="person_2")
-    disease_2 = col3.selectbox("Krankheitsbild", ["NDD +/- Epilepsie", "unspezifisch", "HNPCC", "SCA", "HTT", "Marfan/EDS", "Geschlechtsinkongruenz"], key="disease_2")
-
+   
 with tab3:
     st.header("A dog")
     st.image("https://static.streamlit.io/examples/dog.jpg", width=200)
