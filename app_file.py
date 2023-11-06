@@ -39,7 +39,7 @@ with tab1:
     # Add a selectbox for choosing the type of counciling
     #st.markdown("### Art der Beratung und Analyse")
     col1, col2, col3= st.columns(3)
-    council = col1.selectbox("Art der Beratung", ["Erstberatung", "Befundbesprechung"])
+    council = col1.selectbox("Art der Beratung", ["Erstberatung"])
     person = col2.selectbox("Patiententyp", ["Kind", "Erwachsen"])
     disease = col3.selectbox("Krankheitsbild", ["NDD +/- Epilepsie", "unspezifisch", "HNPCC", "SCA", "HTT", "Marfan/EDS", "Geschlechtsinkongruenz"])
 
@@ -296,34 +296,34 @@ with tab2:
     st.markdown("<h1 style='font-size: 30px;'>Befundbesprechungsbrief</h1>", unsafe_allow_html=True)
         
     # Get the current date and time
-    #current_datetime = datetime.now()
+    current_datetime = datetime.now()
         
     #Get patient data
     # Create a selectbox to choose an option for the gender
     st.markdown("### Patienten Daten")
     col1, col2, col3= st.columns(3)
-    Titel #= col1.selectbox("Titel", ["Frau", "Herr", "Familie"])
+    Titel2 = col1.selectbox("Titel", ["Frau", "Herr", "Familie"])
         
-    Vorname #= col2.text_input("Vorame")
-    Name #= col3.text_input("Name")
+    Vorname2 = col2.text_input("Vorame")
+    Name2 = col3.text_input("Name")
         
     #st.markdown("### Fragestellung")
-    question #= st.text_input("Fragestellung")
-    analysis #= st.selectbox("Art der genetischen Testung", ["Exom", "Exom+CNV+CA", "gezielt", "Cancer Panel", "Repeat Expansion", "CA", "keine"])
-    result = st.selectbox ("Ergebnis",  ["unauffällig", "VUS", "auffällig"])
-    if result=="unauffällig" and analysis!="gezielt":
+    question2 = st.text_input("Fragestellung")
+    analysis2 = st.selectbox("Art der genetischen Testung", ["Exom", "Exom+CNV+CA", "gezielt", "Cancer Panel", "Repeat Expansion", "CA", "keine"])
+    result2 = st.selectbox ("Ergebnis",  ["unauffällig", "VUS", "auffällig"])
+    if result2=="unauffällig" and analysis2!="gezielt":
         result_default_text = """Kein Nachweis einer klinisch relevanten Variante in der molekulargenetischen Diagnostik"""
         result_text=st.text_area("Ergebnis der genetischen Diagnostik", result_default_text)
-    elif result=="VUS" and analysis!="gezielt":
+    elif result2="VUS" and analysis2!="gezielt":
         result_default_text = """Nachweis einer Variante unklarer Signifikanz c.XX, p.(XX) im XX-Gen"""
         result_text=st.text_area("Ergebnis der genetischen Diagnostik", result_default_text)
-    elif result=="auffällig" and analysis!="gezielt":
+    elif result2=="auffällig" and analysis2!="gezielt":
         result_default_text = """Diagnose: …, molekulargenetisch nachgewiesen"""
         result_text=st.text_area("Ergebnis der genetischen Diagnostik", result_default_text)
-    elif result=="unauffällig" and analysis=="gezielt":
+    elif result2=="unauffällig" and analysis2=="gezielt":
         result_default_text = """Ausschluss der familiär bekannten Variante im XX-Gen/ Kein Nachweis einer klinisch relevanten Variante im XX-Gen"""
         result_text=st.text_area("Ergebnis der genetischen Diagnostik", result_default_text)
-    elif result=="auffällig" and analysis=="gezielt":
+    elif result2=="auffällig" and analysis2=="gezielt":
         result_default_text = """Nachweis der familiär bekannten Variante …. im …..-Gen/Heterozygoter Nachweis der familiär bekannten Variante c.XX,p.(XX) im XX-Gen"""
         result_text=st.text_area("Ergebnis der genetischen Diagnostik", result_default_text)
     
@@ -336,9 +336,9 @@ with tab2:
     # Add a selectbox for choosing the type of counciling
     #st.markdown("### Art der Beratung und Analyse")
     col1, col2, col3= st.columns(3)
-    council #= col1.selectbox("Art der Beratung", ["Erstberatung"])
-    person #= col2.selectbox("Patiententyp", ["Kind", "Erwachsen"])
-    disease #= col3.selectbox("Krankheitsbild", ["NDD +/- Epilepsie", "unspezifisch", "HNPCC", "SCA", "HTT", "Marfan/EDS", "Geschlechtsinkongruenz"])
+    council2 = col1.selectbox("Art der Beratung", ["Befundbesprechung"])
+    person2 = col2.selectbox("Patiententyp", ["Kind", "Erwachsen"])
+    disease2 = col3.selectbox("Krankheitsbild", ["NDD +/- Epilepsie", "unspezifisch", "HNPCC", "SCA", "HTT", "Marfan/EDS", "Geschlechtsinkongruenz"])
 
 with tab3:
     st.header("A dog")
