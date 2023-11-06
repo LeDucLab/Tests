@@ -1,4 +1,4 @@
-tberaimport streamlit as st
+import streamlit as st
 from datetime import datetime
 
 #Create a custom Paragraph spacing and lower the fonts
