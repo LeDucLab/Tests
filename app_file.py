@@ -296,21 +296,21 @@ with tab2:
     st.markdown("<h1 style='font-size: 30px;'>Befundbesprechungsbrief</h1>", unsafe_allow_html=True)
         
     # Get the current date and time
-    current_datetime = datetime.now()
+    #current_datetime = datetime.now()
         
     #Get patient data
     # Create a selectbox to choose an option for the gender
     st.markdown("### Patienten Daten")
-    col1, col2, col3= st.columns(3)
-    Titel = col1.selectbox("Titel", ["Frau", "Herr", "Familie"])
+    #col1, col2, col3= st.columns(3)
+    Titel #= col1.selectbox("Titel", ["Frau", "Herr", "Familie"])
         
-    Vorname = col2.text_input("Vorame")
-    Name = col3.text_input("Name")
+    Vorname #= col2.text_input("Vorame")
+    Name #= col3.text_input("Name")
         
     #st.markdown("### Fragestellung")
-    question = st.text_input("Fragestellung")
-    analysis = st.selectbox("Art der genetischen Testung", ["Exom", "Exom+CNV+CA", "gezielt", "Cancer Panel", "Repeat Expansion", "CA", "keine"])
-    result = st.selectbox ("Ergebnis",  ["unauffällig", "VUS", "auffällig"])
+    question #= st.text_input("Fragestellung")
+    analysis #= st.selectbox("Art der genetischen Testung", ["Exom", "Exom+CNV+CA", "gezielt", "Cancer Panel", "Repeat Expansion", "CA", "keine"])
+    result #= st.selectbox ("Ergebnis",  ["unauffällig", "VUS", "auffällig"])
     if result=="unauffällig" and analysis!="gezielt":
         result_default_text = """Kein Nachweis einer klinisch relevanten Variante in der molekulargenetischen Diagnostik"""
         result_text=st.text_area("Ergebnis der genetischen Diagnostik", result_default_text)
