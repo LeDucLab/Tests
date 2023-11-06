@@ -314,7 +314,7 @@ with tab2:
     if result2=="unauffällig" and analysis2!="gezielt":
         result_default_text = """Kein Nachweis einer klinisch relevanten Variante in der molekulargenetischen Diagnostik"""
         result_text=st.text_area("Ergebnis der genetischen Diagnostik", result_default_text)
-    elif result2="VUS" and analysis2!="gezielt":
+    elif result2=="VUS" and analysis2!="gezielt":
         result_default_text = """Nachweis einer Variante unklarer Signifikanz c.XX, p.(XX) im XX-Gen"""
         result_text=st.text_area("Ergebnis der genetischen Diagnostik", result_default_text)
     elif result2=="auffällig" and analysis2!="gezielt":
