@@ -13,6 +13,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 </style>
 """
+st.markdown(custom_css, unsafe_allow_html=True)
 
 tab1, tab2= st.tabs(["Beratung", "Krankheitsbild Textbausteine"])
 
