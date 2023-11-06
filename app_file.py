@@ -39,7 +39,7 @@ with tab1:
     # Add a selectbox for choosing the type of counciling
     #st.markdown("### Art der Beratung und Analyse")
     col1, col2, col3= st.columns(3)
-    council = col1.selectbox("Art der Beratung", ["Erstberatung"])
+    council = col1.selectbox("Art der Beratung", ["Erstberatung", "Befundbesprechung"])
     person = col2.selectbox("Patiententyp", ["Kind", "Erwachsen"])
     disease = col3.selectbox("Krankheitsbild", ["NDD +/- Epilepsie", "unspezifisch", "HNPCC", "SCA", "HTT", "Marfan/EDS", "Geschlechtsinkongruenz"])
 
