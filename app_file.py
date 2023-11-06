@@ -71,7 +71,8 @@ with tab1:
         free_anamnesis= st.text_area("Relevante Symptome und Vorgeschichte für die aktuelle Fragestellung", default_text)
     elif council == "Erstberatung" and disease == "HTT":
         st.markdown("### Anamnese")
-        default_text = """In Bezug af die aktuelle Fragestellung wurden folgende Aspkete in der Anamnese erfasst:
+        default_text = """Sie berichteten, dass bei Ihnen keine für die Huntington-Erkrankung typischen psychiatrischen oder motorischen Störungen bekannt seien. 
+        In Bezug af die aktuelle Fragestellung wurden folgende Aspkete in der Anamnese erfasst:
         - Typische Symptome einer Huntington Erkrankung: Motorische Symptome wie Unkontrollierte Bewegungen (Chorea), Muskelsteifigkeit, Verlust der Koordination im Alter von XX, kognitive Einschränkung und Gedächtnisstörungen im Alter von XX, psychiatrische Manifestationen wie Depression, Ängstlichkeit, Stimmungsschwankungen, Persönlichkeitsveränderungen im Alter von XX 
         - Krankheitsgeschichte: neurologische Diagnostik –⁠ XX, cMRT Untersuchung –⁠ keine pathologische Befunde (Arztbrief vom XX, Klinik XX)"""
         free_anamnesis= st.text_area("Relevante Symptome und Vorgeschichte für die aktuelle Fragestellung", default_text)
@@ -163,7 +164,7 @@ Seltenere Tumorprädispositionssyndrome sind das Peutz-Jeghers-Syndrom, das durc
     
     
     #Final lines
-    last_line=""""Wir hoffen, Sie mit unserem Gespräch und diesem Brief vorerst ausreichend informiert zu haben. Bei Rückfragen stehen wir gerne auch telefonisch zur Verfügung.<br><br>Mit freundlichen Grüßen,<br><br>"""
+    last_line="""Wir hoffen, Sie mit unserem Gespräch und diesem Brief vorerst ausreichend informiert zu haben. Bei Rückfragen stehen wir gerne auch telefonisch zur Verfügung.<br><br>Mit freundlichen Grüßen,<br><br>"""
 
     #Signatures
     if Arzt1 =="Diana Le Duc":
