@@ -1,4 +1,4 @@
-import streamlit as st
+tberaimport streamlit as st
 from datetime import datetime
 
 #Create a custom Paragraph spacing and lower the fonts
@@ -19,7 +19,7 @@ tab1, tab2, tab3, tab4= st.tabs(["EBM_Erstberatung", "EBM_Befundbesprechung", "F
 
 with tab1:
     # Create a Streamlit app
-    st.markdown("<h1 style='font-size: 30px;'>Arzt Brief Generator</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='font-size: 30px;'>Erstberatungsbrief</h1>", unsafe_allow_html=True)
         
     # Get the current date and time
     current_datetime = datetime.now()
