@@ -9,7 +9,7 @@ custom_css = """
     margin-bottom: 0.5em; /* Add a custom margin-bottom to control spacing */
 }
 h1, h2, h3, h4, h5, h6 {
-    font-size: 16px; /* Change the font size to your desired value */
+    font-size: 8px; /* Change the font size to your desired value */
 }
 </style>
 """
