@@ -52,32 +52,32 @@ with tab1:
         free_anamnesis= st.text_area("Relevante Symptome und Vorgeschichte für die aktuelle Fragestellung", default_text)
     elif council == "Erstberatung" and disease == "NDD +/- Epilepsie":
         st.markdown("### Anamnese")
-        default_text = """In Bezug auf die aktuelle Fragestellung wurden folgende Aspkete in der Anamnese erfasst:<br>
-        - Geburtshintergrund: Geburtsart XX, Geburtstermin XX, Geburtsmaßen XX<br>
-        - Meilensteine der motorischen Entwicklung: Drehen XX, Sitzen XX, Gehen XX<br>
-        - Meilensteine der sprachlichen Entwicklung: esrte Laute/Worte XX, aktueller Status XX<br>
-        - Soziale Entwicklung: Kita/Schulbesuch XX, Interaktion mit der Familie/Gleichaltrigen XX<br>
-        - Aktuelle Symptome und Beobachtungen: Art der Entwicklungsverzögerung XX, Verhaltensauffälligkeiten XX, Kommunikationsfähigkeiten XX, Epilepsie XX<br>
-        - Bisherige Untersuchungen und Interventionen: Frühere Arztbesuche oder Therapieansätze XX, Diagnosen oder Empfehlungen XX</br>"""
+        default_text = """In Bezug auf die aktuelle Fragestellung wurden folgende Aspkete in der Anamnese erfasst:
+        - Geburtshintergrund: Geburtsart XX, Geburtstermin XX, Geburtsmaßen XX
+        - Meilensteine der motorischen Entwicklung: Drehen XX, Sitzen XX, Gehen XX
+        - Meilensteine der sprachlichen Entwicklung: esrte Laute/Worte XX, aktueller Status XX
+        - Soziale Entwicklung: Kita/Schulbesuch XX, Interaktion mit der Familie/Gleichaltrigen XX
+        - Aktuelle Symptome und Beobachtungen: Art der Entwicklungsverzögerung XX, Verhaltensauffälligkeiten XX, Kommunikationsfähigkeiten XX, Epilepsie XX
+        - Bisherige Untersuchungen und Interventionen: Frühere Arztbesuche oder Therapieansätze XX, Diagnosen oder Empfehlungen XX"""
         free_anamnesis= st.text_area("Relevante Symptome und Vorgeschichte für die aktuelle Fragestellung", default_text)
     elif council == "Erstberatung" and disease == "HNPCC":
         st.markdown("### Anamnese")
-        default_text = """In Bezug af die aktuelle Fragestellung wurden folgende Aspkete in der Anamnese erfasst:<br>
-        - Diagnose eines Darmkrebs im Alter von XX (Brief XX vom XX)<br>
-        - Behandlung: operative Tumorentfernung, adjuvante Chemotherapie<br>
+        default_text = """In Bezug af die aktuelle Fragestellung wurden folgende Aspkete in der Anamnese erfasst:
+        - Diagnose eines Darmkrebs im Alter von XX (Brief XX vom XX)
+        - Behandlung: operative Tumorentfernung, adjuvante Chemotherapie
         - Pathologische Untersuchung am Tumormaterial: unauffällige Befunde bezüglich einer Mikrosatelliteninstabilität und in der Immunhistochemie der Mismatch-Repair-Proteine (Arztbrief vom …, Klinik). / In der pathologischen Untersuchung am Tumormaterial wurde eine … Mikrosatelliteninstabilität sowie in der Immunhistochemie wurde ein Verlust der Kernexpression für XX nachgewiesen. Weiterhin wurde am Tumormaterial die somatische Variante p.Val600Gly im BRAF-Gen (nicht) nachgewiesen (Arztbrief vom …, Klinik)."""
         free_anamnesis= st.text_area("Relevante Symptome und Vorgeschichte für die aktuelle Fragestellung", default_text)
     elif council == "Erstberatung" and disease == "SCA":
         st.markdown("### Anamnese")
-        default_text = """In Bezug af die aktuelle Fragestellung wurden folgende Aspkete in der Anamnese erfasst:<br>
-        - Typische Symptome einer spinozerebellären Ataxie: Gangstörung im Alter von XX, Dysarthrie im Alter von XX, Orientierungsstörungen –⁠ XX, Augenbewegungsstörungen –⁠ XX<br> 
+        default_text = """In Bezug af die aktuelle Fragestellung wurden folgende Aspkete in der Anamnese erfasst:
+        - Typische Symptome einer spinozerebellären Ataxie: Gangstörung im Alter von XX, Dysarthrie im Alter von XX, Orientierungsstörungen –⁠ XX, Augenbewegungsstörungen –⁠ XX
         - Krankheitsgeschichte: neurologische Diagnostik –⁠ XX, cMRT Untersuchung –⁠ keine pathologische Befunde (Arztbrief vom XX, Klinik XX)"""
         free_anamnesis= st.text_area("Relevante Symptome und Vorgeschichte für die aktuelle Fragestellung", default_text)
     elif council == "Erstberatung" and disease == "HTT":
         st.markdown("### Anamnese")
-        default_text = """Sie berichteten, dass bei Ihnen keine für die Huntington-Erkrankung typischen psychiatrischen oder motorischen Störungen bekannt seien.<br>
-        In Bezug af die aktuelle Fragestellung wurden folgende Aspkete in der Anamnese erfasst:<br>
-        - Typische Symptome einer Huntington Erkrankung: Motorische Symptome wie Unkontrollierte Bewegungen (Chorea), Muskelsteifigkeit, Verlust der Koordination im Alter von XX, kognitive Einschränkung und Gedächtnisstörungen im Alter von XX, psychiatrische Manifestationen wie Depression, Ängstlichkeit, Stimmungsschwankungen, Persönlichkeitsveränderungen im Alter von XX<br>
+        default_text = """Sie berichteten, dass bei Ihnen keine für die Huntington-Erkrankung typischen psychiatrischen oder motorischen Störungen bekannt seien.
+        In Bezug af die aktuelle Fragestellung wurden folgende Aspkete in der Anamnese erfasst:
+        - Typische Symptome einer Huntington Erkrankung: Motorische Symptome wie Unkontrollierte Bewegungen (Chorea), Muskelsteifigkeit, Verlust der Koordination im Alter von XX, kognitive Einschränkung und Gedächtnisstörungen im Alter von XX, psychiatrische Manifestationen wie Depression, Ängstlichkeit, Stimmungsschwankungen, Persönlichkeitsveränderungen im Alter von XX
         - Krankheitsgeschichte: neurologische Diagnostik –⁠ XX, cMRT Untersuchung –⁠ keine pathologische Befunde (Arztbrief vom XX, Klinik XX)"""
         free_anamnesis= st.text_area("Relevante Symptome und Vorgeschichte für die aktuelle Fragestellung", default_text)
         
