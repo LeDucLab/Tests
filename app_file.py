@@ -127,7 +127,7 @@ Seltenere Tumorprädispositionssyndrome sind das Peutz-Jeghers-Syndrom, das durc
 
     #Signatures
     if Arzt1 =="Diana Le Duc":
-        signature="""PD Dr. D Le Duc, MD/PhD<br><small>FÄ für Humangenetik>/small>"""
+        signature="""PD Dr. D Le Duc, MD/PhD<br><small>FÄ für Humangenetik</small>"""
     
 
     
