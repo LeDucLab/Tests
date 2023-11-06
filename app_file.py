@@ -89,7 +89,7 @@ with tab1:
         - Psychische Gesundheit: Depression, Stimmungsschwankungen
         - Transition, weitere Aspekte: Hormontherapie seit XX, eine Geschlechtsumwandlungoperation ist geplannt XX"""
         free_anamnesis= st.text_area("Relevante Symptome und Vorgeschichte für die aktuelle Fragestellung", default_text)
-     elif council == "Erstberatung" and disease == "Marfan/EDS":
+    elif council == "Erstberatung" and disease == "Marfan/EDS":
         st.markdown("### Anamnese")
         default_text = """In Bezug af die aktuelle Fragestellung wurden folgende Aspkete in der Anamnese erfasst:
         - Systemische Ghent-Kriterien anamnestisch:
