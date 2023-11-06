@@ -41,7 +41,7 @@ with tab1:
     col1, col2, col3= st.columns(3)
     council = col1.selectbox("Art der Beratung", ["Erstberatung", "Befundbesprechung"])
     person = col2.selectbox("Patiententyp", ["Kind", "Erwachsen"])
-    disease = col3.selectbox("Krankheitsbild", ["NDD +/- Epilepsie", "unspezifisch", "HNPCC", "FBrEK", "SCA", "HTT", "Geschlechtsinkongruenz"])
+    disease = col3.selectbox("Krankheitsbild", ["XNDD +/- Epilepsie", "unspezifisch", "HNPCC", "FBrEK", "SCA", "HTT", "Geschlechtsinkongruenz"])
 
 
     
