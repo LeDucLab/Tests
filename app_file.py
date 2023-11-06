@@ -43,7 +43,7 @@ with tab1:
     person = col2.selectbox("Patiententyp", ["Kind", "Erwachsen"])
     disease = col3.selectbox("Krankheitsbild", ["NDD +/- Epilepsie", "unspezifisch", "HNPCC", "FBrEK", "SCA", "HTT", "Geschlechtsinkongruenz"])
 
-    #
+
     
     # Add anamnesis button
     if council == "Erstberatung" and disease == "unspezifisch":
