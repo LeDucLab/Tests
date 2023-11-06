@@ -301,7 +301,7 @@ with tab2:
     #Get patient data
     # Create a selectbox to choose an option for the gender
     st.markdown("### Patienten Daten")
-    #col1, col2, col3= st.columns(3)
+    col1, col2, col3= st.columns(3)
     Titel #= col1.selectbox("Titel", ["Frau", "Herr", "Familie"])
         
     Vorname #= col2.text_input("Vorame")
