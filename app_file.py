@@ -310,7 +310,7 @@ with tab2:
     #st.markdown("### Fragestellung")
     question #= st.text_input("Fragestellung")
     analysis #= st.selectbox("Art der genetischen Testung", ["Exom", "Exom+CNV+CA", "gezielt", "Cancer Panel", "Repeat Expansion", "CA", "keine"])
-    result #= st.selectbox ("Ergebnis",  ["unauffällig", "VUS", "auffällig"])
+    result = st.selectbox ("Ergebnis",  ["unauffällig", "VUS", "auffällig"])
     if result=="unauffällig" and analysis!="gezielt":
         result_default_text = """Kein Nachweis einer klinisch relevanten Variante in der molekulargenetischen Diagnostik"""
         result_text=st.text_area("Ergebnis der genetischen Diagnostik", result_default_text)
