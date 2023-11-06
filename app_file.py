@@ -135,7 +135,8 @@ with tab1:
             Der Beighton Hypermobilitäts-Score ergab XX von 9 Punkten // https://www.ndr.de/ratgeber/gesundheit/Hypermobilitaet-Wenn-Gelenke-nicht-stabil-sind,hypermobilitaet106.html // (3–4 Punkte zeigte eine moderate Hypermobilität, ≥ 5 Punkte generalisierte Hypermobilität)."""
             body=st.text_area("", body_text)
         elif body_box=="Ja" and disease=="unspezifisch":
-            body=st.text_area()
+            body_text=""""""
+            body=st.text_area("", body_text)
     
         
     
