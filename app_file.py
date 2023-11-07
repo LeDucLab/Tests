@@ -312,7 +312,7 @@ with tab2:
     col1, col2, col3= st.columns(3)
     council_2 = col1.selectbox("Art der Beratung", ["Befundbesprechung"], key="council_2")
     person_2 = col2.selectbox("Patiententyp", ["Kind", "Erwachsen"], key="person_2")
-    disease_2 = col3.selectbox("Krankheitsbild", ["NDD +/- Epilepsie", "unspezifisch", "HNPCC", "SCA", "HTT", "Marfan/EDS", "Geschlechtsinkongruenz"], key="disease_2")
+    disease_2 = col3.selectbox("Krankheitsbild", ["NDD +/- Epilepsie", "unspezifisch", "HNPCC", "SCA", "HTT", "Marfan", "EDS-klassisch-COL5A1", "Geschlechtsinkongruenz"], key="disease_2")
 
     analysis_2 = st.selectbox("Art der genetischen Testung", ["Exom", "Exom+CNV+CA", "Trio", "gezielt", "Cancer Panel", "Repeat Expansion", "CA", "keine"], key="analysis_2")
     result_2 = st.selectbox ("Ergebnis",  ["unauffällig", "VUS", "auffällig"])
@@ -395,9 +395,52 @@ with tab2:
         Zur Abklärung des Verdachts auf eine genetisch bedingte Bewegungsstörung veranlassten wir an einer Probe von Ihnen eine molekulargenetische Repeat-Expansion Diagnostik bezüglich der SCA 1, 2, 3, 6, 7, 8, 10, 12 und 17 sowie des Fragiles-X-assoziiertes-Tremor-Ataxie-Syndroms. Diese ergab keinen Nachweis einer klinisch relevanten Variante und somit einen unauffälligen Befund (Befund vom XX).Weiterhin führten wir eine molekulargenetische Paneldiagnostik bezüglich Veränderungen in den Genen, welche mit Ihren Symptomen assoziiert sind, durch. Hierbei wurde die heterozygote wahrscheinlich/pathogene Variante c.xxxx>x, p.(XX) im XX-Gen bei Ihnen nachgewiesen (Befund vom XX)."""
     elif result_2=="unauffällig" and analysis_2=="CA" and disease_2=="Geschlechtsinkongruenz":
         diagnostic="""Die durchgeführte konventionelle Chromosomenanalyse ergab einen strukturell und numerisch unauffälligen männlichen/weiblichen Karyotyp (Befund vom XX)."""
+
+     #Info about disease
+    if result_2!="unauffällig" and disease_2=="unspezifisch":
+        disease_default_text = """Klinisches Bild der Erkrankung
+        Genetik und Vererbung
+        Therapien"""
+        disease_text=st.text_area("Allgemeine Informationen zum Krankheitsbild", disease_default_text)
+    elif result_2!="unauffällig" and disease_2=="HNPCC":
+        disease_default_text = """Dickdarmkrebs (Kolonkarzinom) zählt zu den häufigsten bösartigen Tumoren in Westeuropa. Die meisten Fälle treten sporadisch auf und sind vermutlich multifaktoriell verursacht. In ca. 3⁠–5 % der Fälle ist eine familiäre Häufung durch eine monogene, autosomal dominant erbliche Ursache zu erklären. Beim familiären Darmkrebs unterscheidet man mehrere Unterformen. Hierzu zählen die FAP (Familiäre Adenomatöse Polyposis) mit hunderten bis tausenden Polypen im Darm, die MUTYH-assoziierte Polyposis mit zehn bis einigen hundert Polypen im Darm und das HNPCC-Syndrom (auch Lynch-Syndrom genannt) ohne Polyposis. Das Lynch-Syndrom ist ein Tumorprädispositionssyndrom, das mit einem erhöhten Risiko für kolorektale Karzinome, Karzinome des weiteren Verdauungstrakts, Endometriumkarzinome, Karzinome des Harntrakts, Ovarialkarzinome und Hirntumoren einhergeht.
+
+Ursächlich für das Lynch-Syndrom sind pathogene Varianten in den Genen <i>MLH1</i>, <i>MSH2</i>, <i>MSH6</i>, <i>PMS2</i> und <i>EPCAM</i>. Diese werden autosomal dominant vererbt. Das bedeutet, dass heterozygote Anlageträger*Innen die Erkrankung ausbilden. Damit besteht für die Nachkommen von Anlageträger*Innenn eine 50 %ige Wahrscheinlichkeit, diese zu erben und die Erkrankung ebenfalls auszubilden. Es ist eine unvollständige Penetranz bekannt. Das bedeutet, nicht jeder Anlageträger*Innen bildet die Erkrankung aus.
+Um Patient*Innen mit einem HNPCC-Syndrom (hereditäres nicht-polypöses Kolonkarzinom) zu identifizieren, wurden klinische Kriterien definiert. Sind in einer Familie die Amsterdam-Kriterien für HNPCC (Auftreten von Kolonkarzinom, Nierenbecken- oder Ureterkarzinom und anderen assoziierten Tumorerkrankungen bei drei Familienangehörigen in zwei aufeinanderfolgenden Generationen, ein Familienmitglied erstgradig verwandt mit den beiden anderen, Erkrankungsalter bei einem Betroffenen vor dem 50. Lebensjahr) erfüllt, kann bereits klinisch die Diagnose eines HNPCC-Syndroms gestellt werden.
+Die Bethesda-Kriterien für HNPCC (Kolonkarzinom vor dem 50. Lebensjahr, synchrones oder metachrones Auftreten von Kolonkarzinom oder anderen assoziierten Tumorerkrankungen, Kolonkarzinom mit spezieller MSI-H-Histologie, Patient mit Kolonkarzinom mit einem erstgradig Verwandten mit Kolonkarzinom oder assoziierter Tumorerkrankung vor dem 50. Lebensjahr, Patient mit Kolonkarzinom mit min. zwei erst- oder zweitgradig Verwandten mit Kolonkarzinom oder assoziierter Tumorerkrankung) stellen hingegen lediglich klinische Verdachtskriterien dar. 
+
+Bei Verdacht auf ein HNPCC-Syndrom können zunächst molekularpathologische und immunhistochemische Untersuchungen am Tumormaterial erfolgen, bevor eine molekulargenetische Analyse der o.g. Gene anhand einer Blutprobe des Patient*Innen durchgeführt wird (Kohlmann et Gruber. GeneReviews. 2018).
+
+Seltenere Tumorprädispositionssyndrome sind das Peutz-Jeghers-Syndrom, das durch multiple Hamartome und melanotische Pigmentflecken gekennzeichnet ist und das PTEN-Hamartoma-Tumor-Syndrom, das mit einer Makrozephalie, Hamartomen der Schleimhaut und einem erhöhten Risiko für Schilddrüsen-, Nierenzell- und Mammakarzinome einhergeht."""
+        disease_text=st.text_area("Allgemeine Informationen zum Krankheitsbild", disease_default_text)
+     elif result_2!="unauffällig" and disease_2=="SCA":
+        disease_default_text ="""Die Spinozerebelläre Ataxie 1 (SCA) ist charakterisiert durch eine progrediente Gang- und Sprechataxie, welche meistens im Erwachsenenalter (30.⁠–40. Lebensjahr) beginnt. Bei den Patient*Innen fallen häufig zusätzlich eine Gleichgewichtsstörung, eine axonale sensorische Neuropathie, Augenauffälligkeiten (Nystagmus, hypermetrische Sakkaden) und eine milde Schluckstörung auf. Im weiteren Verlauf sind eine Muskelatrophie, Hyporeflexie, Bewegungsstörungen (wie Chorea oder Dystonie), bulbäre Dysfunktion und kognitive Defizite typisch. In der cMRT zeigt sich eine Atrophie des Kleinhirns und Hirnstamms. Der Krankheitsverlauf bis zum Versterben der betroffenen Patient*Innen kann zwischen zehn und dreißig Jahren betragen.
+Ursächlich sind CAG-Repeatexpansionen im <i>ATXN1</i>-Gen. Diese werden autosomal dominant vererbt. Das bedeutet, dass heterozygote Anlageträger*Innen die Erkrankung ausbilden. Damit besteht für die Nachkommen von Anlageträger*Innenn eine 50%ige Wahrscheinlichkeit diese zu erben und die Erkrankung ebenfalls auszubilden. Für die SCA1 ist eine Antizipation beschrieben, das bedeutet, es kann bei der Vererbung, insbesondere vom Vater auf sein Kind, zu einer Verlängerung der Repeat-Expansion kommen. Längere Repeatexpansionen korrelieren in der Regel mit einem früheren Beginn, einem schwereren Krankheitsverlauf und einem früheren Versterben. Eine individuelle Aussage zum Erkrankungsalter und zur Erkrankungsschwere ist jedoch nicht möglich.
+Bei 39 und mehr CAG-Repeats ohne Unterbrechung durch CAT-Repeats ist eine 100%ige Penetranz für das klassische Bild einer SCA1 beschrieben. Das bedeutet, dass beinahe alle Anlageträger*Innen Symptome entwi-ckeln werden. Zwischen 36 und 38 CAG-Repeats ohne Unterbrechung durch CAT-Repeats spricht man von einem „intermediären Allel“, dabei sind die Anlageträger*Innen nicht selbst von einer SCA1 betroffen, jedoch haben Nachkommen durch eine mögliche Antizipation ein erhöhtes Risiko für eine SCA1. Bei Personen mit 6 bis 35 CAG-Repeats oder mit 36 bis 44 CAG-Repeats mit Unterbrechung durch CAT-Repeats besteht kein erhöhtes Erkrankungsrisiko bezüglich einer SCA1.
+Eine kausale Therapie ist bislang nicht bekannt. Medikamente können symptomatisch für neurologische und psychiatrische Symptome eingesetzt werden, welche den Krankheitsverlauf jedoch nicht beeinflussen (Opal et Ashizawa. GeneReviews. 2017)."""
+         disease_text=st.text_area("Allgemeine Informationen zum Krankheitsbild", disease_default_text)
+    elif result_2!="unauffällig" and disease_2=="HTT":
+        disease_default_text ="""Die Huntington-Erkrankung ist eine progrediente neuropsychiatrische Erkrankung, welche meist zwischen dem 30. und 50. Lebensjahr beginnt. Oftmals treten zunächst psychiatrische Symptome wie eine Depression oder Angststörung und im Verlauf typische motorische Symptome auf. Zum breiten Spektrum der motorischen Symptome gehören unwillkürliche/ einschießende Bewegungen, später auch eine Bradykinese (Verlangsamung), Dystonie/ Muskelsteifheit, Gang- und Schluckstörungen. Im weiteren Verlauf der Erkrankung weisen die Betroffenen in aller Regel Schlafstörungen, eine fortschreitende Demenz und Wesensveränderungen auf. Im Spätstadium sind die Patient*Innen voll pflegebedürftig. Die mediane Überlebensrate nach Beginn der ersten Symptome liegt zwischen 15 und 18 Jahren. 
+
+Ursächlich für eine Huntington-Erkrankung sind pathogene CAG-Repeatverlängerungen (40 und mehr Repeats) im <i>HTT</i>-Gen. Diese werden autosomal-dominant vererbt. Das bedeutet, dass heterozygote Anlageträger*Innen mit einer pathogenen CAG-Repeatverlängerung die Erkrankung ausbilden. Für die Nachkommen von Anlageträger*Innenn besteht eine 50%ige Wahrscheinlichkeit, die Repeatverlängerung zu erben und somit die Erkrankung ebenfalls auszubilden. Zwischen 36 und 39 Repeats ist eine inkomplette Penetranz beschrieben. Es erkranken also nicht alle Anlageträger*Innen. 
+Weiterhin ist für die Huntington-Erkrankung ist eine Antizipation beschrieben, sodass es bei der Vererbung, insbesondere vom Vater auf sein Kind, zu einer Verlängerung der Repeatanzahl kommen kann. Längere Repeats korrelieren in der Regel mit einem früheren Symptombeginn, einem schwereren Krankheitsverlauf und einem früheren Versterben. Ab 60 Repeats ist ein Krankheitsbeginn noch vor dem Erwachsenenalter zu erwarten.
+
+Eine kausale Therapie ist bislang nicht bekannt. Medikamente können symptomatisch für neurologische und psychiatrische Symptome eingesetzt werden, welche den Krankheitsverlauf jedoch nicht beeinflussen. Wirkstoffe aus klinischen Studien werden bisher in der Routinetherapie nicht eingesetzt (Caron et al. GeneReviews. 2018)."""
+        disease_text=st.text_area("Allgemeine Informationen zum Krankheitsbild", disease_default_text)
+    elif result_2!="unauffällig" and disease_2=="Marfan":
+        disease_default_text = """Das Marfan-Syndrom ist eine Bindegewebserkrankung, die mit einem erhöhten Risiko für Erkrankungen unterschiedlicher Organsysteme einhergeht. Im Herzkreislaufsystem sind dies vor allem Aortenaneurysmen und Aortendissektionen. Im Skelettsystem stehen Großwuchs, eine Skoliose, eine Arachnodaktylie und Thoraxdeformitäten (Pectus carinatum, Pectus excavatum) im Vordergrund. Insgesamt bestehen häufig eine Gelenksüberbeweglichkeit sowie eine Hyperlaxizität der Haut, welche zur Neigung zu Hernien und Dehnungsstreifen führt. Zu den Komplikationen des Auges gehören eine in der Kindheit progrediente Myopie, Linsenluxationen, eine Netzhautablösung, Glaukome und Katarakte. Weiterhin besteht ein erhöhtes Risiko für einen Pneumothorax und eine Duraektasie (Erweiterung der Dura mit Rücken- oder Beinschmerzen). 
+Ursächlich für das Marfan-Syndrom sind pathogene Varianten im <i>FBN1</i>-Gen. Diese werden autosomal dominant vererbt. Das bedeutet, dass heterozygote Anlageträger*Innen die Erkrankung ausbilden. Kinder von Anlageträgern haben eine 50%ige Wahrscheinlichkeit die pathogene Variante zu erben und ebenfalls die Erkrankung auszubilden. Es ist eine variable Expressivität beschrieben. Das bedeutet, die Ausprägung der klinischen Symptomatik kann auch innerhalb einer Familie sehr unterschiedlich sein.
+Eine kausale Therapie für das Marfan-Syndrom steht derzeit nicht zur Verfügung. Es wird jedoch eine Behandlung mit Beta-blockern bzw. AT1-Rezeptor-Antagonisten empfohlen, um das Risiko für Aortenaneurysmen zu reduzieren (Dietz, GeneReviews. 2022)."""
+        disease_text=st.text_area("Allgemeine Informationen zum Krankheitsbild", disease_default_text)
+    elif result_2!="unauffällig" and disease_2=="EDS-klassisch-COL5A1":
+        disease_default_text = """Das klassische Ehlers-Danlos-Syndrom (cEDS) ist eine Bindegewebserkrankung, die durch eine Überdehnbarkeit der Haut, atrophische Narbenbildung und eine generalisierte Gelenkhypermobilität gekennzeichnet ist. Die Haut fühlt sich weich und teigig an, ist hyperextensibel, dehnt sich leicht aus und schnappt nach dem Loslassen wieder zurück. Die Haut ist fragil, was sich in einer Aufspaltung der Dermis nach relativ geringfügigen Traumata zeigt, insbesondere an Druckstellen (Knie, Ellbogen) und Bereichen, die zu Traumata neigen (Schienbeine, Stirn, Kinn). Die Wundheilung ist schlecht und eine ausgeprägte Narbenbildung nach scheinbar erfolgreicher primärer Wundheilung charakteristisch. Komplikationen der Gelenkhypermobilität, wie z. B. Verrenkungen von Schulter, Kniescheibe, Zehen, Hüfte, Speiche und Schlüsselbein, sin durch die Betroffenen selbst gut beherrschbar. Weitere Merkmale sind eine muskuläre Hypotonie mit verzögerter motorischer Entwicklung, Müdigkeit und Muskelkrämpfe sowie schnell auftretende Blutergüsse. Ein Mitralklappenprolaps kann in seltenen Fällen auftreten, ist aber in der Regel von geringer klinischer Bedeutung. Weiterhin wurden selten Erweiterungen der Aortenwurzel berichtet.
+Ursächlich sind u.a. pathogene Varianten im <i>COL5A1</i>-Gen. Diese werden autosomal dominant vererbt. Das bedeutet, dass heterozygote Anlageträger:innen die Erkrankung ausbilden. Damit besteht für die Nachkommen von Anlageträger:innen eine 50%ige Wahrscheinlichkeit, diese zu erben und die Erkrankung ebenfalls auszubilden. Die Datenlage reicht aktuell nicht aus um die Penetranz, also die Wahrscheinlichkeit, dass Symptome ausgebildet werden, zu beurteilen. 
+Eine ursächliche Therapie ist zum gegenwärtigen Zeitpunkt nicht vorhanden (Malfait <i>et al</i>, GeneReviews, 2018)."""
+        disease_text=st.text_area("Allgemeine Informationen zum Krankheitsbild", disease_default_text)
+
+
         
         
-    
 
     
     if st.button("Arzt Brief Befundbesprechung"):
@@ -434,6 +477,44 @@ with tab2:
             #st.markdown(beurteilung, unsafe_allow_html=True)
             #st.markdown(last_line, unsafe_allow_html=True)
             #st.markdown(signature, unsafe_allow_html=True)
+        elif council_2 == "Befundbesprechung" and result_2!="unauffällig" and disease_2!="HNPCC":
+            st.markdown(beratung_line_2, unsafe_allow_html=True)
+            st.markdown(ergebnis, unsafe_allow_html=True)
+            st.markdown(hello_line_2, unsafe_allow_html=True)
+            st.markdown(first_line_2, unsafe_allow_html=True)
+            st.markdown("<div class='custom-paragraph'><b>Genetische Diagnostik:</b></div>",  unsafe_allow_html=True)
+            st.markdown(diagnostic, unsafe_allow_html=True)
+            st.markdown("<div class='custom-paragraph'><b>Genetische Diagnostik:</b></div>",  unsafe_allow_html=True)
+            st.markdown(diagnostic, unsafe_allow_html=True)
+            st.markdown("<div class='custom-paragraph'><b>Allgemeine Informationen zum Krankheitsbild:</b></div>",  unsafe_allow_html=True)
+            st.markdown(disease_text, unsafe_allow_html=True)
+            #st.markdown("<div class='custom-paragraph'><b>Körperliche Untersuchung:</b></div>",  unsafe_allow_html=True)
+            #st.markdown(body, unsafe_allow_html=True)
+            #st.markdown("<div class='custom-paragraph'><b>Beurteilung und Procedere:</b></div>",  unsafe_allow_html=True)
+            #st.markdown(beurteilung, unsafe_allow_html=True)
+            #st.markdown(last_line, unsafe_allow_html=True)
+            #st.markdown(signature, unsafe_allow_html=True)
+        elif council_2 == "Befundbesprechung" and result_2!="unauffällig" and disease_2=="HNPCC":
+            st.markdown(beratung_line_2, unsafe_allow_html=True)
+            st.markdown(ergebnis, unsafe_allow_html=True)
+            st.markdown(hello_line_2, unsafe_allow_html=True)
+            st.markdown(first_line_2, unsafe_allow_html=True)
+            st.markdown("<div class='custom-paragraph'><b>Molekularpathologische Diagnostik:</b></div>",  unsafe_allow_html=True)
+            st.markdown(diagnostic_patho, unsafe_allow_html=True)
+            st.markdown("<div class='custom-paragraph'><b>Genetische Diagnostik:</b></div>",  unsafe_allow_html=True)
+            st.markdown(diagnostic, unsafe_allow_html=True)
+            st.markdown("<div class='custom-paragraph'><b>Allgemeine Informationen zum Krankheitsbild:</b></div>",  unsafe_allow_html=True)
+            st.markdown(disease_text, unsafe_allow_html=True)
+            #st.markdown("<div class='custom-paragraph'><b>Familienanamnese:</b></div>",  unsafe_allow_html=True)
+            #st.markdown(family, unsafe_allow_html=True)
+            #st.markdown("<div class='custom-paragraph'><b>Körperliche Untersuchung:</b></div>",  unsafe_allow_html=True)
+            #st.markdown(body, unsafe_allow_html=True)
+            #st.markdown("<div class='custom-paragraph'><b>Beurteilung und Procedere:</b></div>",  unsafe_allow_html=True)
+            #st.markdown(beurteilung, unsafe_allow_html=True)
+            #st.markdown(last_line, unsafe_allow_html=True)
+            #st.markdown(signature, unsafe_allow_html=True)
+    
+    
         
     
     
