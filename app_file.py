@@ -385,7 +385,7 @@ Zur Abklärung des Verdachts auf ein eine genetisch bedingtes Kolonkarzinom vera
     
     if st.button("Arzt Brief Befundbesprechung"):
         # Display text based on the selected option
-        if council_2 == "Befundbesprechung" and result_2=="unauffällig" and disease_2!=HNPCC":
+        if council_2 == "Befundbesprechung" and result_2=="unauffällig" and disease_2!="HNPCC":
             st.markdown(beratung_line_2, unsafe_allow_html=True)
             st.markdown(ergebnis, unsafe_allow_html=True)
             st.markdown(hello_line_2, unsafe_allow_html=True)
@@ -400,7 +400,7 @@ Zur Abklärung des Verdachts auf ein eine genetisch bedingtes Kolonkarzinom vera
             #st.markdown(beurteilung, unsafe_allow_html=True)
             #st.markdown(last_line, unsafe_allow_html=True)
             #st.markdown(signature, unsafe_allow_html=True)
-        elif council_2 == "Befundbesprechung" and result_2=="unauffällig" and disease_2==HNPCC":
+        elif council_2 == "Befundbesprechung" and result_2=="unauffällig" and disease_2=="HNPCC":
             st.markdown(beratung_line_2, unsafe_allow_html=True)
             st.markdown(ergebnis, unsafe_allow_html=True)
             st.markdown(hello_line_2, unsafe_allow_html=True)
