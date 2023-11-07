@@ -360,7 +360,7 @@ with tab2:
 
     #Genetic diagnostic
     if result_2=="unauffällig" and person_2=="Kind" and analysis_2=="Exom+CNV+CA":
-        diagnostic="""Die anhand einer Blutprobe von Ihrer Tochter/Ihrem Sohn durchgeführte konventionelle Chromosomenanalyse ergab einen strukturell und numerisch unauffälligen männlichen/weiblichen Karyotyp (Befund vom XX). Zur weiteren Abklärung des Verdachts auf eine genetisch bedingte Entwicklungsstörung führten wir bei Ihrer Tochter/Ihrem Sohn die molekulargenetische Diagnostik im FMR1-Gen bezüglich eines Fragilen-X-Syndroms durch. Diese ergab einen unauffälligen Befund (Befund vom XX). Auch die molekulargenetische Karyotypisierung mittels genomweiter CNV-Analyse ergab keinen Nachweis von klinisch relevanten Kopienzahlvarianten (Befund vom XX). Weiterhin führten wir eine molekulargenetische Exomdiagnostik bezüglich Veränderungen in den für ihre/seine Auffälligkeiten ursächlichen Genen durch. Diese ergab keinen Nachweis einer klinisch relevanten Variante (Befund vom ...)."""
+        diagnostic="""Die anhand einer Blutprobe von Ihrer Tochter/Ihrem Sohn durchgeführte konventionelle Chromosomenanalyse ergab einen strukturell und numerisch unauffälligen männlichen/weiblichen Karyotyp (Befund vom XX). Zur weiteren Abklärung des Verdachts auf eine genetisch bedingte Entwicklungsstörung führten wir bei Ihrer Tochter/Ihrem Sohn die molekulargenetische Diagnostik im FMR1-Gen bezüglich eines Fragilen-X-Syndroms durch. Diese ergab einen unauffälligen Befund (Befund vom XX). Auch die molekulargenetische Karyotypisierung mittels genomweiter CNV-Analyse ergab keinen Nachweis von klinisch relevanten Kopienzahlvarianten (Befund vom XX). Weiterhin führten wir eine molekulargenetische Exomdiagnostik bezüglich Veränderungen in den für ihre/seine Auffälligkeiten ursächlichen Genen durch. Diese ergab keinen Nachweis einer klinisch relevanten Variante (Befund vom XX)."""
     elif result_2=="unauffällig" and person_2=="Kind" and analysis_2=="Trio":
         diagnostic="""Zur Abklärung des Verdachts auf eine genetisch bedingte Entwicklungsstörung bei Ihrem Sohn/Ihrer Tochter veranlassten wir eine Trio-Exom-Analyse auf Forschungsbasis. Hierbei ergab sich ein unauffälliger Befund (Befund vom XX, Institut für Humangenetik am Universitätsklinikum Leipzig)."""
     elif result_2=="VUS" and person_2=="Kind" and analysis_2=="Exom+CNV+CA":
@@ -446,6 +446,66 @@ Ursächlich sind u.a. pathogene Varianten im <i>COL5A1</i>-Gen. Diese werden aut
 Eine ursächliche Therapie ist zum gegenwärtigen Zeitpunkt nicht vorhanden (Malfait <i>et al</i>, GeneReviews, 2018)."""
         disease_text=st.text_area("Allgemeine Informationen zum Krankheitsbild", disease_default_text)
 
+    #Here I should introduce a button for the different genes
+
+      #Beurteilung unauffällig
+    if result_2=="unauffällig" and person_2=="Kind" and analysis_2=="Exom+CNV+CA":
+        beurteilung="""In der bisher durchgeführten genetischen Diagnostik (Chromosomenanalyse, FMR1-Diagnostik, Array, Panel) konnte keine Ursache für die klinische Symptomatik bei Ihrem Sohn/Ihrer Tochter nachgewiesen werden.
+Ein grundsätzlicher Ausschluss einer genetischen Ursache ist allerdings nicht möglich. Aufgrund der noch ungeklärten Ursache der Symptomatik bei Ihrem Sohn/Ihrer Tochter können wir keine sicheren Aussagen bezüglich des weiteren Verlaufs der Symptomatik bzw. im Hinblick auf ein mögliches Wiederholungsrisiko in der Familie treffen. Wir empfehlen eine Wiedervorstellung in unserer genetischen Sprechstunde in zwei Jahren zur Re-Evaluation und ggf. Einleitung einer weiterführenden genetischen Diagnostik."""
+    elif result_2=="unauffällig" and person_2=="Kind" and analysis_2=="Trio":
+        beurteilung="""In der durchgeführten genetischen Diagnostik (Chromosomenanalyse, FMR1-Diagnostik, Array, Panel, Trio-Exom) konnte keine Ursache für die klinische Symptomatik bei Ihrem Sohn/Ihrer Tochter nachgewiesen werden. Ein grundsätzlicher Ausschluss einer genetischen Ursache ist allerdings nicht möglich. Aufgrund der noch ungeklärten Ursache der Symptomatik bei Ihrem Sohn/Ihrer Tochter können wir keine sicheren Aussagen bezüglich des weiteren Verlaufs der Symptomatik bzw. im Hinblick auf ein mögliches Wiederholungsrisiko in der Familie treffen. Wir empfehlen eine Wiedervorstellung in unserer genetischen Sprechstunde in zwei Jahren zur Re-Evaluation und ggf. Einleitung einer weiterführenden genetischen Diagnostik."""
+    elif result_2=="VUS" and person_2=="Kind" and analysis_2=="Exom+CNV+CA":
+        beurteilung=f"Bei Ihrem Sohn/Ihrer Tochter wurde die o.g. Variante unklarer Signifikanz (VUS) im XX-Gen nachgewiesen. Die XX-Variante war bei Ihnen, Herr/Frau {Name}, ebenfalls nachweisbar. Das bedeutet diese XX-Variante wurde paternal/maternal vererbt. Aufgrund der guten Übereinstimmung des klinischen Phänotyps gehen wir eher von einer Ursächlichkeit der nachgewiesenen Variante aus. Eine abschließende Beurteilung zur klinischen Relevanz der nachgewiesenen Variante ist derzeit nicht möglich.
+Eine gezielte, prädiktive Diagnostik für weitere Familienangehörige ist bei einer Variante unklarer Signifikanz nicht möglich."
+    elif result_2=="auffällig" and person_2=="Kind" and analysis_2=="Exom+CNV+CA":
+        beurteilung=f"Bei Ihrem Sohn/Ihrer Tochter wurde die o.g. wahrscheinlich/pathogene XX-Variante und somit eine XX molekulargenetisch nachgewiesen. Die XX-Variante war bei Ihnen, Frau {Name}, sowie Herr {Name} nicht nachweisbar. Das bedeutet, wir gehen von einer <i>de novo</i> Genese (Neuentstehung) der Variante bei Ihrem Sohn/Ihrer Tochter aus. Der seltene Fall eines Keimzellmosaiks (Vorliegen der Variante in einem Anteil der Ei- oder Samenzellen) bei Ihnen mit einem geringen Wiederholungsrisiko (ca. 1 %) für weitere Kinder ist nicht auszuschließen./Bei Ihnen, Herr und Frau {Name}, wurden die o.g. pathogenen XX-Varianten molekulargenetisch nachgewiesen. Mit dem Nachweis des heterozygoten Vorliegens der beiden XX-Varianten bei Ihnen, Herr und Frau {Name}, konnte bei Ihrem Sohn/Ihrer Tochter die Compound-Heterozygotie und somit das Vorliegen einer XX nachgewiesen werden. "
+    elif result_2=="unauffällig" and analysis_2=="gezielt":
+        beurteilung="""Bei Ihnen/Ihrem Sohn/Ihrer Tochter konnte die familiär bekannte pathogene XX-Variante nicht nachgewiesen werden. Eine XX auf Grundlage dieser Variante konnte somit bei Ihnen/ihm/ihr ausgeschlossen werden. // Bei Ihnen konnte keine klinisch relevante Variante im XX-Gen nachgewiesen werden. Eine Anlageträgerschaft für XX kann damit weitgehend ausgeschlossen werden. Es besteht somit kein erhöhtes Risiko für XX bei einem gemeinsamen Kind mit Ihrem Partner/Ihrer Partnerin."""
+    elif result_2=="auffällig" and analysis_2=="gezielt":
+        beurteilung="""Bei Ihnen/Ihrem Sohn/Ihrer Tochter wurde die familiär bekannte wahrscheinlich/pathogene XX-Variante nachgewiesen und somit eine XX molekulargenetisch bestätigt. Für Kinder von Ihnen/Ihrem Sohn/Ihrer Tochter besteht eine 50%ige Wahrscheinlichkeit die o.g. Variante im XX-Gen ebenfalls zu erben und (mit einer hohen Wahrscheinlichkeit) eine XX auszubilden. (Eine sichere Vorhersage zu auftretenden Symptomen ist aufgrund der bekannt unvollständigen Penetranz nicht möglich. // Mit dem Nachweis der o.g. wahrscheinlich pathogenen Variante im XX-Gen besteht bei Ihnen eine Anlageträgerschaft für eine XX. Das Krankheitsbild folgt einem autosomal rezessiven Erbgang. Heterozygote Anlageträger zeigen daher in der Regel keine Zeichen der Erkrankung. Das Wiederholungsrisiko für zukünftige Kinder von Ihnen, an einer XX zu erkranken, ist abhängig von einer möglichen Anlageträgerschaft bei der Partnerin/ beim Partner. Soll Ihre Partnerin/Ihr Partner Anlageträger/Anlageträgerin für XX sein, besteht ein 25%iges Risiko für zukünftige Kinder von Ihnen, an einer XX zu erkranken.)"""
+    elif result_2=="unauffällig" and analysis_2=="Exom":
+        beurteilung="""In der durchgeführten genetischen Diagnostik konnte keine Ursache für die klinische Symptomatik bei Ihnen/Ihrem Sohn/Ihrer Tochter nachgewiesen werden. Ein grundsätzlicher Ausschluss einer genetischen Ursache ist allerdings nicht möglich. Aufgrund der noch ungeklärten Ursache der Symptomatik bei Ihnen können wir keine sicheren Aussagen bezüglich des weiteren Verlaufs der Symptomatik bzw. im Hinblick auf ein mögliches Wiederholungsrisiko in der Familie treffen.
+Wir empfehlen eine Wiedervorstellung in unserer genetischen Sprechstunde in zwei Jahren zur Re-Evaluation und ggf. Einleitung einer weiterführenden genetischen Diagnostik."""
+    elif result_2=="auffällig" and analysis_2=="Exom":
+        beurteilung="""Bei Ihnen wurde die o.g. pathogene XX-Variante und somit eine XX molekulargenetisch nachgewiesen. Für Kinder von Ihnen besteht eine 50%ige Wahrscheinlichkeit die o.g. Variante im XX-Gen ebenfalls zu erben und (mit einer hohen Wahrscheinlichkeit) eine XX auszubilden. (Eine sichere Vorhersage zu auftretenden Symptomen ist aufgrund der bekannt unvollständigen Penetranz nicht möglich.)
+Unter Annahme der Compound-Heterozygotie konnte somit eine XX molekulargenetisch nachgewiesen werden. / Bei Ihnen wurden die o.g. pathogenen XX-Varianten molekulargenetisch nachgewiesen. Mit dem Nachweis des heterozygoten Vorliegens der beiden XX-Varianten bei Ihren Eltern konnte bei Ihnen die Compound-Heterozygotie und somit das Vorliegen eine XX nachgewiesen werden. Kinder von Ihnen werden mit 100%iger Wahrscheinlichkeit eine der beiden o.g. Varianten im XX-Gen von Ihnen erben. Die Abschätzung des Wiederholungsrisikos für Ihre Kinder ist abhängig davon, ob Ihre Partnerin/Ihr Partner Anlageträgerin/Anlageträger für eine XX ist."""
+    elif result_2=="VUS" and analysis_2=="Exom":
+        beurteilung="""Bei Ihnen wurde die o.g. Variante unklarer Signifikanz (VUS) im XX-Gen nachgewiesen (Befund vom XX). Bei einer VUS kann zum aktuellen Zeitpunkt nicht endgültig entschieden werden, ob es sich um eine benigne/ neutrale bzw. krankheitsverursachende genetische Veränderung handelt. Aufgrund o.g. Variante unklarer Signifikanz im XX-Gen ist das Vorliegen einer XX-Erkrankung bei Ihnen möglich."""
+    elif result_2=="unauffällig" and analysis_2=="Cancer Panel" and disease_2=="HNPCC":
+        beurteilung="""Bei Ihnen besteht der Verdacht auf eine genetisch bedingte Darmkrebserkrankung. Die Bethesda-Kriterien sind erfüllt. Die molekularpathologischen und immunhistochemischen Untersuchungen am Tumormaterial von Ihnen ergaben unauffällige Befunde.// Die molekularpathologische Untersuchung am Tumormaterial bezüglich der Mikrosatelliten ergab keinen Hinweis auf eine Mikrosatelliteninstabilität. In der durchgeführten genetischen Diagnostik konnte keine Ursache für die klinische Symptomatik bei Ihnen nachgewiesen werden. Ein grundsätzlicher Ausschluss einer genetischen Ursache ist allerdings nicht möglich. Aufgrund der noch ungeklärten Ursache der Symptomatik bei Ihnen können wir keine sicheren Aussagen bezüglich des weiteren Verlaufs der Symptomatik bzw. im Hinblick auf ein mögliches Wiederholungsrisiko in der Familie treffen.
+
+Bei Ihnen besteht der Verdacht auf eine genetisch bedingte Darmkrebserkrankung/HNPCC-Syndrom. Die Bethesda-Kriterien sind erfüllt. Die molekularpathologischen Untersuchungen am Tumormaterial ergaben eine Mikrosatelliteninstabilität. Die immunhistochemischen Untersuchungen ergaben einen Verlust der Kernexpression für PMS-2 und MLH-1. Eine Ursache hierfür konnte in den molekularpathologischen Untersuchungen (BRAF, MLH1-Promotor-Methylierung) nicht nachgewiesen werden. Aus diesem Grund führten wir bei Ihnen eine molekulargenetische Paneldiagnostik in den für ein Lynch-Syndrom ursächlichen Genen durch. Hierbei konnte keine Ursache für die Tumorerkrankung bei Ihnen nachgewiesen werden. Ein grundsätzlicher Ausschluss einer genetischen Ursache ist allerdings nicht möglich. Es bleibt die Möglichkeit, dass die Tumorerkrankung:
+- durch eine Variante verursacht wurden, die mit den angewandten Untersuchungsverfahren nicht nachgewiesen werden konnte,
+- durch eine Veränderung in einem anderen (bislang unbekannten) Gen verursacht wurden,
+- nicht auf eine einzelne erbliche Ursache zurückzuführen sind.
+Aufgrund der noch ungeklärten Ursache der Symptomatik bei Ihnen können wir keine sicheren Aussagen bezüglich des weiteren Verlaufs der Symptomatik bzw. im Hinblick auf ein mögliches Wiederholungsrisiko in der Familie treffen. 
+
+Bei Ihnen wurde ein Endometriumkarzinom diagnostiziert. Klinisch ergaben sich keine Hinweise auf ein Lynch-Syndrom, da die Bethesda- und die Amsterdam-Kriterien nicht erfüllt sind. In der molekularpathologischen Untersuchung des Endometriumkarzinoms konnte ein Ausfall der Mismatch-Repair-Proteine MLH-1 und PMS-2 und eine Mikrosatelliteninstabilität nachgewiesen werden. Als Ursache hierfür konnte eine somatische MLH1-Promotormethylierung molekularpathologisch nachgewiesen werden. Es ist somit mit einer hohen Wahrscheinlichkeit von einer sporadischen Genese des Endometriumkarzinoms auszugehen. Eine weiterführende genetische Diagnostik ist somit bei Ihnen nicht indiziert."""
+    elif result_2=="auffällig" and analysis_2=="Cancer Panel" and disease_2=="HNPCC":
+        diagnostic="""Bei Ihnen wurde die o.g. pathogene XX-Variante und somit ein XX-assoziiertes Lynch-Syndrom molekulargenetisch nachgewiesen. Damit ist bei Ihnen das Lebenszeitrisiko für folgende Tumorerkrankungen erhöht:
+MLH1 (female): Dickdarm (44%), Endometrium (35%), Eierstock (11%), Magen/Dünndarm (8%), Ureter/Niere (3%), Harnblase (3%), Gehirn (2%), Brust (11%)
+MLH1 (male): Dickdarm (53%), Magen/Dünndarm (16%), Ureter/Niere (4%), Harnblase (5%), Prostata (7%), Gehirn (1%)
+MSH2(female): Dickdarm (42%), Endometrium (46%), Eierstock (17%), Magen/Dünndarm (10%), Ureter/Niere (13%), Harnblase (7%), Gehirn (2%), Brust (13%)
+MSH2(male): Dickdarm (46%),  Magen/Dünndarm (16%), Ureter/Niere (16%), Harnblase (9%), Prostata (16%), Gehirn (4%)
+MSH6(female): Dickdarm (20%), Endometrium (41%), Eierstock (11%), Magen/Dünndarm (2%), Ureter/Niere (6%), Harnblase (1%), Gehirn (1%), Brust (11%)
+MSH6(male): Dickdarm (12%), Magen/Dünndarm (4%), Ureter/Niere (2%), Harnblase (4%), Prostata (5%), Gehirn (2%)
+PMS2(cave male/female): Dickdarm (3%), Endometrium (13%), Eierstock (3%), Magen/Dünndarm (4%), Prostata (5%), Brust (8%)
+PMS2(cave male/female): Dickdarm (75%), Endometrium (12%)
+(Idos et Valle, GeneReviews 2021, PMID: 20301390)
+Für Kinder von Ihnen besteht eine 50%ige Wahrscheinlichkeit die o.g. Variante im XX-Gen ebenfalls zu erben und ein XX-assoziiertes Lynch-Syndrom auszubilden. """
+    elif result_2=="unauffällig" and analysis_2=="Repeat Expansion" and disease_2=="HTT":
+        beurteilung="""Bei Ihnen konnte die familiär bekannte Repeatexpansion im <i>HTT</i>-Gen nicht nachgewiesen werden. Eine Huntington-Erkrankung auf Grundlage dieser Variante konnte somit ausgeschlossen werden. 
+Weiteres Informationsmaterial von der Deutschen-Huntington-Hilfe e.V. finden Sie unter: https://www.dhh-ev.de/)"""
+    elif result_2=="auffällig" and analysis_2=="Repeat Expansion" and disease_2=="HTT":
+        beurteilung="""Bei Ihnen wurde die o.g. Repeatverlängerung im <i>HTT</i>-Gen und somit eine Huntington-Erkrankung molekulargenetisch nachgewiesen. Für Kinder und Geschwister von Ihnen besteht eine 50%ige Wahrscheinlichkeit die o.g. Repeatverlängerung im <i>HTT</i>-Gen ebenfalls zu tragen und eine Huntington-Erkrankung auszubilden. """
+    elif result_2=="unauffällig" and analysis_2=="Repeat Expansion" and disease_2=="SCA":
+        beurteilung="""In der durchgeführten genetischen Diagnostik konnte keine Ursache für die klinische Symptomatik bei Ihnen nachgewiesen werden. Ein grundsätzlicher Ausschluss einer genetischen Ursache ist allerdings nicht möglich. Aufgrund der noch ungeklärten Ursache der Symptomatik bei Ihnen können wir keine sicheren Aussagen bezüglich des weiteren Verlaufs der Symptomatik bzw. im Hinblick auf ein mögliches Wiederholungsrisiko in der Familie treffen.
+Wir empfehlen eine Wiedervorstellung in unserer genetischen Sprechstunde in zwei Jahren zur Re-Evaluation und ggf. Einleitung einer weiterführenden genetischen Diagnostik."""
+    elif result_2=="auffällig" and analysis_2=="Repeat Expansion" and disease_2=="SCA":
+        beurteilung="""Bei Ihnen wurde die o.g. Repeatverlängerung im xx-Gen und somit eine SCA Typ XX molekulargenetisch nachgewiesen. Für Kinder und Geschwister von Ihnen besteht eine 50%ige Wahrscheinlichkeit die o.g. Repeatverlängerung im XX-Gen ebenfalls zu tragen und eine SCA Typ XX auszubilden. // Bei Ihnen wurde die o.g. pathogene XX-Variante und somit eine XX molekulargenetisch nachgewiesen. Für Kinder von Ihnen besteht eine 50%ige Wahrscheinlichkeit die o.g. Variante im XX-Gen ebenfalls zu erben und (mit einer hohen Wahrscheinlichkeit) eine XX auszubilden. (Eine sichere Vorhersage zu auftretenden Symptomen ist aufgrund der bekannt unvollständigen Penetranz nicht möglich.)"""
+    elif result_2=="unauffällig" and analysis_2=="CA" and disease_2=="Geschlechtsinkongruenz":
+        beurteilung="""In den durchgeführten genetischen Untersuchungen konnte keine genetische Ursache für die abweichende Geschlechtsidentifikation nachgewiesen werden. Ihr genetisches Geschlecht ist weiblich/männlich. Dies erlaubt jedoch keine Aussage über die von Ihnen empfundene Geschlechtszugehörigkeit."""
+
 
         
         
@@ -460,8 +520,8 @@ Eine ursächliche Therapie ist zum gegenwärtigen Zeitpunkt nicht vorhanden (Mal
             st.markdown(first_line_2, unsafe_allow_html=True)
             st.markdown("<div class='custom-paragraph'><b>Genetische Diagnostik:</b></div>",  unsafe_allow_html=True)
             st.markdown(diagnostic, unsafe_allow_html=True)
-            #st.markdown("<div class='custom-paragraph'><b>Familienanamnese:</b></div>",  unsafe_allow_html=True)
-            #st.markdown(family, unsafe_allow_html=True)
+            st.markdown("<div class='custom-paragraph'><b>Beurteilung und Empfehlungen</b></div>",  unsafe_allow_html=True)
+            st.markdown(beurteilung, unsafe_allow_html=True)
             #st.markdown("<div class='custom-paragraph'><b>Körperliche Untersuchung:</b></div>",  unsafe_allow_html=True)
             #st.markdown(body, unsafe_allow_html=True)
             #st.markdown("<div class='custom-paragraph'><b>Beurteilung und Procedere:</b></div>",  unsafe_allow_html=True)
@@ -477,8 +537,8 @@ Eine ursächliche Therapie ist zum gegenwärtigen Zeitpunkt nicht vorhanden (Mal
             st.markdown(diagnostic_patho, unsafe_allow_html=True)
             st.markdown("<div class='custom-paragraph'><b>Genetische Diagnostik:</b></div>",  unsafe_allow_html=True)
             st.markdown(diagnostic, unsafe_allow_html=True)
-            #st.markdown("<div class='custom-paragraph'><b>Familienanamnese:</b></div>",  unsafe_allow_html=True)
-            #st.markdown(family, unsafe_allow_html=True)
+            st.markdown("<div class='custom-paragraph'><b>Beurteilung und Empfehlungen</b></div>",  unsafe_allow_html=True)
+            st.markdown(beurteilung, unsafe_allow_html=True)
             #st.markdown("<div class='custom-paragraph'><b>Körperliche Untersuchung:</b></div>",  unsafe_allow_html=True)
             #st.markdown(body, unsafe_allow_html=True)
             #st.markdown("<div class='custom-paragraph'><b>Beurteilung und Procedere:</b></div>",  unsafe_allow_html=True)
@@ -494,8 +554,8 @@ Eine ursächliche Therapie ist zum gegenwärtigen Zeitpunkt nicht vorhanden (Mal
             st.markdown(diagnostic, unsafe_allow_html=True)
             st.markdown("<div class='custom-paragraph'><b>Allgemeine Informationen zum Krankheitsbild:</b></div>",  unsafe_allow_html=True)
             st.markdown(disease_text, unsafe_allow_html=True)
-            #st.markdown("<div class='custom-paragraph'><b>Körperliche Untersuchung:</b></div>",  unsafe_allow_html=True)
-            #st.markdown(body, unsafe_allow_html=True)
+            st.markdown("<div class='custom-paragraph'><b>Beurteilung</b></div>",  unsafe_allow_html=True)
+            st.markdown(beurteilung, unsafe_allow_html=True)
             #st.markdown("<div class='custom-paragraph'><b>Beurteilung und Procedere:</b></div>",  unsafe_allow_html=True)
             #st.markdown(beurteilung, unsafe_allow_html=True)
             #st.markdown(last_line, unsafe_allow_html=True)
@@ -511,8 +571,8 @@ Eine ursächliche Therapie ist zum gegenwärtigen Zeitpunkt nicht vorhanden (Mal
             st.markdown(diagnostic, unsafe_allow_html=True)
             st.markdown("<div class='custom-paragraph'><b>Allgemeine Informationen zum Krankheitsbild:</b></div>",  unsafe_allow_html=True)
             st.markdown(disease_text, unsafe_allow_html=True)
-            #st.markdown("<div class='custom-paragraph'><b>Familienanamnese:</b></div>",  unsafe_allow_html=True)
-            #st.markdown(family, unsafe_allow_html=True)
+            st.markdown("<div class='custom-paragraph'><b>Beurteilung</b></div>",  unsafe_allow_html=True)
+            st.markdown(beurteilung, unsafe_allow_html=True)
             #st.markdown("<div class='custom-paragraph'><b>Körperliche Untersuchung:</b></div>",  unsafe_allow_html=True)
             #st.markdown(body, unsafe_allow_html=True)
             #st.markdown("<div class='custom-paragraph'><b>Beurteilung und Procedere:</b></div>",  unsafe_allow_html=True)
