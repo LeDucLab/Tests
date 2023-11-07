@@ -398,14 +398,16 @@ with tab2:
 
      #Info about disease
     if result_2!="unauffällig" and disease_2=="unspezifisch":
-        disease_default_text = """Klinisches Bild der Erkrankung
-        Genetik und Vererbung
-        Therapien"""
+        disease_default_text = """
+        - Klinisches Bild der Erkrankung
+        - Genetik und Vererbung
+        - Therapien"""
         disease_text=st.text_area("Allgemeine Informationen zum Krankheitsbild", disease_default_text)
     if result_2!="unauffällig" and disease_2=="NDD +/- Epilepsie":
-        disease_default_text = """Klinisches Bild der Erkrankung
-        Genetik und Vererbung
-        Therapien"""
+        disease_default_text = """
+        - Klinisches Bild der Erkrankung
+        - Genetik und Vererbung
+        - Therapien"""
         disease_text=st.text_area("Allgemeine Informationen zum Krankheitsbild", disease_default_text)
 
     elif result_2!="unauffällig" and disease_2=="HNPCC":
@@ -488,8 +490,6 @@ Eine ursächliche Therapie ist zum gegenwärtigen Zeitpunkt nicht vorhanden (Mal
             st.markdown(ergebnis, unsafe_allow_html=True)
             st.markdown(hello_line_2, unsafe_allow_html=True)
             st.markdown(first_line_2, unsafe_allow_html=True)
-            st.markdown("<div class='custom-paragraph'><b>Genetische Diagnostik:</b></div>",  unsafe_allow_html=True)
-            st.markdown(diagnostic, unsafe_allow_html=True)
             st.markdown("<div class='custom-paragraph'><b>Genetische Diagnostik:</b></div>",  unsafe_allow_html=True)
             st.markdown(diagnostic, unsafe_allow_html=True)
             st.markdown("<div class='custom-paragraph'><b>Allgemeine Informationen zum Krankheitsbild:</b></div>",  unsafe_allow_html=True)
