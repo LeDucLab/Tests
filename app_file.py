@@ -481,17 +481,18 @@ Aufgrund der noch ungeklärten Ursache der Symptomatik bei Ihnen können wir kei
 
 Bei Ihnen wurde ein Endometriumkarzinom diagnostiziert. Klinisch ergaben sich keine Hinweise auf ein Lynch-Syndrom, da die Bethesda- und die Amsterdam-Kriterien nicht erfüllt sind. In der molekularpathologischen Untersuchung des Endometriumkarzinoms konnte ein Ausfall der Mismatch-Repair-Proteine MLH-1 und PMS-2 und eine Mikrosatelliteninstabilität nachgewiesen werden. Als Ursache hierfür konnte eine somatische MLH1-Promotormethylierung molekularpathologisch nachgewiesen werden. Es ist somit mit einer hohen Wahrscheinlichkeit von einer sporadischen Genese des Endometriumkarzinoms auszugehen. Eine weiterführende genetische Diagnostik ist somit bei Ihnen nicht indiziert."""
     elif result_2=="auffällig" and analysis_2=="Cancer Panel" and disease_2=="HNPCC":
-        diagnostic="""Bei Ihnen wurde die o.g. pathogene XX-Variante und somit ein XX-assoziiertes Lynch-Syndrom molekulargenetisch nachgewiesen. Damit ist bei Ihnen das Lebenszeitrisiko für folgende Tumorerkrankungen erhöht:
-MLH1 (female): Dickdarm (44%), Endometrium (35%), Eierstock (11%), Magen/Dünndarm (8%), Ureter/Niere (3%), Harnblase (3%), Gehirn (2%), Brust (11%)
-MLH1 (male): Dickdarm (53%), Magen/Dünndarm (16%), Ureter/Niere (4%), Harnblase (5%), Prostata (7%), Gehirn (1%)
-MSH2(female): Dickdarm (42%), Endometrium (46%), Eierstock (17%), Magen/Dünndarm (10%), Ureter/Niere (13%), Harnblase (7%), Gehirn (2%), Brust (13%)
-MSH2(male): Dickdarm (46%),  Magen/Dünndarm (16%), Ureter/Niere (16%), Harnblase (9%), Prostata (16%), Gehirn (4%)
-MSH6(female): Dickdarm (20%), Endometrium (41%), Eierstock (11%), Magen/Dünndarm (2%), Ureter/Niere (6%), Harnblase (1%), Gehirn (1%), Brust (11%)
-MSH6(male): Dickdarm (12%), Magen/Dünndarm (4%), Ureter/Niere (2%), Harnblase (4%), Prostata (5%), Gehirn (2%)
-PMS2(cave male/female): Dickdarm (3%), Endometrium (13%), Eierstock (3%), Magen/Dünndarm (4%), Prostata (5%), Brust (8%)
-PMS2(cave male/female): Dickdarm (75%), Endometrium (12%)
+        beurteilung_default_text="""Bei Ihnen wurde die o.g. pathogene XX-Variante und somit ein XX-assoziiertes Lynch-Syndrom molekulargenetisch nachgewiesen. Damit ist bei Ihnen das Lebenszeitrisiko für folgende Tumorerkrankungen erhöht:
+        - MLH1 (female): Dickdarm (44%), Endometrium (35%), Eierstock (11%), Magen/Dünndarm (8%), Ureter/Niere (3%), Harnblase (3%), Gehirn (2%), Brust (11%)
+        - MLH1 (male): Dickdarm (53%), Magen/Dünndarm (16%), Ureter/Niere (4%), Harnblase (5%), Prostata (7%), Gehirn (1%)
+        - MSH2(female): Dickdarm (42%), Endometrium (46%), Eierstock (17%), Magen/Dünndarm (10%), Ureter/Niere (13%), Harnblase (7%), Gehirn (2%), Brust (13%)
+        - MSH2(male): Dickdarm (46%),  Magen/Dünndarm (16%), Ureter/Niere (16%), Harnblase (9%), Prostata (16%), Gehirn (4%)
+        - MSH6(female): Dickdarm (20%), Endometrium (41%), Eierstock (11%), Magen/Dünndarm (2%), Ureter/Niere (6%), Harnblase (1%), Gehirn (1%), Brust (11%)
+        - MSH6(male): Dickdarm (12%), Magen/Dünndarm (4%), Ureter/Niere (2%), Harnblase (4%), Prostata (5%), Gehirn (2%)
+        - PMS2(cave male/female): Dickdarm (3%), Endometrium (13%), Eierstock (3%), Magen/Dünndarm (4%), Prostata (5%), Brust (8%)
+        - EPCAM(cave male/female): Dickdarm (75%), Endometrium (12%)
 (Idos et Valle, GeneReviews 2021, PMID: 20301390)
-Für Kinder von Ihnen besteht eine 50%ige Wahrscheinlichkeit die o.g. Variante im XX-Gen ebenfalls zu erben und ein XX-assoziiertes Lynch-Syndrom auszubilden. """
+Für Kinder von Ihnen besteht eine 50%ige Wahrscheinlichkeit die o.g. Variante im XX-Gen ebenfalls zu erben und ein XX-assoziiertes Lynch-Syndrom auszubilden."""
+        beurteilung=st.text_area("Beurteilung", beurteilung_default_text) # to be able to adapt according to gene
     elif result_2=="unauffällig" and analysis_2=="Repeat Expansion" and disease_2=="HTT":
         beurteilung="""Bei Ihnen konnte die familiär bekannte Repeatexpansion im <i>HTT</i>-Gen nicht nachgewiesen werden. Eine Huntington-Erkrankung auf Grundlage dieser Variante konnte somit ausgeschlossen werden. 
 Weiteres Informationsmaterial von der Deutschen-Huntington-Hilfe e.V. finden Sie unter: https://www.dhh-ev.de/)"""
@@ -564,7 +565,7 @@ Wir empfehlen eine Wiedervorstellung in unserer genetischen Sprechstunde in zwei
             st.markdown(ergebnis, unsafe_allow_html=True)
             st.markdown(hello_line_2, unsafe_allow_html=True)
             st.markdown(first_line_2, unsafe_allow_html=True)
-            st.markdown("<div class='custom-paragraph'><b>Molekularpathologische Diagnostik:</b></div>",  unsafe_allow_html=True)
+            st.markdown("<div class='custom-paragraph'><b>Genetische Diagnostik:</b></div>",  unsafe_allow_html=True)
             st.markdown(diagnostic, unsafe_allow_html=True)
             st.markdown("<div class='custom-paragraph'><b>Allgemeine Informationen zum Krankheitsbild:</b></div>",  unsafe_allow_html=True)
             st.markdown(disease_text, unsafe_allow_html=True)
