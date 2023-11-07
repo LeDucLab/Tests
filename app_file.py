@@ -316,7 +316,7 @@ with tab2:
 
     analysis_2 = st.selectbox("Art der genetischen Testung", ["Exom", "Exom+CNV+CA", "Trio", "gezielt", "Cancer Panel", "Repeat Expansion", "CA", "keine"], key="analysis_2")
     result_2 = st.selectbox ("Ergebnis",  ["unauffällig", "VUS", "auffällig"])
-    if result_2=="unauffällig" and analysis_2!="gezielt":
+    if result_2=="unauffällig" and analysis_2!="gezielt" and disease_2!="Geschlechtsinkongruenz":
         result_default_text = """Kein Nachweis einer klinisch relevanten Variante in der molekulargenetischen Diagnostik"""
         result_text=st.text_area("Ergebnis der genetischen Diagnostik", result_default_text)
     elif result_2=="VUS" and analysis_2!="gezielt":
@@ -331,7 +331,7 @@ with tab2:
     elif result_2=="auffällig" and analysis_2=="gezielt":
         result_default_text = """Nachweis der familiär bekannten Variante …. im …..-Gen/Heterozygoter Nachweis der familiär bekannten Variante c.XX,p.(XX) im XX-Gen"""
         result_text=st.text_area("Ergebnis der genetischen Diagnostik", result_default_text)
-    elif result_2=="unauffällig" and disease_2=="Geschlechtsinkongruenz":
+    elif result_2=="unauffällig" and analysis_2=="CA" and disease_2=="Geschlechtsinkongruenz":
         result_default_text = """Genetisches Geschlecht: weiblich/ männlich"""
         result_text=st.text_area("Ergebnis der genetischen Diagnostik", result_default_text)
 
