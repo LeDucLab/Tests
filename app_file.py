@@ -565,8 +565,6 @@ Wir empfehlen eine Wiedervorstellung in unserer genetischen Sprechstunde in zwei
             st.markdown(hello_line_2, unsafe_allow_html=True)
             st.markdown(first_line_2, unsafe_allow_html=True)
             st.markdown("<div class='custom-paragraph'><b>Molekularpathologische Diagnostik:</b></div>",  unsafe_allow_html=True)
-            st.markdown(diagnostic_patho, unsafe_allow_html=True)
-            st.markdown("<div class='custom-paragraph'><b>Genetische Diagnostik:</b></div>",  unsafe_allow_html=True)
             st.markdown(diagnostic, unsafe_allow_html=True)
             st.markdown("<div class='custom-paragraph'><b>Allgemeine Informationen zum Krankheitsbild:</b></div>",  unsafe_allow_html=True)
             st.markdown(disease_text, unsafe_allow_html=True)
