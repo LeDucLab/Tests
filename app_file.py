@@ -288,18 +288,6 @@ Seltenere Tumorprädispositionssyndrome sind das Peutz-Jeghers-Syndrom, das durc
             st.markdown(last_line, unsafe_allow_html=True)
             st.markdown(signature, unsafe_allow_html=True)
             st.markdown(anhang, unsafe_allow_html=True)
-    
-       # elif council == "Erstberatung" and Titel == "Herr" and person == "Kind" and disease == "NDD +/- Epilepsie" and analysis == "Exom+CNV+CA" :
-            
-           
-       
-    # elif option == "Option 2":
-        #    st.write("You chose Option 2!")
-        #elif option == "Option 3":
-         #   st.write("You chose Option 3!")
-    
-    # You can also add more text or content below the button
-    st.write("This is some additional text below the button and options.")
 
 with tab2:
     # Create the second tab
@@ -382,14 +370,43 @@ with tab2:
     elif result_2=="auffällig" and analysis_2=="gezielt":
         diagnostic="""Wir führten eine gezielte Diagnostik bezüglich der familiär bekannten (wahrscheinlich) pathogenen c.XX,p.(XX) im XX-Gen bei Ihnen/Ihrem Sohn/Ihrer Tochter durch. Hierbei konnte diese bei Ihnen/ihm/ihr nachgewiesen werden (Befund vom XX).
         // Zur Abklärung einer möglichen Anlageträgerschaft bezüglich XX veranlassten wir bei Ihnen eine molekulargenetische Einzelgen-Diagnostik und MLPA-Untersuchung bezüglich Veränderungen im XX-Gen. Diese ergab eine heterozygote wahrscheinlich/pathogene Variante c.XX,p.(XX) im XX-Gen (Befund vom XX)."""
+    elif result_2=="unauffällig" and analysis_2=="Exom":
+        diagnostic=="""Zur Abklärung des Verdachts auf eine XX führten wir bei Ihnen/Ihrem Sohn/Ihrer Tochter eine molekulargenetische Exomdiagnostik in den hierfür ursächlichen Genen durch. Hierbei ergab sich ein unauffälliger Befund (Befund vom XX)."""
+    elif result_2=="auffällig" and analysis_2=="Exom":
+        diagnostic=="""Zur Abklärung des Verdachts auf XX führten wir bei Ihnen/Ihrem Sohn/Ihrer Tochter eine molekulargenetische Exomdiagnostik in den hierfür ursächlichen Genen durch. Hierbei wurde die heterozygote wahrscheinlich/pathogene Variante c.xxxx>x, p.(XX) im XX-Gen bei Ihnen/Ihrem Sohn/Ihrer Tochter nachgewiesen (Befund vom XX)."""
+    elif result_2=="VUS" and analysis_2=="Exom":
+         diagnostic=="Zur Abklärung des Verdachts auf eine genetisch bedingte XX führten wir bei Ihnen/Ihrem Sohn/Ihrer Tochter eine molekulargenetische Exomdiagnostik in den hierfür ursächlichen Genen durch. Hierbei wurde die heterozygote Variante unklarer Signifikanz c.xxx>, p.(XX) im XX-Gen bei Ihnen/Ihrem Sohn/Ihrer Tochter nachgewiesen (Befund vom XX)."""
+    elif result_2=="unauffällig" and analysis_2=="Cancer Panel" and disease_2=="HNPCC":
+        diagnostic_patho="""Zur Abklärung des Verdachts auf ein HNPCC-Syndrom // eine genetisch bedingte Darmkrebserkrankung veranlassten wir eine molekularpathologische Diagnostik bezüglich einer Mikrosatelliteninstabilität und eine immunhistochemische Untersuchung am Tumormaterial von Ihnen. Diese ergaben keinen Nachweis einer Mikrosatelliteninstabilität sowie eine unauffällige Immunhistochemie bezüglich MLH-1, MSH-2, MSH-6 und PMS-2 (Befund vom XX, XX). Die molekularpathologische Diagnostik am Tumormaterial bezüglich der <i>BRAF</i>-Variante c.1799T>A, p.(Val600Glu) ergab einen unauffälligen Befund (Befund vom XX, XX).
+Zur Abklärung des Verdachts auf ein eine genetisch bedingtes Kolonkarzinom veranlassten wir eine molekularpathologische Diagnostik bezüglich einer Mikrosatelliteninstabilität am Tumormaterial von Ihnen. Diese ergaben den Nachweis einer starken Mikrosatelliteninstabilität korrespondierend zum Verlaust der Kernexpression für PMS-2 und MLH-1. (Befund vom XX, XX). Die molekularpathologische MLH1-Promotormethylierungsanalyse erbrachte eine MLH1-Promotormethylierung. Die Mutationsanalyse am Tumormaterial bezüglich der BRAF-Variante c.1799T>A, p.(Val600Glu) ergab einen unauffälligen Befund (Befund vom XX, XX )."""
+        diagnostic="""Zur weiteren Abklärung des Verdachts auf ein HNPCC-Syndrom // eine genetisch bedingte Darmkrebserkrankung führten wir bei Ihnen eine molekulargenetische Paneldiagnostik in den hierfür ursächlichen Genen durch. Hierbei ergab sich ein unauffälliger Befund (Befund vom XX)."""
+
+
     
     if st.button("Arzt Brief Befundbesprechung"):
         # Display text based on the selected option
-        if council_2 == "Befundbesprechung" and person_2 == "Kind":
+        if council_2 == "Befundbesprechung" and result_2=="unauffällig" and disease_2!=HNPCC":
             st.markdown(beratung_line_2, unsafe_allow_html=True)
             st.markdown(ergebnis, unsafe_allow_html=True)
             st.markdown(hello_line_2, unsafe_allow_html=True)
             st.markdown(first_line_2, unsafe_allow_html=True)
+            st.markdown("<div class='custom-paragraph'><b>Genetische Diagnostik:</b></div>",  unsafe_allow_html=True)
+            st.markdown(diagnostic, unsafe_allow_html=True)
+            #st.markdown("<div class='custom-paragraph'><b>Familienanamnese:</b></div>",  unsafe_allow_html=True)
+            #st.markdown(family, unsafe_allow_html=True)
+            #st.markdown("<div class='custom-paragraph'><b>Körperliche Untersuchung:</b></div>",  unsafe_allow_html=True)
+            #st.markdown(body, unsafe_allow_html=True)
+            #st.markdown("<div class='custom-paragraph'><b>Beurteilung und Procedere:</b></div>",  unsafe_allow_html=True)
+            #st.markdown(beurteilung, unsafe_allow_html=True)
+            #st.markdown(last_line, unsafe_allow_html=True)
+            #st.markdown(signature, unsafe_allow_html=True)
+        elif council_2 == "Befundbesprechung" and result_2=="unauffällig" and disease_2==HNPCC":
+            st.markdown(beratung_line_2, unsafe_allow_html=True)
+            st.markdown(ergebnis, unsafe_allow_html=True)
+            st.markdown(hello_line_2, unsafe_allow_html=True)
+            st.markdown(first_line_2, unsafe_allow_html=True)
+            st.markdown("<div class='custom-paragraph'><b>Molekularpathologische Diagnostik:</b></div>",  unsafe_allow_html=True)
+            st.markdown(diagnostic_patho, unsafe_allow_html=True)
             st.markdown("<div class='custom-paragraph'><b>Genetische Diagnostik:</b></div>",  unsafe_allow_html=True)
             st.markdown(diagnostic, unsafe_allow_html=True)
             #st.markdown("<div class='custom-paragraph'><b>Familienanamnese:</b></div>",  unsafe_allow_html=True)
