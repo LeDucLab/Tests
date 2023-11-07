@@ -371,7 +371,7 @@ with tab2:
         diagnostic="""Wir führten eine gezielte Diagnostik bezüglich der familiär bekannten (wahrscheinlich) pathogenen c.XX,p.(XX) im XX-Gen bei Ihnen/Ihrem Sohn/Ihrer Tochter durch. Hierbei konnte diese bei Ihnen/ihm/ihr nachgewiesen werden (Befund vom XX).
         // Zur Abklärung einer möglichen Anlageträgerschaft bezüglich XX veranlassten wir bei Ihnen eine molekulargenetische Einzelgen-Diagnostik und MLPA-Untersuchung bezüglich Veränderungen im XX-Gen. Diese ergab eine heterozygote wahrscheinlich/pathogene Variante c.XX,p.(XX) im XX-Gen (Befund vom XX)."""
     elif result_2=="unauffällig" and analysis_2=="Exom":
-        diagnostic=="""Zur Abklärung des Verdachts auf eine XX führten wir bei Ihnen/Ihrem Sohn/Ihrer Tochter eine molekulargenetische Exomdiagnostik in den hierfür ursächlichen Genen durch. Hierbei ergab sich ein unauffälliger Befund (Befund vom XX)."""
+        diagnostic=="""Lala"""
     elif result_2=="auffällig" and analysis_2=="Exom":
         diagnostic=="""Zur Abklärung des Verdachts auf XX führten wir bei Ihnen/Ihrem Sohn/Ihrer Tochter eine molekulargenetische Exomdiagnostik in den hierfür ursächlichen Genen durch. Hierbei wurde die heterozygote wahrscheinlich/pathogene Variante c.xxxx>x, p.(XX) im XX-Gen bei Ihnen/Ihrem Sohn/Ihrer Tochter nachgewiesen (Befund vom XX)."""
     elif result_2=="VUS" and analysis_2=="Exom":
@@ -380,6 +380,8 @@ with tab2:
         diagnostic_patho="""Zur Abklärung des Verdachts auf ein HNPCC-Syndrom // eine genetisch bedingte Darmkrebserkrankung veranlassten wir eine molekularpathologische Diagnostik bezüglich einer Mikrosatelliteninstabilität und eine immunhistochemische Untersuchung am Tumormaterial von Ihnen. Diese ergaben keinen Nachweis einer Mikrosatelliteninstabilität sowie eine unauffällige Immunhistochemie bezüglich MLH-1, MSH-2, MSH-6 und PMS-2 (Befund vom XX, XX). Die molekularpathologische Diagnostik am Tumormaterial bezüglich der <i>BRAF</i>-Variante c.1799T>A, p.(Val600Glu) ergab einen unauffälligen Befund (Befund vom XX, XX).
 Zur Abklärung des Verdachts auf ein eine genetisch bedingtes Kolonkarzinom veranlassten wir eine molekularpathologische Diagnostik bezüglich einer Mikrosatelliteninstabilität am Tumormaterial von Ihnen. Diese ergaben den Nachweis einer starken Mikrosatelliteninstabilität korrespondierend zum Verlaust der Kernexpression für PMS-2 und MLH-1. (Befund vom XX, XX). Die molekularpathologische MLH1-Promotormethylierungsanalyse erbrachte eine MLH1-Promotormethylierung. Die Mutationsanalyse am Tumormaterial bezüglich der BRAF-Variante c.1799T>A, p.(Val600Glu) ergab einen unauffälligen Befund (Befund vom XX, XX )."""
         diagnostic="""Zur weiteren Abklärung des Verdachts auf ein HNPCC-Syndrom // eine genetisch bedingte Darmkrebserkrankung führten wir bei Ihnen eine molekulargenetische Paneldiagnostik in den hierfür ursächlichen Genen durch. Hierbei ergab sich ein unauffälliger Befund (Befund vom XX)."""
+    elif result_2=="auffällig" and analysis_2=="Cancer Panel" and disease_2=="HNPCC":
+        diagnostic="""Zur Abklärung des Verdachts auf ... führten wir bei Ihnen eine molekulargenetische Paneldiagnostik in den hierfür ursächlichen Genen durch. Hierbei wurde die heterozygote wahrscheinlich/pathogene Variante c.xxxx>x, p.(...) im ...-Gen bei Ihnen nachgewiesen (unser Befund vom ...)."""
 
 
     
