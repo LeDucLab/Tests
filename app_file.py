@@ -402,6 +402,12 @@ with tab2:
         Genetik und Vererbung
         Therapien"""
         disease_text=st.text_area("Allgemeine Informationen zum Krankheitsbild", disease_default_text)
+    if result_2!="unauffällig" and disease_2=="NDD +/- Epilepsie":
+        disease_default_text = """Klinisches Bild der Erkrankung
+        Genetik und Vererbung
+        Therapien"""
+        disease_text=st.text_area("Allgemeine Informationen zum Krankheitsbild", disease_default_text)
+
     elif result_2!="unauffällig" and disease_2=="HNPCC":
         disease_default_text = """Dickdarmkrebs (Kolonkarzinom) zählt zu den häufigsten bösartigen Tumoren in Westeuropa. Die meisten Fälle treten sporadisch auf und sind vermutlich multifaktoriell verursacht. In ca. 3⁠–5 % der Fälle ist eine familiäre Häufung durch eine monogene, autosomal dominant erbliche Ursache zu erklären. Beim familiären Darmkrebs unterscheidet man mehrere Unterformen. Hierzu zählen die FAP (Familiäre Adenomatöse Polyposis) mit hunderten bis tausenden Polypen im Darm, die MUTYH-assoziierte Polyposis mit zehn bis einigen hundert Polypen im Darm und das HNPCC-Syndrom (auch Lynch-Syndrom genannt) ohne Polyposis. Das Lynch-Syndrom ist ein Tumorprädispositionssyndrom, das mit einem erhöhten Risiko für kolorektale Karzinome, Karzinome des weiteren Verdauungstrakts, Endometriumkarzinome, Karzinome des Harntrakts, Ovarialkarzinome und Hirntumoren einhergeht.
 
