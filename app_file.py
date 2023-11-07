@@ -566,7 +566,7 @@ Mit Nachweis der o.g. Repeatverlängerung im <i>HTT</i>-Gen besteht für Familie
     elif result_2!="unauffällig" and disease=="unspezifisch":
         recommendation_default_text="""- Nach Diagnosestellung sollten folgende Untersuchungen erfolgen
         - Mit Nachweis der o.g. wahrscheinlich pathogenen Variante im XX-Gen besteht für Familienangehörige im Rahmen einer genetischen Beratung die Möglichkeit einer gezielten Diagnostik, dies gilt insbesondere für Ihre Schwester XX. Eine Terminvereinbarung ist unter der o.g. Telefonnummer möglich. Eine gezielte Diagnostik auf die o.g. Variante im XX-Gen bei Ihren Eltern haben mit ihrem Einverständnis bereits eingeleitet. Sobald die Befunde der eingeleiteten Diagnostik vorliegen, werden wir Sie kontaktieren und weiterführend Stellung nehmen.
-        Viele Ratsuchende profitieren von Angeboten verschiedener Selbsthilfegruppen. Hier können Betroffene und Eltern von Kindern mit seltenen Erkrankungen Informationen erhalten, weitergeben und eine psychosoziale Betreuung in Anspruch nehmen. Selbsthilfegruppen für Angehörige und Patient:innen mit XX sind beispielsweise unter folgenden Adressen erreichbar:XX."
+        Viele Ratsuchende profitieren von Angeboten verschiedener Selbsthilfegruppen. Hier können Betroffene und Eltern von Kindern mit seltenen Erkrankungen Informationen erhalten, weitergeben und eine psychosoziale Betreuung in Anspruch nehmen. Selbsthilfegruppen für Angehörige und Patient:innen mit XX sind beispielsweise unter folgenden Adressen erreichbar:XX."""
         recommendation=st.text_area("Empfehlungen", recommendation_default_text)
         
         
