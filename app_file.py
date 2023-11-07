@@ -448,7 +448,7 @@ Eine ursächliche Therapie ist zum gegenwärtigen Zeitpunkt nicht vorhanden (Mal
 
     #Here I should introduce a button for the different genes
 
-      #Beurteilung unauffällig
+      #Beurteilung
     if result_2=="unauffällig" and person_2=="Kind" and analysis_2=="Exom+CNV+CA":
         beurteilung="""In der bisher durchgeführten genetischen Diagnostik (Chromosomenanalyse, FMR1-Diagnostik, Array, Panel) konnte keine Ursache für die klinische Symptomatik bei Ihrem Sohn/Ihrer Tochter nachgewiesen werden.
 Ein grundsätzlicher Ausschluss einer genetischen Ursache ist allerdings nicht möglich. Aufgrund der noch ungeklärten Ursache der Symptomatik bei Ihrem Sohn/Ihrer Tochter können wir keine sicheren Aussagen bezüglich des weiteren Verlaufs der Symptomatik bzw. im Hinblick auf ein mögliches Wiederholungsrisiko in der Familie treffen. Wir empfehlen eine Wiedervorstellung in unserer genetischen Sprechstunde in zwei Jahren zur Re-Evaluation und ggf. Einleitung einer weiterführenden genetischen Diagnostik."""
@@ -506,7 +506,68 @@ Wir empfehlen eine Wiedervorstellung in unserer genetischen Sprechstunde in zwei
     elif result_2=="unauffällig" and analysis_2=="CA" and disease_2=="Geschlechtsinkongruenz":
         beurteilung="""In den durchgeführten genetischen Untersuchungen konnte keine genetische Ursache für die abweichende Geschlechtsidentifikation nachgewiesen werden. Ihr genetisches Geschlecht ist weiblich/männlich. Dies erlaubt jedoch keine Aussage über die von Ihnen empfundene Geschlechtszugehörigkeit."""
 
+         #Recommendations
+    if result_2=="unauffällig" and disease_2=="HNPCC":
+        recommendation ="""Wir empfehlen Ihnen im Anschluss an die Tumornachsorge eine Koloskopie alle drei bis fünf Jahre. Das Risiko eines Verwandten ersten Grades eines Patienten mit kolorektalem Karzinom, ebenfalls an einem kolorektalen Karzinom zu erkranken, ist auch ohne das Vorliegen eines erblichen Tumorsyndroms statistisch erhöht. Ihren Eltern als erstgradig Angehörige empfehlen wir gemäß S3-Leitlinie Kolorektales Karzinom ebenfalls eine Koloskopie, bestenfalls im Rahmen der Regelvorsorge für Darmkrebs.// Verwandte ersten Grades (Eltern, Kinder und Geschwister) von Patienten mit kolorektalem Karzinom sollten in einem Lebensalter, das 10 Jahre vor dem Alterszeitpunkt des Auftretens des Karzinoms beim Indexpatienten liegt, erstmals komplett koloskopiert werden (spätestens im Alter von 40-45 Jahren, S3-Leitlinie Kolorektales Karzinom).
+Sollten im Verlauf Sie oder weitere Familienmitglieder an weiteren Krebserkrankungen erkranken, empfehlen wir eine Wiedervorstellung in unserer genetischen Sprechstunde zur Re-Evaluation und ggf. Einleitung einer weiterführenden genetischen Diagnostik."""
+    elif result_2!="unauffällig" and disease_2=="HNPCC":
+        recommendation="""Nach der aktuellen Leitlinie empfehlen wir Ihnen auf Grundlage des molekulargenetisch nachgewiesenen Lynch-Syndroms folgende Vorsorgeuntersuchungen bezüglich des Risikos für ein kolorektales Karzinom, ein Magenkarzinom und ein Endometriumkarzinom (S3-Leitlinie Kolorektales Karzinom. 2019):
+- Jährliche Koloskopie ab dem 25. Lebensjahr
+- Regelmäßige Ösophagogastroduodenoskopie ab dem 35. Lebensjahr
+- Jährlicher vaginaler Ultraschall ab dem 25. Lebensjahr
+- Jährliche Endometriumbiopsie mit Pipelle-Methode ab dem 35. Lebensjahr
+- Es besteht die Möglichkeit einer prophylaktischen Hyster- und Ovarektomie bei abgeschlossener Familienplanung ab dem 40. Lebensjahr (oder fünf Jahre vor dem frühesten Erkrankungsalter)
+Das Risiko für die weiteren assoziierten Tumorerkrankungen ist im Vergleich zur Allgemeinbevölkerung geringer erhöht. Aus diesem Grund empfehlen wir Ihnen die Teilnahme an den allgemeinen gültigen Früherkennungsmaßnahmen der Regelversorgung.
+Mit Nachweis der o.g. pathogenen Variante im XX-Gen besteht für Familienangehörige im Rahmen einer genetischen Beratung die Möglichkeit einer gezielten Diagnostik bezüglich der o.g. pathogenen Variante, dies gilt insbesondere für Ihre XX. Diese Untersuchung kann gern im Rahmen unserer genetischen Sprechstunde stattfinden. Eine Terminvereinbarung ist unter der o. g. Telefonnummer möglich."""
+    elif result_2!="unauffällig" and disease_2=="SCA":
+        recommendation ="""Wir empfehlen unterstützende Maßnahmen, einschließlich adaptiver Hilfsmittel, Physiotherapie, Ergotherapie sowie das Vermeiden von Übergewicht; intensive Rehabilitation (koordinierte Physiotherapie) kann von Nutzen sein; Sprachtherapie und Kommunikationshilfen bei Dysarthrie; ein videobasiertes Schluckröntgen zur Identifizierung der Nahrungskonsistenz, die am wenigsten wahrscheinlich Aspiration auslöst, sowie Ernährungshilfsmittel bei wiederholter Aspiration; kalorische Unterstützung bei Gewichtsverlust; Vitaminzusätze nach Bedarf; Psychotherapie, neuropsychologische Rehabilitation und/oder standardmäßige psychiatrische Behandlungen bei kognitiven und psychiatrischen Erscheinungen; bei Bedarf Pharmakotherapie und/oder Überweisung zur Schmerztherapie.
+        Wir empfehlen eine neurologische Beurteilung auf das Fortschreiten der Ataxie und physiatrische, ergotherapeutische sowie physiotherapeutische Beurteilung hinsichtlich Mobilität und Selbsthilfefähigkeiten; bei jedem Besuch: Beurteilung des Zugangs zur Kommunikation, sprachlicher Bedarf, Aspirationsrisiko, Ernährungsbedarf, Stimmung, psychiatrische Erscheinungen, kognitive Funktion und familiäre Bedürfnisse.
+Substanzen/Umstände zu vermeiden: Alkohol, Medikamente, die bekanntermaßen Nervenschäden verursachen können (z. B. Isoniazid, hohe Dosen Vitamin B6) und Umstände, die zu körperlichem Schaden führen könnten, wie das Bedienen von Maschinen oder das Klettern in große Höhen."""
+    elif result_2!="unauffällig" and disease_2=="HTT":
+        recommendation ="""Wir empfehlen Ihnen die weitere Betreuung durch unsere Kollegen des Fachbereichs Neurologie/Psychiatrie beziehungsweise eine Mitbetreuung an einem Huntington-Zentrum. Am Beratungstag händigten wir Ihnen eine Liste mit Huntington-Zentren und Kliniken sowie Kontaktdaten der Leipziger Selbsthilfegruppe aus.
 
+Weiterhin besteht die Möglichkeit der psychologischen Mitbetreuung durch unsere Kollegen aus dem Zentrum für psychische Gesundheit. Eine Terminvereinbarung für einen Beratungstermin ist unter der Telefonnummer XX möglich.
+
+Mit Nachweis der o.g. Repeatverlängerung im <i>HTT</i>-Gen besteht für Familienangehörige im Rahmen einer genetischen Beratung die Möglichkeit einer gezielten Diagnostik ⁠– dies gilt insbesondere für Ihre Geschwister und Ihre Kinder (ab Erreichen der Volljährigkeit). Diese Untersuchung kann gern im Rahmen unserer genetischen Sprechstunde stattfinden. Eine Terminvereinbarung ist unter der o. g. Telefonnummer möglich."""
+    elif result_2!="unauffällig" and disease_2=="Marfan":
+        recommendation = """Wir empfehlen die Anbindung an eine spezialisierte Marfan-Sprechstunde bzw. ein sozialpädiatrisches Zentrum. 
+        Nach Diagnosestellung werden folgende Untersuchungen empfohlen (Dietz, GeneReviews. 2022): 
+        - kardiologische Untersuchung inkl. Echokardiographie
+        - Bestimmung der Körpermaße
+        - augenärztliche Untersuchung hinsichtlich Katarakt und Glaukom
+        - körperliche Untersuchung hinsichtlich Thoraxdeformitäten, Skoliose, Hernien
+        - zahnärztliche Untersuchung
+        - bei unteren Rückenschmerzen, Beinschmerzen, Beinschwäche oder Taubheitsgefühlen neurologische Untersuchung und bildgebende Diagnostik hinsichtlich durale Ektasie 
+        - bei Zyanose, Brustenge oder Dyspnoe Röntgen-Thorax hinsichtlich eines Pneumothorax
+        Im Verlauf werden folgende Untersuchungen empfohlen (Dietz, GeneReviews. 2022): 
+        - min. jährliche kardiologische Untersuchung inkl. Echokardiographie
+        - regelmäßige Bestimmung der Körpermaße
+        - jährliche augenärztliche Untersuchung hinsichtlich Katarakt und Glaukom
+        - regelmäßige körperliche Untersuchung hinsichtlich Thoraxdeformitäten, Skoliose, Hernien
+        - jährliche zahnärztliche Untersuchung
+        Eine Behandlung mit Betablockern bzw. AT1-Rezeptor-Antagonisten sollte unter regelmäßiger kardiologischer Kontrolle erwogen werden. Kontaktsportarten, Coffein, Vasokonstriktoren, wie Triptane, Augenlasern (LASIK Behandlung) sollten vermieden werden.
+        Für weitere Informationen zum Krankheitsbild und die Kontaktaufnahme mit anderen Betroffenen möchten wir auf die Selbsthilfegruppe Marfan Hilfe (Deutschland) e.V. hinweisen. 
+        Bei Kinderwunsch kann Marie eine genetische Beratung hinsichtlich der Wiederholungswahrscheinlichkeit in Anspruch nehmen. Diese kann gern im Rahmen unserer Sprechstunde stattfinden. Eine Terminvereinbarung ist unter der o.g. Telefonnummer möglich.
+        Mit Nachweis der o.g. pathogenen Variante im <i>FBN1</i>-Gen besteht für leibliche Familienangehörige im Rahmen einer genetischen Beratung die Möglichkeit einer gezielten Diagnostik. Diese Untersuchung kann gern im Rahmen unserer genetischen Sprechstunde stattfinden. Eine Terminvereinbarung ist unter der o. g. Telefonnummer möglich."""
+    elif result_2!="unauffällig" and disease_2=="EDS-klassisch-COL5A1":
+        recommendation = """Nach Diagnosestellung sollten folgende Untersuchungen erfolgen (Malfait <i>et al</i>, GeneReviews, 2018): 
+        - Dermatologische Vorstellung zur Beurteilung der Hyperextensibilität der Haut, atropher Narben und Blutergüsse sowie anderer dermatologischer cEDS-Manifestationen 
+        - Orthopädische Vorstellung zur Bewertung der Gelenkbeweglichkeit mit Hilfe des Beighton-Scores
+        - Kardiologische Vorstellung zur Durchführung eines Echokardiogramms mit Messung des Aortendurchmessers 
+        - Gerinnungsdignostik bei leichten Blutergüssen
+        Im Verlauf sollten folgende Untersuchungen erfolgen (Malfait <i>et al</i>, GeneReviews, 2018):
+        - Im Falle von echokardiographischen Auffälligkeiten Wiederholung des Echokardiogramms jährlich
+        Eine Verbesserung der Gelenkstabilität und damit Schutz vor Verletzungen kann durch Sportarten erreicht werden, die insbesondere den Muskeltonus unterstützen. Beispiele hierfür sind Gehen, Radfahren, Aerobic mit geringer Belastung, Schwimmen oder Wassergymnastik sowie einfache Bewegungsübungen ohne zusätzlichen Widerstand. Sportarten mit starker Gelenkbelastung (Kontaktsportarten, Kampfsportarten, Fußball, Laufen) sollten eher vermieden werden.   Wir empfehlen zudem eine physiotherapeutische Behandlung zur Verbesserung der Gelenkstabilität. 
+        Bei Personen mit Muskelhypotonie und Gelenkinstabilität mit chronischen Schmerzen kann Verhaltens- und Psychotherapie dabei helfen, Akzeptanz und Bewältigungsstrategien zu entwickeln.
+        Wunden sollten spannungsfrei verschlossen werden, vorzugsweise in zwei Schichten. Tiefe Stiche sollten großzügig gesetzt werden. Hautnähte sollten doppelt so lange wie üblich belassen werden, und eine zusätzliche Fixierung der angrenzenden Haut kann helfen, eine Dehnung der Narbe zu verhindern.
+        Im Falle einer verlängerten Blutungszeit kann DDAVP (Deamino-Delta-D-Arginin-Vasopressin) z.B. bei Nasenbluten oder vor operativen Eingriffen eingesetzt werden. Die Einnahme von Acetylsalicylsäure (Aspirin) sollte vermieden werden. 
+        Mit Nachweis der o.g. wahrscheinlich pathogenen Variante im <i>COL5A1</i>-Gen besteht für Familienangehörige im Rahmen einer genetischen Beratung die Möglichkeit einer gezielten Diagnostik, dies gilt insbesondere für Ihre Schwester XX. Eine Terminvereinbarung ist unter der o.g. Telefonnummer möglich. Eine gezielte Diagnostik auf die o.g. Variante im <i>COL5A1</i>-Gen bei Ihren Eltern haben mit ihrem Einverständnis bereits eingeleitet. Sobald die Befunde der eingeleiteten Diagnostik vorliegen, werden wir Sie kontaktieren und weiterführend Stellung nehmen.
+        Viele Ratsuchende profitieren von Angeboten verschiedener Selbsthilfegruppen. Hier können Betroffene und Eltern von Kindern mit seltenen Erkrankungen Informationen erhalten, weitergeben und eine psychosoziale Betreuung in Anspruch nehmen. Selbsthilfegruppen für Angehörige und Patient\:Innen mit Ehlers-Danlos-Syndrom sind beispielsweise unter folgenden Adressen erreichbar: https://www.ehlers-danlos-initiative.de/ oder https://www.bundesverband-eds.de/de/."""
+    elif result_2!="unauffällig" and disease=="unspezifisch":
+        recommendation_default_text="""- Nach Diagnosestellung sollten folgende Untersuchungen erfolgen
+        - Mit Nachweis der o.g. wahrscheinlich pathogenen Variante im XX-Gen besteht für Familienangehörige im Rahmen einer genetischen Beratung die Möglichkeit einer gezielten Diagnostik, dies gilt insbesondere für Ihre Schwester XX. Eine Terminvereinbarung ist unter der o.g. Telefonnummer möglich. Eine gezielte Diagnostik auf die o.g. Variante im XX-Gen bei Ihren Eltern haben mit ihrem Einverständnis bereits eingeleitet. Sobald die Befunde der eingeleiteten Diagnostik vorliegen, werden wir Sie kontaktieren und weiterführend Stellung nehmen.
+        Viele Ratsuchende profitieren von Angeboten verschiedener Selbsthilfegruppen. Hier können Betroffene und Eltern von Kindern mit seltenen Erkrankungen Informationen erhalten, weitergeben und eine psychosoziale Betreuung in Anspruch nehmen. Selbsthilfegruppen für Angehörige und Patient:innen mit XX sind beispielsweise unter folgenden Adressen erreichbar:XX."
+        recommendation=st.text_area("Empfehlungen", recommendation_default_text)
         
         
 
