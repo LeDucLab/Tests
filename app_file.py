@@ -536,24 +536,24 @@ Weiterhin besteht die Möglichkeit der psychologischen Mitbetreuung durch unsere
 
 Mit Nachweis der o.g. Repeatverlängerung im <i>HTT</i>-Gen besteht für Familienangehörige im Rahmen einer genetischen Beratung die Möglichkeit einer gezielten Diagnostik ⁠– dies gilt insbesondere für Ihre Geschwister und Ihre Kinder (ab Erreichen der Volljährigkeit). Diese Untersuchung kann gern im Rahmen unserer genetischen Sprechstunde stattfinden. Eine Terminvereinbarung ist unter der o. g. Telefonnummer möglich."""
     elif result_2!="unauffällig" and disease_2=="Marfan":
-        recommendation = """Wir empfehlen die Anbindung an eine spezialisierte Marfan-Sprechstunde bzw. ein sozialpädiatrisches Zentrum. 
-        Nach Diagnosestellung werden folgende Untersuchungen empfohlen (Dietz, GeneReviews. 2022): 
-        - kardiologische Untersuchung inkl. Echokardiographie
-        - Bestimmung der Körpermaße
-        - augenärztliche Untersuchung hinsichtlich Katarakt und Glaukom
-        - körperliche Untersuchung hinsichtlich Thoraxdeformitäten, Skoliose, Hernien
-        - zahnärztliche Untersuchung
-        - bei unteren Rückenschmerzen, Beinschmerzen, Beinschwäche oder Taubheitsgefühlen neurologische Untersuchung und bildgebende Diagnostik hinsichtlich durale Ektasie 
-        - bei Zyanose, Brustenge oder Dyspnoe Röntgen-Thorax hinsichtlich eines Pneumothorax
-        Im Verlauf werden folgende Untersuchungen empfohlen (Dietz, GeneReviews. 2022): 
-        - min. jährliche kardiologische Untersuchung inkl. Echokardiographie
-        - regelmäßige Bestimmung der Körpermaße
-        - jährliche augenärztliche Untersuchung hinsichtlich Katarakt und Glaukom
-        - regelmäßige körperliche Untersuchung hinsichtlich Thoraxdeformitäten, Skoliose, Hernien
-        - jährliche zahnärztliche Untersuchung
-        Eine Behandlung mit Betablockern bzw. AT1-Rezeptor-Antagonisten sollte unter regelmäßiger kardiologischer Kontrolle erwogen werden. Kontaktsportarten, Coffein, Vasokonstriktoren, wie Triptane, Augenlasern (LASIK Behandlung) sollten vermieden werden.
-        Für weitere Informationen zum Krankheitsbild und die Kontaktaufnahme mit anderen Betroffenen möchten wir auf die Selbsthilfegruppe Marfan Hilfe (Deutschland) e.V. hinweisen. 
-        Bei Kinderwunsch kann Marie eine genetische Beratung hinsichtlich der Wiederholungswahrscheinlichkeit in Anspruch nehmen. Diese kann gern im Rahmen unserer Sprechstunde stattfinden. Eine Terminvereinbarung ist unter der o.g. Telefonnummer möglich.
+        recommendation = """Wir empfehlen die Anbindung an eine spezialisierte Marfan-Sprechstunde bzw. ein sozialpädiatrisches Zentrum.<br>
+        Nach Diagnosestellung werden folgende Untersuchungen empfohlen (Dietz, GeneReviews. 2022):<br>
+        - kardiologische Untersuchung inkl. Echokardiographie<br>
+        - Bestimmung der Körpermaße<br>
+        - augenärztliche Untersuchung hinsichtlich Katarakt und Glaukom<br>
+        - körperliche Untersuchung hinsichtlich Thoraxdeformitäten, Skoliose, Hernien<br>
+        - zahnärztliche Untersuchung<br>
+        - bei unteren Rückenschmerzen, Beinschmerzen, Beinschwäche oder Taubheitsgefühlen neurologische Untersuchung und bildgebende Diagnostik hinsichtlich durale Ektasie<br>
+        - bei Zyanose, Brustenge oder Dyspnoe Röntgen-Thorax hinsichtlich eines Pneumothorax<br>
+        Im Verlauf werden folgende Untersuchungen empfohlen (Dietz, GeneReviews. 2022):<br>
+        - min. jährliche kardiologische Untersuchung inkl. Echokardiographie<br>
+        - regelmäßige Bestimmung der Körpermaße<br>
+        - jährliche augenärztliche Untersuchung hinsichtlich Katarakt und Glaukom<br>
+        - regelmäßige körperliche Untersuchung hinsichtlich Thoraxdeformitäten, Skoliose, Hernien<br>
+        - jährliche zahnärztliche Untersuchung<br>
+        Eine Behandlung mit Betablockern bzw. AT1-Rezeptor-Antagonisten sollte unter regelmäßiger kardiologischer Kontrolle erwogen werden. Kontaktsportarten, Coffein, Vasokonstriktoren, wie Triptane, Augenlasern (LASIK Behandlung) sollten vermieden werden.<br>
+        Für weitere Informationen zum Krankheitsbild und die Kontaktaufnahme mit anderen Betroffenen möchten wir auf die Selbsthilfegruppe Marfan Hilfe (Deutschland) e.V. hinweisen.<br>
+        Bei Kinderwunsch kann Marie eine genetische Beratung hinsichtlich der Wiederholungswahrscheinlichkeit in Anspruch nehmen. Diese kann gern im Rahmen unserer Sprechstunde stattfinden. Eine Terminvereinbarung ist unter der o.g. Telefonnummer möglich.<br>
         Mit Nachweis der o.g. pathogenen Variante im <i>FBN1</i>-Gen besteht für leibliche Familienangehörige im Rahmen einer genetischen Beratung die Möglichkeit einer gezielten Diagnostik. Diese Untersuchung kann gern im Rahmen unserer genetischen Sprechstunde stattfinden. Eine Terminvereinbarung ist unter der o. g. Telefonnummer möglich."""
     elif result_2!="unauffällig" and disease_2=="EDS-klassisch-COL5A1":
         recommendation = """Nach Diagnosestellung sollten folgende Untersuchungen erfolgen (Malfait <i>et al</i>, GeneReviews, 2018): 
