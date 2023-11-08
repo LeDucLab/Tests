@@ -138,10 +138,6 @@ with tab1:
             body_text=""""""
             body=st.text_area("", body_text)
     
-        
-    
-        
-    
     #Add Anaylsis
     st.markdown("### Genetische Diagnostik")
     analysis = st.selectbox("Art der genetischen Testung", ["Exom", "Exom+CNV+CA", "gezielt", "Cancer Panel", "Repeat Expansion", "CA", "keine"])
@@ -153,35 +149,31 @@ with tab1:
     elif analysis == "gezielt" and disease !="HTT":
         beurteilung="""Bei  Ihren Angehörigen/ Ihrer Mutter / Ihrem Vater / Ihrer Großmutter / Ihrem Großvater / väterlicherseits/ mütterlicherseits wurde im Vorfeld die o.g. pathogene Variante im XX-Gen nachgewiesen. Somit weist Ihr Sohn/Ihre Tochter // weisen Sie mit XX%iger Wahrscheinlichkeit die in Ihrer Familie bekannte pathogene Variante ebenfalls auf.  Mit Ihrem Einverständnis veranlassten wir die gezielte Diagnostik auf die o.g. pathogene XX-Variante bei Ihrem Sohn/Ihrer Tochter/Ihnen. // Zur Abklärung einer möglichen Anlageträgerschaft bezüglich XX veranlassten wir bei Ihnen eine molekulargenetische Einzelgen-Diagnostik und MLPA-Untersuchung bezüglich Veränderungen im ...-Gen. // Sobald der Befund der genetischen Diagnostik vorliegt, werden wir Sie informieren und weiterführend Stellung nehmen."""
     elif analysis == "Cancer Panel" and disease == "HNPCC":
-        beurteilung="""Bei Ihnen besteht der Verdacht auf eine genetisch bedingte Darmkrebserkrankung. Die Bethesda-Kriterien und Amsterdam-Kriterien sind erfüllt. Die molekularpathologischen Untersuchungen am Tumormaterial von Ihnen ergaben einen auffälligen Befund. Zur Abklärung veranlassten wir daher bei Ihnen eine molekulargenetische Paneldiagnostik in den für genetisch bedingten Darmkrebs ursächlichen Genen. / Zur weiteren Abklärung forderten wir die molekularpathologische Untersuchung bezüglich einer Mikrosatelliteninstabilität, eine immunhistochemische Diagnostik sowie die molekularpathologische Diagnostik bezüglich der somatischen Mutation p.(Val600Glu) im BRAF-Gen an.
-Sobald die Befunde der eingeleiteten Diagnostik vorliegen, werden wir Sie informieren und weiterführend Stellung nehmen.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
-
-/ Wir besprachen, dass aufgrund Ihrer Angaben zur Eigen- und Familienanamnese die klinischen Kriterien (Bethesda- und Amsterdam-Kriterien) für ein HNPCC-Syndrom nicht erfüllt sind. Zudem erwiesen sich die im Vorfeld durchgeführten molekularpathologischen und immunhistochemischen Untersuchungen am Tumormaterial bei Ihnen als unauffällig. Hinweise auf ein polypöses Tumorprädispositionssyndrom ergaben sich bei Ihnen nicht. Wir empfehlen Ihnen daher im Anschluss an die Tumornachsorge die Teilnahme an der Regelvorsorge für Darmkrebs/ eine Koloskopie alle 3–⁠5 Jahre. Das Risiko eines Verwandten ersten Grades eines Patienten mit kolorektalem Karzinom, ebenfalls an einem kolorektalen Karzinom zu erkranken, ist auch ohne das Vorliegen eines erblichen Tumorsyndroms statistisch erhöht. Ihre Verwandten ersten Grades sollten daher mit spätestens XX Jahren erstmals komplett koloskopiert werden (10 Jahre vor dem Alterszeitpunkt des Auftretens des Karzinoms beim Indexpatienten gemäß S3-Leitlinie Kolorektales Karzinom).
+        beurteilung="""Bei Ihnen besteht der Verdacht auf eine genetisch bedingte Darmkrebserkrankung. Die Bethesda-Kriterien und Amsterdam-Kriterien sind erfüllt. Die molekularpathologischen Untersuchungen am Tumormaterial von Ihnen ergaben einen auffälligen Befund. Zur Abklärung veranlassten wir daher bei Ihnen eine molekulargenetische Paneldiagnostik in den für genetisch bedingten Darmkrebs ursächlichen Genen. <br>
+        / Zur weiteren Abklärung forderten wir die molekularpathologische Untersuchung bezüglich einer Mikrosatelliteninstabilität, eine immunhistochemische Diagnostik sowie die molekularpathologische Diagnostik bezüglich der somatischen Mutation p.(Val600Glu) im BRAF-Gen an.<br>
+<br>
+Sobald die Befunde der eingeleiteten Diagnostik vorliegen, werden wir Sie informieren und weiterführend Stellung nehmen.<br>
+<br>
+/ Wir besprachen, dass aufgrund Ihrer Angaben zur Eigen- und Familienanamnese die klinischen Kriterien (Bethesda- und Amsterdam-Kriterien) für ein HNPCC-Syndrom nicht erfüllt sind. Zudem erwiesen sich die im Vorfeld durchgeführten molekularpathologischen und immunhistochemischen Untersuchungen am Tumormaterial bei Ihnen als unauffällig. Hinweise auf ein polypöses Tumorprädispositionssyndrom ergaben sich bei Ihnen nicht. Wir empfehlen Ihnen daher im Anschluss an die Tumornachsorge die Teilnahme an der Regelvorsorge für Darmkrebs/ eine Koloskopie alle 3–⁠5 Jahre. Das Risiko eines Verwandten ersten Grades eines Patienten mit kolorektalem Karzinom, ebenfalls an einem kolorektalen Karzinom zu erkranken, ist auch ohne das Vorliegen eines erblichen Tumorsyndroms statistisch erhöht. Ihre Verwandten ersten Grades sollten daher mit spätestens XX Jahren erstmals komplett koloskopiert werden (10 Jahre vor dem Alterszeitpunkt des Auftretens des Karzinoms beim Indexpatienten gemäß S3-Leitlinie Kolorektales Karzinom).<br>
 Sollten im weiteren Verlauf Sie bzw. andere Familienmitglieder an weiteren Krebserkrankungen erkranken, ist eine Wiedervorstellung in unserer Sprechstunde zur Re-Evaluation und ggf. Einleitung einer weiterführenden genetischen Diagnostik möglich."""
     elif analysis == "Repeat expansion" and disease == "SCA":
         beurteilung="""Bei Ihnen besteht der Verdacht auf eine genetisch bedingte Ataxie. Wir veranlassten daher bei Ihnen die molekulargenetische Diagnostik bezüglich des Fragilen-X-assoziierten Tremor-Ataxie-Syndroms (FXTAS) im FMR1-Gen. Weiterhin werden wir die molekulargenetische Diagnostik bezüglich der Spinozerebellären Ataxie Typ 1, 2, 3, 6, 7, 8, 10, 12 und 17 sowie eine molekulargenetische Paneldiagnostik in weiteren hierfür ursächlichen Genen durchführen. Sobald die Befunde der genetischen Diagnostik vorliegen, werden wir Sie informieren und weiterführend Stellung nehmen. Wir hoffen, Sie mit unserem Gespräch und diesem Brief ausreichend informiert zu haben. Bei Rückfragen stehen wir gerne auch telefonisch zur Verfügung."""
     elif analysis == "gezielt" and disease == "HTT":
-        beurteilung="""Bei XX wurde mit dem Nachweis einer pathogenen CAG-Repeat-Verlängerung im <i>HTT</i>-Gen eine Huntington-Erkrankung molekulargenetisch nachgewiesen. Damit besteht für Sie eine 50%ige Wahrscheinlichkeit, diese geerbt zu haben und ebenfalls eine Huntington-Erkrankung auszubilden. 
-
-Im Rahmen der Beratung besprachen wir psychologische, soziale und versicherungsrechtliche Aspekte, die sich aus dem Ergebnis der genetischen Diagnostik ergeben könnten. Zudem empfahlen wir eine psychologische Beratung im Hinblick auf eine mögliche prädiktive Diagnostik im HTT-Gen. Sollten Sie sich nach angemessener Bedenkzeit für die molekulargenetische Untersuchung im HTT-Gen entscheiden, ist eine erneute Terminvereinbarung in unserer genetischen Sprechstunde zur Entnahme einer Blutprobe und Einleitung der genetischen Diagnostik möglich."""
+        beurteilung="""Bei XX wurde mit dem Nachweis einer pathogenen CAG-Repeat-Verlängerung im <i>HTT</i>-Gen eine Huntington-Erkrankung molekulargenetisch nachgewiesen. Damit besteht für Sie eine 50%ige Wahrscheinlichkeit, diese geerbt zu haben und ebenfalls eine Huntington-Erkrankung auszubilden. <br>
+        Im Rahmen der Beratung besprachen wir psychologische, soziale und versicherungsrechtliche Aspekte, die sich aus dem Ergebnis der genetischen Diagnostik ergeben könnten. Zudem empfahlen wir eine psychologische Beratung im Hinblick auf eine mögliche prädiktive Diagnostik im HTT-Gen. Sollten Sie sich nach angemessener Bedenkzeit für die molekulargenetische Untersuchung im HTT-Gen entscheiden, ist eine erneute Terminvereinbarung in unserer genetischen Sprechstunde zur Entnahme einer Blutprobe und Einleitung der genetischen Diagnostik möglich."""
     elif analysis == "Repeat Expansion" and disease == "HTT":
         beurteilung="""Bei Ihnen besteht der Verdacht auf eine Huntington Erkrankung. Wir veranlassten daher bei Ihnen eine molekulargenetische Diagnostik im Hinblick auf eine Huntington Erkrankung. Sollte diese Diagnostik unauffällig sein werden wir eine weiterführende genetische Diagnostik im Hinblick Huntington-like Erkrankungen einleiten. Sobald die Befunde der genetischen Diagnostik vorliegen, werden wir Sie informieren und weiterführend Stellung nehmen."""
     elif  analysis == "CA" and disease == "Geschlechtsinkongruenz":
         beurteilung="""Zur Abklärung des genetischen Geschlechts veranlassten wir eine konventionelle Chromosomenanalyse. Sobald die Befunde der genetischen Diagnostik vorliegen, werden wir Sie informieren und weiterführend Stellung nehmen."""
     elif  analysis == "Exom" and disease == "Marfan/EDS":
         beurteilung="""Bei Ihnen besteht der Verdacht auf eine eine genetisch bedingte Bindegewebestörung. Die klinischen Kriterien für ein Marfan- bzw. ein Ehlers-Danlos-Syndrom sind bei Ihnen nicht erfüllt/erfüllt XX. Zur Abklärung von weiteren/einer XX genetisch bedingten Bindegewebestörungen/Bindegewebestörung ist aus der Sicht unseres Fachgebietes eine genetische Diagnostik indiziert. Wir veranlassten daher eine molekulargenetische Paneldiagnostik in den hierfür ursächlichen Genen. Sobald der Befund der genetischen Diagnostik vorliegt, werden wir Sie informieren und weiterführend Stellung nehmen."""
+    
     #Add Signature boxes
     st.markdown("### Behandelnde Ärzte")
     col1, col2 = st.columns(2)
     Arzt1 = col1.selectbox("Arzt 1", ["Diana Le Duc", "Albrecht Kobelt"])
     Arzt2 = col2.selectbox("Arzt 2", ["Diana Le Duc", "Albrecht Kobelt"])
-    
-
-    
-    
-      
-        
-        
+     
     
     # Letter Structure for all types of letters
     #Beratungsgrund
@@ -307,6 +299,7 @@ with tab2:
         
     #st.markdown("### Fragestellung")
     question_2 = st.text_input("Fragestellung", key="question_2")
+    
     # Add a selectbox for choosing the type of counciling
     #st.markdown("### Art der Beratung und Analyse")
     col1, col2, col3= st.columns(3)
@@ -334,6 +327,12 @@ with tab2:
     elif result_2=="unauffällig" and analysis_2=="CA" and disease_2=="Geschlechtsinkongruenz":
         result_default_text = """Genetisches Geschlecht: weiblich/ männlich"""
         result_text=st.text_area("Ergebnis der genetischen Diagnostik", result_default_text)
+
+     #Add Signature boxes
+    st.markdown("### Behratende Ärzte")
+    col1, col2 = st.columns(2)
+    Arzt1_2 = col1.selectbox("Arzt 1", ["Diana Le Duc", "Albrecht Kobelt"], key="Arzt1_2")
+    Arzt2_2 = col2.selectbox("Arzt 2", ["Diana Le Duc", "Albrecht Kobelt"],  key="Arzt2_2")
 
     # Letter Structure for all types of letters
     
@@ -475,30 +474,30 @@ Unter Annahme der Compound-Heterozygotie konnte somit eine XX molekulargenetisch
     elif result_2=="VUS" and analysis_2=="Exom":
         beurteilung="""Bei Ihnen wurde die o.g. Variante unklarer Signifikanz (VUS) im XX-Gen nachgewiesen (Befund vom XX). Bei einer VUS kann zum aktuellen Zeitpunkt nicht endgültig entschieden werden, ob es sich um eine benigne/ neutrale bzw. krankheitsverursachende genetische Veränderung handelt. Aufgrund o.g. Variante unklarer Signifikanz im XX-Gen ist das Vorliegen einer XX-Erkrankung bei Ihnen möglich."""
     elif result_2=="unauffällig" and analysis_2=="Cancer Panel" and disease_2=="HNPCC":
-        beurteilung="""Bei Ihnen besteht der Verdacht auf eine genetisch bedingte Darmkrebserkrankung. Die Bethesda-Kriterien sind erfüllt. Die molekularpathologischen und immunhistochemischen Untersuchungen am Tumormaterial von Ihnen ergaben unauffällige Befunde.// Die molekularpathologische Untersuchung am Tumormaterial bezüglich der Mikrosatelliten ergab keinen Hinweis auf eine Mikrosatelliteninstabilität. In der durchgeführten genetischen Diagnostik konnte keine Ursache für die klinische Symptomatik bei Ihnen nachgewiesen werden. Ein grundsätzlicher Ausschluss einer genetischen Ursache ist allerdings nicht möglich. Aufgrund der noch ungeklärten Ursache der Symptomatik bei Ihnen können wir keine sicheren Aussagen bezüglich des weiteren Verlaufs der Symptomatik bzw. im Hinblick auf ein mögliches Wiederholungsrisiko in der Familie treffen.
+        beurteilung="""Bei Ihnen besteht der Verdacht auf eine genetisch bedingte Darmkrebserkrankung. Die Bethesda-Kriterien sind erfüllt. Die molekularpathologischen und immunhistochemischen Untersuchungen am Tumormaterial von Ihnen ergaben unauffällige Befunde.// Die molekularpathologische Untersuchung am Tumormaterial bezüglich der Mikrosatelliten ergab keinen Hinweis auf eine Mikrosatelliteninstabilität. In der durchgeführten genetischen Diagnostik konnte keine Ursache für die klinische Symptomatik bei Ihnen nachgewiesen werden. Ein grundsätzlicher Ausschluss einer genetischen Ursache ist allerdings nicht möglich. Aufgrund der noch ungeklärten Ursache der Symptomatik bei Ihnen können wir keine sicheren Aussagen bezüglich des weiteren Verlaufs der Symptomatik bzw. im Hinblick auf ein mögliches Wiederholungsrisiko in der Familie treffen.<br>
 
-Bei Ihnen besteht der Verdacht auf eine genetisch bedingte Darmkrebserkrankung/HNPCC-Syndrom. Die Bethesda-Kriterien sind erfüllt. Die molekularpathologischen Untersuchungen am Tumormaterial ergaben eine Mikrosatelliteninstabilität. Die immunhistochemischen Untersuchungen ergaben einen Verlust der Kernexpression für PMS-2 und MLH-1. Eine Ursache hierfür konnte in den molekularpathologischen Untersuchungen (BRAF, MLH1-Promotor-Methylierung) nicht nachgewiesen werden. Aus diesem Grund führten wir bei Ihnen eine molekulargenetische Paneldiagnostik in den für ein Lynch-Syndrom ursächlichen Genen durch. Hierbei konnte keine Ursache für die Tumorerkrankung bei Ihnen nachgewiesen werden. Ein grundsätzlicher Ausschluss einer genetischen Ursache ist allerdings nicht möglich. Es bleibt die Möglichkeit, dass die Tumorerkrankung:
-- durch eine Variante verursacht wurden, die mit den angewandten Untersuchungsverfahren nicht nachgewiesen werden konnte,
-- durch eine Veränderung in einem anderen (bislang unbekannten) Gen verursacht wurden,
-- nicht auf eine einzelne erbliche Ursache zurückzuführen sind.
-Aufgrund der noch ungeklärten Ursache der Symptomatik bei Ihnen können wir keine sicheren Aussagen bezüglich des weiteren Verlaufs der Symptomatik bzw. im Hinblick auf ein mögliches Wiederholungsrisiko in der Familie treffen. 
-
+Bei Ihnen besteht der Verdacht auf eine genetisch bedingte Darmkrebserkrankung/HNPCC-Syndrom. Die Bethesda-Kriterien sind erfüllt. Die molekularpathologischen Untersuchungen am Tumormaterial ergaben eine Mikrosatelliteninstabilität. Die immunhistochemischen Untersuchungen ergaben einen Verlust der Kernexpression für PMS-2 und MLH-1. Eine Ursache hierfür konnte in den molekularpathologischen Untersuchungen (BRAF, MLH1-Promotor-Methylierung) nicht nachgewiesen werden. Aus diesem Grund führten wir bei Ihnen eine molekulargenetische Paneldiagnostik in den für ein Lynch-Syndrom ursächlichen Genen durch. Hierbei konnte keine Ursache für die Tumorerkrankung bei Ihnen nachgewiesen werden. Ein grundsätzlicher Ausschluss einer genetischen Ursache ist allerdings nicht möglich. Es bleibt die Möglichkeit, dass die Tumorerkrankung:<br>
+- durch eine Variante verursacht wurden, die mit den angewandten Untersuchungsverfahren nicht nachgewiesen werden konnte,<br>
+- durch eine Veränderung in einem anderen (bislang unbekannten) Gen verursacht wurden,<br>
+- nicht auf eine einzelne erbliche Ursache zurückzuführen sind.<br>
+Aufgrund der noch ungeklärten Ursache der Symptomatik bei Ihnen können wir keine sicheren Aussagen bezüglich des weiteren Verlaufs der Symptomatik bzw. im Hinblick auf ein mögliches Wiederholungsrisiko in der Familie treffen.<br>
+<br>
 Bei Ihnen wurde ein Endometriumkarzinom diagnostiziert. Klinisch ergaben sich keine Hinweise auf ein Lynch-Syndrom, da die Bethesda- und die Amsterdam-Kriterien nicht erfüllt sind. In der molekularpathologischen Untersuchung des Endometriumkarzinoms konnte ein Ausfall der Mismatch-Repair-Proteine MLH-1 und PMS-2 und eine Mikrosatelliteninstabilität nachgewiesen werden. Als Ursache hierfür konnte eine somatische MLH1-Promotormethylierung molekularpathologisch nachgewiesen werden. Es ist somit mit einer hohen Wahrscheinlichkeit von einer sporadischen Genese des Endometriumkarzinoms auszugehen. Eine weiterführende genetische Diagnostik ist somit bei Ihnen nicht indiziert."""
     elif result_2=="auffällig" and analysis_2=="Cancer Panel" and disease_2=="HNPCC":
-        beurteilung_default_text="""Bei Ihnen wurde die o.g. pathogene XX-Variante und somit ein XX-assoziiertes Lynch-Syndrom molekulargenetisch nachgewiesen. Damit ist bei Ihnen das Lebenszeitrisiko für folgende Tumorerkrankungen erhöht:
-        - MLH1 (female): Dickdarm (44%), Endometrium (35%), Eierstock (11%), Magen/Dünndarm (8%), Ureter/Niere (3%), Harnblase (3%), Gehirn (2%), Brust (11%)
-        - MLH1 (male): Dickdarm (53%), Magen/Dünndarm (16%), Ureter/Niere (4%), Harnblase (5%), Prostata (7%), Gehirn (1%)
-        - MSH2(female): Dickdarm (42%), Endometrium (46%), Eierstock (17%), Magen/Dünndarm (10%), Ureter/Niere (13%), Harnblase (7%), Gehirn (2%), Brust (13%)
-        - MSH2(male): Dickdarm (46%),  Magen/Dünndarm (16%), Ureter/Niere (16%), Harnblase (9%), Prostata (16%), Gehirn (4%)
-        - MSH6(female): Dickdarm (20%), Endometrium (41%), Eierstock (11%), Magen/Dünndarm (2%), Ureter/Niere (6%), Harnblase (1%), Gehirn (1%), Brust (11%)
-        - MSH6(male): Dickdarm (12%), Magen/Dünndarm (4%), Ureter/Niere (2%), Harnblase (4%), Prostata (5%), Gehirn (2%)
-        - PMS2(cave male/female): Dickdarm (3%), Endometrium (13%), Eierstock (3%), Magen/Dünndarm (4%), Prostata (5%), Brust (8%)
-        - EPCAM(cave male/female): Dickdarm (75%), Endometrium (12%)
-(Idos et Valle, GeneReviews 2021, PMID: 20301390)
+        beurteilung_default_text="""Bei Ihnen wurde die o.g. pathogene XX-Variante und somit ein XX-assoziiertes Lynch-Syndrom molekulargenetisch nachgewiesen. Damit ist bei Ihnen das Lebenszeitrisiko für folgende Tumorerkrankungen erhöht:<br>
+        - MLH1 (female): Dickdarm (44%), Endometrium (35%), Eierstock (11%), Magen/Dünndarm (8%), Ureter/Niere (3%), Harnblase (3%), Gehirn (2%), Brust (11%)<br>
+        - MLH1 (male): Dickdarm (53%), Magen/Dünndarm (16%), Ureter/Niere (4%), Harnblase (5%), Prostata (7%), Gehirn (1%)<br>
+        - MSH2(female): Dickdarm (42%), Endometrium (46%), Eierstock (17%), Magen/Dünndarm (10%), Ureter/Niere (13%), Harnblase (7%), Gehirn (2%), Brust (13%)<br>
+        - MSH2(male): Dickdarm (46%),  Magen/Dünndarm (16%), Ureter/Niere (16%), Harnblase (9%), Prostata (16%), Gehirn (4%)<br>
+        - MSH6(female): Dickdarm (20%), Endometrium (41%), Eierstock (11%), Magen/Dünndarm (2%), Ureter/Niere (6%), Harnblase (1%), Gehirn (1%), Brust (11%)<br>
+        - MSH6(male): Dickdarm (12%), Magen/Dünndarm (4%), Ureter/Niere (2%), Harnblase (4%), Prostata (5%), Gehirn (2%)<br>
+        - PMS2(cave male/female): Dickdarm (3%), Endometrium (13%), Eierstock (3%), Magen/Dünndarm (4%), Prostata (5%), Brust (8%)<br>
+        - EPCAM(cave male/female): Dickdarm (75%), Endometrium (12%)<br>
+(Idos <i>et</i> Valle, GeneReviews 2021, PMID: 20301390)<br>
 Für Kinder von Ihnen besteht eine 50%ige Wahrscheinlichkeit die o.g. Variante im XX-Gen ebenfalls zu erben und ein XX-assoziiertes Lynch-Syndrom auszubilden."""
         beurteilung=st.text_area("Beurteilung", beurteilung_default_text) # to be able to adapt according to gene
     elif result_2=="VUS" and analysis_2=="Cancer Panel" and disease_2=="HNPCC":
-        beurteilung="""Bei Ihnen wurde die o.g. Variante unklarer Signifikanz (VUS) im XX-Gen nachgewiesen (Befund vom XX). Bei einer VUS kann zum aktuellen Zeitpunkt nicht endgültig entschieden werden, ob es sich um eine benigne/ neutrale bzw. krankheitsverursachende genetische Veränderung handelt. Aufgrund o.g. Variante unklarer Signifikanz im XX-Gen ist das Vorliegen eines XX-assoziierten Lynch-Syndroms bei Ihnen möglich. Aufgrund der noch ungeklärten Ursache der Symptomatik bei Ihnen können wir keine sicheren Aussagen bezüglich des weiteren Verlaufs der Symptomatik bzw. im Hinblick auf ein mögliches Wiederholungsrisiko in der Familie treffen."""        
+        beurteilung="""Bei Ihnen wurde die o.g. Variante unklarer Signifikanz (VUS) im XX-Gen nachgewiesen (Befund vom XX). Bei einer VUS kann zum aktuellen Zeitpunkt nicht endgültig entschieden werden, ob es sich um eine benigne/ neutrale bzw. krankheitsverursachende genetische Veränderung handelt. Aufgrund o.g. Variante unklarer Signifikanz im XX-Gen ist das Vorliegen eines XX-assoziierten Lynch-Syndroms bei Ihnen möglich.<br> Aufgrund der noch ungeklärten Ursache der Symptomatik bei Ihnen können wir keine sicheren Aussagen bezüglich des weiteren Verlaufs der Symptomatik bzw. im Hinblick auf ein mögliches Wiederholungsrisiko in der Familie treffen."""        
     elif result_2=="unauffällig" and analysis_2=="Repeat Expansion" and disease_2=="HTT":
         beurteilung="""Bei Ihnen konnte die familiär bekannte Repeatexpansion im <i>HTT</i>-Gen nicht nachgewiesen werden. Eine Huntington-Erkrankung auf Grundlage dieser Variante konnte somit ausgeschlossen werden. 
 Weiteres Informationsmaterial von der Deutschen-Huntington-Hilfe e.V. finden Sie unter: https://www.dhh-ev.de/)"""
@@ -514,27 +513,33 @@ Wir empfehlen eine Wiedervorstellung in unserer genetischen Sprechstunde in zwei
 
          #Recommendations
     if result_2!="auffällig" and disease_2=="HNPCC":
-        recommendation ="""Wir empfehlen Ihnen im Anschluss an die Tumornachsorge eine Koloskopie alle drei bis fünf Jahre. Das Risiko eines Verwandten ersten Grades eines Patienten mit kolorektalem Karzinom, ebenfalls an einem kolorektalen Karzinom zu erkranken, ist auch ohne das Vorliegen eines erblichen Tumorsyndroms statistisch erhöht. Ihren Eltern als erstgradig Angehörige empfehlen wir gemäß S3-Leitlinie Kolorektales Karzinom ebenfalls eine Koloskopie, bestenfalls im Rahmen der Regelvorsorge für Darmkrebs.// Verwandte ersten Grades (Eltern, Kinder und Geschwister) von Patienten mit kolorektalem Karzinom sollten in einem Lebensalter, das 10 Jahre vor dem Alterszeitpunkt des Auftretens des Karzinoms beim Indexpatienten liegt, erstmals komplett koloskopiert werden (spätestens im Alter von 40–⁠45 Jahren, S3-Leitlinie Kolorektales Karzinom).
+        recommendation ="""Wir empfehlen Ihnen im Anschluss an die Tumornachsorge eine Koloskopie alle drei bis fünf Jahre. Das Risiko eines Verwandten ersten Grades eines Patienten mit kolorektalem Karzinom, ebenfalls an einem kolorektalen Karzinom zu erkranken, ist auch ohne das Vorliegen eines erblichen Tumorsyndroms statistisch erhöht. Ihren Eltern als erstgradig Angehörige empfehlen wir gemäß S3-Leitlinie Kolorektales Karzinom ebenfalls eine Koloskopie, bestenfalls im Rahmen der Regelvorsorge für Darmkrebs.<br>
+        // Verwandte ersten Grades (Eltern, Kinder und Geschwister) von Patienten mit kolorektalem Karzinom sollten in einem Lebensalter, das 10 Jahre vor dem Alterszeitpunkt des Auftretens des Karzinoms beim Indexpatienten liegt, erstmals komplett koloskopiert werden (spätestens im Alter von 40–⁠45 Jahren, S3-Leitlinie Kolorektales Karzinom).
 Sollten im Verlauf Sie oder weitere Familienmitglieder an weiteren Krebserkrankungen erkranken, empfehlen wir eine Wiedervorstellung in unserer genetischen Sprechstunde zur Re-Evaluation und ggf. Einleitung einer weiterführenden genetischen Diagnostik."""
     elif result_2=="auffällig" and disease_2=="HNPCC":
-        recommendation="""Nach der aktuellen Leitlinie empfehlen wir Ihnen auf Grundlage des molekulargenetisch nachgewiesenen Lynch-Syndroms folgende Vorsorgeuntersuchungen bezüglich des Risikos für ein kolorektales Karzinom, ein Magenkarzinom und ein Endometriumkarzinom (S3-Leitlinie Kolorektales Karzinom. 2019):
-- Jährliche Koloskopie ab dem 25. Lebensjahr
-- Regelmäßige Ösophagogastroduodenoskopie ab dem 35. Lebensjahr
-- Jährlicher vaginaler Ultraschall ab dem 25. Lebensjahr
-- Jährliche Endometriumbiopsie mit Pipelle-Methode ab dem 35. Lebensjahr
-- Es besteht die Möglichkeit einer prophylaktischen Hyster- und Ovarektomie bei abgeschlossener Familienplanung ab dem 40. Lebensjahr (oder fünf Jahre vor dem frühesten Erkrankungsalter)
-Das Risiko für die weiteren assoziierten Tumorerkrankungen ist im Vergleich zur Allgemeinbevölkerung geringer erhöht. Aus diesem Grund empfehlen wir Ihnen die Teilnahme an den allgemeinen gültigen Früherkennungsmaßnahmen der Regelversorgung.
+        recommendation="""Nach der aktuellen Leitlinie empfehlen wir Ihnen auf Grundlage des molekulargenetisch nachgewiesenen Lynch-Syndroms folgende Vorsorgeuntersuchungen bezüglich des Risikos für ein kolorektales Karzinom, ein Magenkarzinom und ein Endometriumkarzinom (S3-Leitlinie Kolorektales Karzinom. 2019):<br>
+- Jährliche Koloskopie ab dem 25. Lebensjahr<br>
+- Regelmäßige Ösophagogastroduodenoskopie ab dem 35. Lebensjahr<br>
+- Jährlicher vaginaler Ultraschall ab dem 25. Lebensjahr<br>
+- Jährliche Endometriumbiopsie mit Pipelle-Methode ab dem 35. Lebensjahr<br>
+- Es besteht die Möglichkeit einer prophylaktischen Hyster- und Ovarektomie bei abgeschlossener Familienplanung ab dem 40. Lebensjahr (oder fünf Jahre vor dem frühesten Erkrankungsalter)<br>
+Das Risiko für die weiteren assoziierten Tumorerkrankungen ist im Vergleich zur Allgemeinbevölkerung geringer erhöht. Aus diesem Grund empfehlen wir Ihnen die Teilnahme an den allgemeinen gültigen Früherkennungsmaßnahmen der Regelversorgung.<br>
 Mit Nachweis der o.g. pathogenen Variante im XX-Gen besteht für Familienangehörige im Rahmen einer genetischen Beratung die Möglichkeit einer gezielten Diagnostik bezüglich der o.g. pathogenen Variante, dies gilt insbesondere für Ihre XX. Diese Untersuchung kann gern im Rahmen unserer genetischen Sprechstunde stattfinden. Eine Terminvereinbarung ist unter der o. g. Telefonnummer möglich."""
     elif result_2!="unauffällig" and disease_2=="SCA":
-        recommendation ="""Wir empfehlen unterstützende Maßnahmen, einschließlich adaptiver Hilfsmittel, Physiotherapie, Ergotherapie sowie das Vermeiden von Übergewicht; intensive Rehabilitation (koordinierte Physiotherapie) kann von Nutzen sein; Sprachtherapie und Kommunikationshilfen bei Dysarthrie; ein videobasiertes Schluckröntgen zur Identifizierung der Nahrungskonsistenz, die am wenigsten wahrscheinlich Aspiration auslöst, sowie Ernährungshilfsmittel bei wiederholter Aspiration; kalorische Unterstützung bei Gewichtsverlust; Vitaminzusätze nach Bedarf; Psychotherapie, neuropsychologische Rehabilitation und/oder standardmäßige psychiatrische Behandlungen bei kognitiven und psychiatrischen Erscheinungen; bei Bedarf Pharmakotherapie und/oder Überweisung zur Schmerztherapie.
-        Wir empfehlen eine neurologische Beurteilung auf das Fortschreiten der Ataxie und physiatrische, ergotherapeutische sowie physiotherapeutische Beurteilung hinsichtlich Mobilität und Selbsthilfefähigkeiten; bei jedem Besuch: Beurteilung des Zugangs zur Kommunikation, sprachlicher Bedarf, Aspirationsrisiko, Ernährungsbedarf, Stimmung, psychiatrische Erscheinungen, kognitive Funktion und familiäre Bedürfnisse.
-Substanzen/Umstände zu vermeiden: Alkohol, Medikamente, die bekanntermaßen Nervenschäden verursachen können (z. B. Isoniazid, hohe Dosen Vitamin B6) und Umstände, die zu körperlichem Schaden führen könnten, wie das Bedienen von Maschinen oder das Klettern in große Höhen."""
+        recommendation ="""Wir empfehlen die Anbindung an eine spezialisierte SCA-Sprechstunde. Nach Diagnosestellung werden Maßnahmen empfohlen (Opal <i>et</i> Ashizawa, GeneReviews. 2023): <br>
+        - unterstützende Maßnahmen, einschließlich adaptiver Hilfsmittel, Physiotherapie, Ergotherapie sowie das Vermeiden von Übergewicht;<br>
+        - intensive Rehabilitation (koordinierte Physiotherapie) kann von Nutzen sein;<br>
+        - Sprachtherapie und Kommunikationshilfen bei Dysarthrie;<br>
+        - ein videobasiertes Schluckröntgen zur Identifizierung der Nahrungskonsistenz, die am wenigsten wahrscheinlich Aspiration auslöst, sowie Ernährungshilfsmittel bei wiederholter Aspiration;<br>
+        - kalorische Unterstützung bei Gewichtsverlust, Vitaminzusätze nach Bedarf;<br>
+        - Psychotherapie, neuropsychologische Rehabilitation und/oder standardmäßige psychiatrische Behandlungen bei kognitiven und psychiatrischen Erscheinungen;
+        - bei Bedarf Pharmakotherapie und/oder Überweisung zur Schmerztherapie.<br>
+        Wir empfehlen eine neurologische Beurteilung auf das Fortschreiten der Ataxie und physiatrische, ergotherapeutische sowie physiotherapeutische Beurteilung hinsichtlich Mobilität und Selbsthilfefähigkeiten, kognitive Funktion.Weiterhin empfehlen wir kontinuierliche neurologische Betreeung.<br>
+        Substanzen/Umstände zu vermeiden: Alkohol, Medikamente, die bekanntermaßen Nervenschäden verursachen können (z. B. Isoniazid, hohe Dosen Vitamin B6) und Umstände, die zu körperlichem Schaden führen könnten, wie das Bedienen von Maschinen oder das Klettern in große Höhen."""
     elif result_2!="unauffällig" and disease_2=="HTT":
-        recommendation ="""Wir empfehlen Ihnen die weitere Betreuung durch unsere Kollegen des Fachbereichs Neurologie/Psychiatrie beziehungsweise eine Mitbetreuung an einem Huntington-Zentrum. Am Beratungstag händigten wir Ihnen eine Liste mit Huntington-Zentren und Kliniken sowie Kontaktdaten der Leipziger Selbsthilfegruppe aus.
-
-Weiterhin besteht die Möglichkeit der psychologischen Mitbetreuung durch unsere Kollegen aus dem Zentrum für psychische Gesundheit. Eine Terminvereinbarung für einen Beratungstermin ist unter der Telefonnummer XX möglich.
-
-Mit Nachweis der o.g. Repeatverlängerung im <i>HTT</i>-Gen besteht für Familienangehörige im Rahmen einer genetischen Beratung die Möglichkeit einer gezielten Diagnostik ⁠– dies gilt insbesondere für Ihre Geschwister und Ihre Kinder (ab Erreichen der Volljährigkeit). Diese Untersuchung kann gern im Rahmen unserer genetischen Sprechstunde stattfinden. Eine Terminvereinbarung ist unter der o. g. Telefonnummer möglich."""
+        recommendation ="""Wir empfehlen Ihnen die weitere Betreuung durch unsere Kollegen des Fachbereichs Neurologie/Psychiatrie beziehungsweise eine Mitbetreuung an einem Huntington-Zentrum. Am Beratungstag händigten wir Ihnen eine Liste mit Huntington-Zentren und Kliniken sowie Kontaktdaten der Leipziger Selbsthilfegruppe aus.<br>
+        Weiterhin besteht die Möglichkeit der psychologischen Mitbetreuung durch unsere Kollegen aus dem Zentrum für psychische Gesundheit. Eine Terminvereinbarung für einen Beratungstermin ist unter der Telefonnummer XX möglich.<br>
+        Mit Nachweis der o.g. Repeatverlängerung im <i>HTT</i>-Gen besteht für Familienangehörige im Rahmen einer genetischen Beratung die Möglichkeit einer gezielten Diagnostik ⁠– dies gilt insbesondere für Ihre Geschwister und Ihre Kinder (ab Erreichen der Volljährigkeit). Diese Untersuchung kann gern im Rahmen unserer genetischen Sprechstunde stattfinden. Eine Terminvereinbarung ist unter der o. g. Telefonnummer möglich."""
     elif result_2!="unauffällig" and disease_2=="Marfan":
         recommendation = """Wir empfehlen die Anbindung an eine spezialisierte Marfan-Sprechstunde bzw. ein sozialpädiatrisches Zentrum.<br>
         Nach Diagnosestellung werden folgende Untersuchungen empfohlen (Dietz, GeneReviews. 2022):<br>
@@ -556,25 +561,35 @@ Mit Nachweis der o.g. Repeatverlängerung im <i>HTT</i>-Gen besteht für Familie
         Bei Kinderwunsch kann Marie eine genetische Beratung hinsichtlich der Wiederholungswahrscheinlichkeit in Anspruch nehmen. Diese kann gern im Rahmen unserer Sprechstunde stattfinden. Eine Terminvereinbarung ist unter der o.g. Telefonnummer möglich.<br>
         Mit Nachweis der o.g. pathogenen Variante im <i>FBN1</i>-Gen besteht für leibliche Familienangehörige im Rahmen einer genetischen Beratung die Möglichkeit einer gezielten Diagnostik. Diese Untersuchung kann gern im Rahmen unserer genetischen Sprechstunde stattfinden. Eine Terminvereinbarung ist unter der o. g. Telefonnummer möglich."""
     elif result_2!="unauffällig" and disease_2=="EDS-klassisch-COL5A1":
-        recommendation = """Nach Diagnosestellung sollten folgende Untersuchungen erfolgen (Malfait <i>et al</i>, GeneReviews, 2018): 
-        - Dermatologische Vorstellung zur Beurteilung der Hyperextensibilität der Haut, atropher Narben und Blutergüsse sowie anderer dermatologischer cEDS-Manifestationen 
-        - Orthopädische Vorstellung zur Bewertung der Gelenkbeweglichkeit mit Hilfe des Beighton-Scores
-        - Kardiologische Vorstellung zur Durchführung eines Echokardiogramms mit Messung des Aortendurchmessers 
-        - Gerinnungsdignostik bei leichten Blutergüssen
-        Im Verlauf sollten folgende Untersuchungen erfolgen (Malfait <i>et al</i>, GeneReviews, 2018):
-        - Im Falle von echokardiographischen Auffälligkeiten Wiederholung des Echokardiogramms jährlich
-        Eine Verbesserung der Gelenkstabilität und damit Schutz vor Verletzungen kann durch Sportarten erreicht werden, die insbesondere den Muskeltonus unterstützen. Beispiele hierfür sind Gehen, Radfahren, Aerobic mit geringer Belastung, Schwimmen oder Wassergymnastik sowie einfache Bewegungsübungen ohne zusätzlichen Widerstand. Sportarten mit starker Gelenkbelastung (Kontaktsportarten, Kampfsportarten, Fußball, Laufen) sollten eher vermieden werden.   Wir empfehlen zudem eine physiotherapeutische Behandlung zur Verbesserung der Gelenkstabilität. 
+        recommendation = """Nach Diagnosestellung sollten folgende Untersuchungen erfolgen (Malfait <i>et al</i>, GeneReviews, 2018):<br> 
+        - Dermatologische Vorstellung zur Beurteilung der Hyperextensibilität der Haut, atropher Narben und Blutergüsse sowie anderer dermatologischer cEDS-Manifestationen<br>
+        - Orthopädische Vorstellung zur Bewertung der Gelenkbeweglichkeit mit Hilfe des Beighton-Scores<br>
+        - Kardiologische Vorstellung zur Durchführung eines Echokardiogramms mit Messung des Aortendurchmessers<br> 
+        - Gerinnungsdignostik bei leichten Blutergüssen<br>
+        Im Verlauf sollten folgende Untersuchungen erfolgen (Malfait <i>et al</i>, GeneReviews, 2018):<br>
+        - Im Falle von echokardiographischen Auffälligkeiten Wiederholung des Echokardiogramms jährlich<br>
+        Eine Verbesserung der Gelenkstabilität und damit Schutz vor Verletzungen kann durch Sportarten erreicht werden, die insbesondere den Muskeltonus unterstützen. Beispiele hierfür sind Gehen, Radfahren, Aerobic mit geringer Belastung, Schwimmen oder Wassergymnastik sowie einfache Bewegungsübungen ohne zusätzlichen Widerstand. Sportarten mit starker Gelenkbelastung (Kontaktsportarten, Kampfsportarten, Fußball, Laufen) sollten eher vermieden werden.   Wir empfehlen zudem eine physiotherapeutische Behandlung zur Verbesserung der Gelenkstabilität.<br>
         Bei Personen mit Muskelhypotonie und Gelenkinstabilität mit chronischen Schmerzen kann Verhaltens- und Psychotherapie dabei helfen, Akzeptanz und Bewältigungsstrategien zu entwickeln.
-        Wunden sollten spannungsfrei verschlossen werden, vorzugsweise in zwei Schichten. Tiefe Stiche sollten großzügig gesetzt werden. Hautnähte sollten doppelt so lange wie üblich belassen werden, und eine zusätzliche Fixierung der angrenzenden Haut kann helfen, eine Dehnung der Narbe zu verhindern.
-        Im Falle einer verlängerten Blutungszeit kann DDAVP (Deamino-Delta-D-Arginin-Vasopressin) z.B. bei Nasenbluten oder vor operativen Eingriffen eingesetzt werden. Die Einnahme von Acetylsalicylsäure (Aspirin) sollte vermieden werden. 
-        Mit Nachweis der o.g. wahrscheinlich pathogenen Variante im <i>COL5A1</i>-Gen besteht für Familienangehörige im Rahmen einer genetischen Beratung die Möglichkeit einer gezielten Diagnostik, dies gilt insbesondere für Ihre Schwester XX. Eine Terminvereinbarung ist unter der o.g. Telefonnummer möglich. Eine gezielte Diagnostik auf die o.g. Variante im <i>COL5A1</i>-Gen bei Ihren Eltern haben mit ihrem Einverständnis bereits eingeleitet. Sobald die Befunde der eingeleiteten Diagnostik vorliegen, werden wir Sie kontaktieren und weiterführend Stellung nehmen.
+        Wunden sollten spannungsfrei verschlossen werden, vorzugsweise in zwei Schichten. Tiefe Stiche sollten großzügig gesetzt werden. Hautnähte sollten doppelt so lange wie üblich belassen werden, und eine zusätzliche Fixierung der angrenzenden Haut kann helfen, eine Dehnung der Narbe zu verhindern.<br>
+        Im Falle einer verlängerten Blutungszeit kann DDAVP (Deamino-Delta-D-Arginin-Vasopressin) z.B. bei Nasenbluten oder vor operativen Eingriffen eingesetzt werden. Die Einnahme von Acetylsalicylsäure (Aspirin) sollte vermieden werden.<br>
+        Mit Nachweis der o.g. wahrscheinlich pathogenen Variante im <i>COL5A1</i>-Gen besteht für Familienangehörige im Rahmen einer genetischen Beratung die Möglichkeit einer gezielten Diagnostik, dies gilt insbesondere für Ihre Schwester XX. Eine Terminvereinbarung ist unter der o.g. Telefonnummer möglich. Eine gezielte Diagnostik auf die o.g. Variante im <i>COL5A1</i>-Gen bei Ihren Eltern haben mit ihrem Einverständnis bereits eingeleitet. Sobald die Befunde der eingeleiteten Diagnostik vorliegen, werden wir Sie kontaktieren und weiterführend Stellung nehmen.<br>
         Viele Ratsuchende profitieren von Angeboten verschiedener Selbsthilfegruppen. Hier können Betroffene und Eltern von Kindern mit seltenen Erkrankungen Informationen erhalten, weitergeben und eine psychosoziale Betreuung in Anspruch nehmen. Selbsthilfegruppen für Angehörige und Patient\:Innen mit Ehlers-Danlos-Syndrom sind beispielsweise unter folgenden Adressen erreichbar: https://www.ehlers-danlos-initiative.de/ oder https://www.bundesverband-eds.de/de/."""
     elif result_2!="unauffällig" and disease=="unspezifisch":
         recommendation_default_text="""- Nach Diagnosestellung sollten folgende Untersuchungen erfolgen
         - Mit Nachweis der o.g. wahrscheinlich pathogenen Variante im XX-Gen besteht für Familienangehörige im Rahmen einer genetischen Beratung die Möglichkeit einer gezielten Diagnostik, dies gilt insbesondere für Ihre Schwester XX. Eine Terminvereinbarung ist unter der o.g. Telefonnummer möglich. Eine gezielte Diagnostik auf die o.g. Variante im XX-Gen bei Ihren Eltern haben mit ihrem Einverständnis bereits eingeleitet. Sobald die Befunde der eingeleiteten Diagnostik vorliegen, werden wir Sie kontaktieren und weiterführend Stellung nehmen.
         Viele Ratsuchende profitieren von Angeboten verschiedener Selbsthilfegruppen. Hier können Betroffene und Eltern von Kindern mit seltenen Erkrankungen Informationen erhalten, weitergeben und eine psychosoziale Betreuung in Anspruch nehmen. Selbsthilfegruppen für Angehörige und Patient:innen mit XX sind beispielsweise unter folgenden Adressen erreichbar:XX."""
         recommendation=st.text_area("Empfehlungen", recommendation_default_text)
-        
+
+    #Final lines
+    last_line_2="""Wir hoffen, Sie mit unserem Gespräch und diesem Brief vorerst ausreichend informiert zu haben. Bei Rückfragen stehen wir gerne auch telefonisch zur Verfügung.<br><br>Mit freundlichen Grüßen,<br><br>"""
+
+    #Signatures
+    if Arzt1_2 =="Diana Le Duc":
+        signature="""PD Dr. D Le Duc, MD/PhD<br><small>FÄ für Humangenetik</small>"""
+
+    #Anhang
+    anhang_2="""<small>Befund vom XX</small>"""
+    
         
 
     
@@ -589,12 +604,9 @@ Mit Nachweis der o.g. Repeatverlängerung im <i>HTT</i>-Gen besteht für Familie
             st.markdown(diagnostic, unsafe_allow_html=True)
             st.markdown("<div class='custom-paragraph'><b>Beurteilung und Empfehlungen</b></div>",  unsafe_allow_html=True)
             st.markdown(beurteilung, unsafe_allow_html=True)
-            #st.markdown("<div class='custom-paragraph'><b>Körperliche Untersuchung:</b></div>",  unsafe_allow_html=True)
-            #st.markdown(body, unsafe_allow_html=True)
-            #st.markdown("<div class='custom-paragraph'><b>Beurteilung und Procedere:</b></div>",  unsafe_allow_html=True)
-            #st.markdown(beurteilung, unsafe_allow_html=True)
-            #st.markdown(last_line, unsafe_allow_html=True)
-            #st.markdown(signature, unsafe_allow_html=True)
+            st.markdown(last_line_2, unsafe_allow_html=True)
+            st.markdown(signature, unsafe_allow_html=True)
+            st.markdown(anhang_2, unsafe_allow_html=True)
         elif council_2 == "Befundbesprechung" and result_2=="unauffällig" and disease_2=="HNPCC":
             st.markdown(beratung_line_2, unsafe_allow_html=True)
             st.markdown(ergebnis, unsafe_allow_html=True)
@@ -606,12 +618,9 @@ Mit Nachweis der o.g. Repeatverlängerung im <i>HTT</i>-Gen besteht für Familie
             st.markdown(diagnostic, unsafe_allow_html=True)
             st.markdown("<div class='custom-paragraph'><b>Beurteilung und Empfehlungen</b></div>",  unsafe_allow_html=True)
             st.markdown(beurteilung, unsafe_allow_html=True)
-            #st.markdown("<div class='custom-paragraph'><b>Körperliche Untersuchung:</b></div>",  unsafe_allow_html=True)
-            #st.markdown(body, unsafe_allow_html=True)
-            #st.markdown("<div class='custom-paragraph'><b>Beurteilung und Procedere:</b></div>",  unsafe_allow_html=True)
-            #st.markdown(beurteilung, unsafe_allow_html=True)
-            #st.markdown(last_line, unsafe_allow_html=True)
-            #st.markdown(signature, unsafe_allow_html=True)
+            st.markdown(last_line_2, unsafe_allow_html=True)
+            st.markdown(signature, unsafe_allow_html=True)
+            st.markdown(anhang_2, unsafe_allow_html=True)
         elif council_2 == "Befundbesprechung" and result_2!="unauffällig" and disease_2!="HNPCC":
             st.markdown(beratung_line_2, unsafe_allow_html=True)
             st.markdown(ergebnis, unsafe_allow_html=True)
@@ -625,8 +634,9 @@ Mit Nachweis der o.g. Repeatverlängerung im <i>HTT</i>-Gen besteht für Familie
             st.markdown(beurteilung, unsafe_allow_html=True)
             st.markdown("<div class='custom-paragraph'><b>Empfehlung</b></div>",  unsafe_allow_html=True)
             st.markdown(recommendation, unsafe_allow_html=True)
-            #st.markdown(last_line, unsafe_allow_html=True)
-            #st.markdown(signature, unsafe_allow_html=True)
+            st.markdown(last_line_2, unsafe_allow_html=True)
+            st.markdown(signature, unsafe_allow_html=True)
+            st.markdown(anhang_2, unsafe_allow_html=True)
         elif council_2 == "Befundbesprechung" and result_2!="unauffällig" and disease_2=="HNPCC":
             st.markdown(beratung_line_2, unsafe_allow_html=True)
             st.markdown(ergebnis, unsafe_allow_html=True)
@@ -640,12 +650,9 @@ Mit Nachweis der o.g. Repeatverlängerung im <i>HTT</i>-Gen besteht für Familie
             st.markdown(beurteilung, unsafe_allow_html=True)
             st.markdown("<div class='custom-paragraph'><b>Empfehlung</b></div>",  unsafe_allow_html=True)
             st.markdown(recommendation, unsafe_allow_html=True)
-            #st.markdown("<div class='custom-paragraph'><b>Beurteilung und Procedere:</b></div>",  unsafe_allow_html=True)
-            #st.markdown(beurteilung, unsafe_allow_html=True)
-            #st.markdown(last_line, unsafe_allow_html=True)
-            #st.markdown(signature, unsafe_allow_html=True)
-    
-    
+            st.markdown(last_line_2, unsafe_allow_html=True)
+            st.markdown(signature, unsafe_allow_html=True)
+            st.markdown(anhang_2, unsafe_allow_html=True)
         
     
     
