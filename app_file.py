@@ -53,9 +53,8 @@ with tab1:
     person = col2.selectbox("Patiententyp", ["Kind", "Erwachsen"])
     disease = col3.selectbox("Krankheitsbild", ["NDD +/- Epilepsie", "unspezifisch", "HNPCC", "SCA", "HTT", "Marfan/EDS", "Geschlechtsinkongruenz"])
     if person=="Kind": # we need this to adapt how we address it in the letter
-        col1, col2= st.columns(2)
         child= col2.selectbox("Kind", ["Tochter", "Sohn"])
-        Name_child = col3.text_input("Vorname", key="Name_child")
+        Name_child = col2.text_input("Vorname", key="Name_child")
     
     #######################
     # Add anamnesis button#
