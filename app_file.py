@@ -50,8 +50,7 @@ with tab1:
     ######################################################
     #st.markdown("### Art der Beratung und Analyse")
     col1, col2, col3= st.columns(3)
-    council = col1.selectbox("Art der Beratung", ["Erstberatung", "Befundbesprechung"])
-    default_tab = 1 if council == "Befundbesprechung" else 0
+    council = col1.selectbox("Art der Beratung", ["Erstberatung"])
     person = col2.selectbox("Patiententyp", ["Kind", "Erwachsen"])
     disease = col3.selectbox("Krankheitsbild", ["NDD +/- Epilepsie", "unspezifisch", "HNPCC", "SCA", "HTT", "Marfan/EDS", "Geschlechtsinkongruenz"])
     if person=="Kind": # we need this to adapt how we address it in the letter
