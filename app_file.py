@@ -659,6 +659,9 @@ with tab2:
                 diagnostic="""Die durchgeführte konventionelle Chromosomenanalyse ergab einen strukturell und numerisch unauffälligen männlichen Karyotyp (Befund vom XX)."""
             elif Titel_2=="Frau":
                 diagnostic="""Die durchgeführte konventionelle Chromosomenanalyse ergab einen strukturell und numerisch unauffälligen weiblichen Karyotyp (Befund vom XX)."""
+             elif Titel_2=="Familie":
+                diagnostic="""Die durchgeführte konventionelle Chromosomenanalyse ergab einen strukturell und numerisch unauffälligen weiblichen/männlichen Karyotyp (Befund vom XX)."""
+            
         if person_2=="Kind":
             if child_2=="Sohn":
                 diagnostic="""Die durchgeführte konventionelle Chromosomenanalyse ergab einen strukturell und numerisch unauffälligen männlichen Karyotyp (Befund vom XX)."""
