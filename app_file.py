@@ -19,9 +19,9 @@ st.markdown(custom_css, unsafe_allow_html=True)
 tab1, tab2, tab3, tab4= st.tabs(["EBM_Erstberatung", "EBM_Befundbesprechung", "FBrEK", "Krankheitsbild Textbausteine"])
 
 with tab1:
-    #######################
-    # Create the first tab#
-    #######################
+    ########################################
+    # Create the first tab for Erstberatung#
+    ########################################
     
     st.markdown("<h1 style='font-size: 30px;'>Erstberatungsbrief</h1>", unsafe_allow_html=True)
 
@@ -402,51 +402,131 @@ with tab1:
             st.markdown(signature, unsafe_allow_html=True)
             st.markdown(anhang, unsafe_allow_html=True)
 
+######################################################################################################################################################
+
 with tab2:
-    # Create the second tab
+    
+    ##########################################
+    # Create second tab for Befundbesprechung#
+    ##########################################
     st.markdown("<h1 style='font-size: 30px;'>Befundbesprechungsbrief</h1>", unsafe_allow_html=True)
         
-    # Get the current date and time
+    # Get the current date and time#
+    ################################
     current_datetime = datetime.now()
         
-    #Get patient data
+    #Get patient data#
+    ##################
     # Create a selectbox to choose an option for the gender
     st.markdown("### Patienten Daten")
     col1, col2, col3= st.columns(3)
-    Titel_2 = col1.selectbox("Titel", ["Frau", "Herr", "Familie"], key="Titel_2")
-        
+    Titel_2 = col1.selectbox("Titel", ["Frau", "Herr", "Familie"], key="Titel_2")     
     Vorname_2 = col2.text_input("Vorname",key="Vorname_2")
     Name_2 = col3.text_input("Name", key="Name_2")
         
     #st.markdown("### Fragestellung")
     question_2 = st.text_input("Fragestellung", key="question_2")
     
-    # Add a selectbox for choosing the type of counciling
+    #Add a selectbox for choosing the type of counciling
     #st.markdown("### Art der Beratung und Analyse")
     col1, col2, col3= st.columns(3)
     council_2 = col1.selectbox("Art der Beratung", ["Befundbesprechung"], key="council_2")
     person_2 = col2.selectbox("Patiententyp", ["Kind", "Erwachsen"], key="person_2")
     disease_2 = col3.selectbox("Krankheitsbild", ["NDD +/- Epilepsie", "unspezifisch", "HNPCC", "SCA", "HTT", "Marfan", "EDS-klassisch-COL5A1", "Geschlechtsinkongruenz"], key="disease_2")
+    if person_2=="Kind":
+        child_2=col2.selectbox("Kind", ["Tochter", "Sohn"], key="child_2")
+        Name_child_2=col2.text_input("Vorname",key="Name_child_2")
 
-    analysis_2 = st.selectbox("Art der genetischen Testung", ["Exom", "Exom+CNV+CA", "Trio", "gezielt", "Cancer Panel", "Repeat Expansion", "CA", "keine"], key="analysis_2")
-    result_2 = st.selectbox ("Ergebnis",  ["unauffällig", "VUS", "auffällig"])
-    if result_2=="unauffällig" and analysis_2!="gezielt" and disease_2!="Geschlechtsinkongruenz":
+    
+    #Add a selectbox for choosing the type of analysis and result#
+    ###############################################################
+    if disease_2=="NDD +/- Epilepsie":
+        analysis_2 = st.selectbox("Art der genetischen Testung", ["Exom", "Exom+CNV+CA", "Trio", "gezielt"], key="analysis_2")
+    elif disease_2=="unspezifisch":
+        analysis_2 = st.selectbox("Art der genetischen Testung", ["Exom", "Exom+CNV+CA", "Trio", "gezielt", "Cancer Panel", "Repeat Expansion", "CA"], key="analysis_2")
+    elif disease_2=="HNPCC":
+        analysis_2 = st.selectbox("Art der genetischen Testung", ["gezielt", "Cancer Panel"], key="analysis_2")
+    elif disease_2=="SCA":
+        analysis_2 = st.selectbox("Art der genetischen Testung", ["gezielt", "Repeat Expansion"], key="analysis_2")
+    elif disease_2=="HTT":
+        analysis_2 = st.selectbox("Art der genetischen Testung", ["gezielt", "Repeat Expansion"], key="analysis_2")
+    elif disease_2=="Marfan":
+        analysis_2 = st.selectbox("Art der genetischen Testung", ["Exom", "gezielt"], key="analysis_2")
+    elif disease_2=="EDS-klassisch-COL5A1":
+        analysis_2 = st.selectbox("Art der genetischen Testung", ["Exom", "gezielt"], key="analysis_2")
+    elif disease_2=="Geschlechtsinkongruenz":
+        analysis_2 = st.selectbox("Art der genetischen Testung", ["CA"], key="analysis_2")    
+    
+    #Add a type of result depending on analysis#
+    ############################################
+    if analysis_2 == "Exom":
+        result_2 = st.selectbox ("Ergebnis",  ["unauffällig", "VUS", "auffällig"])
+    elif analysis_2 == "Exom+CNV+CA":
+        result_2 = st.selectbox ("Ergebnis",  ["unauffällig", "VUS", "auffällig"])
+    elif analysis_2 == "Trio":
+        result_2 = st.selectbox ("Ergebnis",  ["unauffällig", "VUS", "auffällig"])
+    elif analysis_2 == "gezielt":
+        result_2 = st.selectbox ("Ergebnis",  ["unauffällig", "auffällig"])
+    elif analysis_2 == "Cancer Panel":
+        result_2 = st.selectbox ("Ergebnis",  ["unauffällig", "VUS", "auffällig"])
+    elif analysis_2 == "Repeat Expansion":
+        result_2 = st.selectbox ("Ergebnis",  ["unauffällig", "auffällig"])
+    elif analysis_2 == "CA":
+        result_2 = st.selectbox ("Ergebnis",  ["unauffällig", "auffällig"])
+    
+    #Add the result in free text
+
+    #Case 1 unauff. for all except gezielt and CA#
+    ##############################################
+    if result_2=="unauffällig" and analysis_2!="gezielt" and analysis_2!="CA" :
         result_default_text = """Kein Nachweis einer klinisch relevanten Variante in der molekulargenetischen Diagnostik"""
         result_text=st.text_area("Ergebnis der genetischen Diagnostik", result_default_text)
-    elif result_2=="VUS" and analysis_2!="gezielt":
-        result_default_text = """Nachweis einer Variante unklarer Signifikanz c.XX, p.(XX) im XX-Gen"""
-        result_text=st.text_area("Ergebnis der genetischen Diagnostik", result_default_text)
-    elif result_2=="auffällig" and analysis_2!="gezielt":
-        result_default_text = """Diagnose: …, molekulargenetisch nachgewiesen"""
-        result_text=st.text_area("Ergebnis der genetischen Diagnostik", result_default_text)
+
+    #Case 2 unauff. for gezielt#
+    ############################
     elif result_2=="unauffällig" and analysis_2=="gezielt":
         result_default_text = """Ausschluss der familiär bekannten Variante im XX-Gen/ Kein Nachweis einer klinisch relevanten Variante im XX-Gen"""
         result_text=st.text_area("Ergebnis der genetischen Diagnostik", result_default_text)
-    elif result_2=="auffällig" and analysis_2=="gezielt":
-        result_default_text = """Nachweis der familiär bekannten Variante …. im …..-Gen/Heterozygoter Nachweis der familiär bekannten Variante c.XX,p.(XX) im XX-Gen"""
+
+    #Case 3 unauff. for CA#
+    #######################
+    elif result_2=="unauffällig" and analysis_2=="CA":
+        if disease == "Geschlechtsinkongruenz":
+            result_default_text = """Genetisches Geschlecht: weiblich/ männlich"""
+            result_text=st.text_area("Ergebnis der genetischen Diagnostik", result_default_text)
+        elif disease == "unspezifisch":
+            if Titel_2=="Frau":
+                result_default_text="""Strukturell und numerisch unauffälliger weiblicher Karyotyp"""
+                result_text=st.text_area("Ergebnis der genetischen Diagnostik", result_default_text)
+            elif Titel_2=="Mann":
+                result_default_text="""Strukturell und numerisch unauffälliger männlicher Karyotyp"""
+                result_text=st.text_area("Ergebnis der genetischen Diagnostik", result_default_text)
+            elif Titel_2=="Familie":
+                result_default_text="""Strukturell und numerisch unauffällige Karyotypen"""
+                result_text=st.text_area("Ergebnis der genetischen Diagnostik", result_default_text)
+                
+    #Case 4 VUS for Exome and Panel#
+    ################################
+    elif result_2=="VUS":
+        result_default_text = """Nachweis einer Variante unklarer Signifikanz c.XX, p.(XX) im XX-Gen"""
         result_text=st.text_area("Ergebnis der genetischen Diagnostik", result_default_text)
-    elif result_2=="unauffällig" and analysis_2=="CA" and disease_2=="Geschlechtsinkongruenz":
-        result_default_text = """Genetisches Geschlecht: weiblich/ männlich"""
+
+    #Case 5 auff. for Exome and Panel, and Repeat#
+    ##############################################
+    elif result_2=="auffällig" and analysis_2!="gezielt" and analysis !="CA":
+        result_default_text = """Diagnose: XX, molekulargenetisch nachgewiesen"""
+        result_text=st.text_area("Ergebnis der genetischen Diagnostik", result_default_text)
+    
+    #Case 6 auff. for gezielt#
+    ##########################
+    elif result_2=="auffällig" and analysis_2=="gezielt":
+        result_default_text = """Nachweis der familiär bekannten Variante c.XX, p.(XX) im XX-Gen/Heterozygoter Nachweis der familiär bekannten Variante c.XX,p.(XX) im XX-Gen"""
+        result_text=st.text_area("Ergebnis der genetischen Diagnostik", result_default_text)
+
+    #Case 7 auff. for CA#
+    #####################
+    elif result_2=="auffällig" and analysis_2=="CA":
+        result_default_text ="""Diagnose: Eine Trisomie XX/ Translokation XX, zytogenetisch nachgewiesen"""
         result_text=st.text_area("Ergebnis der genetischen Diagnostik", result_default_text)
 
      #Add Signature boxes
@@ -455,71 +535,170 @@ with tab2:
     Arzt1_2 = col1.selectbox("Arzt 1", ["Diana Le Duc", "Albrecht Kobelt"], key="Arzt1_2")
     Arzt2_2 = col2.selectbox("Arzt 2", ["Diana Le Duc", "Albrecht Kobelt"],  key="Arzt2_2")
 
-    # Letter Structure for all types of letters
+    ###########################################
+    #Letter Structure for all types of letters#
+    ###########################################
     
-    #Beratungsgrund
+    #Beratungsgrund#
+    ################
     if analysis_2 != "gezielt":
         beratung_line_2 = f"**Beratungsgrund:** V.a. genetisch bedingte {question_2}"
     elif analysis_2 == "gezielt":
         beratung_line_2 = f"**Beratungsgrund:** Eine (wahrscheinlich) pathogene Variante c.XX, p.XX im XX-Gen in der Familienanamnese"
 
-    #Ergebnis
+    #Ergebnis#
+    ##########
     ergebnis=f"**Ergebnis:** {result_text}"
     
-    #Begrüßung
+    #Begrüßung#
+    ###########
     if Titel_2== "Herr":
         hello_line_2 = f"Sehr geehrter {Titel} {Name},"
     elif Titel_2 != "Herr":
         hello_line_2 = f"Sehr geehrte {Titel} {Name},"
     
-    #Date of Beratung
-    if result_2=="unauffällig":
-        first_line_2="""wir berichten vom Ergebnis der bei Ihnen/bei Ihrem Sohn/bei Ihrer Tochter durchgeführten genetischen Diagnostik. Zur Vorgeschichte verweisen wir auf unseren Brief vom XX."""
-    elif result_2!="unauffällig": 
-        first_line_2=f"am {current_datetime.strftime('%d.%m.%Y')} stellten Sie sich/Ihren Sohn/Ihre Tochter in unserer genetischen Sprechstunde vor. Zur Vorgeschichte verweisen wir auf unseren Brief vom XX."
+    #Date of Beratung#
+    ##################
 
-    #Genetic diagnostic
-    if result_2=="unauffällig" and person_2=="Kind" and analysis_2=="Exom+CNV+CA":
-        diagnostic="""Die anhand einer Blutprobe von Ihrer Tochter/Ihrem Sohn durchgeführte konventionelle Chromosomenanalyse ergab einen strukturell und numerisch unauffälligen männlichen/weiblichen Karyotyp (Befund vom XX). Zur weiteren Abklärung des Verdachts auf eine genetisch bedingte Entwicklungsstörung führten wir bei Ihrer Tochter/Ihrem Sohn die molekulargenetische Diagnostik im FMR1-Gen bezüglich eines Fragilen-X-Syndroms durch. Diese ergab einen unauffälligen Befund (Befund vom XX). Auch die molekulargenetische Karyotypisierung mittels genomweiter CNV-Analyse ergab keinen Nachweis von klinisch relevanten Kopienzahlvarianten (Befund vom XX). Weiterhin führten wir eine molekulargenetische Exomdiagnostik bezüglich Veränderungen in den für ihre/seine Auffälligkeiten ursächlichen Genen durch. Diese ergab keinen Nachweis einer klinisch relevanten Variante (Befund vom XX)."""
-    elif result_2=="unauffällig" and person_2=="Kind" and analysis_2=="Trio":
-        diagnostic="""Zur Abklärung des Verdachts auf eine genetisch bedingte Entwicklungsstörung bei Ihrem Sohn/Ihrer Tochter veranlassten wir eine Trio-Exom-Analyse auf Forschungsbasis. Hierbei ergab sich ein unauffälliger Befund (Befund vom XX, Institut für Humangenetik am Universitätsklinikum Leipzig)."""
+    #Case 1 unauff no meeting#
+    ##########################
+    if result_2=="unauffällig":
+        if person_2=="Kind":
+            if child_2=="Sohn":
+                first_line_2=f"wir berichten vom Ergebnis der bei Ihrem Sohn, {Name_child_2}, durchgeführten genetischen Diagnostik. Zur Vorgeschichte verweisen wir auf unseren Brief vom XX."""
+            elif child_2=="Tochter":
+                first_line_2=f"wir berichten vom Ergebnis der bei Ihrer Tochter, {Name_child_2}, durchgeführten genetischen Diagnostik. Zur Vorgeschichte verweisen wir auf unseren Brief vom XX."""
+        elif person_2=="Erwachsen":
+            first_line_2=f"wir berichten vom Ergebnis der bei Ihnen durchgeführten genetischen Diagnostik. Zur Vorgeschichte verweisen wir auf unseren Brief vom XX."""
+    
+    #Case 2 auff meeting#
+    #####################    
+    elif result_2!="unauffällig":
+        if person_2=="Kind":
+            if child_2=="Sohn":
+                first_line_2=f"am {current_datetime.strftime('%d.%m.%Y')} stellten Sie Ihren Sohn, {Name_child_2}, in unserer genetischen Sprechstunde vor. Zur Vorgeschichte verweisen wir auf unseren Brief vom XX."
+            elif child_2=="Tochter":
+                first_line_2=f"am {current_datetime.strftime('%d.%m.%Y')} stellten Sie Ihre Tochter, {Name_child_2}, in unserer genetischen Sprechstunde vor. Zur Vorgeschichte verweisen wir auf unseren Brief vom XX."
+        elif person_2=="Erwachsen":
+            first_line_2=f"am {current_datetime.strftime('%d.%m.%Y')} stellten Sie sich in unserer genetischen Sprechstunde vor. Zur Vorgeschichte verweisen wir auf unseren Brief vom XX."
+
+    #Genetic diagnostic#
+    ####################
+
+    #Case 1 unauff, Exom+CNV+CA#
+    ############################
+    if result_2=="unauffällig" and analysis_2=="Exom+CNV+CA":
+        if person_2=="Kind":
+            if child_2=="Sohn":
+                diagnostic="""Die anhand einer Blutprobe von Ihrem Sohn durchgeführte konventionelle Chromosomenanalyse ergab einen strukturell und numerisch unauffälligen männlichen Karyotyp (Befund vom XX). Zur weiteren Abklärung des Verdachts auf eine genetisch bedingte Entwicklungsstörung führten wir bei Ihrem Sohn die molekulargenetische Diagnostik im <i>FMR1</i>-Gen bezüglich eines Fragilen-X-Syndroms durch. Diese ergab einen unauffälligen Befund (Befund vom XX). Auch die molekulargenetische Karyotypisierung mittels genomweiter CNV-Analyse ergab keinen Nachweis von klinisch relevanten Kopienzahlvarianten (Befund vom XX). Weiterhin führten wir eine molekulargenetische Exomdiagnostik bezüglich Veränderungen in den für seine Auffälligkeiten ursächlichen Genen durch. Diese ergab keinen Nachweis einer klinisch relevanten Variante (Befund vom XX)."""
+            elif child_2=="Tochter":
+                diagnostic="""Die anhand einer Blutprobe von Ihrer Tochter durchgeführte konventionelle Chromosomenanalyse ergab einen strukturell und numerisch unauffälligen weiblichen Karyotyp (Befund vom XX). Zur weiteren Abklärung des Verdachts auf eine genetisch bedingte Entwicklungsstörung führten wir bei Ihrer Tochter die molekulargenetische Diagnostik im <i>FMR1</i>-Gen bezüglich eines Fragilen-X-Syndroms durch. Diese ergab einen unauffälligen Befund (Befund vom XX). Auch die molekulargenetische Karyotypisierung mittels genomweiter CNV-Analyse ergab keinen Nachweis von klinisch relevanten Kopienzahlvarianten (Befund vom XX). Weiterhin führten wir eine molekulargenetische Exomdiagnostik bezüglich Veränderungen in den für ihre Auffälligkeiten ursächlichen Genen durch. Diese ergab keinen Nachweis einer klinisch relevanten Variante (Befund vom XX)."""
+        elif person_2=="Erwachsen":
+            if Titel_2=="Herr":
+                diagnostic="""Die anhand einer Blutprobe von Ihnen durchgeführte konventionelle Chromosomenanalyse ergab einen strukturell und numerisch unauffälligen männlichen Karyotyp (Befund vom XX). Zur weiteren Abklärung des Verdachts auf eine genetisch bedingte Entwicklungsstörung führten wir bei Ihnen die molekulargenetische Diagnostik im <i>FMR1</i>-Gen bezüglich eines Fragilen-X-Syndroms durch. Diese ergab einen unauffälligen Befund (Befund vom XX). Auch die molekulargenetische Karyotypisierung mittels genomweiter CNV-Analyse ergab keinen Nachweis von klinisch relevanten Kopienzahlvarianten (Befund vom XX). Weiterhin führten wir eine molekulargenetische Exomdiagnostik bezüglich Veränderungen in den für Ihre Auffälligkeiten ursächlichen Genen durch. Diese ergab keinen Nachweis einer klinisch relevanten Variante (Befund vom XX)."""
+            elif Titel_2=="Frau":
+                diagnostic="""Die anhand einer Blutprobe von Ihnen durchgeführte konventionelle Chromosomenanalyse ergab einen strukturell und numerisch unauffälligen weiblichen Karyotyp (Befund vom XX). Zur weiteren Abklärung des Verdachts auf eine genetisch bedingte Entwicklungsstörung führten wir bei Ihnen die molekulargenetische Diagnostik im <i>FMR1</i>-Gen bezüglich eines Fragilen-X-Syndroms durch. Diese ergab einen unauffälligen Befund (Befund vom XX). Auch die molekulargenetische Karyotypisierung mittels genomweiter CNV-Analyse ergab keinen Nachweis von klinisch relevanten Kopienzahlvarianten (Befund vom XX). Weiterhin führten wir eine molekulargenetische Exomdiagnostik bezüglich Veränderungen in den für Ihre Auffälligkeiten ursächlichen Genen durch. Diese ergab keinen Nachweis einer klinisch relevanten Variante (Befund vom XX)."""
+
+    #Case 2 unauff, Trio#
+    #####################
+    elif result_2=="unauffällig" and analysis_2=="Trio":
+        if person_2=="Kind":
+            if child_2=="Sohn":
+                diagnostic="""Zur Abklärung des Verdachts auf eine genetisch bedingte Entwicklungsstörung bei Ihrem Sohn veranlassten wir eine Trio-Exom-Analyse auf Forschungsbasis. Hierbei ergab sich ein unauffälliger Befund (Befund vom XX, Institut für Humangenetik am Universitätsklinikum Leipzig)."""
+            elif child_2=="Tochter":
+                diagnostic="""Zur Abklärung des Verdachts auf eine genetisch bedingte Entwicklungsstörung bei Ihrem Sohn veranlassten wir eine Trio-Exom-Analyse auf Forschungsbasis. Hierbei ergab sich ein unauffälliger Befund (Befund vom XX, Institut für Humangenetik am Universitätsklinikum Leipzig)."""
+        elif person_2=="Erwachsen":
+            diagnostic="""Zur Abklärung des Verdachts auf eine genetisch bedingte Intellignzminderung bei Ihnen veranlassten wir eine Trio-Exom-Analyse auf Forschungsbasis. Hierbei ergab sich ein unauffälliger Befund (Befund vom XX, Institut für Humangenetik am Universitätsklinikum Leipzig)."""
+
+    #Case 3 unauff, Exom#
+    #####################
+    elif result_2=="unauffällig" and analysis_2=="Exom":
+         if person_2=="Kind":
+            if child_2=="Sohn":
+                diagnostic="""Zur Abklärung des Verdachts auf XX führten wir bei Ihrem Sohn eine molekulargenetische Exomdiagnostik in den hierfür ursächlichen Genen durch. Hierbei ergab sich ein unauffälliger Befund (Befund vom XX)."""
+            elif child_2=="Tochter":
+                diagnostic="""Zur Abklärung des Verdachts auf XX führten wir bei Ihrer Tochter eine molekulargenetische Exomdiagnostik in den hierfür ursächlichen Genen durch. Hierbei ergab sich ein unauffälliger Befund (Befund vom XX)."""
+        elif person_2=="Erwachsen":
+            diagnostic="""Zur Abklärung des Verdachts auf XX führten wir bei Ihnen eine molekulargenetische Exomdiagnostik in den hierfür ursächlichen Genen durch. Hierbei ergab sich ein unauffälliger Befund (Befund vom XX)."""
+
+    #Case 4 unauff, gezielt#
+    ########################
+    elif result_2=="unauffällig" and analysis_2=="gezielt":
+        if person_2=="Kind":
+            if child_2=="Sohn":
+                diagnostic="""Wir führten eine gezielte Diagnostik bezüglich der familiär bekannten (wahrscheinlich) pathogenen c.XX,p.(XX) im XX-Gen bei Ihrem Sohn durch. Hierbei konnte diese bei ihm nicht nachgewiesen werden (Befund vom XX)."""
+            elif child_2=="Tochter":
+                diagnostic="""Wir führten eine gezielte Diagnostik bezüglich der familiär bekannten (wahrscheinlich) pathogenen c.XX,p.(XX) im XX-Gen bei Ihrer Tochter durch. Hierbei konnte diese bei ihr nicht nachgewiesen werden (Befund vom XX)."""
+        elif person_2=="Erwachsen":
+            diagnostic="""Wir führten eine gezielte Diagnostik bezüglich der familiär bekannten (wahrscheinlich) pathogenen c.XX,p.(XX) im XX-Gen bei Ihnen durch. Hierbei konnte diese bei ihr nicht nachgewiesen werden (Befund vom XX). <br> /Zur Abklärung einer möglichen Anlageträgerschaft bezüglich XX veranlassten wir bei Ihnen eine molekulargenetische Einzelgen-Diagnostik und MLPA-Untersuchung bezüglich Veränderungen im XX-Gen. Diese ergab keinen Nachweis einer klinisch relevanten Variante im XX-Gen (Befund vom XX)."""
+
+    #Case 5 unauff, Cancer Panel#
+    #############################
+    elif result_2=="unauffällig" and analysis_2=="Cancer Panel":
+        if disease_2=="HNPCC":
+            diagnostic_patho="""Zur Abklärung des Verdachts auf ein HNPCC-Syndrom // eine genetisch bedingte Darmkrebserkrankung veranlassten wir eine molekularpathologische Diagnostik bezüglich einer Mikrosatelliteninstabilität und eine immunhistochemische Untersuchung am Tumormaterial von Ihnen. Diese ergaben keinen Nachweis einer Mikrosatelliteninstabilität sowie eine unauffällige Immunhistochemie bezüglich MLH-1, MSH-2, MSH-6 und PMS-2 (Befund vom XX, XX). Die molekularpathologische Diagnostik am Tumormaterial bezüglich der <i>BRAF</i>-Variante c.1799T>A, p.(Val600Glu) ergab einen unauffälligen Befund (Befund vom XX, XX).<br><br> //Zur Abklärung des Verdachts auf ein eine genetisch bedingtes Kolonkarzinom veranlassten wir eine molekularpathologische Diagnostik bezüglich einer Mikrosatelliteninstabilität am Tumormaterial von Ihnen. Diese ergaben den Nachweis einer starken Mikrosatelliteninstabilität korrespondierend zum Verlaust der Kernexpression für PMS-2 und MLH-1. (Befund vom XX, XX). Die molekularpathologische MLH1-Promotormethylierungsanalyse erbrachte eine MLH1-Promotormethylierung. Die Mutationsanalyse am Tumormaterial bezüglich der <i>BRAF</i>-Variante c.1799T>A, p.(Val600Glu) ergab einen unauffälligen Befund (Befund vom XX, XX )."""
+            diagnostic="""Zur weiteren Abklärung des Verdachts auf ein HNPCC-Syndrom // eine genetisch bedingte Darmkrebserkrankung führten wir bei Ihnen eine molekulargenetische Paneldiagnostik in den hierfür ursächlichen Genen durch. Hierbei ergab sich ein unauffälliger Befund (Befund vom XX)."""
+        elif disease_2=="unspezifisch":
+            diagnostic="""Zur Abklärung des Verdachts auf eine genetisch bedingte Kreberkrankung führten wir bei Ihnen eine molekulargenetische Paneldiagnostik in den hierfür ursächlichen Genen durch. Hierbei ergab sich ein unauffälliger Befund (Befund vom XX)."""
+
+    #Case 6 unauff, Repeat Expansion#
+    #################################
+     elif result_2=="unauffällig" and analysis_2=="Repeat Expansion":
+        if disease_2=="HTT":
+            diagnostic="""Wir führten eine molekulargenetische Diagnostik bezüglich der Repeatanzahl im <i>HTT</i>-Gen bei Ihnen durch. Diese ergab einen unauffälligen Befund mit dem Nachweis von zwei Allelen mit XX CAG-Repeats (Befund vom XX)."""
+        elif disease_2=="SCA":
+             diagnostic="""Zur Abklärung des Verdachts auf eine genetisch bedingte Bewegungsstörung veranlassten wir an einer Probe von Ihnen zunächst eine molekulargenetische Diagnostik bezüglich der SCA 1, 2, 3, 6, und 17. Diese ergab keinen Nachweis einer Repeat-Expansion und somit einen unauffälligen Befund (Befund vom XX). Ergänzend veranlassten wir die molekulargenetische Diagnostik bezüglich der SCA 7, 8, 10 und 12. Diese ergab keinen Nachweis einer Repeat-Expansion und somit einen unauffälligen Befund (Befund vom XX). Auch die molekulargenetische Diagnostik bezüglich des Fragiles-X-assoziiertes-Tremor-Ataxie-Syndroms ergab keinen Nachweis einer CGG-Repeatverlängerung im <i>FMR1</i>-Gen und somit einen unauffälligen Befund (Befund vom XX). Weiterhin führten wir eine molekulargenetische Paneldiagnostik bezüglich Veränderungen in den Genen, welche mit Ihren Symptomen assoziiert sind, durch. Diese ergab keinen Nachweis einer klinisch relevanten Variante und somit einen unauffälligen Befund (Befund vom XX)."""
+        elif disease_2=="unspezifisch":
+            diagnostic="""Zur Abklärung des Verdachts auf eine genetisch bedingte Repeat-Erkrankung führten wir bei Ihnen eine molekulargenetische Diagnostik in den hierfür ursächlichen Genen durch. Hierbei ergab sich ein unauffälliger Befund (Befund vom XX)."""
+
+    #Case 7 unauff, CA#
+    ###################
+    elif result_2=="unauffällig" and analysis_2=="CA": 
+        if person_2=="Erwachsen":
+            if Titel_2=="Herr":
+                diagnostic="""Die durchgeführte konventionelle Chromosomenanalyse ergab einen strukturell und numerisch unauffälligen männlichen Karyotyp (Befund vom XX)."""
+            elif Titel_2=="Frau":
+                diagnostic="""Die durchgeführte konventionelle Chromosomenanalyse ergab einen strukturell und numerisch unauffälligen weiblichen Karyotyp (Befund vom XX)."""
+        if person_2=="Kind":
+            if child_2=="Sohn":
+                diagnostic="""Die durchgeführte konventionelle Chromosomenanalyse ergab einen strukturell und numerisch unauffälligen männlichen Karyotyp (Befund vom XX)."""
+            elif child_2=="Tochter":
+                diagnostic="""Die durchgeführte konventionelle Chromosomenanalyse ergab einen strukturell und numerisch unauffälligen weiblichen Karyotyp (Befund vom XX)."""
+
+
+            
+        
+            
+            
+                
     elif result_2=="VUS" and person_2=="Kind" and analysis_2=="Exom+CNV+CA":
         diagnostic=f"Zur Abklärung des Verdachts auf eine genetisch bedingte Entwicklungsstörung führten wir bei Ihrem Sohn/Ihrer Tochter eine molekulargenetische Paneldiagnostik in den hierfür ursächlichen Genen durch. Hierbei wurde die heterozygote Variante unklarer Signifikanz c.xxxx>x, p.(XX) im XX-Gen bei Ihrem Sohn/Ihrer Tochter nachgewiesen (Befund vom XX). Diese XX-Variante liegt bei Ihnen, Herr/Frau {Name}, nicht vor. Bei Ihnen, Herr/Frau {Name}, war die o.g. Variante ebenfalls nachweisbar (Befund vom XX)."
     elif result_2=="auffällig" and person_2=="Kind" and analysis_2=="Exom+CNV+CA":
         diagnostic=f"Zur Abklärung des Verdachts auf eine genetisch bedingte Entwicklungsstörung führten wir bei Ihrem Sohn/Ihrer Tochter eine molekulargenetische Paneldiagnostik in den hierfür ursächlichen Genen durch.  Hierbei wurde die heterozygote wahrscheinlich/pathogene Variante c.xxxx>x, p.(XX) im XX-Gen bei Ihrem Sohn/Ihrer Tochter nachgewiesen (Befund vom XX). Diese XX-Variante liegt bei Ihnen, Herr/Frau {Name}, nicht vor. Bei Ihnen, Herr/Frau {Name}, war die o.g. Variante ebenfalls nachweisbar (Befund vom XX)."
-    elif result_2=="unauffällig" and analysis_2=="gezielt":
-        diagnostic="""Wir führten eine gezielte Diagnostik bezüglich der familiär bekannten (wahrscheinlich) pathogenen c.XX,p.(XX) im XX-Gen bei Ihnen/Ihrem Sohn/Ihrer Tochter durch. Hierbei konnte diese bei Ihnen/ihm/ihr nicht nachgewiesen werden (Befund vom XX). // Zur Abklärung einer möglichen Anlageträgerschaft bezüglich XX veranlassten wir bei Ihnen eine molekulargenetische Einzelgen-Diagnostik und MLPA-Untersuchung bezüglich Veränderungen im XX-Gen. Diese ergab keinen Nachweis einer klinisch relevanten Variante im XX-Gen (Befund vom XX)."""
+
     elif result_2=="auffällig" and analysis_2=="gezielt":
         diagnostic="""Wir führten eine gezielte Diagnostik bezüglich der familiär bekannten (wahrscheinlich) pathogenen c.XX,p.(XX) im XX-Gen bei Ihnen/Ihrem Sohn/Ihrer Tochter durch. Hierbei konnte diese bei Ihnen/ihm/ihr nachgewiesen werden (Befund vom XX). 
         // Zur Abklärung einer möglichen Anlageträgerschaft bezüglich XX veranlassten wir bei Ihnen eine molekulargenetische Einzelgen-Diagnostik und MLPA-Untersuchung bezüglich Veränderungen im XX-Gen. Diese ergab eine heterozygote wahrscheinlich/pathogene Variante c.XX,p.(XX) im XX-Gen (Befund vom XX)."""
-    elif result_2=="unauffällig" and analysis_2=="Exom":
-        diagnostic="""Zur Abklärung des Verdachts auf XX führten wir bei Ihnen/Ihrem Sohn/Ihrer Tochter eine molekulargenetische Exomdiagnostik in den hierfür ursächlichen Genen durch. Hierbei ergab sich ein unauffälliger Befund (Befund vom XX)."""
+    
     elif result_2=="auffällig" and analysis_2=="Exom":
         diagnostic="""Zur Abklärung des Verdachts auf XX führten wir bei Ihnen/Ihrem Sohn/Ihrer Tochter eine molekulargenetische Exomdiagnostik in den hierfür ursächlichen Genen durch. Hierbei wurde die heterozygote wahrscheinlich/pathogene Variante c.xxxx>x, p.(XX) im XX-Gen bei Ihnen/Ihrem Sohn/Ihrer Tochter nachgewiesen (Befund vom XX)."""
     elif result_2=="VUS" and analysis_2=="Exom":
         diagnostic="""Zur Abklärung des Verdachts auf eine genetisch bedingte XX führten wir bei Ihnen/Ihrem Sohn/Ihrer Tochter eine molekulargenetische Exomdiagnostik in den hierfür ursächlichen Genen durch. Hierbei wurde die heterozygote Variante unklarer Signifikanz c.xxx>, p.(XX) im XX-Gen bei Ihnen/Ihrem Sohn/Ihrer Tochter nachgewiesen (Befund vom XX)."""
-    elif result_2=="unauffällig" and analysis_2=="Cancer Panel" and disease_2=="HNPCC":
-        diagnostic_patho="""Zur Abklärung des Verdachts auf ein HNPCC-Syndrom // eine genetisch bedingte Darmkrebserkrankung veranlassten wir eine molekularpathologische Diagnostik bezüglich einer Mikrosatelliteninstabilität und eine immunhistochemische Untersuchung am Tumormaterial von Ihnen. Diese ergaben keinen Nachweis einer Mikrosatelliteninstabilität sowie eine unauffällige Immunhistochemie bezüglich MLH-1, MSH-2, MSH-6 und PMS-2 (Befund vom XX, XX). Die molekularpathologische Diagnostik am Tumormaterial bezüglich der <i>BRAF</i>-Variante c.1799T>A, p.(Val600Glu) ergab einen unauffälligen Befund (Befund vom XX, XX).
-        //Zur Abklärung des Verdachts auf ein eine genetisch bedingtes Kolonkarzinom veranlassten wir eine molekularpathologische Diagnostik bezüglich einer Mikrosatelliteninstabilität am Tumormaterial von Ihnen. Diese ergaben den Nachweis einer starken Mikrosatelliteninstabilität korrespondierend zum Verlaust der Kernexpression für PMS-2 und MLH-1. (Befund vom XX, XX). Die molekularpathologische MLH1-Promotormethylierungsanalyse erbrachte eine MLH1-Promotormethylierung. Die Mutationsanalyse am Tumormaterial bezüglich der <i>BRAF</i>-Variante c.1799T>A, p.(Val600Glu) ergab einen unauffälligen Befund (Befund vom XX, XX )."""
-        diagnostic="""Zur weiteren Abklärung des Verdachts auf ein HNPCC-Syndrom // eine genetisch bedingte Darmkrebserkrankung führten wir bei Ihnen eine molekulargenetische Paneldiagnostik in den hierfür ursächlichen Genen durch. Hierbei ergab sich ein unauffälliger Befund (Befund vom XX)."""
+   
     elif result_2=="VUS" and analysis_2=="Cancer Panel" and disease_2=="HNPCC":
         diagnostic_patho="""Zur Abklärung des Verdachts auf ein HNPCC-Syndrom // eine genetisch bedingte Darmkrebserkrankung veranlassten wir eine molekularpathologische Diagnostik bezüglich einer Mikrosatelliteninstabilität und eine immunhistochemische Untersuchung am Tumormaterial von Ihnen. Diese ergaben keinen Nachweis einer Mikrosatelliteninstabilität sowie eine unauffällige Immunhistochemie bezüglich MLH-1, MSH-2, MSH-6 und PMS-2 (Befund vom XX, XX). Die molekularpathologische Diagnostik am Tumormaterial bezüglich der <i>BRAF</i>-Variante c.1799T>A, p.(Val600Glu) ergab einen unauffälligen Befund (Befund vom XX, XX).
-        //Zur Abklärung des Verdachts auf ein eine genetisch bedingtes Kolonkarzinom veranlassten wir eine molekularpathologische Diagnostik bezüglich einer Mikrosatelliteninstabilität am Tumormaterial von Ihnen. Diese ergaben den Nachweis einer starken Mikrosatelliteninstabilität korrespondierend zum Verlaust der Kernexpression für PMS-2 und MLH-1. (Befund vom XX, XX). Die molekularpathologische MLH1-Promotormethylierungsanalyse erbrachte eine MLH1-Promotormethylierung. Die Mutationsanalyse am Tumormaterial bezüglich der <i>BRAF</i>-Variante c.1799T>A, p.(Val600Glu) ergab einen unauffälligen Befund (Befund vom XX, XX )."""
+        //Zur Abklärung des Verdachts auf ein genetisch bedingtes Kolonkarzinom veranlassten wir eine molekularpathologische Diagnostik bezüglich einer Mikrosatelliteninstabilität am Tumormaterial von Ihnen. Diese ergaben den Nachweis einer starken Mikrosatelliteninstabilität korrespondierend zum Verlaust der Kernexpression für PMS-2 und MLH-1. (Befund vom XX, XX). Die molekularpathologische MLH1-Promotormethylierungsanalyse erbrachte eine MLH1-Promotormethylierung. Die Mutationsanalyse am Tumormaterial bezüglich der <i>BRAF</i>-Variante c.1799T>A, p.(Val600Glu) ergab einen unauffälligen Befund (Befund vom XX, XX )."""
         diagnostic="""Zur weiteren Abklärung des Verdachts auf ein HNPCC-Syndrom // eine genetisch bedingte Darmkrebserkrankung führten wir bei Ihnen eine molekulargenetische Paneldiagnostik in den hierfür ursächlichen Genen durch. Hierbei wurde die heterozygote Variante unklarer Signifikanz c.xxx>, p.(XX) im XX-Gen bei Ihnen nachgewiesen (Befund vom XX)."""    
     elif result_2=="auffällig" and analysis_2=="Cancer Panel" and disease_2=="HNPCC":
         diagnostic="""Zur Abklärung des Verdachts auf ein HNPCC-Syndrom // eine genetisch bedingte Darmkrebserkrankung führten wir bei Ihnen eine molekulargenetische Paneldiagnostik in den hierfür ursächlichen Genen durch. Hierbei wurde die heterozygote wahrscheinlich/pathogene Variante c.xxxx>x, p.(XX) im XX-Gen bei Ihnen nachgewiesen (Befund vom XX)."""
-    elif result_2=="unauffällig" and analysis_2=="Repeat Expansion" and disease_2=="HTT":
-        diagnostic="""Wir führten eine molekulargenetische Diagnostik bezüglich der Repeatanzahl im <i>HTT</i>-Gen bei Ihnen durch. Diese ergab einen unauffälligen Befund mit dem Nachweis von zwei Allelen mit XX CAG-Repeats (Befund vom XX)."""
+  
     elif result_2=="auffällig" and analysis_2=="Repeat Expansion" and disease_2=="HTT":
         diagnostic="""Zur Abklärung des Verdachts auf eine Huntington-Erkrankung führten wir bei Ihnen zudem eine molekulargenetische Diagnostik im <i>HTT</i>-Gen durch. Hierbei wurde eine pathogene heterozygote CAG-Repeatverlängerung auf XX CAG-Repeats im <i>HTT</i>-Gen bei Ihnen nachgewiesen (Befund vom XX)."""
-    elif result_2=="unauffällig" and analysis_2=="Repeat Expansion" and disease_2=="SCA":
-         diagnostic="""Zur Abklärung des Verdachts auf eine genetisch bedingte Bewegungsstörung veranlassten wir an einer Probe von Ihnen zunächst eine molekulargenetische Diagnostik bezüglich der SCA 1, 2, 3, 6, und 17. Diese ergab keinen Nachweis einer Repeat-Expansion und somit einen unauffälligen Befund (Befund vom XX). Ergänzend veranlassten wir die molekulargenetische Diagnostik bezüglich der SCA 7, 8, 10 und 12. Diese ergab keinen Nachweis einer Repeat-Expansion und somit einen unauffälligen Befund (Befund vom XX). Auch die molekulargenetische Diagnostik bezüglich des Fragiles-X-assoziiertes-Tremor-Ataxie-Syndroms ergab keinen Nachweis einer CGG-Repeatverlängerung im <i>FMR1</i>-Gen und somit einen unauffälligen Befund (Befund vom XX). Weiterhin führten wir eine molekulargenetische Paneldiagnostik bezüglich Veränderungen in den Genen, welche mit Ihren Symptomen assoziiert sind, durch. Diese ergab keinen Nachweis einer klinisch relevanten Variante und somit einen unauffälligen Befund (Befund vom XX)."""
+
     elif result_2=="auffällig" and analysis_2=="Repeat Expansion" and disease_2=="SCA":
         diagnostic="""Zur Abklärung des Verdachts auf eine genetisch bedingte Bewegungsstörung veranlassten wir an einer Probe von Ihnen eine molekulargenetische Repeat-Expansion Diagnostik bezüglich der SCA 1, 2, 3, 6, 7, 8, 10, 12 und 17 sowie des Fragiles-X-assoziiertes-Tremor-Ataxie-Syndroms. Hierbei wurde eine pathogene heterozygote XX-Repeatverlängerung auf XX XX-Repeats im XX-Gen bei Ihnen nachgewiesen (Befund vom XX). Weiterhin führten wir eine molekulargenetische Paneldiagnostik bezüglich Veränderungen in den Genen, welche mit Ihren Symptomen assoziiert sind, durch. Diese ergab keinen Nachweis einer klinisch relevanten Variante und somit einen unauffälligen Befund (Befund vom XX). //
         Zur Abklärung des Verdachts auf eine genetisch bedingte Bewegungsstörung veranlassten wir an einer Probe von Ihnen eine molekulargenetische Repeat-Expansion Diagnostik bezüglich der SCA 1, 2, 3, 6, 7, 8, 10, 12 und 17 sowie des Fragiles-X-assoziiertes-Tremor-Ataxie-Syndroms. Diese ergab keinen Nachweis einer klinisch relevanten Variante und somit einen unauffälligen Befund (Befund vom XX).Weiterhin führten wir eine molekulargenetische Paneldiagnostik bezüglich Veränderungen in den Genen, welche mit Ihren Symptomen assoziiert sind, durch. Hierbei wurde die heterozygote wahrscheinlich/pathogene Variante c.xxxx>x, p.(XX) im XX-Gen bei Ihnen nachgewiesen (Befund vom XX)."""
-    elif result_2=="unauffällig" and analysis_2=="CA" and disease_2=="Geschlechtsinkongruenz":
-        diagnostic="""Die durchgeführte konventionelle Chromosomenanalyse ergab einen strukturell und numerisch unauffälligen männlichen/weiblichen Karyotyp (Befund vom XX)."""
-
+  
      #Info about disease
     if result_2!="unauffällig" and disease_2=="unspezifisch":
         disease_default_text = """
