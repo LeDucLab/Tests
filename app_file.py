@@ -613,7 +613,7 @@ with tab2:
     #Case 3 unauff, Exom#
     #####################
     elif result_2=="unauffällig" and analysis_2=="Exom":
-         if person_2=="Kind":
+        if person_2=="Kind":
             if child_2=="Sohn":
                 diagnostic="""Zur Abklärung des Verdachts auf XX führten wir bei Ihrem Sohn eine molekulargenetische Exomdiagnostik in den hierfür ursächlichen Genen durch. Hierbei ergab sich ein unauffälliger Befund (Befund vom XX)."""
             elif child_2=="Tochter":
