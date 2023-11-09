@@ -643,7 +643,7 @@ with tab2:
 
     #Case 6 unauff, Repeat Expansion#
     #################################
-     elif result_2=="unauffällig" and analysis_2=="Repeat Expansion":
+    elif result_2=="unauffällig" and analysis_2=="Repeat Expansion":
         if disease_2=="HTT":
             diagnostic="""Wir führten eine molekulargenetische Diagnostik bezüglich der Repeatanzahl im <i>HTT</i>-Gen bei Ihnen durch. Diese ergab einen unauffälligen Befund mit dem Nachweis von zwei Allelen mit XX CAG-Repeats (Befund vom XX)."""
         elif disease_2=="SCA":
