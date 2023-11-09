@@ -289,23 +289,22 @@ with tab1:
         elif person=="Erwachsen":
             beurteilung=f"Wir besprachen, dass aufgrund Ihrer Angaben zur Eigen- und Familienanamnese bei Ihnen kein Verdacht auf eine genetisch bedingte Erkrankung besteht. Aus der Sicht unseres Fachgebietes ist keine genetische Diagnostik indiziert. Sollten im weiteren Verlauf Sie bzw. andere Familienmitglieder weitere Symptome aufweisen/ an weiteren Krebserkrankungen erkranken, ist eine Wiedervorstellung in unserer Sprechstunde zur Re-Evaluation und ggf. Einleitung einer weiterführenden genetischen Diagnostik möglich."
 
-
-        
-
-    #Add Signature boxes
+    #Add Signature boxes#
+    #####################
     st.markdown("### Behandelnde Ärzte")
     col1, col2 = st.columns(2)
     Arzt1 = col1.selectbox("Arzt 1", ["Diana Le Duc", "Albrecht Kobelt"])
     Arzt2 = col2.selectbox("Arzt 2", ["Diana Le Duc", "Albrecht Kobelt"])
      
     
-    # Letter Structure for all types of letters
+    #Letter Structure for all types of letters#
+    ###########################################
     #Beratungsgrund
     if analysis != "gezielt":
         beratung_line = f"**Beratungsgrund:** V.a. genetisch bedingte {question}"
     elif analysis == "gezielt":
         beratung_line = f"**Beratungsgrund:** Eine (wahrscheinlich) pathogene Variante c.XX, p.XX im XX-Gen in der Familienanamnese"
-    
+        
     #Begrüßung
     if Titel== "Herr":
         hello_line = f"Sehr geehrter {Titel} {Name},"
@@ -313,7 +312,13 @@ with tab1:
         hello_line = f"Sehr geehrte {Titel} {Name},"
 
     #Date of Beratung
-    first_line= f"am {current_datetime.strftime('%d.%m.%Y')} stellten Sie sich/Ihren Sohn/Ihre Tochter in unserer genetischen Sprechstunde vor."
+    if person == "Kind":
+        if child=="Sohn":
+            first_line= f"am {current_datetime.strftime('%d.%m.%Y')} stellten Ihren Sohn, {Name_child}, in unserer genetischen Sprechstunde vor."
+        elif child=="Tochter":
+            first_line= f"am {current_datetime.strftime('%d.%m.%Y')} stellten Ihre Tochter, {Name_child}, in unserer genetischen Sprechstunde vor."
+     if person == "Erwachsen":
+        first_line= f"am {current_datetime.strftime('%d.%m.%Y')} stellten Sie sich in unserer genetischen Sprechstunde vor."
 
     #Info zum Krankheitsbild
     if disease=="HNPCC":
