@@ -42,8 +42,10 @@ with tab1:
     council = col1.selectbox("Art der Beratung", ["Erstberatung"])
     person = col2.selectbox("Patiententyp", ["Kind", "Erwachsen"])
     disease = col3.selectbox("Krankheitsbild", ["NDD +/- Epilepsie", "unspezifisch", "HNPCC", "SCA", "HTT", "Marfan/EDS", "Geschlechtsinkongruenz"])
-
-
+    if person=="Kind":
+        col1, col2= st.columns()
+        child= col2.selectbox("Kind", ["Tochter", "Sohn"])
+        Name_child = col3.text_input("Vorname", key="Name_child")
     
     # Add anamnesis button
     if council == "Erstberatung" and disease == "unspezifisch":
@@ -134,7 +136,7 @@ with tab1:
             body_text="""Die systemischen Kriterien der // https://marfan.org/dx/score/ // revidierten Ghent-Kriterien ergaben XX von 20 Punkten (positiv für XX) (≥ 7 Punkte zeigt systemische Beteiligung an; Loeys et al., 2010, PMID: 20591885). Der Z-Score der Aortenwurzeldurchmesser (XX mm) beträgt XX (Normwert ≤ 2). Die Verhältnisse zwischen Ober- und Unterlänge sowie Armspanne zu Körpergröße ergaben un/auffällige Werte (OL/UL XX; AS/KG XX).
             Der Beighton Hypermobilitäts-Score ergab XX von 9 Punkten // https://www.ndr.de/ratgeber/gesundheit/Hypermobilitaet-Wenn-Gelenke-nicht-stabil-sind,hypermobilitaet106.html // (3–4 Punkte zeigte eine moderate Hypermobilität, ≥ 5 Punkte generalisierte Hypermobilität)."""
             body=st.text_area("", body_text)
-        elif body_box=="Ja" and disease=="unspezifisch":
+        elif body_box=="Ja" and disease!="Marfan/EDS":
             body_text=""""""
             body=st.text_area("", body_text)
     
