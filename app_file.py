@@ -317,7 +317,7 @@ with tab1:
             first_line= f"am {current_datetime.strftime('%d.%m.%Y')} stellten Ihren Sohn, {Name_child}, in unserer genetischen Sprechstunde vor."
         elif child=="Tochter":
             first_line= f"am {current_datetime.strftime('%d.%m.%Y')} stellten Ihre Tochter, {Name_child}, in unserer genetischen Sprechstunde vor."
-     if person == "Erwachsen":
+    elif person == "Erwachsen":
         first_line= f"am {current_datetime.strftime('%d.%m.%Y')} stellten Sie sich in unserer genetischen Sprechstunde vor."
 
     #Info zum Krankheitsbild
