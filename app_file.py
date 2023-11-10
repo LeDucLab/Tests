@@ -1131,50 +1131,35 @@ Sollten im Verlauf Sie oder weitere Familienmitglieder an weiteren Krebserkranku
             st.markdown(signature, unsafe_allow_html=True)
             st.markdown(anhang_2, unsafe_allow_html=True)
         
-    
-    
-        
-    
-        
-    
-        
-   
 with tab3:
-    st.header("A cat")
-    st.image("https://static.streamlit.io/examples/cat.jpg", width=200)
+    #########################################
+    # Create the third tab for Textbausteine#
+    #########################################
+    
+    st.markdown("<h1 style='font-size: 30px;'>Krankheitsbilder / Textbausteine </h1>", unsafe_allow_html=True)
+    def search(query):
+    # Replace this with your search logic
+    # For demonstration, returning a list of simulated search results
+        results = [f"Result {i}" for i in range(1, 6)]
+        return results
+
+    # Streamlit app
+    st.title("Autocomplete Search App")
+
+    # User input for search query with autocomplete
+    search_query = st.text_input("Enter your search query:", key="search_query")
+    suggested_queries = search(search_query)
+
+    # Autocomplete dropdown
+    selected_query = st.selectbox("Select a suggested query:", suggested_queries, index=0)
+
+    # Search button
+    if st.button("Search"):
+        # Perform the search using the selected or entered query
+        result = search(selected_query if selected_query else search_query)
+        st.write(result)
 
 with tab4:
     st.header("A cat")
     st.image("https://static.streamlit.io/examples/cat.jpg", width=200)
     
-    
-    #elif council == "Erstberatung" and disease == "NDD +/- Epilepsie":
-    #    st.markdown("### Anamnese")
-    #    st.markdown("Geburtshintergrund")
-    #   col1, col2, col3 = st.columns(3)
-    #    Geburtsart=col1.text_input("Geburtsart")
-    #    Geburtstermin=col2.text_input("Geburtstermin")
-    #    Geburtsmaßen=col3.text_input("Geburtsmaßen")
-    #    st.markdown("Frühe Entwicklung")
-    #    st.markdown("Meilensteine der motorischen Entwicklung")
-    #    col1, col2, col3 = st.columns(3)
-    #    Drehen=col1.text_input("Drehen")
-    #    Sitzen=col2.text_input("Sitzen")
-    #    Gehen=col3.text_input("Gehen")
-    #    st.markdown("Meilensteine der sprachlichen Entwicklung")
-    #    col1, col2 = st.columns(2)
-    #    Words=col1.text_input("Erste Laute/Worte")
-    #    Aktuell=col2.text_input("Aktueller Status")
-    #    st.markdown("Soziale Entwicklung")
-    #    col1, col2 = st.columns(2)
-    #    Kita=col1.text_input("Kita/Schulbbesuch")
-    #    Interaktion=col2.text_input("Interaktion mit Familie/Gleichaltrigen")
-    #    st.markdown("Aktuelle Symptome und Beobachtungen")
-    #    col1, col2= st.columns(2)
-    #    Entwicklung=col1.text_input("Art der Entwicklungsverzögerung")
-    #    Verhalten=col2.text_input("Verhaltensauffälligkeiten")
-    #    Kommunikation=col1.text_input("Kommunikationsfähigkeiten")
-    #    Epilepsie=col2.text_input("Epilepsie")
-    #    st.markdown("Bisherige Untersuchungen und Interventionen")
-    #    Vorbefunde=st.text_area("Frühere Arztbesuche oder Therapieansätze")
-    #    Diagnose=st.text_area("Diagnosen oder Empfehlungen")
