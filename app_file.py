@@ -16,7 +16,7 @@ h1, h2, h3, h4, h5, h6 {
 st.markdown(custom_css, unsafe_allow_html=True)
 
 
-tab1, tab2, tab3, tab4= st.tabs(["EBM_Erstberatung", "EBM_Befundbesprechung", "FBrEK", "Krankheitsbild Textbausteine"])
+tab1, tab2, tab3, tab4= st.tabs(["EBM_Erstberatung", "EBM_Befundbesprechung", "text Blocks", "Krankheitsbild Textbausteine"])
 
 with tab1:
     ########################################
@@ -1143,7 +1143,7 @@ with tab3:
     st.title("Text blocks for diseases, genes, brainstorming etc. (Under development)")
 
     #Make a list of all genes, notions for which we have text#
-    names = ["15q11.2-q13 - Angelman-Syndrom", "ABCA4", "ABCC6", "Bob", "Charlie", "David", "Eva", "Frank"]
+    names = ["15q11.2-q13 - Angelman-Syndrom", "ABCA4", "ABCC6", "Mikrodeletionssyndrom 16p11.2", "Charlie", "David", "Eva", "Frank"]
 
     def search(query):
         # returning a list of names that contain the query
@@ -1190,6 +1190,47 @@ with tab3:
             st.markdown(disease_info_3, unsafe_allow_html=True)
             st.markdown("<div class='custom-paragraph'><b>Empfehlung</b></div>",  unsafe_allow_html=True)
             st.markdown(recommendation_3, unsafe_allow_html=True)
+
+        elif display_query=="ABCC6":
+            disease_info_default_text_3="""Die 16p11.2-Mikrodeletion ist eine seltene strukturelle Chromosomenstörung. Es ist gekennzeichnet durch eine globale Entwicklungsverzögerung, im späteren Verlauf ist eine Intelligenzminderung beschrieben. Weiterhin sind psychiatrische Störungen und Verhaltensauffälligkeiten, typischerweise aus dem Bereich der Autismus-Spektrum-Störungen bekannt. Epileptische Anfälle können bei 25% der Betroffenen auftreten. Betroffene Kinder entwickeln häufig eine Adipositas. Auch Veränderungen der Wirbelsäule, der Kopfform, des Gehirns, des Herzens, der Blutgefäße oder eine Schwerhörigkeit können vorkommen.<br>Ursächlich ist eine Mikrodeletion der Region 16p11.2. Diese wird autosomal dominant vererbt. Das bedeutet, dass heterozygote Anlageträger\*Innen die Erkrankung ausbilden. Damit besteht für die Nachkommen von Anlageträger*Innen eine 50%ige Wahrscheinlichkeit, diese zu erben und die Erkrankung ebenfalls auszubilden. Es ist eine variable Expressivität beschrieben. Das bedeutet, die Ausprägung der klinischen Symptomatik kann auch innerhalb einer Familie sehr unterschiedlich sein. Weiterhin ist eine unvollständige Penetranz beschrieben. Das bedeutet, nicht alle Anlageträger\*Innen bilden auch eine klinische Symptomatik aus. Eine kausale Therapie steht derzeit nicht zur Verfügung. (GeneReviews, 2021, 16p11.2 Recurrent Deletion)"""
+            disease_info_3 = st.text_area("Allgemeine Informationen zum Krankheitsbild", disease_info_default_text_3)
+            recommendation_default_text_3="""Nach Diagnosestellung des Mikrodeletionssyndroms 16p11.2 sollten folgende Untersuchungen erfolgen (GeneReviews, 2021, 16p11.2 Recurrent Deletion):
+
+• Beurteilung des Entwicklungsstandes
+• Neuropsychiatrische Evaluation
+• Neurologische Evaluation
+• Muskuloskelettale Beurteilung, inklusive Bildgebung der Wirbelsäule zur Beurteilung eventueller vertebraler Anomalien oder Skoliose)
+• Endokrinologische Beurteilung, ggf. Bestimmung der Nüchternglukose und des HbA1c
+• HNO-ärztliche Evaluation des Hörvermögens
+• Kardiovaskuläre Beurteilung, insbesondere hinsichtlich Herzgeräuschen und Blutdruck
+
+
+Im Verlauf sollten folgende Untersuchungen erfolgen (GeneReviews, 2021, 16p11.2 Recurrent Deletion):
+
+• Regelmäßige Beurteilungen der intellektuellen Entwicklung und des Unterstützungsbedarfs
+• Regelmäßige Beurteilung der Körpermaße zur frühzeitigen Detektion eines entstehenden Übergewichts
+• Regelmäßige kinderpsychiatrische Beurteilung bezüglich Auffälligleiten des Verhaltens oder des Affekts
+• Engmaschige neurologische Anbindung
+• Regelmäßige körperliche Untersuchung, insbesondere hinsichtlich der skelettalen Reife und Skoliose
+• Im Falle eines Übergewichts: Ernährungsmedizinische Beratung, aktiver Lebensstil
+• Jährliche Bestimmung der Nüchternglukose und des HbA1c 
+• Regelmäßige Messung des Blutdrucks (bei jedem Arztkontakt während der Kindheit)
+• Bis zum 3. Lebensjahr jährliche HNO-ärztliche Evaluation des Hörvermögens
+
+Wir empfehlen eine regelmäßige neuropädiatrische Betreuung, z.B. durch ein Sozialpädiatrisches Zentrum, sowie regelmäßige Fördermaßnahmen wie Frühförderung, Logopädie, Ergo- oder Physiotherapie. 
+
+Wir empfehlen, auf Medikamente, die zu einer Gewichtszunahme führen (z.B. Clozapin, Olanzapin), wenn möglich zu verzichten.
+Über die Familienselbsthilfe des Leona e.V. können Sie sich mit anderen betroffenen Familien vernetzen: https://www.leona-ev.de/start/
+
+Wir empfehlen Ihnen bei Kinderwunsch oder spätestens im Falle einer Schwangerschaft in der 6. bis 9. Schwanger-schaftswoche eine genetische Beratung. Diese kann gern im Rahmen unserer Sprechstunde stattfinden. Eine Terminvereinbarung ist unter der o.g. Telefonnummer möglich.
+
+Weiterhin besteht für ####  vor eigener Familienplanung die Möglichkeit einer erneuten genetischen Beratung hinsichtlich der Wiederholungswahrscheinlichkeit."""
+            recommendation_3 = st.text_area("Empfehlungen", recommendation_default_text_3)
+            st.markdown("<div class='custom-paragraph'><b>Allgemeine Informationen zum Krankheitsbild:</b></div>",  unsafe_allow_html=True)
+            st.markdown(disease_info_3, unsafe_allow_html=True)
+            st.markdown("<div class='custom-paragraph'><b>Empfehlung</b></div>",  unsafe_allow_html=True)
+            st.markdown(recommendation_3, unsafe_allow_html=True)
+
 
             
 
