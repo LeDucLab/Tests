@@ -743,7 +743,7 @@ with tab2:
 
     #Case 9 auff, gezielt#
     ######################
-     elif result_2=="auffällig" and analysis_2=="gezielt":
+    elif result_2=="auffällig" and analysis_2=="gezielt":
         if person_2=="Kind":
             if child_2=="Sohn":
                      diagnostic="""Wir führten eine gezielte Diagnostik bezüglich der familiär bekannten (wahrscheinlich) pathogenen c.XX,p.(XX) im XX-Gen Ihrem Sohn, {Name_child}, durch. Hierbei konnte diese bei ihm nachgewiesen werden (Befund vom XX)."""
