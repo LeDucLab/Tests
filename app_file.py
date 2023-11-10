@@ -691,7 +691,7 @@ with tab2:
              diagnostic=f"Zur Abklärung des Verdachts auf eine genetisch bedingte XX führten wir bei Ihnen eine molekulargenetische Exomdiagnostik in den hierfür ursächlichen Genen durch. Hierbei wurde die heterozygote Variante unklarer Signifikanz c.xxxx>x, p.(XX) im XX-Gen bei Ihnen nachgewiesen (Befund vom XX). Diese XX-Variante liegt bei Ihren Eltern nicht vor.<br> // Bei Ihrer Mutter/ Ihrem Vater war die o.g. Variante ebenfalls nachweisbar (Befund vom XX)."
 
     elif result_2=="VUS" and analysis_2=="Trio":
-         if person_2=="Kind":
+        if person_2=="Kind":
             if child_2=="Sohn":
                 diagnostic=f"Zur Abklärung des Verdachts auf eine genetisch bedingte XX führten wir auf Forschungsbasis bei Ihrem Sohn, {Name_child_2}, eine molekulargenetische Trio-Exomdiagnostik XX in den hierfür ursächlichen Genen durch. Hierbei wurde die heterozygote Variante unklarer Signifikanz c.xxxx>x, p.(XX) im XX-Gen bei Ihrem Sohn nachgewiesen (Befund vom XX). Diese XX-Variante liegt bei Ihnen, Herr und Frau {Name_2}, nicht vor.<br> // Bei Ihnen, XX Herr/Frau {Name_2}, war die o.g. Variante ebenfalls nachweisbar (Befund vom XX)."
             elif child_2=="Tochter":
