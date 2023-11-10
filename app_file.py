@@ -16,7 +16,7 @@ h1, h2, h3, h4, h5, h6 {
 st.markdown(custom_css, unsafe_allow_html=True)
 
 
-tab1, tab2, tab3, tab4= st.tabs(["EBM_Erstberatung", "EBM_Befundbesprechung", "text Blocks", "Krankheitsbild Textbausteine"])
+tab1, tab2, tab3, tab4= st.tabs(["EBM_Erstberatung", "EBM_Befundbesprechung", "Text Blocks", "Krankheitsbild Textbausteine"])
 
 with tab1:
     ########################################
@@ -1191,7 +1191,7 @@ with tab3:
             st.markdown("<div class='custom-paragraph'><b>Empfehlung</b></div>",  unsafe_allow_html=True)
             st.markdown(recommendation_3, unsafe_allow_html=True)
 
-        elif display_query=="ABCC6":
+        elif display_query=="Mikrodeletionssyndrom 16p11.2":
             disease_info_default_text_3="""Die 16p11.2-Mikrodeletion ist eine seltene strukturelle Chromosomenstörung. Es ist gekennzeichnet durch eine globale Entwicklungsverzögerung, im späteren Verlauf ist eine Intelligenzminderung beschrieben. Weiterhin sind psychiatrische Störungen und Verhaltensauffälligkeiten, typischerweise aus dem Bereich der Autismus-Spektrum-Störungen bekannt. Epileptische Anfälle können bei 25% der Betroffenen auftreten. Betroffene Kinder entwickeln häufig eine Adipositas. Auch Veränderungen der Wirbelsäule, der Kopfform, des Gehirns, des Herzens, der Blutgefäße oder eine Schwerhörigkeit können vorkommen.<br>Ursächlich ist eine Mikrodeletion der Region 16p11.2. Diese wird autosomal dominant vererbt. Das bedeutet, dass heterozygote Anlageträger\*Innen die Erkrankung ausbilden. Damit besteht für die Nachkommen von Anlageträger*Innen eine 50%ige Wahrscheinlichkeit, diese zu erben und die Erkrankung ebenfalls auszubilden. Es ist eine variable Expressivität beschrieben. Das bedeutet, die Ausprägung der klinischen Symptomatik kann auch innerhalb einer Familie sehr unterschiedlich sein. Weiterhin ist eine unvollständige Penetranz beschrieben. Das bedeutet, nicht alle Anlageträger\*Innen bilden auch eine klinische Symptomatik aus. Eine kausale Therapie steht derzeit nicht zur Verfügung. (GeneReviews, 2021, 16p11.2 Recurrent Deletion)"""
             disease_info_3 = st.text_area("Allgemeine Informationen zum Krankheitsbild", disease_info_default_text_3)
             recommendation_default_text_3="""Nach Diagnosestellung des Mikrodeletionssyndroms 16p11.2 sollten folgende Untersuchungen erfolgen (GeneReviews, 2021, 16p11.2 Recurrent Deletion):
