@@ -1153,6 +1153,7 @@ with tab3:
     suggested_queries = search(search_query)
     # Autocomplete dropdown
     selected_query = st.selectbox("Select a suggested query:", suggested_queries, index=0)
+    search_query = st.text_input("Enter your search query:", value=selected_query)
 
 
     # Check if "David" is in the suggested queries
