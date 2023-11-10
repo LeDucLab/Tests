@@ -1140,14 +1140,14 @@ with tab3:
     def search(query):
     # Replace this with your search logic
     # For demonstration, returning a list of simulated search results
-        results = [f"Result {i}" for i in range(1, 6)]
+        results = [f"Result {i}" for i in range(1, 6) if query.lower() in f"Result {i}".lower()]
         return results
 
     # Streamlit app
     st.title("Autocomplete Search App")
 
     # User input for search query with autocomplete
-    search_query = st.text_input("Enter your search query:", key="search_query")
+    search_query = st.text_input("Enter your search query:")
     suggested_queries = search(search_query)
 
     # Autocomplete dropdown
@@ -1158,6 +1158,10 @@ with tab3:
         # Perform the search using the selected or entered query
         result = search(selected_query if selected_query else search_query)
         st.write(result)
+
+    # Update suggested_queries based on the text_input change
+    st.text("Suggested Results:")
+    st.write(suggested_queries)
 
 with tab4:
     st.header("A cat")
