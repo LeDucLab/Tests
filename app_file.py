@@ -708,7 +708,7 @@ with tab2:
 
     #Case 8 auff, Exom, Exom+CNV+CA, Trio, Cancer Panel#
     ####################################################
-     elif result_2=="auffällig" and analysis_2=="Exom+CNV+CA":
+    elif result_2=="auffällig" and analysis_2=="Exom+CNV+CA":
         if person_2=="Kind":
             if child_2=="Sohn":
                 diagnostic=f"Zur Abklärung des Verdachts auf eine genetisch bedingte Entwicklungsstörung führten wir bei Ihrem Sohn, {Name_child_2}, eine molekulargenetische Paneldiagnostik in den hierfür ursächlichen Genen durch. Hierbei wurde die heterozygote wahrscheinlich/pathogene Variante c.xxxx>x, p.(XX) im XX-Gen bei Ihrem Sohn nachgewiesen (Befund vom XX). Diese XX-Variante liegt bei Ihnen, Herr und Frau {Name}, nicht vor. Bei Ihnen, Herr/Frau {Name}, war die o.g. Variante ebenfalls nachweisbar (Befund vom XX)."
