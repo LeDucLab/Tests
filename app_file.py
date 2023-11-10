@@ -1,6 +1,6 @@
 import streamlit as st
 from datetime import datetime
-from docx import Document
+#from docx import Document
 
 #Create a custom Paragraph spacing and lower the fonts
 custom_css = """
@@ -1255,18 +1255,5 @@ Weiterhin besteht für X vor eigener Familienplanung die Möglichkeit einer erne
 with tab4:
     st.header("A cat")
     st.image("https://static.streamlit.io/examples/cat.jpg", width=200)
-    if st.button('Download as Word'):
-    # Generate Word document
-        document = Document()
-        document.add_heading('My Streamlit Report', 0)
-
-    # Add content to the Word document
-        document.add_paragraph("This is a paragraph in the Word document.")
-        # Add more content as needed
-
-        # Save the document with a specific name, e.g., 'streamlit_report.docx'
-        document.save('streamlit_report.docx')
-
-        # Provide a link to the generated Word document
-        st.markdown('[Download Word document](streamlit_report.docx)', unsafe_allow_html=True)
+  
     
