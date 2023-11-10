@@ -1151,6 +1151,9 @@ with tab3:
     # User input for search query with autocomplete
     search_query = st.text_input("Enter your search query:")
     suggested_queries = search(search_query)
+    # Autocomplete dropdown
+    selected_query = st.selectbox("Select a suggested query:", suggested_queries, index=0)
+
 
     # Check if "David" is in the suggested queries
     is_david_searched = "David" in suggested_queries
@@ -1160,18 +1163,14 @@ with tab3:
         text1 = st.text_input("Text Field 1", value="Default Value 1")
         text2 = st.text_input("Text Field 2", value="Default Value 2")
 
-    # Autocomplete dropdown
-    selected_query = st.selectbox("Select a suggested query:", suggested_queries, index=0)
-
+  
     # Search button
     if st.button("Search"):
-        # Perform the search using the selected or entered query
-        result = search(selected_query if selected_query else search_query)
-        st.write(result)
+        if is_david_searched:
+            text1 = st.text_input("Text Field 1", value="Default Value 1")
+            text2 = st.text_input("Text Field 2", value="Default Value 2")
 
-    # Update suggested_queries based on the text_input change
-    st.text("Suggested Results:")
-    st.write(suggested_queries)
+
 
 with tab4:
     st.header("A cat")
