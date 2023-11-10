@@ -495,15 +495,25 @@ with tab2:
             result_default_text = """Genetisches Geschlecht: weiblich/ männlich"""
             result_text=st.text_area("Ergebnis der genetischen Diagnostik", result_default_text)
         elif disease == "unspezifisch":
-            if Titel_2=="Frau":
-                result_default_text="""Strukturell und numerisch unauffälliger weiblicher Karyotyp"""
-                result_text=st.text_area("Ergebnis der genetischen Diagnostik", result_default_text)
-            elif Titel_2=="Mann":
-                result_default_text="""Strukturell und numerisch unauffälliger männlicher Karyotyp"""
-                result_text=st.text_area("Ergebnis der genetischen Diagnostik", result_default_text)
-            elif Titel_2=="Familie":
-                result_default_text="""Strukturell und numerisch unauffällige Karyotypen"""
-                result_text=st.text_area("Ergebnis der genetischen Diagnostik", result_default_text)
+            if person_2=="Erwachsen":
+                if Titel_2=="Frau":
+                    result_default_text="""Strukturell und numerisch unauffälliger weiblicher Karyotyp"""
+                    result_text=st.text_area("Ergebnis der genetischen Diagnostik", result_default_text)
+                elif Titel_2=="Mann":
+                    result_default_text="""Strukturell und numerisch unauffälliger männlicher Karyotyp"""
+                    result_text=st.text_area("Ergebnis der genetischen Diagnostik", result_default_text)
+                elif Titel_2=="Familie":
+                    result_default_text="""Strukturell und numerisch unauffällige Karyotypen"""
+                    result_text=st.text_area("Ergebnis der genetischen Diagnostik", result_default_text)
+            elif person_2=="Kind":
+                if child_2=="Tochter":
+                    result_default_text="""Strukturell und numerisch unauffälliger weiblicher Karyotyp"""
+                    result_text=st.text_area("Ergebnis der genetischen Diagnostik", result_default_text)
+                elif child_2=="Sohn":
+                    result_default_text="""Strukturell und numerisch unauffälliger männlicher Karyotyp"""
+                    result_text=st.text_area("Ergebnis der genetischen Diagnostik", result_default_text)
+                    
+                    
                 
     #Case 4 VUS for Exome and Panel#
     ################################
