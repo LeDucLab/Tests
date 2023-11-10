@@ -1156,7 +1156,7 @@ with tab3:
 
 
     # Check if "David" is in the suggested queries
-    is_david_searched = "David" in suggested_queries
+    is_david_searched = "John" in suggested_queries
 
     # Conditionally show text input boxes when "David" is searched
     if is_david_searched:
