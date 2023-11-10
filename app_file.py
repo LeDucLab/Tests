@@ -1140,7 +1140,7 @@ with tab3:
     def search(query):
     # Replace this with your search logic
     # For demonstration, returning a list of simulated search results
-        results = [f"Result {i}" for i in range(1, 6) if query.lower() in f"Result {i}".lower()]
+        results = ["ana", "iuli", "Diana"]
         return results
 
     # Streamlit app
