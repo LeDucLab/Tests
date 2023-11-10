@@ -750,7 +750,7 @@ with tab2:
             elif child_2=="Tochter":
                      diagnostic="""Wir führten eine gezielte Diagnostik bezüglich der familiär bekannten (wahrscheinlich) pathogenen c.XX,p.(XX) im XX-Gen Ihrer Tochter, {Name_child}, durch. Hierbei konnte diese bei ihr nachgewiesen werden (Befund vom XX)."""
         elif person_2=="Erwachsen":
-             diagnostic="""Wir führten eine gezielte Diagnostik bezüglich der familiär bekannten (wahrscheinlich) pathogenen c.XX,p.(XX) im XX-Gen bei Ihnen durch. Hierbei konnte diese bei Ihnen/ihm/ihr nachgewiesen werden (Befund vom XX).<br> // Zur Abklärung einer möglichen Anlageträgerschaft bezüglich XX veranlassten wir bei Ihnen eine molekulargenetische Einzelgen-Diagnostik und MLPA-Untersuchung bezüglich Veränderungen im XX-Gen. Diese ergab eine heterozygote wahrscheinlich/pathogene Variante c.XX,p.(XX) im XX-Gen (Befund vom XX)."""
+             diagnostic="""Wir führten eine gezielte Diagnostik bezüglich der familiär bekannten (wahrscheinlich) pathogenen c.XX,p.(XX) im XX-Gen bei Ihnen durch. Hierbei konnte diese bei Ihnen nachgewiesen werden (Befund vom XX).<br> // Zur Abklärung einer möglichen Anlageträgerschaft bezüglich XX veranlassten wir bei Ihnen eine molekulargenetische Einzelgen-Diagnostik und MLPA-Untersuchung bezüglich Veränderungen im XX-Gen. Diese ergab eine heterozygote wahrscheinlich/pathogene Variante c.XX,p.(XX) im XX-Gen (Befund vom XX)."""
 
     #Case 10 auff, Repeat Expansion#
     ################################
