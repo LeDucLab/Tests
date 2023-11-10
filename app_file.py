@@ -1140,21 +1140,32 @@ with tab3:
     names = ["John", "Jane", "Alice", "Bob", "Charlie", "David", "Eva", "Frank"]
 
     def search(query):
-    # Replace this with your search logic
-    # For demonstration, returning a list of names that contain the query
+        # Replace this with your search logic
+        # For demonstration, returning a list of names that contain the query
         results = [name for name in names if query.lower() in name.lower()]
         return results
 
+    # Streamlit app
+    st.title("Autocomplete Search App")
 
+    # User input for search query with autocomplete
     search_query = st.text_input("Enter your search query:")
     suggested_queries = search(search_query)
+
+    # Check if "David" is in the suggested queries
+    is_david_searched = "David" in suggested_queries
+
+    # Conditionally show text input boxes when "David" is searched
+    if is_david_searched:
+        text1 = st.text_input("Text Field 1", value="Default Value 1")
+        text2 = st.text_input("Text Field 2", value="Default Value 2")
 
     # Autocomplete dropdown
     selected_query = st.selectbox("Select a suggested query:", suggested_queries, index=0)
 
     # Search button
     if st.button("Search"):
-    # Perform the search using the selected or entered query
+        # Perform the search using the selected or entered query
         result = search(selected_query if selected_query else search_query)
         st.write(result)
 
