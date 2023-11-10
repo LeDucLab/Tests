@@ -1136,38 +1136,36 @@ with tab3:
     # Create the third tab for Textbausteine#
     #########################################
     
-    st.markdown("<h1 style='font-size: 30px;'>Krankheitsbilder / Textbausteine </h1>", unsafe_allow_html=True)
-    names = ["John", "Jane", "Alice", "Bob", "Charlie", "David", "Eva", "Frank"]
+    st.title("Text blocks for diseases, genes, brainstorming etc. (Under development)")
+
+    #Make a list of all genes, notions for which we have text#
+    names = ["15q11.2-q13 - Angelman-Syndrom", "Jane", "Alice", "Bob", "Charlie", "David", "Eva", "Frank"]
 
     def search(query):
-        # Replace this with your search logic
-        # For demonstration, returning a list of names that contain the query
+        # returning a list of names that contain the query
         results = [name for name in names if query.lower() in name.lower()]
         return results
 
-    # Streamlit app
-    st.title("Autocomplete Search App")
-
-    # User input for search query with autocomplete
+    #User input for search query with autocomplete#
+    ################################################
     search_query = st.text_input("Enter your search query:")
     suggested_queries = search(search_query)
     # Autocomplete dropdown
-    selected_query = st.selectbox("Select a suggested query:", suggested_queries, index=0)
+    selected_query = st.selectbox("Select a suggested query:", suggested_queries, index=0) #it makes things easier to see for what we could return a result
     display_query = st.text_input("Displayed query:", value=selected_query)
 
-
-    # Check if "David" is in the suggested queries
-    
-
-    # Conditionally show text input boxes when "David" is searched
-  
-
-  
-    # Search button
+    # Search button#
+    ################
     if st.button("Search"):
         if display_query=="John":
-            text1 = st.text_input("Text Field 1", value="Default Value 1")
-            text2 = st.text_input("Text Field 2", value="Default Value 2")
+            disease_info_default_text_3="""Das Angelman-Syndrom (AS) ist gekennzeichnet durch eine schwere Entwicklungsverzögerung, einer Intelligenzminderung mit häufiger deutlicher Einschränkung der Sprachentwicklung, Gangstörungen, Tremor und einem einzigartigen Verhalten mit einem fröhlichen Auftreten und häufigem Lachen. Weitere häufige Verhaltensänderungen umfassen auch Hypermotorik, ADHS und Schlafstörungen. Personen mit AS sind in bis zu 80% der Fälle von Epilepsien betroffen, die in der Regel im Kindesalter bis zum 5. Lebensjahr symptomatisch werden. Zudem wurden Fütterungsstörungen, eine Obstipationsneigung, sowie stereotype Kau- bzw. Mundbewegungen wie Zungenstoßen und ein übermäßiger Speichelfluss beschrieben. Ursächlich für ein AS sind Störungen der elterlichen genetischen Prägung („Imprinting“) der Region 15q11.2-q13. Durch eine Analyse des elternspezifischen DNA-Methylierungsmustern („Imprinting“) in der Chromosomenregion 15q11.2-q13 werden etwa 80% der Personen mit AS erkannt, einschließlich derjenigen deren AS durch eine Deletion der Region, einer uniparentalen Disomie oder einem Imprinting-Defekt verursacht ist. Bis zu ca. 75% der AS-Fälle sind einer Deletion des maternalen <i>UBE3A</i>-Allels in der Regi-on 15q11.2-q13 zuzuordnen und weitere 3⁠–⁠7% einer uniparentale Disomie (beide Allele wurden von einem Eltern-teil vererbt). Weiterhin sind pathogene Varianten des <i>UBE3A</i>-Allels in ca. 11% der Fälle nachweisbar, sowie Imprinting-Defekte mit und ohne Beeinflussung des Imprinting-Centers in 3⁠–⁠4%. Imprinting-Defekte ohne Beeinflussung des Imprinting-Centers treten sporadisch auf. Es gibt Hinweise, dass AS Betroffene mit Imprinting-Defekten von einer weniger schweren Symptomatik betroffen sind als jene mit Deletionen.<br> Die Therapie eines AS richtet sich nach der auftretenden Symptomatik und konzentriert sich häufig auf die Kontrolle einer etwaigen epileptischen Symptomatik, sowie einer intensiven multidisziplinären Förderung durch Ergo-, Logo- und Physiotherapie. Eine kausale Therapie ist zum aktuellen Zeitpunkt nicht bekannt (Dagli <i>et al</i>. 2021, GeneReviews PMID: 20301323). "
+            disease_info_3 = st.text_area("Allgemeine Informationen zum Krankheitsbild", disease_info_default_text_3)
+            recommendation_default_text_3="""Nach Diagnosestellung sollten folgende Untersuchungen je nach Bedarf und bereits erfolgter Durchführung erfolgen (Dagli <i>et al</i>. 2021, GeneReviews PMID: 20301323):<br>- Neurologische Vorstellung mit EEG Untersuchung und ggf. MRT-Schädel<br> - Neuropädiatrische Baseline-Evaluation mit Beurteilung der motorischen, kognitiven, verbalen und nonverbalen Entwicklung, sowie potentiellen Verhaltensauffälligkeiten bezüglich ADHS, Autismus und Schlafstörungen<br> - Augenärztliche Vorstellung hinsichtlich Strabismus, Sehfähigkeit und okulärem Albinismus<br> - Orthopädische Vorstellung mit Beurteilung von Gangstörungen, Skoliosen, muskulärer Hypotonie und Fußdeformitäten<br> - Bei Reflux, Schluckstörungen oder Ernährungsstörungen ggf. gastroenterologische Vorstellung<br><br> Im Verlauf sollten folgende Untersuchungen erfolgen (Dagli <i>et al</i>. 2021, GeneReviews PMID: 20301323):<br> - Regelmäßige neuropädiatrische Beurteilung und Beurteilung der motorischen, kognitiven und psychosozialen Entwicklung durch ein sozialpädiatrisches Zentrum oder Anbindung an ein auf Angelman-Syndrom spezialisiertes Zentrum wie sie in München, Aachen und Leipzig etabliert sind. Ein Informationsflyer des Angelman-Zentrums in Leipzig ist diesem Schreiben beigelegt.<br> - Intensive Frühfördermaßnahmen durch Physio-, Ergo- und Logotherapie nach Bedarf<br> - Regelmäßige augenärztliche Kontrollen nach augenärztlicher Maßgabe<br> - Jährliche orthopädische Beurteilung der Wirbelsäule bezüglich einer Skoliose und ggf. weiteren orthopädi-schen Symptomen"""
+            recommendation_3 = st.text_input("Empfehlungen", recommendation_default_text_3)
+            st.markdown("<div class='custom-paragraph'><b>Allgemeine Informationen zum Krankheitsbild:</b></div>",  unsafe_allow_html=True)
+            st.markdown(disease_info_3, unsafe_allow_html=True)
+            st.markdown("<div class='custom-paragraph'><b>Empfehlung</b></div>",  unsafe_allow_html=True)
+            st.markdown(recommendation_3, unsafe_allow_html=True)
 
 
 
