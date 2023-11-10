@@ -1153,21 +1153,19 @@ with tab3:
     suggested_queries = search(search_query)
     # Autocomplete dropdown
     selected_query = st.selectbox("Select a suggested query:", suggested_queries, index=0)
-    search_query = st.text_input("Enter your search query:", value=selected_query)
+    display_query = st.text_input("Displayed query:", value=selected_query)
 
 
     # Check if "David" is in the suggested queries
-    is_david_searched = "John" in suggested_queries
+    
 
     # Conditionally show text input boxes when "David" is searched
-    if is_david_searched:
-        text1 = st.text_input("Text Field 1", value="Default Value 1")
-        text2 = st.text_input("Text Field 2", value="Default Value 2")
+  
 
   
     # Search button
     if st.button("Search"):
-        if is_david_searched:
+        if display_query=="John":
             text1 = st.text_input("Text Field 1", value="Default Value 1")
             text2 = st.text_input("Text Field 2", value="Default Value 2")
 
