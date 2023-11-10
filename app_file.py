@@ -779,6 +779,8 @@ with tab2:
         if disease_2=="unspezifisch":
             disease_default_text = """- Klinisches Bild der Erkrankung<br>- Genetik und Vererbung<br>- Therapien"""
             disease_text=st.text_area("Allgemeine Informationen zum Krankheitsbild", disease_default_text)
+            recommendation_default_text="""- Nach Diagnosestellung sollten folgende Untersuchungen erfolgen: XX<br> - Mit Nachweis der o.g. wahrscheinlich pathogenen Variante im XX-Gen besteht für Familienangehörige im Rahmen einer genetischen Beratung die Möglichkeit einer gezielten Diagnostik, dies gilt insbesondere für Ihre Geschwister und Ihre Kinder (XX ab Erreichen der Volljährigkeit). Eine Terminvereinbarung ist unter der o.g. Telefonnummer möglich. Eine gezielte Diagnostik auf die o.g. Variante im XX-Gen bei Ihren Eltern haben mit ihrem Einverständnis bereits eingeleitet. Sobald die Befunde der eingeleiteten Diagnostik vorliegen, werden wir Sie kontaktieren und weiterführend Stellung nehmen.<br> Viele Ratsuchende profitieren von Angeboten verschiedener Selbsthilfegruppen. Hier können Betroffene und Eltern von Kindern mit seltenen Erkrankungen Informationen erhalten, weitergeben und eine psychosoziale Betreuung in Anspruch nehmen. Selbsthilfegruppen für Angehörige und Patient:innen mit XX sind beispielsweise unter folgenden Adressen erreichbar:XX."""
+            recommendation=st.text_area("Empfehlungen", recommendation_default_text, key="recommendation_un")
         elif disease_2=="NDD +/- Epilepsie":
             disease_default_text = """- Klinisches Bild der Erkrankung<br>- Genetik und Vererbung<br>- Therapien"""
             disease_text=st.text_area("Allgemeine Informationen zum Krankheitsbild", disease_default_text)
