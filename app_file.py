@@ -1143,7 +1143,7 @@ with tab3:
     st.title("Text blocks for diseases, genes, brainstorming etc. (Under development)")
 
     #Make a list of all genes, notions for which we have text#
-    names = ["15q11.2-q13 - Angelman-Syndrom", "Jane", "Alice", "Bob", "Charlie", "David", "Eva", "Frank"]
+    names = ["15q11.2-q13 - Angelman-Syndrom", "ABCA4", "Alice", "Bob", "Charlie", "David", "Eva", "Frank"]
 
     def search(query):
         # returning a list of names that contain the query
@@ -1170,6 +1170,16 @@ with tab3:
             st.markdown(disease_info_3, unsafe_allow_html=True)
             st.markdown("<div class='custom-paragraph'><b>Empfehlung</b></div>",  unsafe_allow_html=True)
             st.markdown(recommendation_3, unsafe_allow_html=True)
+
+        elif display_query=="ABCA4":
+            disease_info_default_text_3="""Morbus Stargardt gilt als häufigste Ursache für eine Makuladegeneration in der Kindheit. Üblicherweise beginnend zwischen dem siebten und zwölften Lebensjahr führt die Erkrankung durch den Zerfall der Zapfen in der Fovea centralis zu starken Seheinschränkungen bis hin zur Erblindung in der zweiten Lebensdekade. Ein späterer Beginn ist aber auch möglich, wenn gleich seltener. Spätmanifestierende Veränderungen sind mit einem langsameren Fortschreiten und einer länger erhaltenen Sehfunktion assoziiert. (Altschwager <i>et al</i>. 2017. PMID: 28941524 )<br><br> Ursächlich für einen Morbus Stargardt sind pathogene Varianten in dem Gen ABCA4. Diese werden autosomal rezessiv vererbt. Das bedeutet, dass homozygote (zwei gleich veränderte Allele) und compound heterozygote (zwei verschieden veränderte Allele) Anlageträger/:Innen die Erkrankung ausbilden. Heterozygote Anlageträger/:Innen zeigen in der Regel keine Zeichen der Erkrankung. Kinder von Eltern, die heterozygote Anlageträger/:Innen für eine autosomal rezessive Erkrankung sind, werden mit einer 25%igen Wahrscheinlichkeit beide pathogene Varianten von ihren Eltern erben und die Erkrankung ausbilden. Eine kausale Therapie ist bisher nicht bekannt. (Fahim <i>et al</i>. GeneReviews. 2017)."""
+            disease_info_3 = st.text_area("Allgemeine Informationen zum Krankheitsbild", disease_info_default_text_3)
+            recommendation_default_text_3="""Im weiteren Verlauf sollten mindestens jährliche augenärztliche Untersuchungen erfolgen. Es wird empfohlen auf hochdosiertes Vitamin A sowie auf Nikotinkonsum zu verzichten (Fahim <i>et al</i>. GeneReviews. 2017).  Weiteres Informationsmaterial zur Erkrankung und zu möglichen klinischen Studien sowie die Möglichkeit zur Eintragung in ein Patient/:Innenregister finden Sie unter https://www.pro-retina.de/."""
+            st.markdown("<div class='custom-paragraph'><b>Allgemeine Informationen zum Krankheitsbild:</b></div>",  unsafe_allow_html=True)
+            st.markdown(disease_info_3, unsafe_allow_html=True)
+            st.markdown("<div class='custom-paragraph'><b>Empfehlung</b></div>",  unsafe_allow_html=True)
+            st.markdown(recommendation_3, unsafe_allow_html=True)
+            
 
 
 
