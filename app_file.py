@@ -1171,7 +1171,7 @@ with tab3:
 
     pregnancy=col1.text_input("Schwangerschaftswoche", key="pregnancy_3")
     delivery=col2.text_input("Errechneter Geburtstermin", key="delivery_3")
-    regel=col2.text_input("Erster Tag der letzter Regel", key="regel_3")
+    regel=col3.text_input("Erster Tag der letzter Regel", key="regel_3")
     
 
     # Add a selectbox for choosing the type of counciling#
