@@ -1169,9 +1169,9 @@ with tab3:
     Vorname_3 = col2.text_input("Vorame", key="Vorname_3")
     Name_3 = col3.text_input("Name", key="Name_3")
 
-    col1, col2= st.columns(2)
     pregnancy=col1.text_input("Schwangerschaftswoche", key="pregnancy_3")
     delivery=col2.text_input("Errechneter Geburtstermin", key="delivery_3")
+    regel=col2.text_input("Erster Tag der letzter Regel", key="regel_3")
     
 
     # Add a selectbox for choosing the type of counciling#
@@ -1181,38 +1181,62 @@ with tab3:
     council_3 = col1.selectbox("Art der Beratung", ["Erstberatung", "Befundbesprechung"], key="council_3")
     if council_3=="Erstberatung":
         question_3 = col2.selectbox("Fragestellung", ["SS normales Risiko", "SS erhöhtes Risiko", "SS Fehlbildung", "SS Familienanamnese auff.", "Aborte", "Kinderwunsch", "PID", "Planung Nabelschnurblut"], key="question_3")
+        maternal_age_3=col3.text_input("Mütterliches Alter bei der Geburt", key="maternal_age_3")
 
     elif council_3=="Befundbesprechung":
         question_3=col2.selectbox("Analysis", ["CA", "Schnelltest + CA", "Schnelltest + CA + Trio", "Schnelltest + CA + gezielt", "NIPT"], key="analysis_3")
         result_3 = col3.selectbox("Ergebnis", ["unauffällig", "auffälliig"], key="result_3")
-
+    
     #Start building the parts of the letter#
     ########################################
+    #Beratungsgrund and Anamnese#
 
     if question_3=="SS normales Risiko":
         question_3_default_text=f"Aktuelle Schwangerschaft in SSW {pregnancy}, ET {delivery}"
         beratung_3 = st.text_area("Beratungsgrund", question_3_default_text)
+        anamnese_3_default_text=f"Sie berichteten, dass Sie aktuell in Woche {pregnancy} schwanger sind. Der erste Tag der letzten Regel war der {regel}. Der rechnerische Entbindungstermin ist der {delivery}. Die Geburt solle am XX Klinikum stattfinden, wo Sie sich diesbezüglich am 20.05.2020 in der gynäkologischen und anästhesiologischen Sprechstunde vorstellten. Dem Mutterpass entnehmen wir eine unauffällige Schwangerschaft mit unauffälligem Ersttrimesterscreening/ unauffälliger Feindiagnostik am XX 17.02.2020 (Befund vom XX, Klinikum XX). Bei Ihnen, Frau {Name_3}, sowie Ihrem Partner seien keine relevanten Erkrankungen bekannt. Sie seien nicht miteinander verwandt." 
+        anamnese_3 = st.text_area("Beratungsgrund", anamnese_3_default_text)
+    
     elif question_3=="SS erhöhtes Risiko":
         question_3_default_text=f"1. Erhöhtes maternales altersabhängiges Risiko für eine Trisomie 21 beim Fetus<br> 2. Aktuelle Schwangerschaft in SSW {pregnancy}, ET {delivery}"
         beratung_3 = st.text_area("Beratungsgrund", question_3_default_text)
+        anamnese_3_default_text=f"Sie berichteten, dass Sie aktuell in Woche {pregnancy} schwanger sind. Der erste Tag der letzten Regel war der {regel}. Der rechnerische Entbindungstermin ist der {delivery}. Die Geburt solle am XX Klinikum stattfinden, wo Sie sich diesbezüglich am 20.05.2020 in der gynäkologischen und anästhesiologischen Sprechstunde vorstellten. Dem Mutterpass entnehmen wir eine unauffällige Schwangerschaft mit unauffälligem Ersttrimesterscreening/ unauffälliger Feindiagnostik am XX 17.02.2020 (Befund vom XX, Klinikum XX). Bei Ihnen, Frau {Name_3}, sowie Ihrem Partner seien keine relevanten Erkrankungen bekannt. Sie seien nicht miteinander verwandt." 
+        anamnese_3 = st.text_area("Beratungsgrund", anamnese_3_default_text)
+    
     elif question_3=="SS Fehlbildung":
         question_3_default_text=f"1. V.a. eine genetisch bedingte Fehlbildung beim Fetus<br> 2. Aktuelle Schwangerschaft in SSW {pregnancy}, ET {delivery}"
         beratung_3 = st.text_area("Beratungsgrund", question_3_default_text)
+        anamnese_3_default_text=f"Sie berichteten, dass Sie aktuell in Woche {pregnancy} schwanger sind. Der erste Tag der letzten Regel war der {regel}. Der rechnerische/sonographisch korrigierte Entbindungstermin ist am {delivery} (rechnerisch: ). Bei der sonographischen Untersuchung im Rahmen einer regulären Vorsorgeuntersuchung wurde eine Fehlbidung des XX beim Fetus festgestellt (Brief vom XX, XX). Bei Ihnen, Frau {Name_3}, sowie Ihrem Partner seien keine für die Fragestellung relevanten Erkrankungen bekannt. Sie seien nicht miteinander verwandt."
+        anamnese_3 = st.text_area("Beratungsgrund", anamnese_3_default_text)
+        
     elif question_3=="SS Familienanamnese auff.":
         question_3_default_text=f"1. XX in der Familienanamnese aufgrund einer pathogene Variante im XX Gen<br> 2. Aktuelle Schwangerschaft in SSW {pregnancy}, ET {delivery}"
         beratung_3 = st.text_area("Beratungsgrund", question_3_default_text)
+        anamnese_3_default_text=f"Sie berichteten, dass Sie aktuell in Woche {pregnancy} schwanger sind. Der erste Tag der letzten Regel war der {regel}. Der rechnerische/sonographisch korrigierte Entbindungstermin ist am {delivery} (rechnerisch: ). Die Schwangerschaft sei durch die Gynäkologin bestätigt worden. Die Ausstellung des Mutterpasses steht aus. Bei Ihnen, Frau {Name_3}, sowie Ihrem Partner seien keine für die Fragestellung relevanten Erkrankungen bekannt. Sie seien nicht miteinander verwandt."
+        anamnese_3 = st.text_area("Beratungsgrund", anamnese_3_default_text)
+        
     elif question_3=="Aborte":
         question_3_default_text=f"Habituelle Aborte"
         beratung_3 = st.text_area("Beratungsgrund", question_3_default_text)
+        anamnese_3_default_text=f"In Bezug auf die aktuelle Fragestellung wurden folgende Aspkete in der Anamnese erfasst:<br> - XX Aborte in der XX Schwangerschaftswoche<br> - Schwangerschaft sonographisch ohne Auffälligkeiten bestätigt / nicht bestätigt<br> - genetische Diagnostik ist bei keiner der Fehlgeburten erfolgt / Die zytogenetische Diagnostik anhand des Abortmaterials ergab den Nachweis einer XX, im Sinne eines XX (Befund vom XX)<br> - endokrinologische, gynäkologische, immunologische Untersuchungen und und Gerinnungsdiagnostik sind unauffällig (Briefe vom XX) / sind nicht erfolgt<br> -weitere für die Fragestellung relevante Erkrankungen seien bei Ihnen, Frau {Name_3} und Ihrem Partner nicht bekannt."
+        anamnese_3 = st.text_area("Beratungsgrund", anamnese_3_default_text)
+
     elif question_3=="Kinderwunsch":
         question_3_default_text=f"Unerfüllter Kinderwunsch"
         beratung_3 = st.text_area("Beratungsgrund", question_3_default_text)
+        anamnese_3_default_text=f"Seit XX bestehe in Ihrer Partnerschaft ein unerfüllter Kinderwunsch. Eine endokrinologische, gynäkologische, immunologische Untersuchung und Gerinnungsdiagnostik sind unauffällig (Briefe vom XX) // sind nicht erfolgt. Weitere für die Fragestellung relevante Erkrankungen seien bei Ihnen, Frau {Name_3} und Ihrem Partner nicht bekannt."
+        anamnese_3 = st.text_area("Beratungsgrund", anamnese_3_default_text)
+    
     elif question_3=="PID":
         question_3_default_text=f"Präimplantationsdiagnostik bei XX in der Familienanamnese"
         beratung_3 = st.text_area("Beratungsgrund", question_3_default_text)
+        anamnese_3_default_text=f"Sie berichteten, dass bei Ihnen/bei Ihrem Partner, Frau {Name_3}, eine (wahrscheinlich) pathogene c.XX, p.(XX) Variante im XX-Gen nachgewiesen wurde (Befund vom XX). Sie erwägen deshalb eine Präimplantationsdiagnostik. Weitere für die Fragestellung relevante Erkrankungen seien bei Ihnen, Frau {Name_3} und Ihrem Partner nicht bekannt."
+        anamnese_3 = st.text_area("Beratungsgrund", anamnese_3_default_text)
+    
     elif question_3=="Planung Nabelschnurblut":
         question_3_default_text=f"Aktuelle Schwangerschaft in SSW {pregnancy}, ET {delivery}"
         beratung_3 = st.text_area("Beratungsgrund", question_3_default_text)
+        anamnese_3_default_text=f"Sie berichteten, dass bei Ihnen/bei Ihrem Partner, Frau {Name_3}, eine (wahrscheinlich) pathogene c.XX, p.(XX) Variante im XX-Gen nachgewiesen wurde (Befund vom XX). Sie sind aktuell in Woche {pregnancy} schwanger. Der erste Tag der letzten Regel war der {regel}. Der rechnerische/sonographisch korrigierte Entbindungstermin ist am {delivery} (rechnerisch: ). Die Schwangerschaft sei durch die Gynäkologin bestätigt worden. Die Ausstellung des Mutterpasses steht aus. Bei Ihnen, Frau {Name_3}, sowie Ihrem Partner seien keine für die Fragestellung relevanten Erkrankungen bekannt. Sie seien nicht miteinander verwandt."
         
     
            
