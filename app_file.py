@@ -1081,7 +1081,7 @@ Sollten im Verlauf Sie oder weitere Familienmitglieder an weiteren Krebserkranku
         signature="""PD Dr. D Le Duc, MD/PhD<br><small>FÄ für Humangenetik</small>"""
 
     #Anhang
-    anhang_2="""<small>Befund vom XX</small>"""
+    anhang_2="""<small>Anhang: Befund vom XX</small>"""
     
         
 
@@ -1314,7 +1314,7 @@ Unabhängig davon, welche Untersuchungen man in der Schwangerschaft durchführen
 
     #Anhang
     if familienanamnese_3 == "auffällig":
-        anhang_3="""<small>Stammbaum</small>"""
+        anhang_3="""<small>Anhang: Stammbaum</small>"""
     elif familienanamnese_3 == "unauffällig":
         anhang_3=""""""
         
