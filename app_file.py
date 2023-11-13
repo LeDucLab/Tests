@@ -1246,7 +1246,7 @@ with tab3:
             family_3="""Sie berichteten keine für die Fragestellung relevanten Krankheitsbilder in Ihrer Familie."""
         elif familienanamnese_3 == "auffällig":
             fam_text_3="""Hinsichtlich der aktuellen Fragestellung berichteten Sie, dass bei XX eine XX vorliegt. Unterlagen zu den genannten Familienmitgliedern liegen uns nicht vor. Ein drei Generationen umfassender Stammbaum befindet sich im Anhang."""
-            family_3=st.text_area("Relevante Erkrankungen in der Familie", fam_text_3)
+            family_3=st.text_area("Relevante Erkrankungen in der Familie", fam_text_3, key="family_3")
     
     
            
