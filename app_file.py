@@ -1146,7 +1146,17 @@ Sollten im Verlauf Sie oder weitere Familienmitglieder an weiteren Krebserkranku
             st.markdown(signature, unsafe_allow_html=True)
             st.markdown(anhang_2, unsafe_allow_html=True)
         
+
+
+            
+
+
+
 with tab3:
+    st.header("A cat")
+    st.image("https://static.streamlit.io/examples/cat.jpg", width=200)
+
+with tab4:
     #########################################
     # Create the third tab for Textbausteine#
     #########################################
@@ -1247,13 +1257,5 @@ Weiterhin besteht für X vor eigener Familienplanung die Möglichkeit einer erne
         st.markdown("<div class='custom-paragraph'><b>Empfehlung</b></div>",  unsafe_allow_html=True)
         st.markdown(recommendation_3, unsafe_allow_html=True)
 
-
-            
-
-
-
-with tab4:
-    st.header("A cat")
-    st.image("https://static.streamlit.io/examples/cat.jpg", width=200)
   
     
