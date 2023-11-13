@@ -1181,9 +1181,44 @@ with tab3:
     council_3 = col1.selectbox("Art der Beratung", ["Erstberatung", "Befundbesprechung"], key="council_3")
     if council_3=="Erstberatung":
         question_3 = col2.selectbox("Fragestellung", ["SS normales Risiko", "SS erhöhtes Risiko", "SS Fehlbildung", "SS Familienanamnese auff.", "Aborte", "Kinderwunsch", "PID", "Planung Nabelschnurblut"], key="question_3")
+
     elif council_3=="Befundbesprechung":
         question_3=col2.selectbox("Analysis", ["CA", "Schnelltest + CA", "Schnelltest + CA + Trio", "Schnelltest + CA + gezielt", "NIPT"], key="analysis_3")
         result_3 = col3.selectbox("Ergebnis", ["unauffällig", "auffälliig"], key="result_3")
+
+    #Start building the parts of the letter#
+    ########################################
+
+    if question_3=="SS normales Risiko":
+        question_3_default_text=f"Aktuelle Schwangerschaft in SSW {pregnancy}, ET {delivery}"
+        beratung_3 = st.text_area("Beratungsgrund", question_3_default_text)
+    elif question_3=="SS erhöhtes Risiko":
+        question_3_default_text=f"1. Erhöhtes maternales altersabhängiges Risiko für eine Trisomie 21 beim Fetus<br> 2. Aktuelle Schwangerschaft in SSW {pregnancy}, ET {delivery}"
+        beratung_3 = st.text_area("Beratungsgrund", question_3_default_text)
+    elif question_3=="SS Fehlbildung":
+        question_3_default_text=f"1. V.a. eine genetisch bedingte Fehlbildung beim Fetus<br> 2. Aktuelle Schwangerschaft in SSW {pregnancy}, ET {delivery}"
+        beratung_3 = st.text_area("Beratungsgrund", question_3_default_text)
+    elif question_3=="SS Familienanamnese auff.":
+        question_3_default_text=f"1. XX in der Familienanamnese aufgrund einer pathogene Variante im XX Gen<br> 2. Aktuelle Schwangerschaft in SSW {pregnancy}, ET {delivery}"
+        beratung_3 = st.text_area("Beratungsgrund", question_3_default_text)
+    elif question_3=="Aborte":
+        question_3_default_text=f"Habituelle Aborte"
+        beratung_3 = st.text_area("Beratungsgrund", question_3_default_text)
+    elif question_3=="Kinderwunsch":
+        question_3_default_text=f"Unerfüllter Kinderwunsch"
+        beratung_3 = st.text_area("Beratungsgrund", question_3_default_text)
+    elif question_3=="PID":
+        question_3_default_text=f"Präimplantationsdiagnostik bei XX in der Familienanamnese"
+        beratung_3 = st.text_area("Beratungsgrund", question_3_default_text)
+    elif question_3=="Planung Nabelschnurblut":
+        question_3_default_text=f"Aktuelle Schwangerschaft in SSW {pregnancy}, ET {delivery}"
+        beratung_3 = st.text_area("Beratungsgrund", question_3_default_text)
+        
+    
+           
+           
+        
+        
 
 
         
