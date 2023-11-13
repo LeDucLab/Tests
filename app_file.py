@@ -1187,7 +1187,7 @@ with tab3:
         df = pd.DataFrame(data_risk)
         maternal_age_3=st.selectbox('Mütterliches Alter bei der Geburt:', df['Age'])
         risk_value = df[df['Age'] == maternal_age_3]['Risk'].values[0]
-        st.write(f'Das allgemeine altersabhängige Risiko bezüglich des Auftretens einer Chromosomenveränderung, insbesondere einer Trisomie 21 (Down-Syndrom) beim Kind ist bei einem mütterlichen Alter bei der Geburt von {maternal_age_3} – {risk_value}')
+        st.write(f'Das allgemeine altersabhängige Risiko bezüglich des Auftretens einer Chromosomenveränderung, insbesondere einer Trisomie 21 (Down-Syndrom) beim Kind ist bei einem mütterlichen Alter bei der Geburt von {maternal_age_3} Jahren – {risk_value} (Morris <i>et al</i>. 2002, PMID: 11943789)')
     elif council_3=="Befundbesprechung":
         question_3=col2.selectbox("Analysis", ["CA", "Schnelltest + CA", "Schnelltest + CA + Trio", "Schnelltest + CA + gezielt", "NIPT"], key="analysis_3")
         result_3 = col3.selectbox("Ergebnis", ["unauffällig", "auffälliig"], key="result_3")
