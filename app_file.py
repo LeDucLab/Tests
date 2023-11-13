@@ -17,7 +17,7 @@ h1, h2, h3, h4, h5, h6 {
 st.markdown(custom_css, unsafe_allow_html=True)
 
 
-tab1, tab2, tab3, tab4= st.tabs(["EBM_Erstberatung", "EBM_Befundbesprechung", "Text Blocks", "Krankheitsbild Textbausteine"])
+tab1, tab2, tab3, tab4= st.tabs(["EBM_Erstberatung", "EBM_Befundbesprechung", "Schwangerschaft / Kinderwunsch", "Krankheitsbild Textbausteine"])
 
 with tab1:
     ########################################
@@ -1146,19 +1146,54 @@ Sollten im Verlauf Sie oder weitere Familienmitglieder an weiteren Krebserkranku
             st.markdown(signature, unsafe_allow_html=True)
             st.markdown(anhang_2, unsafe_allow_html=True)
         
-
-
-            
-
-
-
 with tab3:
-    st.header("A cat")
-    st.image("https://static.streamlit.io/examples/cat.jpg", width=200)
+    ############################################################
+    # Create the third tab for Schwangerschaft and Kinderwunsch#
+    ############################################################
+
+    st.markdown("<h1 style='font-size: 30px;'>Schwangerschaft und Kinderwunsch</h1>", unsafe_allow_html=True)
+
+    # Get the current date and time#
+    ################################
+    current_datetime_3 = datetime.now()
+
+    ##################
+    #Get patient data#
+    ##################
+    
+    # Create a selectbox to choose an option for the gender#
+    ########################################################
+    st.markdown("### Patienten Daten")
+    col1, col2, col3= st.columns(3)
+    Titel_3 = col1.selectbox("Titel", ["Frau", "Herr", "Familie"], key="Titel_3")        
+    Vorname_3 = col2.text_input("Vorame", key="Vorname_3")
+    Name_3 = col3.text_input("Name", key="Name_3")
+
+    col1, col2= st.columns(2)
+    pregnancy=col1.text_input("Schwangerschaftswoche", key="Vorname_3")
+    delivery=col2.text_input("Errechneter Geburtstermin", key="Vorname_3")
+    
+
+    # Add a selectbox for choosing the type of counciling#
+    ######################################################
+    #st.markdown("### Art der Beratung und Analyse")
+    col1, col2, col3= st.columns(3)
+    council_3 = col1.selectbox("Art der Beratung", ["Erstberatung", "Befundbesprechung"], key="council_3")
+    if council_3=="Erstberatung":
+        question_3 = col2.selectbox("Fragestellung", ["SS normales Risiko", "SS erhöhtes Risiko", "SS Fehlbildung", "SS Familienanamnese auff.", "Aborte", "Kinderwunsch", "PID", "Planung Nabelschnurblut"], key="question_3")
+    elif council_3=="Befundbesprechung":
+        question_3=col2.selectbox("Analysis", ["CA", "Schnelltest + CA", "Schnelltest + CA + Trio", "Schnelltest + CA + gezielt", "NIPT"], key="analysis_3")
+        result_3 = col3.selectbox("Ergebnis", ["unauffällig", "auffälliig"], key="result_3")
+
+
+        
+
+   # st.header("A cat")
+    #st.image("https://static.streamlit.io/examples/cat.jpg", width=200)
 
 with tab4:
-    #########################################
-    # Create the third tab for Textbausteine#
+    ##########################################
+    # Create the fourth tab for Textbausteine##
     #########################################
     
     st.title("Text blocks for diseases, genes, brainstorming etc. (Under development)")
