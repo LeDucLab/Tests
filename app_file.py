@@ -1185,8 +1185,8 @@ with tab3:
         data_risk = {'Age': ["11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55"],
                 'Risk': ["1:1589", "1:1587", "1:1585", "1:1582", "1:1578", "1:1572", "1:1565", "1:1556", "1:1544", "1:1528", "1:1507", "1:1481", "1:1447", "1:1404", "1:1351", "1:1286", "1:1208", "1:1119", "1:1018", "1:909", "1:796", "1:683", "1:574", "1:474", "1:384", "1:307", "1:242", "1:189", "1:146", "1:112", "1:85", "1:65", "1:49", "1:37", "1:28", "1:21", "1:15", "1:11", "1:8", "1:6", "1:4", "1:3", "1:2", "1:1", "1:"]}
         maternal_age_3=st.selectbox('Mütterliches Alter bei der Geburt:', df['Age'])
-        risk_value = df[df['Age'] == maternal_age]['Risk'].values[0]
-        st.write(f'Das allgemeine altersabhängige Risiko bezüglich des Auftretens einer Chromosomenveränderung, insbesondere einer Trisomie 21 (Down-Syndrom) beim Kind ist bei einem mütterlichen Alter bei der Geburt von {maternal_age} – {risk_value}')
+        risk_value = df[df['Age'] == maternal_age_3]['Risk'].values[0]
+        st.write(f'Das allgemeine altersabhängige Risiko bezüglich des Auftretens einer Chromosomenveränderung, insbesondere einer Trisomie 21 (Down-Syndrom) beim Kind ist bei einem mütterlichen Alter bei der Geburt von {maternal_age_3} – {risk_value}')
     elif council_3=="Befundbesprechung":
         question_3=col2.selectbox("Analysis", ["CA", "Schnelltest + CA", "Schnelltest + CA + Trio", "Schnelltest + CA + gezielt", "NIPT"], key="analysis_3")
         result_3 = col3.selectbox("Ergebnis", ["unauffällig", "auffälliig"], key="result_3")
