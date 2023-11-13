@@ -1243,6 +1243,8 @@ with tab3:
         beratung_3 = st.text_area("Beratungsgrund", question_3_default_text)
         anamnese_3_default_text=f"Sie berichteten, dass bei Ihnen/bei Ihrem Partner, Frau {Name_3}, eine (wahrscheinlich) pathogene c.XX, p.(XX) Variante im XX-Gen nachgewiesen wurde (Befund vom XX). Sie sind aktuell in Woche {pregnancy} schwanger. Der erste Tag der letzten Regel war der {regel}. Der rechnerische/sonographisch korrigierte Entbindungstermin ist am {delivery} (rechnerisch: ). Dem Mutterpass entnehmen wir eine unauffällige Schwangerschaft mit unauffälligem Ersttrimesterscreening/ unauffälliger Feindiagnostik am XX 17.02.2020 (Befund vom XX, Klinikum XX). Die Geburt solle am XX Klinikum stattfinden, wo Sie sich diesbezüglich am XX in der gynäkologischen und anästhesiologischen Sprechstunde vorstellten. Bei Ihnen, Frau {Name_3}, sowie Ihrem Partner seien keine für die Fragestellung relevanten Erkrankungen bekannt. Sie seien nicht miteinander verwandt."
 
+    beratung_line_3 = f"**Beratungsgrund:** {beratung_3}"
+
     #Family history#
     ################
     if council_3=="Erstberatung":
@@ -1253,12 +1255,210 @@ with tab3:
             fam_text_3="""Hinsichtlich der aktuellen Fragestellung berichteten Sie, dass bei XX eine XX vorliegt. Unterlagen zu den genannten Familienmitgliedern liegen uns nicht vor. Ein drei Generationen umfassender Stammbaum befindet sich im Anhang."""
             family_3=st.text_area("Relevante Erkrankungen in der Familie", fam_text_3, key="family_3")
 
+    st.markdown("### Behratende Ärzte")
+    col1, col2 = st.columns(2)
+    Arzt1_3 = col1.selectbox("Arzt 1", ["Diana Le Duc", "Albrecht Kobelt"], key="Arzt1_3")
+    Arzt2_3 = col2.selectbox("Arzt 2", ["Diana Le Duc", "Albrecht Kobelt"],  key="Arzt2_3")
+
     #Information about the diagostic#
     #################################
     diagnostic_info_3="""Bei den Methoden zur vorgeburtlichen genetischen Diagnostik unterscheidet man grundlegend die nichtinvasiven Verfahren (NIPT) von den invasiven Verfahren (Chorionzottenbiopsie, Fruchtwasseruntersuchung). <br><br>Als invasive Untersuchungsmethoden stehen die Chorionzottenbiopsie (CVS) und die Fruchtwasseruntersuchung (Amniozentese; AC) zur Verfügung. Der Vorteil der Chorionzottenbiopsie ist, dass sie bereits ab Schwangerschaftswoche 10+0 durchgeführt werden kann. Eine Fruchtwasseruntersuchung ist ab Schwangerschaftswoche 15+0 möglich. Wir besprachen, dass für beide Eingriffe jeweils ein Fehlgeburtsrisiko von 0,35 % angegeben wird (Beta <i>et al</i>., Minerva Ginecol., 2018). An dem jeweils gewonnen fetalen Material kann eine Chromosomenanalyse zur Bestimmung zahlenmäßiger oder grobstruktureller Veränderungen der Chromosomen durchgeführt werden. Nicht mit Sicherheit detektierbar sind Mosaikbefunde (paralleles Vorliegen verschiedener Zelllinien) oder Strukturveränderungen der Chromosomen unterhalb der lichtmikroskopischen Nachweisgrenze. Weiterhin besteht die Möglichkeit der Durchführung einer molekulargenetischen Diagnostik mit gleichzeitiger Untersuchung aller Gene (Exom). Die Untersuchung wird als Trio (gleichzeitige Untersuchung der DNA des Feten und der Eltern) durchgeführt, sodass eine Beurteilung der identifizierten Varianten schnell und effektiv erfolgen kann.<br><br>Ein weiteres nichtinvasives Untersuchungsverfahren ist der Nicht-invasive Pränataltest (NIPT), der ab Schwangerschaftswoche 9+0 beziehungsweise 10+0 zur Verfügung steht. Die im mütterlichen Blut in geringer Menge vorhandene fetale DNA wird hierbei mittels NGS-Verfahren (Next Generation Sequencing) untersucht. Gegenwärtig sind Analysen von zahlenmäßigen Chromosomenveränderungen (z.B. Trisomie 13, 18, 21), Mikrodeletions- und Mikroduplikationssyndromen (z.B. Mikrodeletionssyndrom 22q11.2) und Einzelgenerkrankungen (z.B. Mukoviszidose, spinale Muskelatrophie, Sichelzellkrankheit oder Thalassämien) möglich. Das Ergebnis des Tests liegt je nach Anbieter nach ein bis zwei Wochen vor. Sollte das Testergebnis auffällig sein, muss eine invasive Untersuchung zur Sicherung der Diagnose angeschlossen werden. Aktuell werden die Kosten für diesen Test von den gesetzlichen Krankenkassen nicht standardmäßig übernommen."""
 
     diagnostic_info_non_invasive_3="""Folgende nichtinvasive Methoden der Pränataldiagnostik stehen weiterhin zur Verfügung, jedoch ist der Nachweis einer spezifischen Chromosomenveränderung damit nicht möglich: Zwischen der 11. und 14. Schwangerschaftswoche kann das Erst-Trimester-Screening (First-Trimester-Screening, FTS) durchgeführt werden. Dabei liegt der optimale Untersuchungszeitraum zwischen der 12+0 und 13+0 Schwangerschaftswoche. Mittels einer Ultraschalluntersuchung wird die sogenannte Nackentransparenz (Abstand der Nackenhaut von der Wirbelsäule) beim Kind gemessen und gleichzeitig das PAPP-A (Pregnancy associated plasma protein A) und das freie ß-hCG (humanes Choriongonadotropin) aus dem mütterlichen Blut bestimmt. Aus diesen Parametern wird dann Ihr individuelles statistisches Risiko für eine Chromosomenveränderung beim Kind berechnet. Aktuell werden die Kosten für diesen Test von den gesetzlichen Krankenkassen nicht standardmäßig übernommen. 
 Unabhängig davon, welche Untersuchungen man in der Schwangerschaft durchführen lässt, kann zwischen der 18. bis 22. Schwangerschaftswoche eine Ultraschallfeindiagnostik erfolgen, wobei die regelrechte Entwicklung aller Organe und des Skelettsystems beurteilt werden kann. Ob Fehlbildungen bereits pränatal im Ultraschall zu erkennen sind, kann nicht mit Sicherheit gesagt werden."""
+
+    diagostic_PID="""Die Polkörperdiagnostik (PKD) ist eine Methode zur genetischen Untersuchung von Eizellen noch vor Abschluss der Befruchtung bei einer mütterlicherseits vorbekannten, schwerwiegenden genetisch bedingten Erkrankung. Die Entnahme und Untersuchung des ersten und zweiten Polkörpers ermöglicht dabei eine indirekte Aussage über die genetische Information der Eizelle. Die Präimplantationsdiagnostik (PID) ist bei einem hohen Risiko für eine schwerwiegende genetisch bedingte Erkrankung des Fetus in Deutschland aufgrund methodischer Vorteile besser etabliert. Hierbei wird nach einer künstlichen Befruchtung eine genetische Diagnostik an der befruchteten Eizelle bzw. dem Embryo vor der Einnistung in der Gebärmutter durchgeführt. Dafür werden einzelne Zellen aus der äußeren Schicht des Embryos (am 5. Tag nach der Befruchtung) entnommen und untersucht. Da die Diagnostik mehrere Tage in Anspruch nimmt, werden die Embryonen vorübergehend eingefroren. Gesunde Embryonen können dann bei einem späteren Zyklus in die Gebärmutter übertragen werden.<br><br>Zunächst kann hierzu eine Beratung an einem PID-Zentrum oder reproduktionsmedizinischen Kooperationspartners erfolgen. Aktuell werden die Kosten für die Diagnostik nicht standardmäßig von den gesetzlichen Krankenkassen übernommen. Eine individuelle Beantragung für eine Kostenübernahme ist jedoch möglich."""
+
+    #Evaulation of the risk#
+    ########################
+    if question_3=="SS normales Risiko":
+        risk_eval=f"Das allgemeine Basisrisiko bei jeder Schwangerschaft für eine Gesundheitsstörung beim Kind liegt in der Größenordnung von 3 bis 5 %. (Das Risiko verdoppelt sich in einer konsanguinen Partnerschaft zwischen Cousine und Cousin ersten Grades. Bei konsanguinen Partnerschaften über mehrere Generationen ist das Risiko dementsprechend zusätzlich erhöht.)<br>Es besteht zusätzlich auch das allgemeine altersabhängige Risiko bezüglich des Auftretens einer Chromosomenveränderung, insbesondere einer Trisomie 21 (Down-Syndrom) beim Kind. Es ist bekannt, dass das Risiko für eine neu entstandene (spontane) Chromosomenveränderung mit steigendem Alter insbesondere der Frau zunimmt. In Ihrer Altersgruppe von {maternal_age_3} Jahren zum Zeitpunkt der Geburt ist das Risiko für das Vorliegen einer neuentstandenen Chromosomenveränderung beim Kind aufgrund Ihres Alters als nicht erhöht einzustufen. Das Risiko liegt bei etwa {risk_value} Geburten nach Morris <i>et al</i>. J Med Screen 2002.<br><br> Wir empfehlen Ihnen die Teilnahme an der Regelschwangerschaftsvorsorge und ggf. nichtinvasive Pränataldiagnostik."
+
+    elif question_3=="SS erhöhtes Risiko":
+        risk_eval=f"Das allgemeine Basisrisiko bei jeder Schwangerschaft für eine Gesundheitsstörung beim Kind liegt in der Größenordnung von 3 bis 5 %. (Das Risiko verdoppelt sich in einer konsanguinen Partnerschaft zwischen Cousine und Cousin ersten Grades. Bei konsanguinen Partnerschaften über mehrere Generationen ist das Risiko dementsprechend zusätzlich erhöht.)<br>Es besteht zusätzlich auch das allgemeine altersabhängige Risiko bezüglich des Auftretens einer Chromosomenveränderung, insbesondere einer Trisomie 21 (Down-Syndrom) beim Kind. Es ist bekannt, dass das Risiko für eine neu entstandene (spontane) Chromosomenveränderung mit steigendem Alter insbesondere der Frau zunimmt. In Ihrer Altersgruppe von {maternal_age_3} Jahren zum Zeitpunkt der Geburt ist das Risiko für das Vorliegen einer neuentstandenen Chromosomenveränderung beim Kind aufgrund Ihres Alters als erhöht einzustufen. Das Risiko liegt bei etwa {risk_value} Geburten nach Morris <i>et al</i>. J Med Screen 2002.<br><br> Sie entschieden sich für eine invasive Pränataldiagnostik. Sobald uns die Probe vorliegt, werden wir die genetische Diagnostik einleiten. Sobald der Befund der genetischen Diagnostik vorliegt werden wir Sie informieren und weiterführend Stellung nehmen."
+
+    elif question_3=="SS Fehlbildung":
+        risk_eval=f"Das allgemeine Basisrisiko bei jeder Schwangerschaft für eine Gesundheitsstörung beim Kind liegt in der Größenordnung von 3 bis 5 %. (Das Risiko verdoppelt sich in einer konsanguinen Partnerschaft zwischen Cousine und Cousin ersten Grades. Bei konsanguinen Partnerschaften über mehrere Generationen ist das Risiko dementsprechend zusätzlich erhöht.)<br>Es besteht zusätzlich auch das allgemeine altersabhängige Risiko bezüglich des Auftretens einer Chromosomenveränderung, insbesondere einer Trisomie 21 (Down-Syndrom) beim Kind. Es ist bekannt, dass das Risiko für eine neu entstandene (spontane) Chromosomenveränderung mit steigendem Alter insbesondere der Frau zunimmt. In Ihrer Altersgruppe von {maternal_age_3} Jahren zum Zeitpunkt der Geburt ist das Risiko für das Vorliegen einer neuentstandenen Chromosomenveränderung beim Kind aufgrund Ihres Alters als (nicht) XX erhöht einzustufen. Das Risiko liegt bei etwa {risk_value} Geburten nach Morris <i>et al</i>. J Med Screen 2002.<br><br> Mit dem durch die pränatalen Auffälligkeiten erhöhten Risiko für eine chromosomale Aberration oder eine monogene Erkrankung beim Kind besteht für Sie die Möglichkeit der Inanspruchnahme einer Pränataldiagnostik.<br><br>//Da eine genetische Ursache für die sonographischen Auffälligkeiten bei Ihrem ungeborenen Kind nicht ausgeschlossen werden kann, besteht für Sie die Möglichkeit der Inanspruchnahme einer Pränataldiagnostik.<br><br>Sie entschieden sich für eine invasive Pränataldiagnostik. Sobald uns die Probe vorliegt, werden wir die genetische Diagnostik einleiten. Sobald der Befund der genetischen Diagnostik vorliegt werden wir Sie informieren und weiterführend Stellung nehmen."
+
+    elif question_3=="SS Familienanamnese auff.":
+        risk_eval=f"Das allgemeine Basisrisiko bei jeder Schwangerschaft für eine Gesundheitsstörung beim Kind liegt in der Größenordnung von 3 bis 5 %. (Das Risiko verdoppelt sich in einer konsanguinen Partnerschaft zwischen Cousine und Cousin ersten Grades. Bei konsanguinen Partnerschaften über mehrere Generationen ist das Risiko dementsprechend zusätzlich erhöht.)<br>Es besteht zusätzlich auch das allgemeine altersabhängige Risiko bezüglich des Auftretens einer Chromosomenveränderung, insbesondere einer Trisomie 21 (Down-Syndrom) beim Kind. Es ist bekannt, dass das Risiko für eine neu entstandene (spontane) Chromosomenveränderung mit steigendem Alter insbesondere der Frau zunimmt. In Ihrer Altersgruppe von {maternal_age_3} Jahren zum Zeitpunkt der Geburt ist das Risiko für das Vorliegen einer neuentstandenen Chromosomenveränderung beim Kind aufgrund Ihres Alters als (nicht) XX erhöht einzustufen. Das Risiko liegt bei etwa {risk_value} Geburten nach Morris <i>et al</i>. J Med Screen 2002.<br><br> Bei Ihnen wurde die (wahrescheinlich) pathogene c.XX, p.(XX) Variante im XX-Gen nachgewiesen, dadurch besteht ein XX 50%-iges Risiko für Ihr ungeborenes Kind an einem XX zu erkranken. Es besteht für Sie die Möglichkeit der Inanspruchnahme einer Pränataldiagnostik.<br><br>/ Durch die auffällige Familienanamnese besteht für Sie ein erhöhtes Risiko für einen unerfüllten Kinderwunsch, ein erhöhtes Risiko für Fehlgeburten und ein erhöhtes Risiko für die Geburt eines Kindes mit Fehlbildungen und einer kognitiven Entwicklungsstörung. Im Falle einer stabilen Schwangerschaft besteht für Sie die Möglichkeit der Inanspruchnahme einer Pränataldiagnostik.<br><br>Sie entschieden sich für eine invasive Pränataldiagnostik. Sobald uns die Probe vorliegt, werden wir die genetische Diagnostik einleiten. Sobald der Befund der genetischen Diagnostik vorliegt werden wir Sie informieren und weiterführend Stellung nehmen."
+
+    elif question_3=="Aborte":
+        risk_eval="""Zur Abklärung des Verdachts auf eine balancierte Chromosomenaberration als Ursache für die Aborte veranlassten wir bei Ihnen (beiden) eine konventionelle Chromosomenanalyse. Sobald der Befund der genetischen Diagnostik vorliegt, werden wir Sie informieren und weiterführend Stellung nehmen."""
+
+    elif question_3=="Kinderwunsch":
+        risk_eval="""Zur Abklärung des Verdachts auf eine balancierte Chromosomenaberration als Ursache für die Aborte veranlassten wir bei Ihnen (beiden) eine konventionelle Chromosomenanalyse. Sobald der Befund der genetischen Diagnostik vorliegt, werden wir Sie informieren und weiterführend Stellung nehmen."""
+
+    elif question_3=="PID":
+        risk_eval="""Bei Ihnen wurde die o.g. (wahrscheinlich) pathogene c.XX, p.(XX)-Variante und somit ein XX molekulargenetisch nachgewiesen. Für weitere Kinder von Ihnen besteht eine XX 50%ige Wahrscheinlichkeit die o.g. Variante im XX-Gen ebenfalls zu erben und mit einer erhöhten Wahrscheinlichkeit ein XX auszubilden. Eine sichere Vorhersage zu auftretenden Symptomen ist aufgrund der bekannt unvollständigen Penetranz nicht möglich. Wir empfehlen eine genetische Beratung im Falle einer Schwangerschaft in der sechsten bis neunten Schwangerschaftswoche. Sollten Sie die Abklärung der Diagnose im Vorfeld einer Schwangerschaft im Rahmen einer künstlichen Befruchtung mittels Präimplantations- oder Polkörperdiagnostik in Erwägung ziehen, empfehlen wir Ihnen die Beratung in einem spezialisierten Kinderwunschzentrum. Kontaktinformationen und Ansprechpartner finden Sie hierzu auch unter https://www.pid-zentrum.de/partner-pid.html.<br><br> Informationen zur Ethikkommission des Freistaats Sachsen finden Sie unter: https://www.aerztekammer-bw.de/20buerger/50pid-kommission/index.html. Informationen zur Ethikkommission des Freistaats Bayern finden Sie unter: https://www.stmgp.bayern.de/ministerium/behoerden-und-gremien/ethikkommission-praeimplantationsdiagnostik/."""
+
+    elif question_3=="Planung Nabelschnurblut":
+        risk_eval="""Bei Ihnen wurde die o.g. (wahrscheinlich) pathogene c.XX, p.(XX)-Variante und somit ein XX molekulargenetisch nachgewiesen. Für weitere Kinder von Ihnen besteht eine XX 50%ige Wahrscheinlichkeit die o.g. Variante im XX-Gen ebenfalls zu erben und mit einer erhöhten Wahrscheinlichkeit ein XX auszubilden. Eine sichere Vorhersage zu auftretenden Symptomen ist aufgrund der bekannt unvollständigen Penetranz nicht möglich. Wir besprachen, dass eine gezielte Diagnostik hinsichtlich der familiär bekannten XX-Veränderung an Nabelschnurblut nach Geburt Ihres Kindes möglich ist. Hierfür benötigen wir:<br> 1) die Zusendung einer Nabelschnurblutprobe durch unsere ärztlichen Kollegen,<br> 2) die Vorlage der Krankenversicherungskarte Ihres Kindes in unserer Ambulanz oder<br> 3) einen ambulanten Überweisungsschein zur genetischen Diagnostik für Ihr Kind.<bbr> Sollte die Entnahme und Zusendung einer Nabelschnurblutprobe bei Ihrem Kind im Rahmen der Geburt nicht möglich sein, können Sie sich gern zur Entnahme einer Mundschleimhautprobe erneut in unserer Sprechstunde vorstellen. Sobald uns eine Blutprobe von Ihrem Kind vorliegt, werden wir die genetische Diagnostik einleiten. Sobald der Befund der genetischen Diagnostik vorliegt werden wir Sie informieren und weiterführend Stellung nehmen."""
+
+    #Begrüßung#
+    ###########
+    if Titel_3== "Herr":
+        hello_line_3 = f"Sehr geehrter {Titel} {Name},"
+    elif Titel_3 != "Herr":
+        hello_line_3 = f"Sehr geehrte {Titel} {Name},"
+
+    first_line_3=f"am {current_datetime.strftime('%d.%m.%Y')} stellten Sie sich in unserer genetischen Sprechstunde vor."
+        
+    #Final lines
+    last_line_3="""Wir hoffen, Sie mit unserem Gespräch und diesem Brief vorerst ausreichend informiert zu haben. Bei Rückfragen stehen wir gerne auch telefonisch zur Verfügung.<br><br>Mit freundlichen Grüßen,<br><br>"""
+
+    #Signatures
+    if Arzt1_3 =="Diana Le Duc":
+        signature_3="""PD Dr. D Le Duc, MD/PhD<br><small>FÄ für Humangenetik</small>"""
+
+    #Anhang
+    if familienanamnese_3 == "auffällig":
+        anhang_3="""<small>Stammbaum</small>"""
+    elif familienanamnese_3 == "unauffällig":
+        anhang_3=""""""
+        
+    
+    if st.button("Arzt Brief"):
+        # Display text based on the selected option
+        if council_3 == "Erstbberatung":
+            if question_3=="SS normales Risiko":
+                st.markdown(beratung_line_3, unsafe_allow_html=True)
+                st.markdown(hello_line_3, unsafe_allow_html=True)
+                st.markdown(first_line_3, unsafe_allow_html=True)
+                st.markdown("<div class='custom-paragraph'><b>Eigenanamnese:</b></div>",  unsafe_allow_html=True)
+                st.markdown(anamnese_3, unsafe_allow_html=True)
+                st.markdown("<div class='custom-paragraph'><b>Familienanamnese</b></div>",  unsafe_allow_html=True)
+                st.markdown(family_3, unsafe_allow_html=True)
+                st.markdown("<div class='custom-paragraph'><b>Allgemeine Informationen zur genetischen Pränataldiagnostik</b></div>",  unsafe_allow_html=True)
+                st.markdown(diagnostic_info_3, unsafe_allow_html=True)
+                st.markdown("<div class='custom-paragraph'><b>Allgemeine Informationen zum Ersttrimesterscreening und Feindiagnostik</b></div>",  unsafe_allow_html=True)
+                st.markdown(diagnostic_info_non_invasive_3, unsafe_allow_html=True)
+                st.markdown("<div class='custom-paragraph'><b>Beurteilung und Procedere</b></div>",  unsafe_allow_html=True)
+                st.markdown(risk_eval, unsafe_allow_html=True)
+                st.markdown(last_line_3, unsafe_allow_html=True)
+                st.markdown(signature_3, unsafe_allow_html=True)
+                st.markdown(anhang_3, unsafe_allow_html=True)
+            elif question_3=="SS erhöhtes Risiko":
+                st.markdown(beratung_line_3, unsafe_allow_html=True)
+                st.markdown(hello_line_3, unsafe_allow_html=True)
+                st.markdown(first_line_3, unsafe_allow_html=True)
+                st.markdown("<div class='custom-paragraph'><b>Eigenanamnese:</b></div>",  unsafe_allow_html=True)
+                st.markdown(anamnese_3, unsafe_allow_html=True)
+                st.markdown("<div class='custom-paragraph'><b>Familienanamnese</b></div>",  unsafe_allow_html=True)
+                st.markdown(family_3, unsafe_allow_html=True)
+                st.markdown("<div class='custom-paragraph'><b>Allgemeine Informationen zur genetischen Pränataldiagnostik</b></div>",  unsafe_allow_html=True)
+                st.markdown(diagnostic_info_3, unsafe_allow_html=True)
+                st.markdown("<div class='custom-paragraph'><b>Allgemeine Informationen zum Ersttrimesterscreening und Feindiagnostik</b></div>",  unsafe_allow_html=True)
+                st.markdown(diagnostic_info_non_invasive_3, unsafe_allow_html=True)
+                st.markdown("<div class='custom-paragraph'><b>Beurteilung und Procedere</b></div>",  unsafe_allow_html=True)
+                st.markdown(risk_eval, unsafe_allow_html=True)
+                st.markdown(last_line_3, unsafe_allow_html=True)
+                st.markdown(signature_3, unsafe_allow_html=True)
+                st.markdown(anhang_3, unsafe_allow_html=True)
+            elif question_3=="Fehlbildungen":
+                st.markdown(beratung_line_3, unsafe_allow_html=True)
+                st.markdown(hello_line_3, unsafe_allow_html=True)
+                st.markdown(first_line_3, unsafe_allow_html=True)
+                st.markdown("<div class='custom-paragraph'><b>Eigenanamnese:</b></div>",  unsafe_allow_html=True)
+                st.markdown(anamnese_3, unsafe_allow_html=True)
+                st.markdown("<div class='custom-paragraph'><b>Familienanamnese</b></div>",  unsafe_allow_html=True)
+                st.markdown(family_3, unsafe_allow_html=True)
+                st.markdown("<div class='custom-paragraph'><b>Allgemeine Informationen zur genetischen Pränataldiagnostik</b></div>",  unsafe_allow_html=True)
+                st.markdown(diagnostic_info_3, unsafe_allow_html=True)
+                st.markdown("<div class='custom-paragraph'><b>Allgemeine Informationen zum Ersttrimesterscreening und Feindiagnostik</b></div>",  unsafe_allow_html=True)
+                st.markdown(diagnostic_info_non_invasive_3, unsafe_allow_html=True)
+                st.markdown("<div class='custom-paragraph'><b>Beurteilung und Procedere</b></div>",  unsafe_allow_html=True)
+                st.markdown(risk_eval, unsafe_allow_html=True)
+                st.markdown(last_line_3, unsafe_allow_html=True)
+                st.markdown(signature_3, unsafe_allow_html=True)
+                st.markdown(anhang_3, unsafe_allow_html=True)
+            elif question_3=="SS Familienanamnese auff.":
+                st.markdown(beratung_line_3, unsafe_allow_html=True)
+                st.markdown(hello_line_3, unsafe_allow_html=True)
+                st.markdown(first_line_3, unsafe_allow_html=True)
+                st.markdown("<div class='custom-paragraph'><b>Eigenanamnese:</b></div>",  unsafe_allow_html=True)
+                st.markdown(anamnese_3, unsafe_allow_html=True)
+                st.markdown("<div class='custom-paragraph'><b>Familienanamnese</b></div>",  unsafe_allow_html=True)
+                st.markdown(family_3, unsafe_allow_html=True)
+                st.markdown("<div class='custom-paragraph'><b>Allgemeine Informationen zur genetischen Pränataldiagnostik</b></div>",  unsafe_allow_html=True)
+                st.markdown(diagnostic_info_3, unsafe_allow_html=True)
+                st.markdown("<div class='custom-paragraph'><b>Allgemeine Informationen zum Ersttrimesterscreening und Feindiagnostik</b></div>",  unsafe_allow_html=True)
+                st.markdown(diagnostic_info_non_invasive_3, unsafe_allow_html=True)
+                st.markdown("<div class='custom-paragraph'><b>Beurteilung und Procedere</b></div>",  unsafe_allow_html=True)
+                st.markdown(risk_eval, unsafe_allow_html=True)
+                st.markdown(last_line_3, unsafe_allow_html=True)
+                st.markdown(signature_3, unsafe_allow_html=True)
+                st.markdown(anhang_3, unsafe_allow_html=True)
+             elif question_3=="Aborte":
+                st.markdown(beratung_line_3, unsafe_allow_html=True)
+                st.markdown(hello_line_3, unsafe_allow_html=True)
+                st.markdown(first_line_3, unsafe_allow_html=True)
+                st.markdown("<div class='custom-paragraph'><b>Eigenanamnese:</b></div>",  unsafe_allow_html=True)
+                st.markdown(anamnese_3, unsafe_allow_html=True)
+                st.markdown("<div class='custom-paragraph'><b>Familienanamnese</b></div>",  unsafe_allow_html=True)
+                st.markdown(family_3, unsafe_allow_html=True)
+                st.markdown("<div class='custom-paragraph'><b>Beurteilung und Procedere</b></div>",  unsafe_allow_html=True)
+                st.markdown(risk_eval, unsafe_allow_html=True)
+                st.markdown(last_line_3, unsafe_allow_html=True)
+                st.markdown(signature_3, unsafe_allow_html=True)
+                st.markdown(anhang_3, unsafe_allow_html=True)
+                st.markdown(anhang_3, unsafe_allow_html=True)
+            elif question_3=="Kinderwunsch":
+                st.markdown(beratung_line_3, unsafe_allow_html=True)
+                st.markdown(hello_line_3, unsafe_allow_html=True)
+                st.markdown(first_line_3, unsafe_allow_html=True)
+                st.markdown("<div class='custom-paragraph'><b>Eigenanamnese:</b></div>",  unsafe_allow_html=True)
+                st.markdown(anamnese_3, unsafe_allow_html=True)
+                st.markdown("<div class='custom-paragraph'><b>Familienanamnese</b></div>",  unsafe_allow_html=True)
+                st.markdown(family_3, unsafe_allow_html=True)
+                st.markdown("<div class='custom-paragraph'><b>Beurteilung und Procedere</b></div>",  unsafe_allow_html=True)
+                st.markdown(risk_eval, unsafe_allow_html=True)
+                st.markdown(last_line_3, unsafe_allow_html=True)
+                st.markdown(signature_3, unsafe_allow_html=True)
+                st.markdown(anhang_3, unsafe_allow_html=True)
+            elif question_3=="SS Familienanamnese auff.":
+                st.markdown(beratung_line_3, unsafe_allow_html=True)
+                st.markdown(hello_line_3, unsafe_allow_html=True)
+                st.markdown(first_line_3, unsafe_allow_html=True)
+                st.markdown("<div class='custom-paragraph'><b>Eigenanamnese:</b></div>",  unsafe_allow_html=True)
+                st.markdown(anamnese_3, unsafe_allow_html=True)
+                st.markdown("<div class='custom-paragraph'><b>Familienanamnese</b></div>",  unsafe_allow_html=True)
+                st.markdown(family_3, unsafe_allow_html=True)
+                st.markdown("<div class='custom-paragraph'><b>Allgemeine Informationen zur Präimplantationsdiagnostik (PID)</b></div>",  unsafe_allow_html=True)
+                st.markdown(diagnostic_PID, unsafe_allow_html=True)
+                st.markdown("<div class='custom-paragraph'><b>Beurteilung und Procedere</b></div>",  unsafe_allow_html=True)
+                st.markdown(risk_eval, unsafe_allow_html=True)
+                st.markdown(last_line_3, unsafe_allow_html=True)
+                st.markdown(signature_3, unsafe_allow_html=True)
+                st.markdown(anhang_3, unsafe_allow_html=True)
+            elif question_3=="Planung Nabelschnurblut":
+                st.markdown(beratung_line_3, unsafe_allow_html=True)
+                st.markdown(hello_line_3, unsafe_allow_html=True)
+                st.markdown(first_line_3, unsafe_allow_html=True)
+                st.markdown("<div class='custom-paragraph'><b>Eigenanamnese:</b></div>",  unsafe_allow_html=True)
+                st.markdown(anamnese_3, unsafe_allow_html=True)
+                st.markdown("<div class='custom-paragraph'><b>Familienanamnese</b></div>",  unsafe_allow_html=True)
+                st.markdown(family_3, unsafe_allow_html=True)
+                st.markdown("<div class='custom-paragraph'><b>Beurteilung und Procedere</b></div>",  unsafe_allow_html=True)
+                st.markdown(risk_eval, unsafe_allow_html=True)
+                st.markdown(last_line_3, unsafe_allow_html=True)
+                st.markdown(signature_3, unsafe_allow_html=True)
+                st.markdown(anhang_3, unsafe_allow_html=True)
+            
+            
+
+
+
+        
+
+        
+      
+
+    
+        
+    
+
+    
 
 
 
