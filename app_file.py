@@ -1321,7 +1321,7 @@ Unabhängig davon, welche Untersuchungen man in der Schwangerschaft durchführen
     
     if st.button("Arzt Brief", key="brief_3"):
         # Display text based on the selected option
-        if council_3 == "Erstbberatung":
+        if council_3 == "Erstberatung":
             if question_3=="SS normales Risiko":
                 st.markdown(beratung_line_3, unsafe_allow_html=True)
                 st.markdown(hello_line_3, unsafe_allow_html=True)
