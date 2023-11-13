@@ -1170,8 +1170,8 @@ with tab3:
     Name_3 = col3.text_input("Name", key="Name_3")
 
     col1, col2= st.columns(2)
-    pregnancy=col1.text_input("Schwangerschaftswoche", key="Vorname_3")
-    delivery=col2.text_input("Errechneter Geburtstermin", key="Vorname_3")
+    pregnancy=col1.text_input("Schwangerschaftswoche", key="pregnancy_3")
+    delivery=col2.text_input("Errechneter Geburtstermin", key="delivery_3")
     
 
     # Add a selectbox for choosing the type of counciling#
