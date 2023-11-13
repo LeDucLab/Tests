@@ -1237,7 +1237,17 @@ with tab3:
         question_3_default_text=f"Aktuelle Schwangerschaft in SSW {pregnancy}, ET {delivery}"
         beratung_3 = st.text_area("Beratungsgrund", question_3_default_text)
         anamnese_3_default_text=f"Sie berichteten, dass bei Ihnen/bei Ihrem Partner, Frau {Name_3}, eine (wahrscheinlich) pathogene c.XX, p.(XX) Variante im XX-Gen nachgewiesen wurde (Befund vom XX). Sie sind aktuell in Woche {pregnancy} schwanger. Der erste Tag der letzten Regel war der {regel}. Der rechnerische/sonographisch korrigierte Entbindungstermin ist am {delivery} (rechnerisch: ). Die Schwangerschaft sei durch die Gynäkologin bestätigt worden. Die Ausstellung des Mutterpasses steht aus. Bei Ihnen, Frau {Name_3}, sowie Ihrem Partner seien keine für die Fragestellung relevanten Erkrankungen bekannt. Sie seien nicht miteinander verwandt."
-        
+
+    #Family history#
+    ################
+    if council_3=="Erstberatung":
+        familienanamnese = st.selectbox("Familienanamnese", ["auffällig", "unauffällig"])
+        if familienanamnese == "unauffällig":
+            family="""Sie berichteten keine für die Fragestellung relevanten Krankheitsbilder in Ihrer Familie."""
+        elif familienanamnese == "auffällig":
+            fam_text="""Hinsichtlich der aktuellen Fragestellung berichteten Sie, dass bei XX eine XX vorliegt. Unterlagen zu den genannten Familienmitgliedern liegen uns nicht vor. Ein drei Generationen umfassender Stammbaum befindet sich im Anhang."""
+            family=st.text_area("Relevante Erkrankungen in der Familie", fam_text)
+    
     
            
            
