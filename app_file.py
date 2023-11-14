@@ -1318,10 +1318,11 @@ Unabhängig davon, welche Untersuchungen man in der Schwangerschaft durchführen
         signature_3="""PD Dr. D Le Duc, MD/PhD<br><small>FÄ für Humangenetik</small>"""
 
     #Anhang
-    if familienanamnese_3 == "auffällig":
-        anhang_3="""<small>Anhang: Stammbaum</small>"""
-    elif familienanamnese_3 == "unauffällig":
-        anhang_3=""""""
+    if council_3=="Erstberatung":
+        if familienanamnese_3 == "auffällig":
+            anhang_3="""<small>Anhang: Stammbaum</small>"""
+        elif familienanamnese_3 == "unauffällig":
+            anhang_3=""""""
     if council_3=="Befundbesprechung":
         anhang_3="""<small>Anhang: Befund vom XX</small>"""
         
