@@ -1190,7 +1190,7 @@ with tab3:
         st.write(f'Das allgemeine altersabhängige Risiko bezüglich des Auftretens einer Chromosomenveränderung, insbesondere einer Trisomie 21 (Down-Syndrom) beim Kind ist bei einem mütterlichen Alter bei der Geburt von {maternal_age_3} Jahren – {risk_value} (Morris <i>et al</i>. 2002, PMID: 11943789)')
     elif council_3=="Befundbesprechung":
         analysis_3=col2.selectbox("Analysis", ["CA-Aborte-Kinderwunsch", "Schnelltest + CA", "Schnelltest + CA + Trio", "Schnelltest + CA + gezielt", "NIPT"], key="analysis_3")
-        result_3 = col3.selectbox("Ergebnis", ["unauffällig", "auffälliig"], key="result_3")
+        result_3 = col3.selectbox("Ergebnis", ["unauffällig", "auffällig"], key="result_3")
         beratung_3 = st.text_area("Beratungsgrund", key="beratung_bb")
     
     #Start building the parts of the letter for Erstberatung#
