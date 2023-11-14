@@ -1382,10 +1382,10 @@ Unabhängig davon, welche Untersuchungen man in der Schwangerschaft durchführen
     if council_3=="Befundbesprechung":
         if result_3=="auffällig":
             first_line_31=f"am {current_datetime.strftime('%d.%m.%Y')} stellten Sie sich zur Befundbesprechung in unserer genetischen Sprechstunde vor. Zur Vorgeschichte verweisen wir auf unseren Brief vom XX."
-            result_line_3="""Kein Nachweis einer Ursache in der durchgeführten genetischen Diagnostik / Ausschluss der familiär bekannten Variante im XX-Gen""" 
+            result_line_3="""**Diagnose**: XX beim Fetus""" 
         elif result_3=="unauffällig":
             first_line_31=f"Wir berichten vom Ergebnis der durchgeführten genetischen Diagnostik. Zur Vorgeschichte verweisen wir auf unseren Brief vom XX. Die Befunde der pränatalen Diagnostik teilten wir Ihnen bereits am XX telefonisch mit."
-            result_line_3="""**Diagnose**: XX beim Fetus""" 
+            result_line_3="""**Ergebnis:**Kein Nachweis einer Ursache in der durchgeführten genetischen Diagnostik / Ausschluss der familiär bekannten Variante im XX-Gen"""
         beratung_line_3 = f"**Beratungsgrund:** {beratung_3}"
             
     
