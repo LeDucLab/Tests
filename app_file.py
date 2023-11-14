@@ -1518,7 +1518,7 @@ Unabhängig davon, welche Untersuchungen man in der Schwangerschaft durchführen
                 st.markdown(signature_3, unsafe_allow_html=True)
                 st.markdown(anhang_3, unsafe_allow_html=True)
 
-    elif council_3 == "Befundbesprechung":
+        elif council_3 == "Befundbesprechung":
             if analysis_3=="CA-Aborte-Kinderwunsch":
                 st.markdown(beratung_line_3, unsafe_allow_html=True)
                 st.markdown(result_line_3, unsafe_allow_html=True)
