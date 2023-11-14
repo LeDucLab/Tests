@@ -1191,6 +1191,7 @@ with tab3:
     elif council_3=="Befundbesprechung":
         analysis_3=col2.selectbox("Analysis", ["CA-Aborte-Kinderwunsch", "Schnelltest + CA", "Schnelltest + CA + Trio", "Schnelltest + CA + gezielt", "NIPT"], key="analysis_3")
         result_3 = col3.selectbox("Ergebnis", ["unauffällig", "auffälliig"], key="result_3")
+        beratung_3 = st.text_area("Beratungsgrund", key="beratung_bb")
     
     #Start building the parts of the letter for Erstberatung#
     #########################################################
@@ -1261,14 +1262,17 @@ with tab3:
     Arzt1_3 = col1.selectbox("Arzt 1", ["Diana Le Duc", "Albrecht Kobelt"], key="Arzt1_3")
     Arzt2_3 = col2.selectbox("Arzt 2", ["Diana Le Duc", "Albrecht Kobelt"],  key="Arzt2_3")
 
-    #Information about the diagostic#
-    #################################
+    #Information about the diagostic/disease#
+    #########################################
     diagnostic_info_3="""Bei den Methoden zur vorgeburtlichen genetischen Diagnostik unterscheidet man grundlegend die nichtinvasiven Verfahren (NIPT) von den invasiven Verfahren (Chorionzottenbiopsie, Fruchtwasseruntersuchung). <br><br>Als invasive Untersuchungsmethoden stehen die Chorionzottenbiopsie (CVS) und die Fruchtwasseruntersuchung (Amniozentese; AC) zur Verfügung. Der Vorteil der Chorionzottenbiopsie ist, dass sie bereits ab Schwangerschaftswoche 10+0 durchgeführt werden kann. Eine Fruchtwasseruntersuchung ist ab Schwangerschaftswoche 15+0 möglich. Wir besprachen, dass für beide Eingriffe jeweils ein Fehlgeburtsrisiko von 0,35 % angegeben wird (Beta <i>et al</i>., Minerva Ginecol., 2018). An dem jeweils gewonnen fetalen Material kann eine Chromosomenanalyse zur Bestimmung zahlenmäßiger oder grobstruktureller Veränderungen der Chromosomen durchgeführt werden. Nicht mit Sicherheit detektierbar sind Mosaikbefunde (paralleles Vorliegen verschiedener Zelllinien) oder Strukturveränderungen der Chromosomen unterhalb der lichtmikroskopischen Nachweisgrenze. Weiterhin besteht die Möglichkeit der Durchführung einer molekulargenetischen Diagnostik mit gleichzeitiger Untersuchung aller Gene (Exom). Die Untersuchung wird als Trio (gleichzeitige Untersuchung der DNA des Feten und der Eltern) durchgeführt, sodass eine Beurteilung der identifizierten Varianten schnell und effektiv erfolgen kann.<br><br>Ein weiteres nichtinvasives Untersuchungsverfahren ist der Nicht-invasive Pränataltest (NIPT), der ab Schwangerschaftswoche 9+0 beziehungsweise 10+0 zur Verfügung steht. Die im mütterlichen Blut in geringer Menge vorhandene fetale DNA wird hierbei mittels NGS-Verfahren (Next Generation Sequencing) untersucht. Gegenwärtig sind Analysen von zahlenmäßigen Chromosomenveränderungen (z.B. Trisomie 13, 18, 21), Mikrodeletions- und Mikroduplikationssyndromen (z.B. Mikrodeletionssyndrom 22q11.2) und Einzelgenerkrankungen (z.B. Mukoviszidose, spinale Muskelatrophie, Sichelzellkrankheit oder Thalassämien) möglich. Das Ergebnis des Tests liegt je nach Anbieter nach ein bis zwei Wochen vor. Sollte das Testergebnis auffällig sein, muss eine invasive Untersuchung zur Sicherung der Diagnose angeschlossen werden. Aktuell werden die Kosten für diesen Test von den gesetzlichen Krankenkassen nicht standardmäßig übernommen."""
 
     diagnostic_info_non_invasive_3="""Folgende nichtinvasive Methoden der Pränataldiagnostik stehen weiterhin zur Verfügung, jedoch ist der Nachweis einer spezifischen Chromosomenveränderung damit nicht möglich: Zwischen der 11. und 14. Schwangerschaftswoche kann das Erst-Trimester-Screening (First-Trimester-Screening, FTS) durchgeführt werden. Dabei liegt der optimale Untersuchungszeitraum zwischen der 12+0 und 13+0 Schwangerschaftswoche. Mittels einer Ultraschalluntersuchung wird die sogenannte Nackentransparenz (Abstand der Nackenhaut von der Wirbelsäule) beim Kind gemessen und gleichzeitig das PAPP-A (Pregnancy associated plasma protein A) und das freie ß-hCG (humanes Choriongonadotropin) aus dem mütterlichen Blut bestimmt. Aus diesen Parametern wird dann Ihr individuelles statistisches Risiko für eine Chromosomenveränderung beim Kind berechnet. Aktuell werden die Kosten für diesen Test von den gesetzlichen Krankenkassen nicht standardmäßig übernommen. 
 Unabhängig davon, welche Untersuchungen man in der Schwangerschaft durchführen lässt, kann zwischen der 18. bis 22. Schwangerschaftswoche eine Ultraschallfeindiagnostik erfolgen, wobei die regelrechte Entwicklung aller Organe und des Skelettsystems beurteilt werden kann. Ob Fehlbildungen bereits pränatal im Ultraschall zu erkennen sind, kann nicht mit Sicherheit gesagt werden."""
 
     diagostic_PID="""Die Polkörperdiagnostik (PKD) ist eine Methode zur genetischen Untersuchung von Eizellen noch vor Abschluss der Befruchtung bei einer mütterlicherseits vorbekannten, schwerwiegenden genetisch bedingten Erkrankung. Die Entnahme und Untersuchung des ersten und zweiten Polkörpers ermöglicht dabei eine indirekte Aussage über die genetische Information der Eizelle. Die Präimplantationsdiagnostik (PID) ist bei einem hohen Risiko für eine schwerwiegende genetisch bedingte Erkrankung des Fetus in Deutschland aufgrund methodischer Vorteile besser etabliert. Hierbei wird nach einer künstlichen Befruchtung eine genetische Diagnostik an der befruchteten Eizelle bzw. dem Embryo vor der Einnistung in der Gebärmutter durchgeführt. Dafür werden einzelne Zellen aus der äußeren Schicht des Embryos (am 5. Tag nach der Befruchtung) entnommen und untersucht. Da die Diagnostik mehrere Tage in Anspruch nimmt, werden die Embryonen vorübergehend eingefroren. Gesunde Embryonen können dann bei einem späteren Zyklus in die Gebärmutter übertragen werden.<br><br>Zunächst kann hierzu eine Beratung an einem PID-Zentrum oder reproduktionsmedizinischen Kooperationspartners erfolgen. Aktuell werden die Kosten für die Diagnostik nicht standardmäßig von den gesetzlichen Krankenkassen übernommen. Eine individuelle Beantragung für eine Kostenübernahme ist jedoch möglich."""
+
+    kinderwunsch_info_3="""Unerfüllter Kinderwunsch bedeutet, dass innerhalb eines Jahres bei regelmäßigem ungeschütztem Geschlechtsverkehr nicht spontan eine Schwangerschaft eintritt. Weltweit gelten etwa 9 % aller Paare als ungewollt kinderlos. Die Gründe für unerfüllten Kinderwunsch sind vielfältig und liegen ebenso häufig bei der Frau (vorzeitige Ovarialinsuffizienz, Störung der Eireifung, des Eitransportes oder der Gebärmutterfunktion sowie endokrine Störungen) wie beim Mann (Störung der Spermienbildung, des Spermientransports oder der Ejakulation). Auch die Lebensweise (Genussmittelkonsum, Ernährung, Sport) kann einen Einfluss auf die Fruchtbarkeit haben.<br> Mögliche genetische Ursachen können chromosomale Aberrationen auf Grundlage einer familiären balancierten Translokation, Veränderungen der Geschlechtschromosomen bei der Frau oder dem Mann. Beim Mann können weiterhin Störung der Spermatogenese ursächlich sein. Eine vorzeitige Menopause, endokrinologische  Störungen  und Gerinnungstörungen stellen weitere genetische Ursachen bei der Frau dar (Sk2-Leitlinie: Diagnostik und Therapie vor einer assistierten Reproduktionsmedizinischen Behandlung. 2019)."""
+
 
     #Evaulation of the risk#
     ########################
@@ -1323,33 +1327,66 @@ Unabhängig davon, welche Untersuchungen man in der Schwangerschaft durchführen
         
 
 
-    #Start building the parts of the letter for Befundbbesprechung#
-    ###############################################################
-    if analysis_3=="CA-Aborte-Kinderwunsch":
-        if result_3=="unauffällig":
-            genetic_diagnosis_3=f"Die bei Ihnen, Frau {Name_3}, durchgeführte konventionelle Chromosomenanalyse ergab einen strukturell und numerisch unauffälligen weiblichen Karyotyp (Befund vom XX). Bei Ihnen, Herr {Name_3}, ergab die durchgeführte konventionelle Chromosomenanalyse einen strukturell und numerisch unauffälligen männlichen Karyotyp (Befund vom XX)."
-            beurteilung_3=f"Bei Ihnen, Frau und Herr {Name_3}, ergaben sich in den durchgeführten Chromosomenanalysen keine Hinweise auf eine balancierte Chromosomenaberration als Ursache für die Aborte/für den unerfüllten Kinderwunsch. Ein grundsätzlicher Ausschluss einer genetischen Ursache ist allerdings nicht möglich.<br><br> Wir empfehlen Ihrem Partner ebenfalls eine zytogenetische Diagnostik. Dies ist im Rahmen einer genetischen Beratung gerne nach Terminvereinbarung möglich.//Weiterhin empfehlen wir im Falle eines erneuten Abortes eine genetische Untersuchung des Abortmaterials."
-        elif result_3=="auffällig":
-            genetic_diagnosis_3=f"Die bei Ihnen, Frau {Name_3}, durchgeführte konventionelle Chromosomenanalyse ergab einen strukturell und numerisch unauffälligen weiblichen Karyotyp/ eine balancierte Chromosomen Translokation XX (Befund vom XX). Bei Ihnen, Herr {Name_3}, ergab die durchgeführte konventionelle Chromosomenanalyse einen strukturell und numerisch unauffälligen männlichen Karyotyp / eine balancierte Chromosomen Translokation XX (Befund vom XX)."
-            beurteilung_3=f"Bei Ihnen, Frau/Herr {Name_3}, ergab sich in den durchgeführten Chromosomenanalysen eine balancierte Chromosomenaberration als Ursache für die Aborte/für den unerfüllten Kinderwunsch."
-            info_disease_3=f"Eine balancierte Chromosomentranslokation kann das Risiko für einen Abort (Fehlgeburt) erhöhen, aber es ist wichtig zu beachten, dass die Auswirkungen stark von der spezifischen Art der Translokation und den betroffenen Chromosomen abhängen. <br><br> Balancierte Translokationen treten auf, wenn Teile von zwei verschiedenen Chromosomen ausgetauscht werden, ohne dass genetisches Material verloren geht. Eine Person mit einer balancierten Translokation hat also die gleiche Menge an genetischem Material wie Menschen ohne Translokation, aber es ist anders angeordnet.<br><br> Wenn in einer Partnerschaft, in der bei einem Partnern eine balancierte Translokation vorliegt, eine Schwangerschaft auftritt, besteht das Risiko, dass während der Zellteilung im Embryo unreduzierte gametische Chromosomen (Chromosomen, die nicht normal geteilt wurden) auftreten. Dies kann zu einer unbalancierten Translokation im Nachwuchs führen, was wiederum zu genetischen Störungen und möglicherweise zu Fehlgeburten führen kann.<br><br> Das Risiko für einen Abort hängt von verschiedenen Faktoren ab, einschließlich der betroffenen Chromosomen, der Größe der translozierten Segmente und anderen genetischen Faktoren, und kann somit schlecht empirisch geschätzt werden."
-            empfehlung_3=f"Wir empfehlen eine genetische Beratung im Falle einer Schwangerschaft in der sechsten bis neunten Schwangerschaftswoche. In einigen Fällen können pränatale Diagnoseverfahren wie chorionische Villusbiopsie oder Amniozentese durchgeführt werden, um genetische Anomalien im Fötus frühzeitig zu identifizieren."
+    #Start building the parts of the letter for Befundbesprechung#
+    ##############################################################
+    if council_3=="Befundbesprechung":
+        if analysis_3=="CA-Aborte-Kinderwunsch":
+            if result_3=="unauffällig":
+                genetic_diagnosis_3=f"Die bei Ihnen, Frau {Name_3}, durchgeführte konventionelle Chromosomenanalyse ergab einen strukturell und numerisch unauffälligen weiblichen Karyotyp (Befund vom XX). Bei Ihnen, Herr {Name_3}, ergab die durchgeführte konventionelle Chromosomenanalyse einen strukturell und numerisch unauffälligen männlichen Karyotyp (Befund vom XX)."
+                beurteilung_3=f"Bei Ihnen, Frau und Herr {Name_3}, ergaben sich in den durchgeführten Chromosomenanalysen keine Hinweise auf eine balancierte Chromosomenaberration als Ursache für die Aborte/für den unerfüllten Kinderwunsch. Ein grundsätzlicher Ausschluss einer genetischen Ursache ist allerdings nicht möglich.<br>// Das unspezifische Wiederholungsrisiko von Fehlgeburten ist von verschiedenen Faktoren abhängig. Sowohl das Alter als auch die Anzahl der vorausgegangenen Aborte und Geburten nehmen darauf Einfluss. Nach mindestens 2 aufgetretenen Aborten besteht in Ihrer Altersgruppe von {maternal_age_3} Jahren ein Wiederholungsrisiko von XX22,7% für Frauen, welche bisher keine Kinder geboren haben, im Vergleich zum Basisrisiko von XX 8,9% einen erneuten Abort zu haben (Nybo Andersen <i>et al</i>., 2000, PMID: 10864550).<br><br> Wir empfehlen Ihrem Partner ebenfalls eine zytogenetische Diagnostik. Dies ist im Rahmen einer genetischen Beratung gerne nach Terminvereinbarung möglich."
+                info_disease_3="""Jede sechste Schwangerschaft (ca. 17 %) endet mit einer Fehlgeburt. Ursachen für Fehlgeburten (Aborte) können sporadische chromosomale Aberrationen, chromosomale Aberrationen auf Grundlage einer familiären balancierten Translokation, seltene monogene Erkrankungen beim Embryo, Infektionen, Fehlbildungen der Plazenta, endokrine und immunologische Störungen oder Gerinnungsstörungen bei der Mutter sein. Etwa 1 bis 3 % aller Paare erleben den wiederholten Verlust einer Schwangerschaft, also habituelle Aborte. Dies entspricht drei oder mehr aufeinanderfolgenden Fehlgeburten vor der 20. Schwangerschaftswoche (S2k-Leitlinie: Diagnostik und Therapie von Frauen mit wiederholten Spontanaborten. 2022)."""
+                empfehlung_3="""Wir empfehlen gemäß der aktuellen Sk2-Leitlinie „Diagnostik und Therapie von wiederholten Spontanaborten“ – falls noch nicht erfolgt - die weitere Abklärung der wiederholten Spontanaborte. Diese umfasst:<br>- Durchführung einer bildgebenden Diagnostik (z.B. 3D-Vaginalsonographie und/oder Hysteroskopie) zum Ausschluss einer Uterusfehlbildung, submuköser Myome und Polypen sowie zum Ausschluss von intrauterinen Adhäsionen<br>- Ggf. Durchführung einer Endometriumbiopsie zum Ausschluss einer chronischen Endometritis<br>- Abklärung endokriner Faktoren (TSH-Bestimmung, Diagnostik hinsichtlich PCOS)<br>- Abklärung immunologischer Faktoren (Abklärung hinsichtlich Anti-Phospholipid-Syndrom)<br>- Abklärung hämostaseologischer Faktoren (Thrombophiliediagnostik) beim Vorliegen von thrombembolischen Risiken.<br><br>Wir empfehlen im Falle eines erneuten Abortes eine genetische Untersuchung des Abortmaterials."""
 
-    elif analysis_3=="Schnelltest + CA":
-        if result_3=="unauffällig":
-            genetic_diagnosis_3=f"Am XX erhielten wir eine Fruchtwasserprobe/Chorionzottenprobe zur weiteren genetischen Diagnostik. Der pränatale Schnelltest ergab keinen Hinweis auf eine numerische Aberration der Chromosomen 13, 18, 21 und X (Geschlecht: XX) (Befund vom XX). Die konventionelle Chromosomenanalyse ergab einen strukturell und numerisch unauffälligen männlichen/weiblichen Karyotyp (Befund vom XX)."
-            beurteilung_3=f"In der durchgeführten genetischen Diagnostik konnte das Vorliegen einer XX beim Fetus ausgeschlossen werden. Wir empfehlen Ihnen die Teilnahme an den regulären Vorsorgeuntersuchungen in der Schwangerschaft."
-        if result_3=="auffällig":
-            genetic_diagnosis_3=f"Am XX erhielten wir eine Fruchtwasserprobe/Chorionzottenprobe zur weiteren genetischen Diagnostik. Der pränatale Schnelltest ergab eine Trisomie/Monosomie 13/18/21/XX (Geschlecht: XX) (Befund vom XX). Die konventionelle Chromosomenanalyse ergab ebenfalls eine Trisomie/Monosomie 13/18/21/XX (Befund vom XX)."
-            beurteilung_3=f"In der durchgeführten genetischen Diagnostik konnte das Vorliegen einer XX Trisomie/Monosomie beim Fetus nachgewiesen werden."
-            info_disease_3=st.text_area("Allgemeine Informationen zum Krankheitsbild", key="info_disease_3")
-            
-            
-            
-        
-            
-            
+            elif result_3=="auffällig":
+                genetic_diagnosis_3=f"Die bei Ihnen, Frau {Name_3}, durchgeführte konventionelle Chromosomenanalyse ergab einen strukturell und numerisch unauffälligen weiblichen Karyotyp/ eine balancierte Chromosomen Translokation XX (Befund vom XX). Bei Ihnen, Herr {Name_3}, ergab die durchgeführte konventionelle Chromosomenanalyse einen strukturell und numerisch unauffälligen männlichen Karyotyp / eine balancierte Chromosomen Translokation XX (Befund vom XX)."
+                beurteilung_3=f"Bei Ihnen, Frau/Herr {Name_3}, ergab sich in den durchgeführten Chromosomenanalysen eine balancierte Chromosomenaberration als Ursache für die Aborte/für den unerfüllten Kinderwunsch."
+                info_disease_3=f"Eine balancierte Chromosomentranslokation kann das Risiko für einen Abort (Fehlgeburt) erhöhen, aber es ist wichtig zu beachten, dass die Auswirkungen stark von der spezifischen Art der Translokation und den betroffenen Chromosomen abhängen. <br><br> Balancierte Translokationen treten auf, wenn Teile von zwei verschiedenen Chromosomen ausgetauscht werden, ohne dass genetisches Material verloren geht. Eine Person mit einer balancierten Translokation hat also die gleiche Menge an genetischem Material wie Menschen ohne Translokation, aber es ist anders angeordnet.<br><br> Wenn in einer Partnerschaft, in der bei einem Partnern eine balancierte Translokation vorliegt, eine Schwangerschaft auftritt, besteht das Risiko, dass während der Zellteilung im Embryo unreduzierte gametische Chromosomen (Chromosomen, die nicht normal geteilt wurden) auftreten. Dies kann zu einer unbalancierten Translokation im Nachwuchs führen, was wiederum zu genetischen Störungen und möglicherweise zu Fehlgeburten führen kann.<br><br> Das Risiko für einen Abort hängt von verschiedenen Faktoren ab, einschließlich der betroffenen Chromosomen, der Größe der translozierten Segmente und anderen genetischen Faktoren, und kann somit schlecht empirisch geschätzt werden."
+                empfehlung_3=f"Wir empfehlen eine genetische Beratung im Falle einer Schwangerschaft in der sechsten bis neunten Schwangerschaftswoche. In einigen Fällen können pränatale Diagnoseverfahren wie chorionische Villusbiopsie oder Amniozentese durchgeführt werden, um genetische Anomalien im Fötus frühzeitig zu identifizieren."
     
+        elif analysis_3=="Schnelltest + CA":
+            if result_3=="unauffällig":
+                genetic_diagnosis_3=f"Am XX erhielten wir eine Fruchtwasserprobe/Chorionzottenprobe zur weiteren genetischen Diagnostik. Der pränatale Schnelltest ergab keinen Hinweis auf eine numerische Aberration der Chromosomen 13, 18, 21 und X (Geschlecht: XX) (Befund vom XX). Die konventionelle Chromosomenanalyse ergab einen strukturell und numerisch unauffälligen männlichen/weiblichen Karyotyp (Befund vom XX)."
+                beurteilung_3=f"In der durchgeführten genetischen Diagnostik konnte das Vorliegen einer XX beim Fetus ausgeschlossen werden. Wir empfehlen Ihnen die Teilnahme an den regulären Vorsorgeuntersuchungen in der Schwangerschaft."
+            elif result_3=="auffällig":
+                genetic_diagnosis_3=f"Am XX erhielten wir eine Fruchtwasserprobe/Chorionzottenprobe zur weiteren genetischen Diagnostik. Der pränatale Schnelltest ergab eine Trisomie/Monosomie 13/18/21/XX (Geschlecht: XX) (Befund vom XX). Die konventionelle Chromosomenanalyse ergab ebenfalls eine Trisomie/Monosomie 13/18/21/XX (Befund vom XX)."
+                beurteilung_3=f"In der durchgeführten genetischen Diagnostik konnte das Vorliegen einer XX Trisomie/Monosomie beim Fetus nachgewiesen werden."
+                disease_default_text_3 = """- Klinisches Bild der Erkrankung<br>- Genetik und Vererbung<br>- Therapien"""
+                info_disease_3=st.text_area("Allgemeine Informationen zum Krankheitsbild", disease_default_text_3, key="info_disease_3")
+                procedere_3="""Sie wünschten weitere Bedenkzeit. / Wir besprachen medizinische und psychosoziale Aspekte, die sich aus der Diagnose beim Fetus und der Entscheidung für sowie gegen einen Schwangerschaftsabbruch ergeben. Aktuell wünschten sie keine Vermittlung an Beratungsstellen, Selbsthilfegruppen oder einen Behindertenverband. Auch eine weitere psychosoziale Beratung war aktuell nicht gewünscht. Nach dem ärztlichen Beratungsgespräch beim pränataldiagnostischen Hinweis auf eine kindliche Gesundheitsschädigung ist eine dreitägige Bedenkzeit vorgeschrieben. Wir vereinbarten einen neuen Termin am XX. Bei der Entscheidung zum Schwangerschaftsabbruch können wir Ihnen dann schriftlich die ärztliche Feststellung zum Schwangerschaftsabbruch bestätigen."""
+
+        elif analysis_3=="Schnelltest + CA + Trio":
+            if result_3=="unauffällig":
+                genetic_diagnosis_3=f"Am XX erhielten wir eine Fruchtwasserprobe/Chorionzottenprobe zur weiteren genetischen Diagnostik. Der pränatale Schnelltest ergab keinen Hinweis auf eine numerische Aberration der Chromosomen 13, 18, 21 und X (Geschlecht: XX) (Befund vom XX). Die konventionelle Chromosomenanalyse ergab einen strukturell und numerisch unauffälligen männlichen/weiblichen Karyotyp (Befund vom XX). Die molekulargenetische Trio-Exom-Diagnostik ergab ebenfalls einen unauffälligen Befund (Befund vom XX)."
+                beurteilung_3="""In der durchgeführten genetischen Diagnostik konnte keine Ursache für die klinische Symptomatik beim Fetus nachgewiesen werden. Ein grundsätzlicher Ausschluss einer genetischen Ursache ist allerdings nicht möglich. Aufgrund der noch ungeklärten Ursache der Symptomatik beim Fetus können wir keine sicheren Aussagen bezüglich des weiteren Verlaufs der Symptomatik bzw. im Hinblick auf ein mögliches Wiederholungsrisiko in der Familie treffen. Wir empfehlen eine Wiedervorstellung in unserer humangenetischen Sprechstunde nach der Geburt zur Re-Evaluation und ggf. Einleitung einer weiterführenden genetischen Diagnostik.<br><br> Wir empfehlen Ihnen die Teilnahme an den regulären Vorsorgeuntersuchungen in der Schwangerschaft. Unabhängig davon welche Untersuchungen man in der Schwangerschaft durchführen lässt, kann zwischen der 18. bis 22. Schwangerschaftswoche eine Ultraschallfeindiagnostik erfolgen, wobei die regelrechte Entwicklung aller Organe und des Skelettsystems beurteilt werden kann."""
+            elif result_3=="auffällig":
+                 genetic_diagnosis_3=f"Am XX erhielten wir eine Fruchtwasserprobe/Chorionzottenprobe zur weiteren genetischen Diagnostik. Der pränatale Schnelltest ergab keinen Hinweis auf eine numerische Aberration der Chromosomen 13, 18, 21 und X (Geschlecht: XX) (Befund vom XX). Die konventionelle Chromosomenanalyse ergab einen strukturell und numerisch unauffälligen männlichen/weiblichen Karyotyp (Befund vom XX). //Der pränatale Schnelltest ergab eine Trisomie/Monosomie 13/18/21/XX (Geschlecht: XX) (Befund vom XX). Die konventionelle Chromosomenanalyse ergab ebenfalls eine Trisomie/Monosomie 13/18/21/XX (Befund vom XX). Die molekulargenetische Trio-Exom-Diagnostik ergab ebenfalls einen unauffälligen Befund (Befund vom XX). // Beim Fetus wurde die (wahrscheinlich) pathogene c.XX, p.(XX) Variante im XX-Gen und somit eine XX molekulargenetisch nachgewiesen."
+                beurteilung_3=f"In der durchgeführten genetischen Diagnostik konnte das Vorliegen einer XX beim Fetus molekulargenetisch / zytogenetisch nachgewiesen werden."
+                disease_default_text_3 = """- Klinisches Bild der Erkrankung<br>- Genetik und Vererbung<br>- Therapien"""
+                info_disease_3=st.text_area("Allgemeine Informationen zum Krankheitsbild", disease_default_text_3, key="info_disease_3")
+                procedere_3="""Sie wünschten weitere Bedenkzeit. / Wir besprachen medizinische und psychosoziale Aspekte, die sich aus der Diagnose beim Fetus und der Entscheidung für sowie gegen einen Schwangerschaftsabbruch ergeben. Aktuell wünschten sie keine Vermittlung an Beratungsstellen, Selbsthilfegruppen oder einen Behindertenverband. Auch eine weitere psychosoziale Beratung war aktuell nicht gewünscht. Nach dem ärztlichen Beratungsgespräch beim pränataldiagnostischen Hinweis auf eine kindliche Gesundheitsschädigung ist eine dreitägige Bedenkzeit vorgeschrieben. Wir vereinbarten einen neuen Termin am XX. Bei der Entscheidung zum Schwangerschaftsabbruch können wir Ihnen dann schriftlich die ärztliche Feststellung zum Schwangerschaftsabbruch bestätigen."""
+
+         elif analysis_3=="Schnelltest + CA + gezielt":
+             if result_3=="unauffällig":
+                 genetic_diagnosis_3=f"Am XX erhielten wir eine Fruchtwasserprobe/Chorionzottenprobe zur weiteren genetischen Diagnostik. Der pränatale Schnelltest ergab keinen Hinweis auf eine numerische Aberration der Chromosomen 13, 18, 21 und X (Geschlecht: XX) (Befund vom XX). Die konventionelle Chromosomenanalyse ergab einen strukturell und numerisch unauffälligen XX Karyotyp (Befund vom XX). Die gezielte molekulargenetische Diagnostik bezüglich XX ergab ebenfalls einen unauffälligen Befund (Befund vom XX)."
+                 beurteilung_3="In der durchgeführten genetischen Diagnostik konnte das Vorliegen einer XX beim Fetus ausgeschlossen werden. Im pränatalen Schnelltest und in der konventionellen Chromosomenanalyse ergaben sich keine Hinweise auf eine chromosomale Aberration beim Fetus.<br> Wir empfehlen Ihnen die Teilnahme an den regulären Vorsorgeuntersuchungen in der Schwangerschaft."
+            elif result_3=="auffällig":
+                genetic_diagnosis_3=f"Am XX erhielten wir eine Fruchtwasserprobe/Chorionzottenprobe zur weiteren genetischen Diagnostik. Der pränatale Schnelltest ergab keinen Hinweis auf eine numerische Aberration der Chromosomen 13, 18, 21 und X (Geschlecht: XX) (Befund vom XX). Die konventionelle Chromosomenanalyse ergab einen strukturell und numerisch unauffälligen männlichen/weiblichen Karyotyp (Befund vom XX). //Der pränatale Schnelltest ergab eine Trisomie/Monosomie 13/18/21/XX (Geschlecht: XX) (Befund vom XX). Die konventionelle Chromosomenanalyse ergab ebenfalls eine Trisomie/Monosomie 13/18/21/XX (Befund vom XX). Die gezielte molekulargenetische Diagnostik bezüglich XX ergab ebenfalls einen unauffälligen Befund (Befund vom XX). // Beim Fetus wurde die familiär bekannte (wahrscheinlich) pathogene c.XX, p.(XX) Variante im XX-Gen und somit eine XX molekulargenetisch nachgewiesen."
+                beurteilung_3=f"In der durchgeführten genetischen Diagnostik konnte das Vorliegen einer XX beim Fetus molekulargenetisch / zytogenetisch nachgewiesen werden."
+                disease_default_text_3 = """- Klinisches Bild der Erkrankung<br>- Genetik und Vererbung<br>- Therapien"""
+                info_disease_3=st.text_area("Allgemeine Informationen zum Krankheitsbild", disease_default_text_3, key="info_disease_3")
+                procedere_3="""Sie wünschten weitere Bedenkzeit. / Wir besprachen medizinische und psychosoziale Aspekte, die sich aus der Diagnose beim Fetus und der Entscheidung für sowie gegen einen Schwangerschaftsabbruch ergeben. Aktuell wünschten sie keine Vermittlung an Beratungsstellen, Selbsthilfegruppen oder einen Behindertenverband. Auch eine weitere psychosoziale Beratung war aktuell nicht gewünscht. Nach dem ärztlichen Beratungsgespräch beim pränataldiagnostischen Hinweis auf eine kindliche Gesundheitsschädigung ist eine dreitägige Bedenkzeit vorgeschrieben. Wir vereinbarten einen neuen Termin am XX. Bei der Entscheidung zum Schwangerschaftsabbruch können wir Ihnen dann schriftlich die ärztliche Feststellung zum Schwangerschaftsabbruch bestätigen."""
+
+    #First line#
+    ############
+    if council_3=="Befundbesprechung":
+        if result_3=="auffällig":
+            first_line_31=f"am {current_datetime.strftime('%d.%m.%Y')} stellten Sie sich zur Befundbesprechung in unserer genetischen Sprechstunde vor. Zur Vorgeschichte verweisen wir auf unseren Brief vom XX."
+            result_line_3="""Kein Nachweis einer Ursache in der durchgeführten genetischen Diagnostik / Ausschluss der familiär bekannten Variante im XX-Gen""" 
+        elif result_3=="unauffällig":
+            first_line_31=f"Wir berichten vom Ergebnis der durchgeführten genetischen Diagnostik. Zur Vorgeschichte verweisen wir auf unseren Brief vom XX. Die Befunde der pränatalen Diagnostik teilten wir Ihnen bereits am XX telefonisch mit."
+            result_line_3="""**Diagnose**: XX beim Fetus""" 
+        beratung_line_3 = f"**Beratungsgrund:** {beratung_3}"
+            
     
     if st.button("Arzt Brief", key="brief_3"):
         # Display text based on the selected option
@@ -1444,6 +1481,8 @@ Unabhängig davon, welche Untersuchungen man in der Schwangerschaft durchführen
                 st.markdown(anamnese_3, unsafe_allow_html=True)
                 st.markdown("<div class='custom-paragraph'><b>Familienanamnese</b></div>",  unsafe_allow_html=True)
                 st.markdown(family_3, unsafe_allow_html=True)
+                st.markdown("<div class='custom-paragraph'><b>Allgemeine Informationen zum unerfüllten Kinderwunsch</b></div>",  unsafe_allow_html=True)
+                st.markdown(kinderwunsch_info_3, unsafe_allow_html=True)
                 st.markdown("<div class='custom-paragraph'><b>Beurteilung und Procedere</b></div>",  unsafe_allow_html=True)
                 st.markdown(risk_eval, unsafe_allow_html=True)
                 st.markdown(last_line_3, unsafe_allow_html=True)
@@ -1477,7 +1516,118 @@ Unabhängig davon, welche Untersuchungen man in der Schwangerschaft durchführen
                 st.markdown(last_line_3, unsafe_allow_html=True)
                 st.markdown(signature_3, unsafe_allow_html=True)
                 st.markdown(anhang_3, unsafe_allow_html=True)
-            
+
+    elif council_3 == "Befundbesprechung":
+            if analysis_3=="CA-Aborte-Kinderwunsch":
+                st.markdown(beratung_line_3, unsafe_allow_html=True)
+                st.markdown(result_line_3, unsafe_allow_html=True)
+                st.markdown(hello_line_3, unsafe_allow_html=True)
+                st.markdown(first_line_3, unsafe_allow_html=True)
+                st.markdown("<div class='custom-paragraph'><b>Genetische Diagnostik:</b></div>",  unsafe_allow_html=True)
+                st.markdown(genetic_diagnosis_3, unsafe_allow_html=True)
+                st.markdown("<div class='custom-paragraph'><b>Beurteilung</b></div>",  unsafe_allow_html=True)
+                st.markdown(beurteilung_3, unsafe_allow_html=True)
+                st.markdown("<div class='custom-paragraph'><b>Allgemeine Informationen zur Fragestellung</b></div>",  unsafe_allow_html=True)
+                st.markdown(info_disease_3, unsafe_allow_html=True)
+                st.markdown("<div class='custom-paragraph'><b>Empfehlungen</b></div>",  unsafe_allow_html=True)
+                st.markdown(empfehlung_3, unsafe_allow_html=True)
+                st.markdown(last_line_3, unsafe_allow_html=True)
+                st.markdown(signature_3, unsafe_allow_html=True)
+                st.markdown(anhang_3, unsafe_allow_html=True)
+
+            elif analysis_3=="Schnelltest + CA":
+                if result_3=="unauffällig":
+                    st.markdown(beratung_line_3, unsafe_allow_html=True)
+                    st.markdown(result_line_3, unsafe_allow_html=True)
+                    st.markdown(hello_line_3, unsafe_allow_html=True)
+                    st.markdown(first_line_3, unsafe_allow_html=True)
+                    st.markdown("<div class='custom-paragraph'><b>Genetische Diagnostik:</b></div>",  unsafe_allow_html=True)
+                    st.markdown(genetic_diagnosis_3, unsafe_allow_html=True)
+                    st.markdown("<div class='custom-paragraph'><b>Beurteilung und Empfehlungen</b></div>",  unsafe_allow_html=True)
+                    st.markdown(beurteilung_3, unsafe_allow_html=True)
+                    st.markdown(last_line_3, unsafe_allow_html=True)
+                    st.markdown(signature_3, unsafe_allow_html=True)
+                    st.markdown(anhang_3, unsafe_allow_html=True)
+                elif result_3=="auffällig":
+                    st.markdown(beratung_line_3, unsafe_allow_html=True)
+                    st.markdown(result_line_3, unsafe_allow_html=True)
+                    st.markdown(hello_line_3, unsafe_allow_html=True)
+                    st.markdown(first_line_3, unsafe_allow_html=True)
+                    st.markdown("<div class='custom-paragraph'><b>Genetische Diagnostik:</b></div>",  unsafe_allow_html=True)
+                    st.markdown(genetic_diagnosis_3, unsafe_allow_html=True)
+                    st.markdown("<div class='custom-paragraph'><b>Beurteilung</b></div>",  unsafe_allow_html=True)
+                    st.markdown(beurteilung_3, unsafe_allow_html=True)
+                    st.markdown("<div class='custom-paragraph'><b>Allgemeine Informationen zur Fragestellung</b></div>",  unsafe_allow_html=True)
+                    st.markdown(info_disease_3, unsafe_allow_html=True)
+                    st.markdown("<div class='custom-paragraph'><b>Procedere</b></div>",  unsafe_allow_html=True)
+                    st.markdown(procedere_3, unsafe_allow_html=True)
+                    st.markdown(last_line_3, unsafe_allow_html=True)
+                    st.markdown(signature_3, unsafe_allow_html=True)
+                    st.markdown(anhang_3, unsafe_allow_html=True)
+
+            elif analysis_3=="Schnelltest + CA + Trio":
+                if result_3=="unauffällig":
+                    st.markdown(beratung_line_3, unsafe_allow_html=True)
+                    st.markdown(result_line_3, unsafe_allow_html=True)
+                    st.markdown(hello_line_3, unsafe_allow_html=True)
+                    st.markdown(first_line_3, unsafe_allow_html=True)
+                    st.markdown("<div class='custom-paragraph'><b>Genetische Diagnostik:</b></div>",  unsafe_allow_html=True)
+                    st.markdown(genetic_diagnosis_3, unsafe_allow_html=True)
+                    st.markdown("<div class='custom-paragraph'><b>Beurteilung und Empfehlungen</b></div>",  unsafe_allow_html=True)
+                    st.markdown(beurteilung_3, unsafe_allow_html=True)
+                    st.markdown(last_line_3, unsafe_allow_html=True)
+                    st.markdown(signature_3, unsafe_allow_html=True)
+                    st.markdown(anhang_3, unsafe_allow_html=True)
+                elif result_3=="auffällig":
+                    st.markdown(beratung_line_3, unsafe_allow_html=True)
+                    st.markdown(result_line_3, unsafe_allow_html=True)
+                    st.markdown(hello_line_3, unsafe_allow_html=True)
+                    st.markdown(first_line_3, unsafe_allow_html=True)
+                    st.markdown("<div class='custom-paragraph'><b>Genetische Diagnostik:</b></div>",  unsafe_allow_html=True)
+                    st.markdown(genetic_diagnosis_3, unsafe_allow_html=True)
+                    st.markdown("<div class='custom-paragraph'><b>Beurteilung</b></div>",  unsafe_allow_html=True)
+                    st.markdown(beurteilung_3, unsafe_allow_html=True)
+                    st.markdown("<div class='custom-paragraph'><b>Allgemeine Informationen zur Fragestellung</b></div>",  unsafe_allow_html=True)
+                    st.markdown(info_disease_3, unsafe_allow_html=True)
+                    st.markdown("<div class='custom-paragraph'><b>Procedere</b></div>",  unsafe_allow_html=True)
+                    st.markdown(procedere_3, unsafe_allow_html=True)
+                    st.markdown(last_line_3, unsafe_allow_html=True)
+                    st.markdown(signature_3, unsafe_allow_html=True)
+                    st.markdown(anhang_3, unsafe_allow_html=True)
+
+            elif analysis_3=="Schnelltest + CA + gezielt":
+                if result_3=="unauffällig":
+                    st.markdown(beratung_line_3, unsafe_allow_html=True)
+                    st.markdown(result_line_3, unsafe_allow_html=True)
+                    st.markdown(hello_line_3, unsafe_allow_html=True)
+                    st.markdown(first_line_3, unsafe_allow_html=True)
+                    st.markdown("<div class='custom-paragraph'><b>Genetische Diagnostik:</b></div>",  unsafe_allow_html=True)
+                    st.markdown(genetic_diagnosis_3, unsafe_allow_html=True)
+                    st.markdown("<div class='custom-paragraph'><b>Beurteilung und Empfehlungen</b></div>",  unsafe_allow_html=True)
+                    st.markdown(beurteilung_3, unsafe_allow_html=True)
+                    st.markdown(last_line_3, unsafe_allow_html=True)
+                    st.markdown(signature_3, unsafe_allow_html=True)
+                    st.markdown(anhang_3, unsafe_allow_html=True)
+                elif result_3=="auffällig":
+                    st.markdown(beratung_line_3, unsafe_allow_html=True)
+                    st.markdown(result_line_3, unsafe_allow_html=True)
+                    st.markdown(hello_line_3, unsafe_allow_html=True)
+                    st.markdown(first_line_3, unsafe_allow_html=True)
+                    st.markdown("<div class='custom-paragraph'><b>Genetische Diagnostik:</b></div>",  unsafe_allow_html=True)
+                    st.markdown(genetic_diagnosis_3, unsafe_allow_html=True)
+                    st.markdown("<div class='custom-paragraph'><b>Beurteilung</b></div>",  unsafe_allow_html=True)
+                    st.markdown(beurteilung_3, unsafe_allow_html=True)
+                    st.markdown("<div class='custom-paragraph'><b>Allgemeine Informationen zur Fragestellung</b></div>",  unsafe_allow_html=True)
+                    st.markdown(info_disease_3, unsafe_allow_html=True)
+                    st.markdown("<div class='custom-paragraph'><b>Procedere</b></div>",  unsafe_allow_html=True)
+                    st.markdown(procedere_3, unsafe_allow_html=True)
+                    st.markdown(last_line_3, unsafe_allow_html=True)
+                    st.markdown(signature_3, unsafe_allow_html=True)
+                    st.markdown(anhang_3, unsafe_allow_html=True)
+
+
+                
+                
             
 
 
