@@ -1189,11 +1189,11 @@ with tab3:
         risk_value = df[df['Age'] == maternal_age_3]['Risk'].values[0]
         st.write(f'Das allgemeine altersabhängige Risiko bezüglich des Auftretens einer Chromosomenveränderung, insbesondere einer Trisomie 21 (Down-Syndrom) beim Kind ist bei einem mütterlichen Alter bei der Geburt von {maternal_age_3} Jahren – {risk_value} (Morris <i>et al</i>. 2002, PMID: 11943789)')
     elif council_3=="Befundbesprechung":
-        question_3=col2.selectbox("Analysis", ["CA", "Schnelltest + CA", "Schnelltest + CA + Trio", "Schnelltest + CA + gezielt", "NIPT"], key="analysis_3")
+        analysis_3=col2.selectbox("Analysis", ["CA-Aborte-Kinderwunsch", "Schnelltest + CA", "Schnelltest + CA + Trio", "Schnelltest + CA + gezielt", "NIPT"], key="analysis_3")
         result_3 = col3.selectbox("Ergebnis", ["unauffällig", "auffälliig"], key="result_3")
     
-    #Start building the parts of the letter#
-    ########################################
+    #Start building the parts of the letter for Erstberatung#
+    #########################################################
     #Beratungsgrund and Anamnese#
 
     if question_3=="SS normales Risiko":
@@ -1317,7 +1317,38 @@ Unabhängig davon, welche Untersuchungen man in der Schwangerschaft durchführen
         anhang_3="""<small>Anhang: Stammbaum</small>"""
     elif familienanamnese_3 == "unauffällig":
         anhang_3=""""""
+    if council_3=="Befundbesprechung":
+        anhang_3="""<small>Anhang: Befund vom XX</small>"""
         
+
+
+    #Start building the parts of the letter for Befundbbesprechung#
+    ###############################################################
+    if analysis_3=="CA-Aborte-Kinderwunsch":
+        if result_3=="unauffällig":
+            genetic_diagnosis_3=f"Die bei Ihnen, Frau {Name_3}, durchgeführte konventionelle Chromosomenanalyse ergab einen strukturell und numerisch unauffälligen weiblichen Karyotyp (Befund vom XX). Bei Ihnen, Herr {Name_3}, ergab die durchgeführte konventionelle Chromosomenanalyse einen strukturell und numerisch unauffälligen männlichen Karyotyp (Befund vom XX)."
+            beurteilung_3=f"Bei Ihnen, Frau und Herr {Name_3}, ergaben sich in den durchgeführten Chromosomenanalysen keine Hinweise auf eine balancierte Chromosomenaberration als Ursache für die Aborte/für den unerfüllten Kinderwunsch. Ein grundsätzlicher Ausschluss einer genetischen Ursache ist allerdings nicht möglich.<br><br> Wir empfehlen Ihrem Partner ebenfalls eine zytogenetische Diagnostik. Dies ist im Rahmen einer genetischen Beratung gerne nach Terminvereinbarung möglich.//Weiterhin empfehlen wir im Falle eines erneuten Abortes eine genetische Untersuchung des Abortmaterials."
+        elif result_3=="auffällig":
+            genetic_diagnosis_3=f"Die bei Ihnen, Frau {Name_3}, durchgeführte konventionelle Chromosomenanalyse ergab einen strukturell und numerisch unauffälligen weiblichen Karyotyp/ eine balancierte Chromosomen Translokation XX (Befund vom XX). Bei Ihnen, Herr {Name_3}, ergab die durchgeführte konventionelle Chromosomenanalyse einen strukturell und numerisch unauffälligen männlichen Karyotyp / eine balancierte Chromosomen Translokation XX (Befund vom XX)."
+            beurteilung_3=f"Bei Ihnen, Frau/Herr {Name_3}, ergab sich in den durchgeführten Chromosomenanalysen eine balancierte Chromosomenaberration als Ursache für die Aborte/für den unerfüllten Kinderwunsch."
+            info_disease_3=f"Eine balancierte Chromosomentranslokation kann das Risiko für einen Abort (Fehlgeburt) erhöhen, aber es ist wichtig zu beachten, dass die Auswirkungen stark von der spezifischen Art der Translokation und den betroffenen Chromosomen abhängen. <br><br> Balancierte Translokationen treten auf, wenn Teile von zwei verschiedenen Chromosomen ausgetauscht werden, ohne dass genetisches Material verloren geht. Eine Person mit einer balancierten Translokation hat also die gleiche Menge an genetischem Material wie Menschen ohne Translokation, aber es ist anders angeordnet.<br><br> Wenn in einer Partnerschaft, in der bei einem Partnern eine balancierte Translokation vorliegt, eine Schwangerschaft auftritt, besteht das Risiko, dass während der Zellteilung im Embryo unreduzierte gametische Chromosomen (Chromosomen, die nicht normal geteilt wurden) auftreten. Dies kann zu einer unbalancierten Translokation im Nachwuchs führen, was wiederum zu genetischen Störungen und möglicherweise zu Fehlgeburten führen kann.<br><br> Das Risiko für einen Abort hängt von verschiedenen Faktoren ab, einschließlich der betroffenen Chromosomen, der Größe der translozierten Segmente und anderen genetischen Faktoren, und kann somit schlecht empirisch geschätzt werden."
+            empfehlung_3=f"Wir empfehlen eine genetische Beratung im Falle einer Schwangerschaft in der sechsten bis neunten Schwangerschaftswoche. In einigen Fällen können pränatale Diagnoseverfahren wie chorionische Villusbiopsie oder Amniozentese durchgeführt werden, um genetische Anomalien im Fötus frühzeitig zu identifizieren."
+
+    elif analysis_3=="Schnelltest + CA":
+        if result_3=="unauffällig":
+            genetic_diagnosis_3=f"Am XX erhielten wir eine Fruchtwasserprobe/Chorionzottenprobe zur weiteren genetischen Diagnostik. Der pränatale Schnelltest ergab keinen Hinweis auf eine numerische Aberration der Chromosomen 13, 18, 21 und X (Geschlecht: XX) (Befund vom XX). Die konventionelle Chromosomenanalyse ergab einen strukturell und numerisch unauffälligen männlichen/weiblichen Karyotyp (Befund vom XX)."
+            beurteilung_3=f"In der durchgeführten genetischen Diagnostik konnte das Vorliegen einer XX beim Fetus ausgeschlossen werden. Wir empfehlen Ihnen die Teilnahme an den regulären Vorsorgeuntersuchungen in der Schwangerschaft."
+        if result_3=="auffällig":
+            genetic_diagnosis_3=f"Am XX erhielten wir eine Fruchtwasserprobe/Chorionzottenprobe zur weiteren genetischen Diagnostik. Der pränatale Schnelltest ergab eine Trisomie/Monosomie 13/18/21/XX (Geschlecht: XX) (Befund vom XX). Die konventionelle Chromosomenanalyse ergab ebenfalls eine Trisomie/Monosomie 13/18/21/XX (Befund vom XX)."
+            beurteilung_3=f"In der durchgeführten genetischen Diagnostik konnte das Vorliegen einer XX Trisomie/Monosomie beim Fetus nachgewiesen werden."
+            info_disease_3=st.text_area("Allgemeine Informationen zum Krankheitsbild", key="info_disease_3")
+            
+            
+            
+        
+            
+            
+    
     
     if st.button("Arzt Brief", key="brief_3"):
         # Display text based on the selected option
