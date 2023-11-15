@@ -565,9 +565,9 @@ with tab2:
     #Begrüßung#
     ###########
     if Titel_2== "Herr":
-        hello_line_2 = f"Sehr geehrter {Titel} {Name},"
+        hello_line_2 = f"Sehr geehrter {Titel} {Name_2},"
     elif Titel_2 != "Herr":
-        hello_line_2 = f"Sehr geehrte {Titel} {Name},"
+        hello_line_2 = f"Sehr geehrte {Titel} {Name_2},"
     
     #Date of Beratung#
     ##################
