@@ -67,7 +67,7 @@ with tab1:
     #############################################################
     if disease == "unspezifisch":
         st.markdown("### Anamnese")
-        default_text = """In Bezug auf die aktuelle Fragestellung wurden folgende Aspkete in der Anamnese erfasst:<br>
+        default_text = """In Bezug auf die aktuelle Fragestellung wurden folgende Aspekte in der Anamnese erfasst:<br>
         - Symptome XX seit XX<br>
         - Krankheitsgeschichte: neurologische Diagnostik –⁠ XX, cMRT Untersuchung –⁠ keine pathologische Befunde (Arztbrief vom XX, Klinik XX)<br>
         Sie berichteten, dass bei Ihnen keine für die Fragestellung relevanten Symptome/ Erkrankungen/ keine Tumorerkrankungen bekannt seien."""
@@ -77,7 +77,7 @@ with tab1:
     ########################
     elif disease == "NDD +/- Epilepsie":
         st.markdown("### Anamnese")
-        default_text = """In Bezug auf die aktuelle Fragestellung wurden folgende Aspkete in der Anamnese erfasst:<br>
+        default_text = """In Bezug auf die aktuelle Fragestellung wurden folgende Aspekte in der Anamnese erfasst:<br>
         - Geburtshintergrund: Geburtsart XX, Geburtstermin XX, Geburtsmaßen XX<br>
         - Meilensteine der motorischen Entwicklung: Drehen XX, Sitzen XX, Gehen XX<br>
         - Meilensteine der sprachlichen Entwicklung: esrte Laute/Worte XX, aktueller Status XX<br>
@@ -90,7 +90,7 @@ with tab1:
     ##########################
     elif disease == "HNPCC":
         st.markdown("### Anamnese")
-        default_text = """In Bezug auf die aktuelle Fragestellung wurden folgende Aspkete in der Anamnese erfasst:<br>
+        default_text = """In Bezug auf die aktuelle Fragestellung wurden folgende Aspekte in der Anamnese erfasst:<br>
         - Diagnose eines Darmkrebs im Alter von XX (Brief XX vom XX)<br>
         - Behandlung: operative Tumorentfernung, adjuvante Chemotherapie<br>
         - Pathologische Untersuchung am Tumormaterial: unauffällige Befunde bezüglich einer Mikrosatelliteninstabilität und in der Immunhistochemie der Mismatch-Repair-Proteine (Brief vom XX, Klinik XX).<br>
@@ -101,7 +101,7 @@ with tab1:
     ########################
     elif disease == "SCA":
         st.markdown("### Anamnese")
-        default_text = """In Bezug auf die aktuelle Fragestellung wurden folgende Aspkete in der Anamnese erfasst:<br>
+        default_text = """In Bezug auf die aktuelle Fragestellung wurden folgende Aspekte in der Anamnese erfasst:<br>
         - Typische Symptome einer spinozerebellären Ataxie: Gangstörung im Alter von XX, Dysarthrie im Alter von XX, Orientierungsstörungen –⁠ XX, Augenbewegungsstörungen –⁠ XX<br>
         - Krankheitsgeschichte: neurologische Diagnostik –⁠ XX, cMRT Untersuchung –⁠ keine pathologische Befunde (Arztbrief vom XX, Klinik XX)"""
         free_anamnesis= st.text_area("Relevante Symptome und Vorgeschichte für die aktuelle Fragestellung", default_text)
@@ -111,7 +111,7 @@ with tab1:
     elif disease == "HTT":
         st.markdown("### Anamnese")
         default_text = """Sie berichteten, dass bei Ihnen keine für die Huntington-Erkrankung typischen psychiatrischen oder motorischen Störungen bekannt seien.<br>
-        In Bezug auf die aktuelle Fragestellung wurden folgende Aspkete in der Anamnese erfasst:<br>
+        In Bezug auf die aktuelle Fragestellung wurden folgende Aspekte in der Anamnese erfasst:<br>
         - Typische Symptome einer Huntington Erkrankung: Motorische Symptome wie unkontrollierte Bewegungen (Chorea), Muskelsteifigkeit, Verlust der Koordination im Alter von XX, kognitive Einschränkung und Gedächtnisstörungen im Alter von XX, psychiatrische Manifestationen wie Depression, Ängstlichkeit, Stimmungsschwankungen, Persönlichkeitsveränderungen im Alter von XX <br>
         - Krankheitsgeschichte: neurologische Diagnostik –⁠ XX, cMRT Untersuchung –⁠ keine pathologische Befunde (Arztbrief vom XX, Klinik XX)"""
         free_anamnesis= st.text_area("Relevante Symptome und Vorgeschichte für die aktuelle Fragestellung", default_text)
@@ -120,7 +120,7 @@ with tab1:
     ###########################################
     elif disease == "Geschlechtsinkongruenz":
         st.markdown("### Anamnese")
-        default_text = """In Bezug auf die aktuelle Fragestellung wurden folgende Aspkete in der Anamnese erfasst:<br>
+        default_text = """In Bezug auf die aktuelle Fragestellung wurden folgende Aspekte in der Anamnese erfasst:<br>
         - Geschlechtsidentität und Entwicklung: keine Auffälligkeiten in der Pubertät, erste Zeichen einer Geschlechtsinkongruenz in XX<br>
         - Soziale und familiäre Akzeptanz: familiäre Unterstuzung, Akzeptanz durch Freundekreis<br>
         - Vorerkrankungen: keine<br>
@@ -132,7 +132,7 @@ with tab1:
     ###############################
     elif disease == "Marfan/EDS":
         st.markdown("### Anamnese")
-        default_text = """In Bezug auf die aktuelle Fragestellung wurden folgende Aspkete in der Anamnese erfasst:<br>
+        default_text = """In Bezug auf die aktuelle Fragestellung wurden folgende Aspekte in der Anamnese erfasst:<br>
         - Systemische Ghent-Kriterien anamnestisch:<br>
             - spontaner Pneumothorax (2P) ⁠–⁠ nein/ja<br>
             - Duralektasie (2P) ⁠–⁠ nein/ja<br>
@@ -1028,11 +1028,11 @@ Wir empfehlen eine Wiedervorstellung in unserer genetischen Sprechstunde in zwei
     #Case 10 auff, Repeat Expansion#
     ################################
     elif result_2=="auffällig" and analysis_2=="Repeat Expansion":
-        if disease=="HNPCC":
+        if disease=="HTT":
             beurteilung="""Bei Ihnen wurde die o.g. Repeatverlängerung im <i>HTT</i>-Gen und somit eine Huntington-Erkrankung molekulargenetisch nachgewiesen. Für Kinder und Geschwister von Ihnen besteht eine 50%ige Wahrscheinlichkeit die o.g. Repeatverlängerung im <i>HTT</i>-Gen ebenfalls zu tragen und eine Huntington-Erkrankung auszubilden."""
         elif disease_2=="SCA":
             beurteilung="""Bei Ihnen wurde die o.g. Repeatverlängerung im xx-Gen und somit eine SCA Typ XX molekulargenetisch nachgewiesen. Für Kinder und Geschwister von Ihnen besteht eine 50%ige Wahrscheinlichkeit die o.g. Repeatverlängerung im XX-Gen ebenfalls zu tragen und eine SCA Typ XX auszubilden. // Bei Ihnen wurde die o.g. pathogene XX-Variante und somit eine XX molekulargenetisch nachgewiesen. Für Kinder von Ihnen besteht eine 50%ige Wahrscheinlichkeit die o.g. Variante im XX-Gen ebenfalls zu erben und (mit einer hohen Wahrscheinlichkeit) eine XX auszubilden. (Eine sichere Vorhersage zu auftretenden Symptomen ist aufgrund der bekannt unvollständigen Penetranz nicht möglich.)"""
-        elif disease_2=="SCA":
+        elif disease_2=="unspezifisch":
             beurteilung="""Bei Ihnen wurde die o.g. Repeatverlängerung im xx-Gen und somit eine XX molekulargenetisch nachgewiesen. Für Kinder und Geschwister von Ihnen besteht eine 50%ige Wahrscheinlichkeit die o.g. Repeatverlängerung im XX-Gen ebenfalls zu tragen und (mit einer hohen Wahrscheinlichkeit) eine XX auszubilden. XX(Eine sichere Vorhersage zu auftretenden Symptomen ist aufgrund der bekannt unvollständigen Penetranz nicht möglich.)"""
 
     #Case 11 auff, CA#
@@ -1224,7 +1224,7 @@ with tab3:
         elif question_3=="Aborte":
             question_3_default_text=f"Habituelle Aborte"
             beratung_3 = st.text_area("Beratungsgrund", question_3_default_text)
-            anamnese_3_default_text=f"In Bezug auf die aktuelle Fragestellung wurden folgende Aspkete in der Anamnese erfasst:<br> - XX Aborte in der XX Schwangerschaftswoche<br> - Schwangerschaft sonographisch ohne Auffälligkeiten bestätigt / nicht bestätigt<br> - genetische Diagnostik ist bei keiner der Fehlgeburten erfolgt / Die zytogenetische Diagnostik anhand des Abortmaterials ergab den Nachweis einer XX, im Sinne eines XX (Befund vom XX)<br> - endokrinologische, gynäkologische, immunologische Untersuchungen und und Gerinnungsdiagnostik sind unauffällig (Briefe vom XX) / sind nicht erfolgt<br> -weitere für die Fragestellung relevante Erkrankungen seien bei Ihnen, Frau {Name_3} und Ihrem Partner nicht bekannt."
+            anamnese_3_default_text=f"In Bezug auf die aktuelle Fragestellung wurden folgende Aspekte in der Anamnese erfasst:<br> - XX Aborte in der XX Schwangerschaftswoche<br> - Schwangerschaft sonographisch ohne Auffälligkeiten bestätigt / nicht bestätigt<br> - genetische Diagnostik ist bei keiner der Fehlgeburten erfolgt / Die zytogenetische Diagnostik anhand des Abortmaterials ergab den Nachweis einer XX, im Sinne eines XX (Befund vom XX)<br> - endokrinologische, gynäkologische, immunologische Untersuchungen und und Gerinnungsdiagnostik sind unauffällig (Briefe vom XX) / sind nicht erfolgt<br> -weitere für die Fragestellung relevante Erkrankungen seien bei Ihnen, Frau {Name_3} und Ihrem Partner nicht bekannt."
             anamnese_3 = st.text_area("Anamnese", anamnese_3_default_text)
 
         elif question_3=="Kinderwunsch":
