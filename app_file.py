@@ -18,7 +18,7 @@ h1, h2, h3, h4, h5, h6 {
 st.markdown(custom_css, unsafe_allow_html=True)
 
 
-tab1, tab2, tab3, tab4= st.tabs(["EBM_Erstberatung", "EBM_Befundbesprechung", "Schwangerschaft / Kinderwunsch", "Krankheitsbild Textbausteine"])
+tab1, tab2, tab3, tab4, tab5= st.tabs(["EBM_Erstberatung", "EBM_Befundbesprechung", "Schwangerschaft / Kinderwunsch", "FBrEK", "Krankheitsbild Textbausteine"])
 
 with tab1:
     ########################################
@@ -1626,7 +1626,29 @@ Unabhängig davon, welche Untersuchungen man in der Schwangerschaft durchführen
                     st.markdown(signature_3, unsafe_allow_html=True)
                     st.markdown(anhang_3, unsafe_allow_html=True)
 
-
+with tab4:
+    
+    ##############################
+    # Create fourth tab for FBrEK#
+    ##############################
+    st.markdown("<h1 style='font-size: 30px;'> Familiärer Brust- und Eierstockkrebs</h1>", unsafe_allow_html=True)
+        
+    # Get the current date and time#
+    ################################
+    current_datetime = datetime.now()
+        
+    #Get patient data#
+    ##################
+    # Create a selectbox to choose an option for the gender
+    st.markdown("### Patienten Daten")
+    col1, col2, col3= st.columns(3)
+    Titel_4 = col1.selectbox("Titel", ["Frau", "Herr", "Familie"], key="Titel_2")     
+    Vorname_4 = col2.text_input("Vorname",key="Vorname_2")
+    Name_4 = col3.text_input("Name", key="Name_2")
+        
+    #st.markdown("### Fragestellung")
+    affected="""1. Ratsuchende: Mammakarzinom re, triple-negativ, mit XX Jahren<br> 2. Mamma- und Ovarialkarzinom in der Familienanamnese:<br> -  Mutter mit Mammakarzinom mit XX Jahren<br>-  Schwester mit Mammakarzinom mit XX Jahren<br>- Großmutter vs mit ”Unterleibskrebs” im unbekannten Alter<br>- Tante ms mit Ovarialkarzinom mit XX Jahren"""
+    betroffene_4 = st.text_area("Betroffene in der Familie",affected, key="betroffene_4")
                 
                 
             
@@ -1659,7 +1681,7 @@ Unabhängig davon, welche Untersuchungen man in der Schwangerschaft durchführen
    # st.header("A cat")
     #st.image("https://static.streamlit.io/examples/cat.jpg", width=200)
 
-with tab4:
+with tab5:
     ##########################################
     # Create the fourth tab for Textbausteine##
     #########################################
