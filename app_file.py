@@ -1642,9 +1642,9 @@ with tab4:
     # Create a selectbox to choose an option for the gender
     st.markdown("### Patienten Daten")
     col1, col2, col3= st.columns(3)
-    Titel_4 = col1.selectbox("Titel", ["Frau", "Herr", "Familie"], key="Titel_2")     
-    Vorname_4 = col2.text_input("Vorname",key="Vorname_2")
-    Name_4 = col3.text_input("Name", key="Name_2")
+    Titel_4 = col1.selectbox("Titel", ["Frau", "Herr", "Familie"], key="Titel_4")     
+    Vorname_4 = col2.text_input("Vorname",key="Vorname_4")
+    Name_4 = col3.text_input("Name", key="Name_4")
         
     #st.markdown("### Fragestellung")
     affected="""1. Ratsuchende: Mammakarzinom re, triple-negativ, mit XX Jahren<br> 2. Mamma- und Ovarialkarzinom in der Familienanamnese:<br> -  Mutter mit Mammakarzinom mit XX Jahren<br>-  Schwester mit Mammakarzinom mit XX Jahren<br>- Großmutter vs mit ”Unterleibskrebs” im unbekannten Alter<br>- Tante ms mit Ovarialkarzinom mit XX Jahren"""
