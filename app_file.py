@@ -501,7 +501,7 @@ with tab2:
                 if Titel_2=="Frau":
                     result_default_text="""Strukturell und numerisch unauffälliger weiblicher Karyotyp"""
                     result_text=st.text_area("Ergebnis der genetischen Diagnostik", result_default_text)
-                elif Titel_2=="Mann":
+                elif Titel_2=="Herr":
                     result_default_text="""Strukturell und numerisch unauffälliger männlicher Karyotyp"""
                     result_text=st.text_area("Ergebnis der genetischen Diagnostik", result_default_text)
                 elif Titel_2=="Familie":
