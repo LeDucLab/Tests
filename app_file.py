@@ -1649,6 +1649,13 @@ with tab4:
     #st.markdown("### Fragestellung")
     affected="""1. Ratsuchende: Mammakarzinom re, triple-negativ, mit XX Jahren<br> 2. Mamma- und Ovarialkarzinom in der Familienanamnese:<br> -  Mutter mit Mammakarzinom mit XX Jahren<br>-  Schwester mit Mammakarzinom mit XX Jahren<br>- Großmutter vs mit ”Unterleibskrebs” im unbekannten Alter<br>- Tante ms mit Ovarialkarzinom mit XX Jahren"""
     betroffene_4 = st.text_area("Betroffene in der Familie",affected, key="betroffene_4")
+
+    col1, col2, col3= st.columns(3)
+    Index_4 = col1.selectbox("Index Status", ["affected", "not affected"], key="Index_4")     
+    Fam_status_4 = col2.selectbox("Status in der Familie", ["keine Variante bekannt", "bekannte Variante"], key="fam_status_4")
+    #Name_4 = col3.text_input("Name", key="Name_4")
+
+    
                 
                 
             
