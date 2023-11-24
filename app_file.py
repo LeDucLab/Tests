@@ -78,7 +78,7 @@ with tab1:
     elif disease == "NDD +/- Epilepsie":
         st.markdown("### Anamnese")
         default_text = """In Bezug auf die aktuelle Fragestellung wurden folgende Aspekte in der Anamnese erfasst:<br>
-        - Geburtshintergrund: Geburtsart XX, Geburtstermin XX, Geburtsmaßen XX<br>
+        - Geburts- und Schwangerschaftshintergrund: Geburtsart XX, Geburtstermin XX, Geburtsmaßen XX<br>
         - Meilensteine der motorischen Entwicklung: Drehen XX, Sitzen XX, Gehen XX<br>
         - Meilensteine der sprachlichen Entwicklung: esrte Laute/Worte XX, aktueller Status XX<br>
         - Soziale Entwicklung: Kita/Schulbesuch XX, Interaktion mit der Familie/Gleichaltrigen XX<br>
