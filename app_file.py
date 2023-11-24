@@ -480,7 +480,23 @@ with tab2:
 
     #Case 1 unauff. for all except gezielt and CA#
     ##############################################
-    if result_2=="unauffällig" and analysis_2!="gezielt" and analysis_2!="CA" :
+    if result_2=="unauffällig" and analysis_2=="Exom":
+        result_default_text = """Kein Nachweis einer klinisch relevanten Variante in der molekulargenetischen Diagnostik"""
+        result_text=st.text_area("Ergebnis der genetischen Diagnostik", result_default_text)
+
+    elif result_2=="unauffällig" and analysis_2=="Exom+CNV+CA":
+        result_default_text = """Kein Nachweis einer klinisch relevanten Variante in der molekulargenetischen Diagnostik"""
+        result_text=st.text_area("Ergebnis der genetischen Diagnostik", result_default_text)
+    
+    elif result_2=="unauffällig" and analysis_2=="Trio":
+        result_default_text = """Kein Nachweis einer klinisch relevanten Variante in der molekulargenetischen Diagnostik"""
+        result_text=st.text_area("Ergebnis der genetischen Diagnostik", result_default_text)
+
+    elif result_2=="unauffällig" and analysis_2=="Cancer Panel":
+        result_default_text = """Kein Nachweis einer klinisch relevanten Variante in der molekulargenetischen Diagnostik"""
+        result_text=st.text_area("Ergebnis der genetischen Diagnostik", result_default_text)
+
+    elif result_2=="unauffällig" and analysis_2=="Repeat Expansion":
         result_default_text = """Kein Nachweis einer klinisch relevanten Variante in der molekulargenetischen Diagnostik"""
         result_text=st.text_area("Ergebnis der genetischen Diagnostik", result_default_text)
 
@@ -494,7 +510,7 @@ with tab2:
     #######################
     elif result_2=="unauffällig" and analysis_2=="CA":
         if disease == "Geschlechtsinkongruenz":
-            result_default_text = """Genetisches Geschlecht: weiblich/ männlich"""
+            result_default_text ="""Genetisches Geschlecht: weiblich/ männlich"""
             result_text=st.text_area("Ergebnis der genetischen Diagnostik", result_default_text)
         elif disease == "unspezifisch":
             if person_2=="Erwachsen":
@@ -718,7 +734,7 @@ with tab2:
         elif disease_2=="unspezifisch":
             diagnostic=f"Zur Abklärung des Verdachts auf eine genetisch bedingte Krebserkrankung führten wir bei Ihnen eine molekulargenetische Paneldiagnostik in den hierfür ursächlichen Genen durch. Hierbei wurde die heterozygote Variante unklarer Signifikanz c.xxxx>x, p.(XX) im XX-Gen bei Ihnen Tochter nachgewiesen (Befund vom XX)."
 
-    #Case 8 auff, Exom, Exom+CNV+CA, Trio, Cancer Panel#
+    #Case 9 auff, Exom, Exom+CNV+CA, Trio, Cancer Panel#
     ####################################################
     elif result_2=="auffällig" and analysis_2=="Exom+CNV+CA":
         if person_2=="Kind":
@@ -753,7 +769,7 @@ with tab2:
         elif disease_2=="unspezifisch":
              diagnostic=f"Zur Abklärung des Verdachts auf eine genetisch bedingte Krebserkrankung führten wir bei Ihnen eine molekulargenetische Paneldiagnostik in den hierfür ursächlichen Genen durch. Hierbei wurde die heterozygote wahrscheinlich/pathogene Variante c.xxxx>x, p.(XX) im XX-Gen bei Ihnen Tochter nachgewiesen (Befund vom XX)."
 
-    #Case 9 auff, gezielt#
+    #Case 10 auff, gezielt#
     ######################
     elif result_2=="auffällig" and analysis_2=="gezielt":
         if person_2=="Kind":
@@ -764,7 +780,7 @@ with tab2:
         elif person_2=="Erwachsen":
              diagnostic="""Wir führten eine gezielte Diagnostik bezüglich der familiär bekannten (wahrscheinlich) pathogenen c.XX,p.(XX) im XX-Gen bei Ihnen durch. Hierbei konnte diese bei Ihnen nachgewiesen werden (Befund vom XX).<br> // Zur Abklärung einer möglichen Anlageträgerschaft bezüglich XX veranlassten wir bei Ihnen eine molekulargenetische Einzelgen-Diagnostik und MLPA-Untersuchung bezüglich Veränderungen im XX-Gen. Diese ergab eine heterozygote wahrscheinlich/pathogene Variante c.XX,p.(XX) im XX-Gen (Befund vom XX)."""
 
-    #Case 10 auff, Repeat Expansion#
+    #Case 11 auff, Repeat Expansion#
     ################################
     elif result_2=="auffällig" and analysis_2=="Repeat Expansion":
         if disease_2=="HTT":
