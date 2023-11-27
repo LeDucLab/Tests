@@ -1771,7 +1771,7 @@ anhang_4="""<small>Anhang: Stammbaum</small>"""
 
 if st.button("Arzt Brief", key="brief_4"):
         # Display text based on the selected option
-        if council_4 == "Erstberatung":
+        if Beratung_4 == "Erstberatung":
                 st.markdown(beratung_line_4, unsafe_allow_html=True)
                 st.markdown(hello_line_4, unsafe_allow_html=True)
                 st.markdown(first_line_4, unsafe_allow_html=True)
