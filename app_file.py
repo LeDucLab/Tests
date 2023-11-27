@@ -1745,8 +1745,8 @@ Sollten im weiteren Verlauf Sie bzw. andere Familienmitglieder an Brust- bzw. Ei
 
 st.markdown("### Behratende Ärzte")
 col1, col2 = st.columns(2)
-Arzt1_3 = col1.selectbox("Arzt 1", ["Diana Le Duc", "Albrecht Kobelt"], key="Arzt1_3")
-Arzt2_3 = col2.selectbox("Arzt 2", ["Diana Le Duc", "Albrecht Kobelt"],  key="Arzt2_3")
+Arzt1_4 = col1.selectbox("Arzt 1", ["Diana Le Duc", "Albrecht Kobelt"], key="Arzt1_4")
+Arzt2_4 = col2.selectbox("Arzt 2", ["Diana Le Duc", "Albrecht Kobelt"],  key="Arzt2_4")
 
 #Begrüßung#
 ###########
