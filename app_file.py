@@ -1668,11 +1668,16 @@ with tab4:
 
     col1, col2, col3, col4= st.columns(4)
     Beratung_4 = col1.selectbox("Art der Beratung", ["Erstberatung", "Befundbesprechung"], key="beratung_4")
-    Index_4 = col2.selectbox("Ratsuchende Status", ["beroffen", "nicht betrofen"], key="Index_4")     
+    Index_4 = col2.selectbox("Ratsuchende Status", ["betroffen", "nicht betroffen"], key="Index_4")     
     Fam_status_4 = col3.selectbox("Status in der Familie", ["keine Variante bekannt", "bekannte Variante"], key="fam_status_4")
     Criteria_4=col4.selectbox("FBrEK Kriterien-Familie", ["erfüllt", "nicht erfüllt"], key="criteria_4")
 
-    
+    st.markdown("### Anamnese")
+    if Index_4=="betroffen":
+        default_text_4 = """In Bezug auf die aktuelle Fragestellung wurden folgende Aspekte in der Anamnese erfasst:<br>
+        - Diagnostik eines Mammakarzinoms/Ovarialkarzinoms der rechten/linken Seite mit XX Jahren<br>
+        - Therapie: neoadjuvante Chemotherapie, vollständige Brustdrüsenentfernung / brusterhaltende Operation rechts/links/ operativ behandelt, adjuvante Chemo- und Strahlentherapie (Brief vom XXX). Aktuell mit Tamoxifen, Herceptin, Letrozol behandelt."""
+        free_anamnesis_4= st.text_area("Relevante Symptome und Vorgeschichte für FBrEK", default_text)
                 
                 
             
