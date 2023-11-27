@@ -1751,7 +1751,7 @@ Arzt2_4 = col2.selectbox("Arzt 2", ["Diana Le Duc", "Albrecht Kobelt"],  key="Ar
 #Begrüßung#
 ###########
 
-beratung_line_4 = f"**Beratungsgrund:** {betroffene_4}"
+beratung_line_4 = f"**Beratungsgrund:<br> {betroffene_4}**"
 
 if Titel_4== "Herr":
     hello_line_4 = f"Sehr geehrter {Titel_4} {Name_4},"
