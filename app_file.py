@@ -1666,10 +1666,11 @@ with tab4:
     affected="""1. Ratsuchende: Mammakarzinom re, triple-negativ, mit XX Jahren<br> 2. Mamma- und Ovarialkarzinom in der Familienanamnese:<br> -  Mutter mit Mammakarzinom mit XX Jahren<br>-  Schwester mit Mammakarzinom mit XX Jahren<br>- Großmutter vs mit ”Unterleibskrebs” im unbekannten Alter<br>- Tante ms mit Ovarialkarzinom mit XX Jahren"""
     betroffene_4 = st.text_area("Betroffene in der Familie",affected, key="betroffene_4")
 
-    col1, col2, col3= st.columns(3)
-    Index_4 = col1.selectbox("Index Status", ["affected", "not affected"], key="Index_4")     
-    Fam_status_4 = col2.selectbox("Status in der Familie", ["keine Variante bekannt", "bekannte Variante"], key="fam_status_4")
-    #Name_4 = col3.text_input("Name", key="Name_4")
+    col1, col2, col3, col4= st.columns(4)
+    Beratung_4 = col1.selectbox("Art der Beratung", ["Erstberatung", "Befundbesprechung"], key="beratung_4")
+    Index_4 = col2.selectbox("Ratsuchende Status", ["beroffen", "nicht betrofen"], key="Index_4")     
+    Fam_status_4 = col3.selectbox("Status in der Familie", ["keine Variante bekannt", "bekannte Variante"], key="fam_status_4")
+    Criteria_4=col4.selectbox("FBrEK Kriterien in der Familie", ["erüllt", "nicht erfüllt"], key="fam_status_4")
 
     
                 
