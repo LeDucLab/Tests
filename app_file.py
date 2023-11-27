@@ -1662,15 +1662,30 @@ with tab4:
     Vorname_4 = col2.text_input("Vorname",key="Vorname_4")
     Name_4 = col3.text_input("Name", key="Name_4")
         
-    #st.markdown("### Fragestellung")
-    affected="""1. Ratsuchende: Mammakarzinom re, triple-negativ, mit XX Jahren<br> 2. Mamma- und Ovarialkarzinom in der Familienanamnese:<br> -  Mutter mit Mammakarzinom mit XX Jahren<br>-  Schwester mit Mammakarzinom mit XX Jahren<br>- Großmutter vs mit ”Unterleibskrebs” im unbekannten Alter<br>- Tante ms mit Ovarialkarzinom mit XX Jahren"""
-    betroffene_4 = st.text_area("Betroffene in der Familie",affected, key="betroffene_4")
+   
 
     col1, col2, col3, col4= st.columns(4)
     Beratung_4 = col1.selectbox("Art der Beratung", ["Erstberatung", "Befundbesprechung"], key="beratung_4")
     Index_4 = col2.selectbox("Ratsuchende Status", ["betroffen", "nicht betroffen"], key="Index_4")     
     Fam_status_4 = col3.selectbox("Status in der Familie", ["keine Variante bekannt", "bekannte Variante"], key="fam_status_4")
     Criteria_4=col4.selectbox("FBrEK Kriterien-Familie", ["erfüllt", "nicht erfüllt"], key="criteria_4")
+
+     #st.markdown("### Fragestellung")
+    if Index_4=="betroffen":
+        if Fam_status_4=="keine Variante bekannt"
+            affected="""1. Ratsuchende: Mammakarzinom re, triple-negativ, mit XX Jahren<br> 2. Mamma- und Ovarialkarzinom in der Familienanamnese:<br> -  Mutter mit Mammakarzinom mit XX Jahren<br>-  Schwester mit Mammakarzinom mit XX Jahren<br>- Großmutter vs mit ”Unterleibskrebs” im unbekannten Alter<br>- Tante ms mit Ovarialkarzinom mit XX Jahren"""
+            betroffene_4 = st.text_area("Betroffene in der Familie",affected, key="betroffene_4")
+        elif Fam_status_4=="bekannte Variante":
+            affected="""1. Nachweis der pathogenen Variante c.XX, p.XX im XX-Gen bei der XX<br> 2. Ratsuchende: Mammakarzinom re, triple-negativ, mit XX Jahren<br> 3. Mamma- und Ovarialkarzinom in der Familienanamnese:<br> -  Mutter mit Mammakarzinom mit XX Jahren<br>-  Schwester mit Mammakarzinom mit XX Jahren<br>- Großmutter vs mit ”Unterleibskrebs” im unbekannten Alter<br>- Tante ms mit Ovarialkarzinom mit XX Jahren"""
+            betroffene_4 = st.text_area("Betroffene in der Familie",affected, key="betroffene_4")
+    if Index_4=="nicht betroffen":
+        if Fam_status_4=="keine Variante bekannt"
+            affected="""1. Ratsuchende: gesund im Hinblick auf Brust- und Eiersockkrebs<br> 2. Mamma- und Ovarialkarzinom in der Familienanamnese:<br> -  Mutter mit Mammakarzinom mit XX Jahren<br>-  Schwester mit Mammakarzinom mit XX Jahren<br>- Großmutter vs mit ”Unterleibskrebs” im unbekannten Alter<br>- Tante ms mit Ovarialkarzinom mit XX Jahren"""
+            betroffene_4 = st.text_area("Betroffene in der Familie",affected, key="betroffene_4")
+        elif Fam_status_4=="bekannte Variante":
+            affected="""1. Nachweis der pathogenen Variante c.XX, p.XX im XX-Gen bei der XX<br> 2. Ratsuchende: gesund im Hinblick auf Brust- und Eiersockkrebs<br> 3. Mamma- und Ovarialkarzinom in der Familienanamnese:<br> -  Mutter mit Mammakarzinom mit XX Jahren<br>-  Schwester mit Mammakarzinom mit XX Jahren<br>- Großmutter vs mit ”Unterleibskrebs” im unbekannten Alter<br>- Tante ms mit Ovarialkarzinom mit XX Jahren"""
+            betroffene_4 = st.text_area("Betroffene in der Familie",affected, key="betroffene_4")
+            
 
     #Build parts o the letter#
     ##########################
@@ -1685,6 +1700,27 @@ with tab4:
             default_text_4 = """Sie berichteten uns, dass bei Ihnen keine für die Fragestellung relevanten Erkrankungen bekannt seien."""
             free_anamnesis_4= st.text_area("Relevante Symptome und Vorgeschichte für FBrEK", default_text_4, key="free_anamnesis_4")
             Status_Betroffen_4 = st.selectbox("Betroffen in der Familie", ["Steht für Testung zur Verfügung ", "Steht für Testung nicht zur Verfügung"], key="status_betroffene_4")
+
+    st.markdown("### Familienanamnese")
+    if Beratung_4=="Erstberatung":
+        if Fam_status_4=="keine Variante bekannt":
+            default_text_4 = """Aus dem drei Generationen umfassenden Familienstammbaum in Bezug auf die aktuelle Fragestellung geht hervor, dass bei folgenden Familienmitgliedern einen Brustkrebs diagnostiziert wurde:<br>
+            - Ihre Mutter im Alter von XX <br>
+            - Ihre Tante mütterlicherseits im Alter von XX <br>
+            - Ihre Großmutter mütterlicherseits im Alter von XX. :<br>
+            Ein Ovarialkarzinom wurde bei folgeneden/keinen Familienmitgliedern diagnostiziert XX.
+            Medizinische Unterlagen zu den genannten Familienmitgliedern liegen uns nicht vor. Ein Stammbaum befindet sich im Ahang."""
+            family_anamnesis_4= st.text_area("Relevante FBrEK Erkrankungen in der Familie", default_text_4, key="family_anamnesis_4")
+         elif Fam_status_4=="bekannte Variante ":
+            default_text_4 = """Aus dem drei Generationen umfassenden Familienstammbaum in Bezug auf die aktuelle Fragestellung geht hervor, dass bei folgenden Familienmitgliedern einen Brustkrebs diagnostiziert wurde:<br>
+            - Ihre Mutter im Alter von XX <br>
+            - Ihre Tante mütterlicherseits im Alter von XX <br>
+            - Ihre Großmutter mütterlicherseits im Alter von XX. :<br>
+            Ein Ovarialkarzinom wurde bei folgeneden/keinen Familienmitgliedern diagnostiziert XX.
+            Es wurde bei XX eine molekulargenetische Untersuchung in den für familiären Brust- und Eierstockkrebs verantwortlichen Genen durchgeführt. Hierbei wurde die o.g. pathogene (krankheitsverursachende) Variante im XX-Gen nachgewiesen (Befund vom XX).
+            Ein Stammbaum befindet sich im Ahang."""
+            family_anamnesis_4= st.text_area("Relevante FBrEK Erkrankungen in der Familie", default_text_4, key="family_anamnesis_4")
+            
             
             
             
