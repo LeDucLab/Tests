@@ -1672,14 +1672,14 @@ with tab4:
 
      #st.markdown("### Fragestellung")
     if Index_4=="betroffen":
-        if Fam_status_4=="keine Variante bekannt"
+        if Fam_status_4=="keine Variante bekannt":
             affected="""1. Ratsuchende: Mammakarzinom re, triple-negativ, mit XX Jahren<br> 2. Mamma- und Ovarialkarzinom in der Familienanamnese:<br> -  Mutter mit Mammakarzinom mit XX Jahren<br>-  Schwester mit Mammakarzinom mit XX Jahren<br>- Großmutter vs mit ”Unterleibskrebs” im unbekannten Alter<br>- Tante ms mit Ovarialkarzinom mit XX Jahren"""
             betroffene_4 = st.text_area("Betroffene in der Familie",affected, key="betroffene_4")
         elif Fam_status_4=="bekannte Variante":
             affected="""1. Nachweis der pathogenen Variante c.XX, p.XX im XX-Gen bei der XX<br> 2. Ratsuchende: Mammakarzinom re, triple-negativ, mit XX Jahren<br> 3. Mamma- und Ovarialkarzinom in der Familienanamnese:<br> -  Mutter mit Mammakarzinom mit XX Jahren<br>-  Schwester mit Mammakarzinom mit XX Jahren<br>- Großmutter vs mit ”Unterleibskrebs” im unbekannten Alter<br>- Tante ms mit Ovarialkarzinom mit XX Jahren"""
             betroffene_4 = st.text_area("Betroffene in der Familie",affected, key="betroffene_4")
     if Index_4=="nicht betroffen":
-        if Fam_status_4=="keine Variante bekannt"
+        if Fam_status_4=="keine Variante bekannt":
             affected="""1. Ratsuchende: gesund im Hinblick auf Brust- und Eiersockkrebs<br> 2. Mamma- und Ovarialkarzinom in der Familienanamnese:<br> -  Mutter mit Mammakarzinom mit XX Jahren<br>-  Schwester mit Mammakarzinom mit XX Jahren<br>- Großmutter vs mit ”Unterleibskrebs” im unbekannten Alter<br>- Tante ms mit Ovarialkarzinom mit XX Jahren"""
             betroffene_4 = st.text_area("Betroffene in der Familie",affected, key="betroffene_4")
         elif Fam_status_4=="bekannte Variante":
