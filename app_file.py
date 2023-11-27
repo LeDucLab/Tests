@@ -1675,7 +1675,7 @@ with tab4:
     #Build parts o the letter#
     ##########################
     st.markdown("### Anamnese")
-    if Beratung_4=="Ersberatung":
+    if Beratung_4=="Erstberatung":
         if Index_4=="betroffen":
             default_text_4 = """In Bezug auf die aktuelle Fragestellung wurden folgende Aspekte in der Anamnese erfasst:<br>
             - Diagnostik eines Mammakarzinoms/Ovarialkarzinoms der rechten/linken Seite mit XX Jahren<br>
