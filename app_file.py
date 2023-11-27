@@ -1681,9 +1681,9 @@ with tab4:
             - Diagnostik eines Mammakarzinoms/Ovarialkarzinoms der rechten/linken Seite mit XX Jahren<br>
             - Therapie: neoadjuvante Chemotherapie, vollständige Brustdrüsenentfernung / brusterhaltende Operation rechts/links/ operativ behandelt, adjuvante Chemo- und Strahlentherapie (Brief vom XXX). Aktuell mit Tamoxifen, Herceptin, Letrozol behandelt."""
             free_anamnesis_4= st.text_area("Relevante Symptome und Vorgeschichte für FBrEK", default_text_4)
-        elif Index_4=="nicht betroffen":
-            default_text_4 = """Sie berichteten uns, dass bei Ihnen keine für die Fragestellung relevanten Erkrankungen bekannt seien."""
-            free_anamnesis_4= st.text_area("Relevante Symptome und Vorgeschichte für FBrEK", default_text_4)
+        #elif Index_4=="nicht betroffen":
+          #  default_text_4 = """Sie berichteten uns, dass bei Ihnen keine für die Fragestellung relevanten Erkrankungen bekannt seien."""
+            #free_anamnesis_4= st.text_area("Relevante Symptome und Vorgeschichte für FBrEK", default_text_4)
             #Status_Betroffen_4 = st.selectbox("Betroffen in der Familie", ["Steht für Testung zur Verfügung ", "Steht für Testung nicht zur Verfügung"], key="status_betroffene_4")
             
             
