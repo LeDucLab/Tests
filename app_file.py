@@ -1711,7 +1711,7 @@ with tab4:
             Ein Ovarialkarzinom wurde bei folgeneden/keinen Familienmitgliedern diagnostiziert XX.
             Medizinische Unterlagen zu den genannten Familienmitgliedern liegen uns nicht vor. Ein Stammbaum befindet sich im Ahang."""
             family_anamnesis_4= st.text_area("Relevante FBrEK Erkrankungen in der Familie", default_text_4, key="family_anamnesis_4")
-         elif Fam_status_4=="bekannte Variante ":
+        elif Fam_status_4=="bekannte Variante":
             default_text_4 = """Aus dem drei Generationen umfassenden Familienstammbaum in Bezug auf die aktuelle Fragestellung geht hervor, dass bei folgenden Familienmitgliedern einen Brustkrebs diagnostiziert wurde:<br>
             - Ihre Mutter im Alter von XX <br>
             - Ihre Tante mütterlicherseits im Alter von XX <br>
