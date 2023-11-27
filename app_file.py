@@ -1754,9 +1754,9 @@ Arzt2_4 = col2.selectbox("Arzt 2", ["Diana Le Duc", "Albrecht Kobelt"],  key="Ar
 beratung_line_4 = f"**Beratungsgrund:** {betroffene_4}"
 
 if Titel_4== "Herr":
-    hello_line_4 = f"Sehr geehrter {Titel_4} {Name},"
+    hello_line_4 = f"Sehr geehrter {Titel_4} {Name_4},"
 elif Titel_3 != "Herr":
-    hello_line_4 = f"Sehr geehrte {Titel_4} {Name},"
+    hello_line_4 = f"Sehr geehrte {Titel_4} {Name_4},"
 
 first_line_4=f"am {current_datetime.strftime('%d.%m.%Y')} stellten Sie sich gemeinsam mit XXX in unserer genetischen Sprechstunde vor. Beratungsanlass war der Verdacht auf familiären Brust- und Eierstockkrebs."
         
