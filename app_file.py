@@ -1670,7 +1670,7 @@ with tab4:
     Beratung_4 = col1.selectbox("Art der Beratung", ["Erstberatung", "Befundbesprechung"], key="beratung_4")
     Index_4 = col2.selectbox("Ratsuchende Status", ["beroffen", "nicht betrofen"], key="Index_4")     
     Fam_status_4 = col3.selectbox("Status in der Familie", ["keine Variante bekannt", "bekannte Variante"], key="fam_status_4")
-    Criteria_4=col4.selectbox("FBrEK Kriterien in der Familie", ["erüllt", "nicht erfüllt"], key="fam_status_4")
+    Criteria_4=col4.selectbox("FBrEK Kriterien in der Familie", ["erüllt", "nicht erfüllt"], key="criteria_4")
 
     
                 
