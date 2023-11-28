@@ -264,7 +264,7 @@ with tab1:
     #Case 11: analysis is Repeat Expansion in unspecific disease#
     ############################################################
     elif analysis == "Repeat Expansion" and disease == "unspezifisch":
-        beurteilung="""Bei Ihnen besteht der Verdacht auf eine genetisch bedingte so gennante Repeat Erkrankung. Aus der Sicht unseres Fachgebietes ist eine genetische Diagnostik indiziert. Wir veranlassten daher eine molekulargenetische Diagnostik mit Beurteilung von Repeat-Verlängerungen im XX-Gen/ in den hierfür ursächlichen Genen.<br> Sobald der Befund der genetischen Diagnostik vorliegt, werden wir Sie informieren und weiterführend Stellung nehmen."""
+        beurteilung="""Bei Ihnen besteht der Verdacht auf eine genetisch bedingte so genannte Repeat Erkrankung. Aus der Sicht unseres Fachgebietes ist eine genetische Diagnostik indiziert. Wir veranlassten daher eine molekulargenetische Diagnostik mit Beurteilung von Repeat-Verlängerungen im XX-Gen/ in den hierfür ursächlichen Genen.<br> Sobald der Befund der genetischen Diagnostik vorliegt, werden wir Sie informieren und weiterführend Stellung nehmen."""
 
     #Case 12: analysis is CA in Geschlechtsinkongruenz#
     ################################################### 
