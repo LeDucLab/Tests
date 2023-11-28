@@ -1320,9 +1320,9 @@ Unabhängig davon, welche Untersuchungen man in der Schwangerschaft durchführen
     #Begrüßung#
     ###########
     if Titel_3== "Herr":
-        hello_line_3 = f"Sehr geehrter {Titel_3} {Name},"
+        hello_line_3 = f"Sehr geehrter {Titel_3} {Name_3},"
     elif Titel_3 != "Herr":
-        hello_line_3 = f"Sehr geehrte {Titel_3} {Name},"
+        hello_line_3 = f"Sehr geehrte {Titel_3} {Name_3},"
 
     first_line_3=f"am {current_datetime.strftime('%d.%m.%Y')} stellten Sie sich in unserer genetischen Sprechstunde vor."
         
