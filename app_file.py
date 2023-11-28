@@ -1743,35 +1743,35 @@ Sollten im weiteren Verlauf Sie bzw. andere Familienmitglieder an Brust- bzw. Ei
         beurteilung_4=f"Bei Ihrer Mutter/XX wurde im Vorfeld die o.g. pathogene Variante im XX-Gen nachgewiesen. Die Vererbung einer pathogenen Variante im XX-Gen folgt einem autosomal-dominanten Erbgang, d.h. Sie, {Titel_4} {Name_4}, weisen mit 50%iger Wahrscheinlichkeit die in Ihrer Familie bekannte pathogene Variante ebenfalls auf. Mit Ihrem Einverständnis haben wir bei Ihnen die molekulargenetische Diagnostik im Hinblick auf die o.g. pathogene XX-Variante eingeleitet. In Abhängigkeit der Resultate der genetischen Untersuchung ergeben sich ggf. Untersuchungsmöglichkeiten für weitere Familienangehörige sowie daraus resultierende Vorsorgeempfehlungen. Diese werden wir bei der Befundmitteilung ausführlich mit Ihnen besprechen."
             
 
-st.markdown("### Behratende Ärzte")
-col1, col2 = st.columns(2)
-Arzt1_4 = col1.selectbox("Arzt 1", ["Diana Le Duc", "Albrecht Kobelt"], key="Arzt1_4")
-Arzt2_4 = col2.selectbox("Arzt 2", ["Diana Le Duc", "Albrecht Kobelt"],  key="Arzt2_4")
+    st.markdown("### Behratende Ärzte")
+    col1, col2 = st.columns(2)
+    Arzt1_4 = col1.selectbox("Arzt 1", ["Diana Le Duc", "Albrecht Kobelt"], key="Arzt1_4")
+    Arzt2_4 = col2.selectbox("Arzt 2", ["Diana Le Duc", "Albrecht Kobelt"],  key="Arzt2_4")
 
-#Begrüßung#
-###########
+    #Begrüßung#
+    ###########
 
-beratung_line_4 = f"**Beratungsgrund:<br> {betroffene_4}**"
+    beratung_line_4 = f"**Beratungsgrund:<br> {betroffene_4}**"
 
-if Titel_4== "Herr":
-    hello_line_4 = f"Sehr geehrter {Titel_4} {Name_4},"
-elif Titel_3 != "Herr":
-    hello_line_4 = f"Sehr geehrte {Titel_4} {Name_4},"
+    if Titel_4== "Herr":
+        hello_line_4 = f"Sehr geehrter {Titel_4} {Name_4},"
+    elif Titel_3 != "Herr":
+        hello_line_4 = f"Sehr geehrte {Titel_4} {Name_4},"
 
-first_line_4=f"am {current_datetime.strftime('%d.%m.%Y')} stellten Sie sich gemeinsam mit XXX in unserer genetischen Sprechstunde vor. Beratungsanlass war der Verdacht auf familiären Brust- und Eierstockkrebs."
+    first_line_4=f"am {current_datetime.strftime('%d.%m.%Y')} stellten Sie sich gemeinsam mit XXX in unserer genetischen Sprechstunde vor. Beratungsanlass war der Verdacht auf familiären Brust- und Eierstockkrebs."
         
-#Final lines
-last_line_4="""Wir hoffen, Sie mit unserem Gespräch und diesem Brief vorerst ausreichend informiert zu haben. Bei Rückfragen stehen wir gerne auch telefonisch zur Verfügung.<br><br>Mit freundlichen Grüßen,<br><br>"""
+    #Final lines
+    last_line_4="""Wir hoffen, Sie mit unserem Gespräch und diesem Brief vorerst ausreichend informiert zu haben. Bei Rückfragen stehen wir gerne auch telefonisch zur Verfügung.<br><br>Mit freundlichen Grüßen,<br><br>"""
 
-#Signatures
-if Arzt1_4 =="Diana Le Duc":
-    signature_4="""PD Dr. D Le Duc, MD/PhD<br><small>FÄ für Humangenetik</small>"""
+    #Signatures
+    if Arzt1_4 =="Diana Le Duc":
+        signature_4="""PD Dr. D Le Duc, MD/PhD<br><small>FÄ für Humangenetik</small>"""
 
-anhang_4="""<small>Anhang: Stammbaum</small>"""
+    anhang_4="""<small>Anhang: Stammbaum</small>"""
 
-if st.button("Arzt Brief", key="brief_4"):
-        # Display text based on the selected option
-        if Beratung_4 == "Erstberatung":
+    if st.button("Arzt Brief", key="brief_4"):
+            # Display text based on the selected option
+            if Beratung_4 == "Erstberatung":
                 st.markdown(beratung_line_4, unsafe_allow_html=True)
                 st.markdown(hello_line_4, unsafe_allow_html=True)
                 st.markdown(first_line_4, unsafe_allow_html=True)
