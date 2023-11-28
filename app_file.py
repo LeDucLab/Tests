@@ -1668,7 +1668,10 @@ with tab4:
     Beratung_4 = col1.selectbox("Art der Beratung", ["Erstberatung", "Befundbesprechung"], key="beratung_4")
     Index_4 = col2.selectbox("Ratsuchende Status", ["betroffen", "nicht betroffen"], key="Index_4")     
     Fam_status_4 = col3.selectbox("Status in der Familie", ["keine Variante bekannt", "bekannte Variante"], key="fam_status_4")
-    Criteria_4=col4.selectbox("FBrEK Kriterien-Familie", ["erfüllt", "nicht erfüllt"], key="criteria_4")
+    if Beratung_4=="Erstberatung":
+        Criteria_4=col4.selectbox("FBrEK Kriterien-Familie", ["erfüllt", "nicht erfüllt"], key="criteria_4")
+    elif Beratung_4=="Befundbesprechung":
+        befund_4=col4.selectbox("Befund Ergebnis", ["auffällig", "unauffällig", "VUS"], key="criteria_4")
 
      #st.markdown("### Fragestellung")
     if Index_4=="betroffen":
@@ -1687,10 +1690,11 @@ with tab4:
             betroffene_4 = st.text_area("Betroffene in der Familie",affected, key="betroffene_4")
             
 
-    #Build parts o the letter#
-    ##########################
-    st.markdown("### Anamnese")
+    #Build parts of the EB letter#
+    ##############################
+    
     if Beratung_4=="Erstberatung":
+        st.markdown("### Anamnese")
         if Index_4=="betroffen":
             default_text_4 = """In Bezug auf die aktuelle Fragestellung wurden folgende Aspekte in der Anamnese erfasst:<br>
             - Diagnostik eines Mammakarzinoms/Ovarialkarzinoms der rechten/linken Seite mit XX Jahren<br>
@@ -1701,8 +1705,9 @@ with tab4:
             free_anamnesis_4= st.text_area("Relevante Symptome und Vorgeschichte für FBrEK", default_text_4, key="free_anamnesis_4")
             Status_Betroffen_4 = st.selectbox("Betroffen in der Familie", ["Steht für Testung zur Verfügung", "Steht für Testung nicht zur Verfügung"], key="status_betroffene_4")
 
-    st.markdown("### Familienanamnese")
+    
     if Beratung_4=="Erstberatung":
+        st.markdown("### Familienanamnese")
         if Fam_status_4=="keine Variante bekannt":
             default_text_4 = """Aus dem drei Generationen umfassenden Familienstammbaum in Bezug auf die aktuelle Fragestellung geht hervor, dass bei folgenden Familienmitgliedern einen Brustkrebs diagnostiziert wurde:<br>
             - Ihre Mutter im Alter von XX <br>
@@ -1727,20 +1732,20 @@ Sogenannte Varianten unklarer Signifikanz (VUS) werden bei ca. 10 % der Untersuc
 
 Die Vererbung einer pathogenen Variante in den o.g. Genen folgt einem autosomal-dominanten Erbgang, d.h. Eltern, Kinder und Geschwister von Trägern einer pathogenen Variante weisen mit 50%iger Wahrscheinlichkeit die pathogene Variante ebenfalls auf und haben dadurch auch ein hohes Risiko für Brust- bzw. Eierstockkrebs."""
 
-    if Fam_status_4=="keine Variante bekannt":
-        if Criteria_4=="erfüllt":
-            if Index_4=="betroffen":
-                beurteilung_4="""In Ihrer Familie besteht der Verdacht auf familiären Brust- und Eierstockkrebs und erfüllt somit die Kriterien für eine molekulargenetische Diagnostik der o.g. elf Gene. Die Untersuchung wird in der Regel zunächst an einem betroffenen Familienmitglied durchgeführt, weil dadurch die Aussagekraft für die gesamte Familie am höchsten ist. Mit Ihrem Einverständnis haben wir bei Ihnen die molekulargenetische Diagnostik in den o.g. elf Genen eingeleitet. In Abhängigkeit der Resultate der genetischen Untersuchung ergeben sich ggf. Untersuchungsmöglichkeiten für weitere Familienangehörige sowie daraus resultierende Vorsorgeempfehlungen. Diese werden wir bei der Befundmitteilung ausführlich mit Ihnen besprechen."""
-            elif Index_4=="nicht betroffen":
-                if Status_Betroffen_4=="Steht für Testung zur Verfügung":
-                    beurteilung_4=f"In Ihrer Familie besteht der Verdacht auf familiären Brust- und Eierstockkrebs und erfüllt somit die Kriterien für eine molekulargenetische Diagnostik der o.g. elf Gene. Die Untersuchung wird in der Regel zunächst an einem betroffenen Familienmitglied durchgeführt, weil dadurch die Aussagekraft für die gesamte Familie am höchsten ist. Mit dem Einverständnis Ihrer XX können wir eine molekulargenetische Diagnostik in den o.g. elf Genen erstmal bei ihr einleiten. Sollten wir eine eindeutig krankheitsverursachende pathogene Variante nachweisen, werden wir Sie, {Titel_4} {Name_4}, im Hinblick auf diese pathogene Variante testen. Hierfür haben wir Ihnen bereits eine Blutprobe entnommen. In Abhängigkeit der Resultate der genetischen Untersuchung ergeben sich ggf. Untersuchungsmöglichkeiten für weitere Familienangehörige sowie daraus resultierende Vorsorgeempfehlungen. Diese werden wir bei der Befundmitteilung ausführlich mit Ihnen besprechen."
-                if Status_Betroffen_4=="Steht für Testung nicht zur Verfügung":
-                    beurteilung_4=f"Ihre Familie erfüllt die Kriterien für eine molekulargenetische Diagnostik der o.g. elf Gene. Die Untersuchung wird in der Regel zunächst an einem betroffenen Familienmitglied durchgeführt, weil dadurch die Aussagekraft für die gesamte Familie am höchsten ist. Dies ist in Ihrer Familie nicht möglich, da Ihre von Brust- bzw. Eierstockkrebs betroffenen Verwandten bereits verstorben sind/nicht zur Verfügung stehen. Die Kriterien für eine molekulargenetische Diagnostik bei erstgradiger/zweitgradiger Verwandtschaft sind in Ihrer Familie erfüllt. Somit ist nach den Richtlinien des deutschen Konsortiums für familiären Brust- und Eierstockkrebs eine prädiktive (vorhersagende) molekulargenetische Diagnostik bei Ihnen, {Titel_4} {Name_4}, indiziert. Mit Ihrem Einverständnis haben wir bei Ihnen die molekulargenetische Diagnostik in den o.g. elf Genen eingeleitet. Das Ergebnis werden wir Ihnen im persönlichen Gespräch im Rahmen unserer interdisziplinären Befundbesprechung mitteilen."    
-        elif Criteria_4=="nicht erfüllt":
-            beurteilung_4="""Aufgrund Ihrer Eigen- und Familienanamnese besteht derzeit kein Verdacht auf familiären Brust- und Eierstockkrebs. Ihre Familie erfüllt nicht die Kriterien für eine molekulargenetische Diagnostik in den o.g. elf Genen nach den Vorgaben des deutschen Konsortiums für familiären Brust- und Eierstockkrebs. Daher ist eine molekulargenetische Diagnostik aus der Sicht unseres Fachgebietes nicht indiziert. Die Einschätzung Ihres persönlichen Risikos an Brustkrebs zu erkranken kann anhand empirischer Daten erfolgen. Wir empfehlen Ihnen im Anschluss an die Tumornachsorge die regelmäßige Teilnahme an der Regelvorsorge für Brustkrebs (Mammographie alle zwei Jahre ab dem 50. Lebensjahr).
+        if Fam_status_4=="keine Variante bekannt":
+            if Criteria_4=="erfüllt":
+                if Index_4=="betroffen":
+                    beurteilung_4="""In Ihrer Familie besteht der Verdacht auf familiären Brust- und Eierstockkrebs und erfüllt somit die Kriterien für eine molekulargenetische Diagnostik der o.g. elf Gene. Die Untersuchung wird in der Regel zunächst an einem betroffenen Familienmitglied durchgeführt, weil dadurch die Aussagekraft für die gesamte Familie am höchsten ist. Mit Ihrem Einverständnis haben wir bei Ihnen die molekulargenetische Diagnostik in den o.g. elf Genen eingeleitet. In Abhängigkeit der Resultate der genetischen Untersuchung ergeben sich ggf. Untersuchungsmöglichkeiten für weitere Familienangehörige sowie daraus resultierende Vorsorgeempfehlungen. Diese werden wir bei der Befundmitteilung ausführlich mit Ihnen besprechen."""
+                elif Index_4=="nicht betroffen":
+                    if Status_Betroffen_4=="Steht für Testung zur Verfügung":
+                        beurteilung_4=f"In Ihrer Familie besteht der Verdacht auf familiären Brust- und Eierstockkrebs und erfüllt somit die Kriterien für eine molekulargenetische Diagnostik der o.g. elf Gene. Die Untersuchung wird in der Regel zunächst an einem betroffenen Familienmitglied durchgeführt, weil dadurch die Aussagekraft für die gesamte Familie am höchsten ist. Mit dem Einverständnis Ihrer XX können wir eine molekulargenetische Diagnostik in den o.g. elf Genen erstmal bei ihr einleiten. Sollten wir eine eindeutig krankheitsverursachende pathogene Variante nachweisen, werden wir Sie, {Titel_4} {Name_4}, im Hinblick auf diese pathogene Variante testen. Hierfür haben wir Ihnen bereits eine Blutprobe entnommen. In Abhängigkeit der Resultate der genetischen Untersuchung ergeben sich ggf. Untersuchungsmöglichkeiten für weitere Familienangehörige sowie daraus resultierende Vorsorgeempfehlungen. Diese werden wir bei der Befundmitteilung ausführlich mit Ihnen besprechen."
+                    if Status_Betroffen_4=="Steht für Testung nicht zur Verfügung":
+                        beurteilung_4=f"Ihre Familie erfüllt die Kriterien für eine molekulargenetische Diagnostik der o.g. elf Gene. Die Untersuchung wird in der Regel zunächst an einem betroffenen Familienmitglied durchgeführt, weil dadurch die Aussagekraft für die gesamte Familie am höchsten ist. Dies ist in Ihrer Familie nicht möglich, da Ihre von Brust- bzw. Eierstockkrebs betroffenen Verwandten bereits verstorben sind/nicht zur Verfügung stehen. Die Kriterien für eine molekulargenetische Diagnostik bei erstgradiger/zweitgradiger Verwandtschaft sind in Ihrer Familie erfüllt. Somit ist nach den Richtlinien des deutschen Konsortiums für familiären Brust- und Eierstockkrebs eine prädiktive (vorhersagende) molekulargenetische Diagnostik bei Ihnen, {Titel_4} {Name_4}, indiziert. Mit Ihrem Einverständnis haben wir bei Ihnen die molekulargenetische Diagnostik in den o.g. elf Genen eingeleitet. Das Ergebnis werden wir Ihnen im persönlichen Gespräch im Rahmen unserer interdisziplinären Befundbesprechung mitteilen."    
+            elif Criteria_4=="nicht erfüllt":
+                beurteilung_4="""Aufgrund Ihrer Eigen- und Familienanamnese besteht derzeit kein Verdacht auf familiären Brust- und Eierstockkrebs. Ihre Familie erfüllt nicht die Kriterien für eine molekulargenetische Diagnostik in den o.g. elf Genen nach den Vorgaben des deutschen Konsortiums für familiären Brust- und Eierstockkrebs. Daher ist eine molekulargenetische Diagnostik aus der Sicht unseres Fachgebietes nicht indiziert. Die Einschätzung Ihres persönlichen Risikos an Brustkrebs zu erkranken kann anhand empirischer Daten erfolgen. Wir empfehlen Ihnen im Anschluss an die Tumornachsorge die regelmäßige Teilnahme an der Regelvorsorge für Brustkrebs (Mammographie alle zwei Jahre ab dem 50. Lebensjahr).
 Sollten im weiteren Verlauf Sie bzw. andere Familienmitglieder an Brust- bzw. Eierstockkrebs erkranken, ist eine Wiedervorstellung in unserer Sprechstunde zur Re-Evaluation möglich. Unter o.g. Telefonnummer kann ein Termin vereinbart werden."""
-    elif Fam_status_4=="bekannte Variante":
-        beurteilung_4=f"Bei Ihrer Mutter/XX wurde im Vorfeld die o.g. pathogene Variante im XX-Gen nachgewiesen. Die Vererbung einer pathogenen Variante im XX-Gen folgt einem autosomal-dominanten Erbgang, d.h. Sie, {Titel_4} {Name_4}, weisen mit 50%iger Wahrscheinlichkeit die in Ihrer Familie bekannte pathogene Variante ebenfalls auf. Mit Ihrem Einverständnis haben wir bei Ihnen die molekulargenetische Diagnostik im Hinblick auf die o.g. pathogene XX-Variante eingeleitet. In Abhängigkeit der Resultate der genetischen Untersuchung ergeben sich ggf. Untersuchungsmöglichkeiten für weitere Familienangehörige sowie daraus resultierende Vorsorgeempfehlungen. Diese werden wir bei der Befundmitteilung ausführlich mit Ihnen besprechen."
+        elif Fam_status_4=="bekannte Variante":
+            beurteilung_4=f"Bei Ihrer Mutter/XX wurde im Vorfeld die o.g. pathogene Variante im XX-Gen nachgewiesen. Die Vererbung einer pathogenen Variante im XX-Gen folgt einem autosomal-dominanten Erbgang, d.h. Sie, {Titel_4} {Name_4}, weisen mit 50%iger Wahrscheinlichkeit die in Ihrer Familie bekannte pathogene Variante ebenfalls auf. Mit Ihrem Einverständnis haben wir bei Ihnen die molekulargenetische Diagnostik im Hinblick auf die o.g. pathogene XX-Variante eingeleitet. In Abhängigkeit der Resultate der genetischen Untersuchung ergeben sich ggf. Untersuchungsmöglichkeiten für weitere Familienangehörige sowie daraus resultierende Vorsorgeempfehlungen. Diese werden wir bei der Befundmitteilung ausführlich mit Ihnen besprechen."
             
 
     st.markdown("### Behratende Ärzte")
