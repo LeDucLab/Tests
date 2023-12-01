@@ -529,9 +529,7 @@ with tab2:
                     result_text=st.text_area("Ergebnis der genetischen Diagnostik", result_default_text)
                 elif child_2=="Sohn":
                     result_default_text="""Strukturell und numerisch unauffälliger männlicher Karyotyp"""
-                    result_text=st.text_area("Ergebnis der genetischen Diagnostik", result_default_text)
-                    
-                    
+                    result_text=st.text_area("Ergebnis der genetischen Diagnostik", result_default_text)                             
                 
     #Case 4 VUS for Exome and Panel#
     ################################
@@ -1066,10 +1064,9 @@ Wir empfehlen eine Wiedervorstellung in unserer genetischen Sprechstunde in zwei
     #################
 
     if result_2!="auffällig" and disease_2=="HNPCC":
-        recommendation ="""Wir empfehlen Ihnen im Anschluss an die Tumornachsorge eine Koloskopie alle drei bis fünf Jahre. Das Risiko eines Verwandten ersten Grades eines Patienten mit kolorektalem Karzinom, ebenfalls an einem kolorektalen Karzinom zu erkranken, ist auch ohne das Vorliegen eines erblichen Tumorsyndroms statistisch erhöht. Ihren Eltern als erstgradig Angehörige empfehlen wir gemäß S3-Leitlinie Kolorektales Karzinom ebenfalls eine Koloskopie, bestenfalls im Rahmen der Regelvorsorge für Darmkrebs.<br> <br>// Verwandte ersten Grades (Eltern, Kinder und Geschwister) von Patienten mit kolorektalem Karzinom sollten in einem Lebensalter, das 10 Jahre vor dem Alterszeitpunkt des Auftretens des Karzinoms beim Indexpatienten liegt, erstmals komplett koloskopiert werden (spätestens im Alter von 40–⁠45 Jahren, S3-Leitlinie Kolorektales Karzinom).
-Sollten im Verlauf Sie oder weitere Familienmitglieder an weiteren Krebserkrankungen erkranken, empfehlen wir eine Wiedervorstellung in unserer genetischen Sprechstunde zur Re-Evaluation und ggf. Einleitung einer weiterführenden genetischen Diagnostik."""
+        recommendation ="""Wir empfehlen Ihnen im Anschluss an die Tumornachsorge eine Koloskopie alle drei bis fünf Jahre. Das Risiko eines Verwandten ersten Grades eines Patienten mit kolorektalem Karzinom, ebenfalls an einem kolorektalen Karzinom zu erkranken, ist auch ohne das Vorliegen eines erblichen Tumorsyndroms statistisch erhöht. Ihren Eltern als erstgradig Angehörige empfehlen wir gemäß S3-Leitlinie Kolorektales Karzinom ebenfalls eine Koloskopie, bestenfalls im Rahmen der Regelvorsorge für Darmkrebs.<br> <br>// Verwandte ersten Grades (Eltern, Kinder und Geschwister) von Patienten mit kolorektalem Karzinom sollten in einem Lebensalter, das 10 Jahre vor dem Alterszeitpunkt des Auftretens des Karzinoms beim Indexpatienten liegt, erstmals komplett koloskopiert werden (spätestens im Alter von 40–⁠45 Jahren, S3-Leitlinie Kolorektales Karzinom).<br> Sollten im Verlauf Sie oder weitere Familienmitglieder an weiteren Krebserkrankungen erkranken, empfehlen wir eine Wiedervorstellung in unserer genetischen Sprechstunde zur Re-Evaluation und ggf. Einleitung einer weiterführenden genetischen Diagnostik."""
         
-    elif result_2=="auffällig" and disease_2!="HNPCC":
+    elif result_2=="unauffällig" and disease_2=="HNPCC":
         recommendation="""Nach der aktuellen Leitlinie empfehlen wir Ihnen auf Grundlage des molekulargenetisch nachgewiesenen Lynch-Syndroms folgende Vorsorgeuntersuchungen bezüglich des Risikos für ein kolorektales Karzinom, ein Magenkarzinom und ein Endometriumkarzinom (S3-Leitlinie Kolorektales Karzinom. 2019):<br> - Jährliche Koloskopie ab dem 25. Lebensjahr<br> - Regelmäßige Ösophagogastroduodenoskopie ab dem 35. Lebensjahr<br> - Jährlicher vaginaler Ultraschall ab dem 25. Lebensjahr<br> - Jährliche Endometriumbiopsie mit Pipelle-Methode ab dem 35. Lebensjahr<br> - Es besteht die Möglichkeit einer prophylaktischen Hyster- und Ovarektomie bei abgeschlossener Familienplanung ab dem 40. Lebensjahr (oder fünf Jahre vor dem frühesten Erkrankungsalter)<br><br> Das Risiko für die weiteren assoziierten Tumorerkrankungen ist im Vergleich zur Allgemeinbevölkerung geringer erhöht. Aus diesem Grund empfehlen wir Ihnen die Teilnahme an den allgemeinen gültigen Früherkennungsmaßnahmen der Regelversorgung.<br> Mit Nachweis der o.g. pathogenen Variante im XX-Gen besteht für Familienangehörige im Rahmen einer genetischen Beratung die Möglichkeit einer gezielten Diagnostik bezüglich der o.g. pathogenen Variante, dies gilt insbesondere für Ihre Geschwister und Ihre Kinder (ab Erreichen der Volljährigkeit). Diese Untersuchung kann gern im Rahmen unserer genetischen Sprechstunde stattfinden. Eine Terminvereinbarung ist unter der o. g. Telefonnummer möglich."""
         
     elif result_2!="unauffällig" and disease_2=="SCA":
