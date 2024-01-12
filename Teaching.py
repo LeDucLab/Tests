@@ -42,6 +42,7 @@ for question_data in questions_data:
         st.warning("Try again!")
 
         # Provide another attempt
+        retry_container = st.empty()
         selected_option_retry = st.radio("Select an option:", options=question_data['Options'])
         if selected_option_retry == question_data['Answer']:
             st.success("Correct on the second try!")
