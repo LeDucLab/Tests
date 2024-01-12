@@ -28,7 +28,7 @@ st.markdown(
 #def print_hoc_part(show_answers):
 
  #   if show_answers:
-        answers = {
+#        answers = {
   #          "hboc_part_1_answer_0" : True,
    #         "hboc_part_2_answer_1" : True,
     #        "hboc_part_3_answer_1" : True,
