@@ -16,6 +16,7 @@ questions_data = [
         'Options': ['Eine "One-Size-Fits-All" -Ansatz für alle Patienten', 'Eine individualisierte Behandlung basierend auf genetischen, molekularen und anderen individuellen Merkmalen', 'Die ausschließliche Verwendung traditioneller Behandlungsansätze', 'Die Maximierung der Kosteneffizienz bei medizinischen Interventionen'],
         'Answer': 'Eine individualisierte Behandlung basierend auf genetischen, molekularen und anderen individuellen Merkmalen',
         'CorrectImageURL':'https://github.com/LeDucLab/Tests/raw/main/Images/Personalisierte%20Medizin%20in%20der%20klinischen%20Genetik_v3.png',
+        'IncorrectImageURL':'https://github.com/LeDucLab/Tests/raw/main/Images/Personalisierte%20Medizin%20in%20der%20klinischen%20Genetik_v3.png',
     },
     # Add more questions as needed
 ]
@@ -51,7 +52,7 @@ for question_data in questions_data:
             score += 1
         else:
             st.warning("Incorrect! Try again.")
-            st.markdown(f'<img src="{question_data["CorrectImageURL"]}" alt="Correct" width="100%">', unsafe_allow_html=True)
+            st.markdown(f'<img src="{question_data["IncorrectImageURL"]}" alt="Correct" width="100%">', unsafe_allow_html=True)
     else:
         st.warning("Please select an option.")
 
