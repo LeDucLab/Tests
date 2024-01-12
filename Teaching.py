@@ -39,21 +39,24 @@ for question_data in questions_data:
     st.write(question_data['Question'])
 
     # Create radio buttons for options without a default selection
-    selected_option = st.radio("Wählen Sie eine Option:", options=['', *question_data['Options']])
+    selected_option = st.radio("Select an option:", options=['', *question_data['Options']])
 
     # Check if an option is selected
     if selected_option != '':
         # Check if the selected option is correct
         if selected_option == question_data['Answer']:
-            st.success("Korrekt!")
+            st.success("Correct!")
         else:
-            st.warning("Falsch! Versuchen Sie es noch einmal.")
+            st.warning("Incorrect! Try again.")
+
+        # Display the image directly from the URL using HTML
         image_url = question_data['CorrectImageURL'] if selected_option == question_data['Answer'] else question_data['IncorrectImageURL']
         st.markdown(f'<img src="{image_url}" alt="Image" width="100%">', unsafe_allow_html=True)
+
         if selected_option == question_data['Answer']:
             score += 1
     else:
-        st.warning("Bitte wählen Sie eine Option.")
+        st.warning("Please select an option.")
 
 # Display the final score
 st.subheader("Your Final Score:")
