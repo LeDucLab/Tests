@@ -48,17 +48,25 @@ for question_data in questions_data:
             st.success("Correct!")
 
             # Display the image directly from the URL using HTML
-            st.markdown(f'<img src="{question_data["CorrectImageURL"]}" alt="Correct" width="100%">', unsafe_allow_html=True)
-            score += 1
+           # st.markdown(f'<img src="{question_data["CorrectImageURL"]}" alt="Correct" width="100%">', unsafe_allow_html=True)
+          #  score += 1
         else:
             st.warning("Incorrect! Try again.")
-            st.markdown(f'<img src="{question_data["IncorrectImageURL"]}" alt="Correct" width="100%">', unsafe_allow_html=True)
+        image_url = question_data['CorrectImageURL'] if selected_option == question_data['Answer'] else question_data['IncorrectImageURL']
+        st.markdown(f'<img src="{image_url}" alt="Image" width="100%">', unsafe_allow_html=True)
+        if selected_option == question_data['Answer']:
+            score += 1
     else:
         st.warning("Please select an option.")
 
 # Display the final score
 st.subheader("Your Final Score:")
 st.write(f"You got {score} out of {len(questions_data)} questions correct.")
+
+
+
+
+
 
 #from PIL import Image
 #from pathlib import Path
