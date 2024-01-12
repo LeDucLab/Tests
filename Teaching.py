@@ -44,6 +44,7 @@ for question_data in questions_data:
     st.subheader(f"Frage {question_number}:")
     st.write(question_data['Question'])
     if question_data['QuestionType'] == 'fill_in':
+        st.text_input("Hidden Input", key=f"hidden_input_{question_number}", visible=False)
         # Get user input for the answer
         user_answer = st.text_input("Antwort:")
 
