@@ -48,7 +48,7 @@ for question_data in questions_data:
         user_answer = st.text_input("Antwort:")
 
         # Check if the user's answer is correct
-       if any(word.lower() in question_data['Answer'].lower() for word in user_answer.split()):
+        if any(word.lower() in question_data['Answer'].lower() for word in user_answer.split()):
             st.success("Korrekt!")
             st.markdown(f'<img src="{question_data["CorrectImageURL"]}" alt="Korrekt" width="100%">', unsafe_allow_html=True)
             score += 1
