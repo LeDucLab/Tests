@@ -71,64 +71,6 @@ for question_data in questions_data:
     else:
         st.warning("Please select an option.")
 
-# Display the final score
-st.subheader("Your Final Score:")
-st.write(f"You got {score} out of {len(questions_data)} questions correct.")
-This code downloads the images locally using the requests library and displays them using st.image. Please try this modified code, and let me know if it resolves the issue.
-
-User
-i would not like to have local downloaded images
-ChatGPT
-I understand your preference. If you want to display images directly from GitHub URLs without downloading them locally, you can use the st.image function along with the format parameter set to 'auto'. Here's the modified code:
-
-python
-Copy code
-import streamlit as st
-import random
-
-# Define a list of dictionaries with questions, options, answers, and images
-questions_data = [
-    {
-        'Question': 'What is the capital of France?',
-        'Options': ['Berlin', 'Madrid', 'Paris', 'Rome'],
-        'Answer': 'Paris',
-        'CorrectImageURL': 'https://github.com/LeDucLab/Tests/raw/main/Images/Personalisierte%20Medizin%20in%20der%20klinischen%20Genetik_v3.png',
-        'IncorrectImageURL': 'https://github.com/LeDucLab/Tests/raw/main/Images/Personalisierte%20Medizin%20in%20der%20klinischen%20Genetik_v3.png',
-    },
-    # Add more questions as needed
-]
-
-# Shuffle the questions
-random.shuffle(questions_data)
-
-# Set the title for the page
-st.title("Interactive Knowledge Testing App")
-
-# Initialize variables
-score = 0
-question_number = 0
-
-# Iterate through each question
-for question_data in questions_data:
-    question_number += 1
-
-    st.subheader(f"Question {question_number}:")
-    st.write(question_data['Question'])
-
-    # Create radio buttons for options without a default selection
-    selected_option = st.radio("Select an option:", options=['', *question_data['Options']])
-
-    # Check if an option is selected
-    if selected_option != '':
-        # Check if the selected option is correct
-        if selected_option == question_data['Answer']:
-            st.success("Correct!")
-            st.image(question_data['CorrectImageURL'], caption='Correct!', use_column_width=True, format='auto')
-            score += 1
-        else:
-            st.warning("Incorrect! Try again.")
-    else:
-        st.warning("Please select an option.")
 
 # Display the final score
 st.subheader("Your Final Score:")
