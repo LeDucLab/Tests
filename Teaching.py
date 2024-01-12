@@ -1,6 +1,9 @@
 import streamlit as st
 import pandas as pd
 import random
+import os
+import requests
+from PIL import Image
 
 # Set the title for the page
 st.title("Personalisierte Medizin: Welche Informationen haben Sie mitgenommen?")
@@ -17,6 +20,91 @@ questions_data = [
 
     # Add more questions as needed
 ]
+# Shuffle the questions
+random.shuffle(questions_data)
+
+# Set the title for the page
+st.title("Interactive Knowledge Testing App")
+
+# Create a directory to store downloaded images
+os.makedirs('images', exist_ok=True)
+
+# Initialize variables
+score = 0
+question_number = 0
+
+# Download images locally
+for question_data in questions_data:
+    for key in ['Correct', 'Incorrect']:
+        image_url = question_data[f'{key}ImageURL']
+        image_filename = f'images/{key}_{question_data["Question"].replace(" ", "_")}.png'
+
+        # Download the image
+        image_content = requests.get(image_url).content
+
+        # Save the image locally
+        with open(image_filename, 'wb') as f:
+            f.write(image_content)
+
+        # Update the question_data with local image path
+        question_data[f'{key}ImageLocal'] = image_filename
+
+# Iterate through each question
+for question_data in questions_data:
+    question_number += 1
+
+    st.subheader(f"Question {question_number}:")
+    st.write(question_data['Question'])
+
+    # Create radio buttons for options without a default selection
+    selected_option = st.radio("Select an option:", options=['', *question_data['Options']])
+
+    # Check if an option is selected
+    if selected_option != '':
+        # Check if the selected option is correct
+        if selected_option == question_data['Answer']:
+            st.success("Correct!")
+            st.image(Image.open(question_data['CorrectImageLocal']), caption='Correct!', use_column_width=True)
+            score += 1
+        else:
+            st.warning("Incorrect! Try again.")
+    else:
+        st.warning("Please select an option.")
+
+# Display the final score
+st.subheader("Your Final Score:")
+st.write(f"You got {score} out of {len(questions_data)} questions correct.")
+This code downloads the images locally using the requests library and displays them using st.image. Please try this modified code, and let me know if it resolves the issue.
+
+User
+i would not like to have local downloaded images
+ChatGPT
+I understand your preference. If you want to display images directly from GitHub URLs without downloading them locally, you can use the st.image function along with the format parameter set to 'auto'. Here's the modified code:
+
+python
+Copy code
+import streamlit as st
+import random
+
+# Define a list of dictionaries with questions, options, answers, and images
+questions_data = [
+    {
+        'Question': 'What is the capital of France?',
+        'Options': ['Berlin', 'Madrid', 'Paris', 'Rome'],
+        'Answer': 'Paris',
+        'CorrectImageURL': 'https://github.com/LeDucLab/Tests/raw/main/Images/Personalisierte%20Medizin%20in%20der%20klinischen%20Genetik_v3.png',
+        'IncorrectImageURL': 'https://github.com/LeDucLab/Tests/raw/main/Images/Personalisierte%20Medizin%20in%20der%20klinischen%20Genetik_v3.png',
+    },
+    # Add more questions as needed
+]
+
+# Shuffle the questions
+random.shuffle(questions_data)
+
+# Set the title for the page
+st.title("Interactive Knowledge Testing App")
+
+# Initialize variables
 score = 0
 question_number = 0
 
@@ -35,7 +123,7 @@ for question_data in questions_data:
         # Check if the selected option is correct
         if selected_option == question_data['Answer']:
             st.success("Correct!")
-            st.image(question_data['CorrectImage'], caption='Correct!', use_column_width=True, format='auto')
+            st.image(question_data['CorrectImageURL'], caption='Correct!', use_column_width=True, format='auto')
             score += 1
         else:
             st.warning("Incorrect! Try again.")
@@ -45,7 +133,6 @@ for question_data in questions_data:
 # Display the final score
 st.subheader("Your Final Score:")
 st.write(f"You got {score} out of {len(questions_data)} questions correct.")
-
 
 
 
