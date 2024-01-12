@@ -24,7 +24,7 @@ questions_data = [
         'Answer': 'Kopienzahl vom SMN2-Gen',
         'CorrectImageURL':'https://github.com/LeDucLab/Tests/raw/main/Images/SMN2_v1.png',
         'IncorrectImageURL':'https://github.com/LeDucLab/Tests/raw/main/Images/SMN2_v2.png',
-        'QuestionType': 'multiple_choice',
+        'QuestionType': 'fill in',
     },
     # Add more questions as needed
 ]
