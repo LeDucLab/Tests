@@ -51,7 +51,7 @@ if current_question < len(questions_data):
 
     elif questions_data[current_question]['QuestionType'] == 'multiple_choice':
         # Create radio buttons for options without a default selection
-        selected_option = st.radio("Wählen Sie eine Option:", options=['', *questions_data[current_question]['Options']], key=f"radio_{current_question}", index=user_answers.get(f"radio_{current_question}", 0))
+        selected_option = st.radio("Wählen Sie eine Option:", options=[*questions_data[current_question]['Options']], key=f"radio_{current_question}", index=user_answers.get(f"radio_{current_question}", 0))
 
         # Store the user's answer in the dictionary
         user_answers[f"radio_{current_question}"] = selected_option
