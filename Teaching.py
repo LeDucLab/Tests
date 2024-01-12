@@ -32,7 +32,7 @@ for question_data in questions_data:
     st.write(question_data['Question'])
 
     # Create radio buttons for options
-    selected_option = st.radio("Select an option:", options=question_data['Options'], index=None)
+    selected_option = st.radio("Select an option:",  options=[None] + question_data['Options'])
 
     # Check if the selected option is correct
     if selected_option == question_data['Answer']:
