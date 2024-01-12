@@ -35,7 +35,7 @@ for question_data in questions_data:
         # Check if the selected option is correct
         if selected_option == question_data['Answer']:
             st.success("Correct!")
-            st.image(question_data['CorrectImage'], caption='Correct!', use_column_width=True)
+            st.image(question_data['CorrectImage'], caption='Correct!', use_column_width=True, format='auto')
             score += 1
         else:
             st.warning("Incorrect! Try again.")
