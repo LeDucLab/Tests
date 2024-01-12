@@ -36,7 +36,6 @@ questions_data = [
 
 # Initialize variables
 score = 0
-session_state = get(user_answer="")
 user_answers = {}
 
 # Iterate through each question
