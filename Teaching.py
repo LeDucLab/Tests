@@ -3,9 +3,50 @@ import pandas as pd
 import random
 
 # Set the title for the page
-st.title("Interaktive Wissenstest-App")
+st.title("Personalisierte Medizin: Welche Informationen haben Sie mitgenommen?")
 github_image_url = 'https://cdn.pixabay.com/photo/2013/07/18/10/59/dna-163710_1280.jpg'
 st.image(github_image_url, use_column_width=True)
+
+questions_data = [
+    {
+        'Question': 'Was ist das Hauptziel der personalisierten Medizin?',
+        'Options': ['Eine "One-Size-Fits-All" -Ansatz für alle Patienten', 'Eine individualisierte Behandlung basierend auf genetischen, molekularen und anderen individuellen Merkmalen', 'Die ausschließliche Verwendung traditioneller Behandlungsansätze', 'Die Maximierung der Kosteneffizienz bei medizinischen Interventionen'],
+        'Answer': 'Eine individualisierte Behandlung basierend auf genetischen, molekularen und anderen individuellen Merkmalen'
+    },
+    {
+        'Question': 'Which planet is known as the Red Planet?',
+        'Options': ['Mars', 'Venus', 'Jupiter', 'Saturn'],
+        'Answer': 'Mars'
+    },
+    # Add more questions as needed
+]
+# Shuffle the questions
+random.shuffle(questions_data)
+# Initialize variables
+score = 0
+question_number = 0
+
+# Iterate through each question
+for question_data in questions_data:
+    question_number += 1
+
+    st.subheader(f"Question {question_number}:")
+    st.write(question_data['Question'])
+
+    # Create radio buttons for options
+    selected_option = st.radio("Select an option:", options=question_data['Options'])
+
+    # Check if the selected option is correct
+    if selected_option == question_data['Answer']:
+        st.success("Correct!")
+        score += 1
+    else:
+        st.error(f"Wrong! The correct answer is: {question_data['Answer']}")
+
+# Display the final score
+st.subheader("Your Final Score:")
+st.write(f"You got {score} out of {len(questions_data)} questions correct.")
+
 
 #from PIL import Image
 #from pathlib import Path
