@@ -22,8 +22,8 @@ questions_data = [
      {
         'Question':'Welche Informationen müssen berücksichtigt werden, um zu entscheiden, welche Therapie für ein Neugeborenes geeignet ist, bei dem im Rahmen des Neugeborenenscreenings eine spinale Muskelatrophie (SMA) diagnostiziert wurde?',
         'Answer': 'Kopienzahl vom SMN2-Gen',
-        'CorrectImageURL':'https://github.com/LeDucLab/Tests/raw/main/Images/Personalisierte%20Medizin%20in%20der%20klinischen%20Genetik_v3.png',
-        'IncorrectImageURL':'https://github.com/LeDucLab/Tests/raw/main/Images/Personalisierte%20Medizin%20in%20der%20klinischen%20Genetik_v2.png',
+        'CorrectImageURL':'https://github.com/LeDucLab/Tests/raw/main/Images/SMN2_v1.png',
+        'IncorrectImageURL':'https://github.com/LeDucLab/Tests/raw/main/Images/SMN2_v2.png',
         'QuestionType': 'multiple_choice',
     },
     # Add more questions as needed
@@ -43,26 +43,55 @@ for question_data in questions_data:
 
     st.subheader(f"Frage {question_number}:")
     st.write(question_data['Question'])
+    if question_data['QuestionType'] == 'fill_in':
+        # Get user input for the answer
+        user_answer = st.text_input("Antwort:")
 
-    # Create radio buttons for options without a default selection
-    selected_option = st.radio("Wählen Sie eine Option", options=['', *question_data['Options']])
-
-    # Check if an option is selected
-    if selected_option != '':
-        # Check if the selected option is correct
-        if selected_option == question_data['Answer']:
+        # Check if the user's answer is correct
+       if any(word.lower() in question_data['Answer'].lower() for word in user_answer.split()):
             st.success("Korrekt!")
+            st.markdown(f'<img src="{question_data["CorrectImageURL"]}" alt="Korrekt" width="100%">', unsafe_allow_html=True)
+            score += 1
         else:
             st.warning("Falsch! Versuchen Sie nochmal.")
+            st.markdown(f'<img src="{question_data["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
+            
+     elif question_data['QuestionType'] == 'multiple_choice':
+        # Create radio buttons for options without a default selection
+        selected_option = st.radio("Select an option:", options=['', *question_data['Options']])
+
+        # Check if an option is selected
+        if selected_option != '':
+            # Check if the selected option is correct
+            if selected_option == question_data['Answer']:
+                st.success("Correct!")
+                st.markdown(f'<img src="{question_data["CorrectImageURL"]}" alt="Korrekt" width="100%">', unsafe_allow_html=True)
+                score += 1
+            else:
+                st.warning("Falsch! Versuchen Sie nochmal.")
+                st.markdown(f'<img src="{question_data["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
+        else:
+            st.warning("Wählen Sie eine Option.")
+
+    # Create radio buttons for options without a default selection
+    #selected_option = st.radio("Wählen Sie eine Option", options=['', *question_data['Options']])
+
+    # Check if an option is selected
+    #if selected_option != '':
+        # Check if the selected option is correct
+     #   if selected_option == question_data['Answer']:
+      #      st.success("Korrekt!")
+       # else:
+        #    st.warning("Falsch! Versuchen Sie nochmal.")
 
         # Display the image directly from the URL using HTML
-        image_url = question_data['CorrectImageURL'] if selected_option == question_data['Answer'] else question_data['IncorrectImageURL']
-        st.markdown(f'<img src="{image_url}" alt="Image" width="100%">', unsafe_allow_html=True)
+        #image_url = question_data['CorrectImageURL'] if selected_option == question_data['Answer'] else question_data['IncorrectImageURL']
+        #st.markdown(f'<img src="{image_url}" alt="Image" width="100%">', unsafe_allow_html=True)
 
-        if selected_option == question_data['Answer']:
-            score += 1
-    else:
-        st.warning("Please select an option.")
+        #if selected_option == question_data['Answer']:
+         #   score += 1
+    #else:
+     #   st.warning("Please select an option.")
 
 # Display the final score
 st.subheader("Your Final Score:")
