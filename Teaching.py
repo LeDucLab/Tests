@@ -12,11 +12,13 @@ questions_data = [
         'Question': 'Was ist das Hauptziel der personalisierten Medizin?',
         'Options': ['Eine "One-Size-Fits-All" -Ansatz für alle Patienten', 'Eine individualisierte Behandlung basierend auf genetischen, molekularen und anderen individuellen Merkmalen', 'Die ausschließliche Verwendung traditioneller Behandlungsansätze', 'Die Maximierung der Kosteneffizienz bei medizinischen Interventionen'],
         'Answer': 'Eine individualisierte Behandlung basierend auf genetischen, molekularen und anderen individuellen Merkmalen'
+        'CorrectImage':'https://github.com/LeDucLab/Tests/blob/main/Images/Personalisierte%20Medizin%20in%20der%20klinischen%20Genetik_v3.png'
     },
     {
         'Question': 'Which planet is known as the Red Planet?',
         'Options': ['Mars', 'Venus', 'Jupiter', 'Saturn'],
         'Answer': 'Mars'
+        'CorrectImage': 'https://example.com/path/to/correct_mars.jpg'
     },
     # Add more questions as needed
 ]
@@ -26,7 +28,6 @@ random.shuffle(questions_data)
 score = 0
 question_number = 0
 
-# Iterate through each question
 for question_data in questions_data:
     question_number += 1
 
@@ -38,16 +39,23 @@ for question_data in questions_data:
 
     # Check if the selected option is correct
     if selected_option == question_data['Answer']:
-        st.success("Erfolgreich!")
+        st.image(question_data['CorrectImage'], caption='Correct!', use_column_width=True)
         score += 1
-     else:
-        st.warning("Nochmals versuchen!")
+    else:
+        st.image(question_data['CorrectImage'], caption='Incorrect!', use_column_width=True)
+        st.warning("Try again!")
+
+        # Provide another attempt
+        selected_option_retry = st.radio("Select an option:", options=question_data['Options'])
+        if selected_option_retry == question_data['Answer']:
+            st.success("Correct on the second try!")
+            score += 1
+        else:
+            st.image(question_data['CorrectImage'], caption='Incorrect!', use_column_width=True)
 
 # Display the final score
 st.subheader("Your Final Score:")
 st.write(f"You got {score} out of {len(questions_data)} questions correct.")
-
-
 #from PIL import Image
 #from pathlib import Path
 
