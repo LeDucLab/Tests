@@ -11,12 +11,12 @@ st.set_page_config(
     initial_sidebar_state='collapsed'
 )
 
-with st.sidebar:
-    answer_mode_pw = st.text_input("Passwort", type="password")
-    if answer_mode_pw == "schlaukopf":
-        show_answers = True
-    else:
-        show_answers = False
+#with st.sidebar:
+#    answer_mode_pw = st.text_input("Passwort", type="password")
+#    if answer_mode_pw == "schlaukopf":
+ #       show_answers = True
+ #   else:
+  #      show_answers = False
 
 st.title(":dna: UaK-WebApp der Humangenetik")
 
