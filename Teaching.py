@@ -1,4 +1,4 @@
-import streamlit as st
+ndimport streamlit as st
 import pandas as pd
 import random
 
@@ -43,7 +43,7 @@ for question_data in questions_data:
 
         # Provide another attempt
         retry_container = st.empty()
-        selected_option_retry = st.radio("Select an option:", options=question_data['Options'])
+        selected_option_retry = st.radio("Select second option:", options=question_data['Options'], key='selected_option_retry' )
         if selected_option_retry == question_data['Answer']:
             st.success("Correct on the second try!")
             score += 1
