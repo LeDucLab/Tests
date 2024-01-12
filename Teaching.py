@@ -35,29 +35,25 @@ question_number = 0
 for question_data in questions_data:
     question_number += 1
 
-    st.subheader(f"Question {question_number}:")
-    st.write(question_data['Question'])
+    st.subheader(f"Frage {question_number}:")
+    st.write(question_data['Frage'])
 
     # Create radio buttons for options without a default selection
-    selected_option = st.radio("Select an option:", options=['', *question_data['Options']])
+    selected_option = st.radio("Wählen Sie eine Option:", options=['', *question_data['Options']])
 
     # Check if an option is selected
     if selected_option != '':
         # Check if the selected option is correct
-        if selected_option == question_data['Answer']:
-            st.success("Correct!")
-
-            # Display the image directly from the URL using HTML
-           # st.markdown(f'<img src="{question_data["CorrectImageURL"]}" alt="Correct" width="100%">', unsafe_allow_html=True)
-          #  score += 1
+        if selected_option == question_data['Antwort']:
+            st.success("Korrekt!")
         else:
-            st.warning("Incorrect! Try again.")
+            st.warning("Falsch! Versuchen Sie es noch einmal.")
         image_url = question_data['CorrectImageURL'] if selected_option == question_data['Answer'] else question_data['IncorrectImageURL']
         st.markdown(f'<img src="{image_url}" alt="Image" width="100%">', unsafe_allow_html=True)
         if selected_option == question_data['Answer']:
             score += 1
     else:
-        st.warning("Please select an option.")
+        st.warning("Bitte wählen Sie eine Option.")
 
 # Display the final score
 st.subheader("Your Final Score:")
