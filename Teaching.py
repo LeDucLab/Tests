@@ -4,7 +4,7 @@ import random
 
 # Set the title for the page
 st.title("Interaktive Wissenstest-App")
-github_image_url = 'https://github.com/LeDucLab/Tests/blob/main/Images/112e5d79540c445a8c02114ceda740f1.webp'
+github_image_url = 'https://cdn.pixabay.com/photo/2013/07/18/10/59/dna-163710_1280.jpg'
 st.image(github_image_url, use_column_width=True)
 
 #from PIL import Image
