@@ -56,7 +56,7 @@ for question_data in questions_data:
             st.warning("Falsch! Versuchen Sie nochmal.")
             st.markdown(f'<img src="{question_data["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
             
-     elif question_data['QuestionType'] == 'multiple_choice':
+    elif question_data['QuestionType'] == 'multiple_choice':
         # Create radio buttons for options without a default selection
         selected_option = st.radio("Select an option:", options=['', *question_data['Options']])
 
