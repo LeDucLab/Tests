@@ -31,7 +31,6 @@ score = 0
 question_number = 0
 
 # Iterate through each question
-# Iterate through each question
 for question_data in questions_data:
     question_number += 1
 
@@ -46,7 +45,9 @@ for question_data in questions_data:
         # Check if the selected option is correct
         if selected_option == question_data['Answer']:
             st.success("Correct!")
-            st.image(question_data['CorrectImageURL'], caption='Correct!', use_column_width=True, format='auto')
+
+            # Display the image directly from the URL using HTML
+            st.markdown(f'<img src="{question_data["CorrectImageURL"]}" alt="Correct" width="100%">', unsafe_allow_html=True)
             score += 1
         else:
             st.warning("Incorrect! Try again.")
@@ -56,7 +57,6 @@ for question_data in questions_data:
 # Display the final score
 st.subheader("Your Final Score:")
 st.write(f"You got {score} out of {len(questions_data)} questions correct.")
-
 
 #from PIL import Image
 #from pathlib import Path
