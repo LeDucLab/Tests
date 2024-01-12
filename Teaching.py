@@ -35,19 +35,19 @@ question_number = 0
 for question_data in questions_data:
     question_number += 1
 
-    st.subheader(f"Question {question_number}:")
+    st.subheader(f"Frage {question_number}:")
     st.write(question_data['Question'])
 
     # Create radio buttons for options without a default selection
-    selected_option = st.radio("Select an option:", options=['', *question_data['Options']])
+    selected_option = st.radio("Wählen Sie eine Option", options=['', *question_data['Options']])
 
     # Check if an option is selected
     if selected_option != '':
         # Check if the selected option is correct
         if selected_option == question_data['Answer']:
-            st.success("Correct!")
+            st.success("Korrekt!")
         else:
-            st.warning("Incorrect! Try again.")
+            st.warning("Falsch! Versuchen Sie nochmal.")
 
         # Display the image directly from the URL using HTML
         image_url = question_data['CorrectImageURL'] if selected_option == question_data['Answer'] else question_data['IncorrectImageURL']
