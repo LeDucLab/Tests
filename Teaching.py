@@ -82,13 +82,20 @@ if current_question < len(questions_data):
                 st.warning("Wählen Sie eine Option")
 
 # Button to go to the next question
-if st.button("Nächste Frage") and current_question < len(questions_data) - 1:
-    current_question += 1
-    st.experimental_rerun()
+# Display the final score if it's the last question
+    if current_question == len(questions_data) - 1:
+        st.subheader("Ergebnis")
+        st.write(f"Sie haben {score} von {len(questions_data)} Fragen korrekt beantwortet.")
+    else:
+        # Button to go to the next question
+        if st.button("Nächste Frage"):
+            current_question += 1
 
-# Display the final score
-st.subheader("Ergebnis")
-st.write(f"Sie haben {score} von {len(questions_data)} Fragen korrekt beantwortet.")
+# Display the current question
+if current_question < len(questions_data):
+    st.subheader(f"Frage {current_question + 1}:")
+    st.write(questions_data[current_question]['Question'])
+
 
 
 # Initialize variables
