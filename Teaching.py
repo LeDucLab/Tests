@@ -13,12 +13,14 @@ questions_data = [
         'Options': ['Eine "One-Size-Fits-All" -Ansatz für alle Patienten', 'Eine individualisierte Behandlung basierend auf genetischen, molekularen und anderen individuellen Merkmalen', 'Die ausschließliche Verwendung traditioneller Behandlungsansätze', 'Die Maximierung der Kosteneffizienz bei medizinischen Interventionen'],
         'Answer': 'Eine individualisierte Behandlung basierend auf genetischen, molekularen und anderen individuellen Merkmalen',
         'CorrectImage':'https://github.com/LeDucLab/Tests/blob/main/Images/Personalisierte%20Medizin%20in%20der%20klinischen%20Genetik_v3.png',
+        'InCorrectImage':'https://github.com/LeDucLab/Tests/blob/main/Images/Personalisierte%20Medizin%20in%20der%20klinischen%20Genetik_v3.png',
     },
     {
         'Question': 'Which planet is known as the Red Planet?',
         'Options': ['Mars', 'Venus', 'Jupiter', 'Saturn'],
         'Answer': 'Mars',
         'CorrectImage': 'https://github.com/LeDucLab/Tests/blob/main/Images/Personalisierte%20Medizin%20in%20der%20klinischen%20Genetik_v3.png',
+        'InCorrectImage':'https://github.com/LeDucLab/Tests/blob/main/Images/Personalisierte%20Medizin%20in%20der%20klinischen%20Genetik_v3.png',
     },
     # Add more questions as needed
 ]
@@ -42,7 +44,7 @@ for question_data in questions_data:
         st.image(question_data['CorrectImage'], caption='Correct!', use_column_width=True)
         score += 1
     else:
-        st.image(question_data['CorrectImage'], caption='Incorrect!', use_column_width=True)
+        st.image(question_data['InCorrectImage'], caption='Incorrect!', use_column_width=True)
         st.warning("Try again!")
 
         # Provide another attempt
@@ -51,7 +53,7 @@ for question_data in questions_data:
             st.success("Correct on the second try!")
             score += 1
         else:
-            st.image(question_data['CorrectImage'], caption='Incorrect!', use_column_width=True)
+            st.image(question_data['InCorrectImage'], caption='Incorrect!', use_column_width=True)
 
 # Display the final score
 st.subheader("Your Final Score:")
