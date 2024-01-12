@@ -15,13 +15,7 @@ questions_data = [
         'CorrectImage':'https://github.com/LeDucLab/Tests/blob/main/Images/Personalisierte%20Medizin%20in%20der%20klinischen%20Genetik_v3.png',
         'InCorrectImage':'https://github.com/LeDucLab/Tests/blob/main/Images/112e5d79540c445a8c02114ceda740f1.webp',
     },
-    {
-        'Question': 'Which planet is known as the Red Planet?',
-        'Options': ['Mars', 'Venus', 'Jupiter', 'Saturn'],
-        'Answer': 'Mars',
-        'CorrectImage': 'https://github.com/LeDucLab/Tests/blob/main/Images/Personalisierte%20Medizin%20in%20der%20klinischen%20Genetik_v3.png',
-        'InCorrectImage':'https://github.com/LeDucLab/Tests/blob/main/Images/112e5d79540c445a8c02114ceda740f1.webp',
-    },
+
     # Add more questions as needed
 ]
 # Shuffle the questions
