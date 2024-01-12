@@ -6,7 +6,7 @@ import requests
 from PIL import Image
 
 # Set the title for the page
-st.title("Personalisierte Medizin: Welche Informationen haben Sie mitgenommen?")
+st.title("Personalisierte Medizin: Welche Informationen haben Sie mitgenommen")
 #github_image_url = 'https://cdn.pixabay.com/photo/2013/07/18/10/59/dna-163710_1280.jpg'
 #st.image(github_image_url, use_column_width=True)
 
@@ -15,7 +15,7 @@ questions_data = [
         'Question': 'Was ist das Hauptziel der personalisierten Medizin?',
         'Options': ['Eine "One-Size-Fits-All" -Ansatz für alle Patienten', 'Eine individualisierte Behandlung basierend auf genetischen, molekularen und anderen individuellen Merkmalen', 'Die ausschließliche Verwendung traditioneller Behandlungsansätze', 'Die Maximierung der Kosteneffizienz bei medizinischen Interventionen'],
         'Answer': 'Eine individualisierte Behandlung basierend auf genetischen, molekularen und anderen individuellen Merkmalen',
-        'CorrectImage':'https://raw.github.com/LeDucLab/main/Tests/raw/main/Images/Personalisierte%20Medizin%20in%20der%20klinischen%20Genetik_v3.png',
+        'CorrectImageURL':'https://raw.github.com/LeDucLab/main/Tests/raw/main/Images/Personalisierte%20Medizin%20in%20der%20klinischen%20Genetik_v3.png',
     },
     # Add more questions as needed
 ]
@@ -24,7 +24,7 @@ questions_data = [
 random.shuffle(questions_data)
 
 # Set the title for the page
-st.title("Personalisierte Medizin - welche Informationen Sie mitgenommen haben")
+
 
 # Initialize variables
 score = 0
@@ -45,7 +45,9 @@ for question_data in questions_data:
         # Check if the selected option is correct
         if selected_option == question_data['Answer']:
             st.success("Correct!")
-            st.image(question_data['CorrectImage'], caption='Correct!', use_column_width=True, format='auto')
+            image_content = requests.get(question_data['CorrectImageURL']).content
+            image = Image.open(BytesIO(image_content))
+            st.image(image, caption='Correct!', use_column_width=True)
             score += 1
         else:
             st.warning("Incorrect! Try again.")
@@ -55,7 +57,6 @@ for question_data in questions_data:
 # Display the final score
 st.subheader("Your Final Score:")
 st.write(f"You got {score} out of {len(questions_data)} questions correct.")
-
 
 
 #from PIL import Image
