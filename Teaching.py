@@ -35,7 +35,7 @@ for question_data in questions_data:
     selected_option = st.radio("Select an option:", options=question_data['Options'])
 
     # Check if the selected option is correct
-     if selected_option == question_data['Answer']:
+    if selected_option == question_data['Answer']:
         st.success("Correct!")
         st.image(question_data['CorrectImage'], caption='Correct!', use_column_width=True)
         score += 1
