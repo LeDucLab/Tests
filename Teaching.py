@@ -36,26 +36,25 @@ questions_data = [
 # Initialize variables
 score = 0
 question_number = 0
+session_state = get(user_answer="")
 
 # Iterate through each question
-for question_data in questions_data:
-    question_number += 1
-
-    st.subheader(f"Frage {question_number}:")
+for i, question_data in enumerate(questions_data, start=1):
+    st.subheader(f"Frage {i}:")
     st.write(question_data['Question'])
-    if question_data['QuestionType'] == 'fill_in':
-        st.text_input("Hidden Input", key=f"hidden_input_{question_number}", visible=False)
-        # Get user input for the answer
-        user_answer = st.text_input("Antwort:")
 
-        # Check if the user's answer is correct
-        if any(word.lower() in question_data['Answer'].lower() for word in user_answer.split()):
-            st.success("Korrekt!")
-            st.markdown(f'<img src="{question_data["CorrectImageURL"]}" alt="Korrekt" width="100%">', unsafe_allow_html=True)
-            score += 1
-        else:
-            st.warning("Falsch! Versuchen Sie nochmal.")
-            st.markdown(f'<img src="{question_data["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
+    if question_data['QuestionType'] == 'fill_in':
+        user_answer = st.text_input("Your Answer:", key=f"input_{i}", value=session_state.user_answer)
+        session_state.user_answer = user_answer
+
+        if st.button("Submit"):
+            if any(word.lower() in question_data['Answer'].lower() for word in user_answer.split()):
+                st.success("Korrekt!")
+                st.markdown(f'<img src="{question_data["CorrectImageURL"]}" alt="Korrekt" width="100%">', unsafe_allow_html=True)
+                score += 1
+            else:
+                st.warning("Falsch! Versuchen Sie nochmal.")
+                st.markdown(f'<img src="{question_data["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
             
     elif question_data['QuestionType'] == 'multiple_choice':
         # Create radio buttons for options without a default selection
