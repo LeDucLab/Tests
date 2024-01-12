@@ -3,6 +3,7 @@ import random
 import requests
 from io import BytesIO
 from PIL import Image, UnidentifiedImageError
+from SessionState import get
 
 
 # Set the title for the page
