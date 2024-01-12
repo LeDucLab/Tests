@@ -36,7 +36,7 @@ for question_data in questions_data:
     question_number += 1
 
     st.subheader(f"Frage {question_number}:")
-    st.write(question_data['Frage'])
+    st.write(question_data['Question'])
 
     # Create radio buttons for options without a default selection
     selected_option = st.radio("Wählen Sie eine Option:", options=['', *question_data['Options']])
