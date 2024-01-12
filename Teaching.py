@@ -65,7 +65,7 @@ if current_question < len(questions_data):
                 st.markdown(f'<img src="{questions_data[current_question]["CorrectImageURL"]}" alt="Korrekt" width="100%">', unsafe_allow_html=True)
                 score += 1
             else:
-                st.warning("Falsch! Versuchen SIe nochmal.")
+                st.warning("Falsch! Versuchen Sie nochmal.")
                 st.markdown(f'<img src="{questions_data[current_question]["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
         elif questions_data[current_question]['QuestionType'] == 'multiple_choice':
             if selected_option != '':
