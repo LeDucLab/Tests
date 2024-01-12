@@ -44,7 +44,7 @@ for question_data in questions_data:
     # Check if an option is selected
     if selected_option != '':
         # Check if the selected option is correct
-        if selected_option == question_data['Antwort']:
+        if selected_option == question_data['Answer']:
             st.success("Korrekt!")
         else:
             st.warning("Falsch! Versuchen Sie es noch einmal.")
