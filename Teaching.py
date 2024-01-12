@@ -39,7 +39,7 @@ for question_data in questions_data:
         st.image(question_data['CorrectImage'], caption='Correct!', use_column_width=True)
         score += 1
     else:
-        st.image(question_data['IncorrectImage'], caption='Incorrect!', use_column_width=True)
+        st.image(question_data['InCorrectImage'], caption='Incorrect!', use_column_width=True)
 
 # Display the final score
 st.subheader("Your Final Score:")
