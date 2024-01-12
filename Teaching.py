@@ -1,9 +1,9 @@
 import streamlit as st
 import random
 import requests
-from PIL import Image
 from io import BytesIO
-
+from PIL import Image, UnidentifiedImageError
+import imageio
 
 # Set the title for the page
 st.title("Personalisierte Medizin: Welche Informationen haben Sie mitgenommen")
@@ -45,9 +45,16 @@ for question_data in questions_data:
         # Check if the selected option is correct
         if selected_option == question_data['Answer']:
             st.success("Correct!")
-            image_content = requests.get(question_data['CorrectImageURL']).content
-            image = Image.open(BytesIO(image_content))
-            st.image(image, caption='Correct!', use_column_width=True)
+
+            try:
+                # Use PIL to open the image
+                image = Image.open(BytesIO(requests.get(question_data['CorrectImageURL']).content))
+                st.image(image, caption='Correct!', use_column_width=True)
+            except UnidentifiedImageError:
+                # Use ImageIO as an alternative
+                image = imageio.imread(BytesIO(requests.get(question_data['CorrectImageURL']).content))
+                st.image(image, caption='Correct!', use_column_width=True)
+
             score += 1
         else:
             st.warning("Incorrect! Try again.")
