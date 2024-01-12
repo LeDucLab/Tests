@@ -3,7 +3,7 @@ import random
 import requests
 from io import BytesIO
 from PIL import Image, UnidentifiedImageError
-from SessionState import get
+
 
 
 # Set the title for the page
@@ -37,6 +37,7 @@ questions_data = [
 # Initialize variables
 score = 0
 session_state = get(user_answer="")
+user_answers = {}
 
 # Iterate through each question
 for i, question_data in enumerate(questions_data, start=1):
@@ -44,8 +45,8 @@ for i, question_data in enumerate(questions_data, start=1):
     st.write(question_data['Question'])
 
     if question_data['QuestionType'] == 'fill_in':
-        user_answer = st.text_input("Your Answer:", key=f"input_{i}", value=session_state.user_answer)
-        session_state.user_answer = user_answer
+        user_answer = st.text_input("Your Answer:", key=f"input_{i}", value=user_answers.get(f"input_{i}", ""))
+        user_answers[f"input_{i}"] = user_answer
 
         if st.button("Submit"):
             if any(word.lower() in question_data['Answer'].lower() for word in user_answer.split()):
