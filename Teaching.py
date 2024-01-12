@@ -35,11 +35,15 @@ for question_data in questions_data:
     selected_option = st.radio("Select an option:", options=question_data['Options'])
 
     # Check if the selected option is correct
-    if selected_option == question_data['Answer']:
+     if selected_option == question_data['Answer']:
+        st.success("Correct!")
         st.image(question_data['CorrectImage'], caption='Correct!', use_column_width=True)
         score += 1
     else:
-        st.image(question_data['InCorrectImage'], caption='Incorrect!', use_column_width=True)
+        st.warning("Incorrect!")
+        st.image(question_data['IncorrectImage'], caption='Incorrect!', use_column_width=True)
+
+# Display the final score
 
 # Display the final score
 st.subheader("Your Final Score:")
