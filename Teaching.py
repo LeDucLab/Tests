@@ -18,9 +18,6 @@ questions_data = [
 
     # Add more questions as needed
 ]
-# Shuffle the questions
-random.shuffle(questions_data)
-# Initialize variables
 score = 0
 question_number = 0
 
@@ -39,18 +36,17 @@ for question_data in questions_data:
         # Check if the selected option is correct
         if selected_option == question_data['Answer']:
             st.success("Correct!")
-            st.image(question_data['CorrectImage'], caption='Correct!', use_column_width=True)
+            st.image(question_data['CorrectImageURL'], caption='Correct!', use_column_width=True)
             score += 1
         else:
             st.warning("Incorrect! Try again.")
     else:
         st.warning("Please select an option.")
-        
-# Display the final score
 
 # Display the final score
 st.subheader("Your Final Score:")
 st.write(f"You got {score} out of {len(questions_data)} questions correct.")
+
 
 
 
