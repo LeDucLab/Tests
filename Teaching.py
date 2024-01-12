@@ -13,7 +13,6 @@ questions_data = [
         'Options': ['Eine "One-Size-Fits-All" -Ansatz für alle Patienten', 'Eine individualisierte Behandlung basierend auf genetischen, molekularen und anderen individuellen Merkmalen', 'Die ausschließliche Verwendung traditioneller Behandlungsansätze', 'Die Maximierung der Kosteneffizienz bei medizinischen Interventionen'],
         'Answer': 'Eine individualisierte Behandlung basierend auf genetischen, molekularen und anderen individuellen Merkmalen',
         'CorrectImage':'https://raw.github.com/LeDucLab/main/Tests/Images/Personalisierte%20Medizin%20in%20der%20klinischen%20Genetik_v3.png',
-        'IncorrectImage':'https://raw.github.com/LeDucLab/main/Tests/Images/Personalisierte%20Medizin%20in%20der%20klinischen%20Genetik_v3.png',
     },
 
     # Add more questions as needed
