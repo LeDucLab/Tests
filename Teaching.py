@@ -1,9 +1,9 @@
 import streamlit as st
-import pandas as pd
 import random
-import os
 import requests
 from PIL import Image
+from io import BytesIO
+
 
 # Set the title for the page
 st.title("Personalisierte Medizin: Welche Informationen haben Sie mitgenommen")
