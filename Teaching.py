@@ -31,6 +31,7 @@ score = 0
 question_number = 0
 
 # Iterate through each question
+# Iterate through each question
 for question_data in questions_data:
     question_number += 1
 
@@ -45,13 +46,8 @@ for question_data in questions_data:
         # Check if the selected option is correct
         if selected_option == question_data['Answer']:
             st.success("Correct!")
-
-            try:
-                # Use PIL to open the image
-                image = Image.open(BytesIO(requests.get(question_data['CorrectImageURL']).content))
-                st.image(image, caption='Correct!', use_column_width=True)
-            except UnidentifiedImageError as e:
-                st.warning(f"Error: {e}")
+            st.image(question_data['CorrectImageURL'], caption='Correct!', use_column_width=True, format='auto')
+            score += 1
         else:
             st.warning("Incorrect! Try again.")
     else:
@@ -60,7 +56,6 @@ for question_data in questions_data:
 # Display the final score
 st.subheader("Your Final Score:")
 st.write(f"You got {score} out of {len(questions_data)} questions correct.")
-
 
 
 #from PIL import Image
