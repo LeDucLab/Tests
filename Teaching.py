@@ -30,6 +30,7 @@ questions_data = [
     # Add more questions as needed
 ]
 
+random.shuffle(questions_data)
 
 # Initialize variables
 score = 0
