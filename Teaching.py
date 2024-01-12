@@ -123,8 +123,8 @@ st.markdown(
        #     st.markdown(read_markdown_file(settings.hboc_markdown + "hboc_part_4.md"))
 
       #      with st.expander("**Infobox - Entscheidungsbaum**"):
-                        hboc_dec_tree = Image.open(settings.hboc_images + "hboc_part_5_decision_tree.png")
-                        st.image(hboc_dec_tree)
+        #                hboc_dec_tree = Image.open(settings.hboc_images + "hboc_part_5_decision_tree.png")
+            #            st.image(hboc_dec_tree)
 
      #       hboc_part_4_options = [
       #          "Risikominimierende Operation",
