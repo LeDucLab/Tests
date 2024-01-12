@@ -24,6 +24,7 @@ random.shuffle(questions_data)
 score = 0
 question_number = 0
 
+# Iterate through each question
 for question_data in questions_data:
     question_number += 1
 
@@ -38,21 +39,14 @@ for question_data in questions_data:
         st.image(question_data['CorrectImage'], caption='Correct!', use_column_width=True)
         score += 1
     else:
-        st.image(question_data['InCorrectImage'], caption='Incorrect!', use_column_width=True)
-        st.warning("Try again!")
-
-        # Provide another attempt
-        retry_container = st.empty()
-        selected_option_retry = st.radio("Select second option:", options=question_data['Options'], key='selected_option_retry' )
-        if selected_option_retry == question_data['Answer']:
-            st.success("Correct on the second try!")
-            score += 1
-        else:
-            st.image(question_data['InCorrectImage'], caption='Incorrect!', use_column_width=True)
+        st.image(question_data['IncorrectImage'], caption='Incorrect!', use_column_width=True)
 
 # Display the final score
 st.subheader("Your Final Score:")
 st.write(f"You got {score} out of {len(questions_data)} questions correct.")
+
+
+
 #from PIL import Image
 #from pathlib import Path
 
