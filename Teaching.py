@@ -19,35 +19,14 @@ questions_data = [
     },
 
     # Add more questions as needed
-]
-# Shuffle the questions
 random.shuffle(questions_data)
 
 # Set the title for the page
-st.title("Interactive Knowledge Testing App")
-
-# Create a directory to store downloaded images
-os.makedirs('images', exist_ok=True)
+st.title("Personalisierte Medizin - welche Informationen Sie mitgenommen haben")
 
 # Initialize variables
 score = 0
 question_number = 0
-
-# Download images locally
-for question_data in questions_data:
-    for key in ['Correct', 'Incorrect']:
-        image_url = question_data[f'{key}ImageURL']
-        image_filename = f'images/{key}_{question_data["Question"].replace(" ", "_")}.png'
-
-        # Download the image
-        image_content = requests.get(image_url).content
-
-        # Save the image locally
-        with open(image_filename, 'wb') as f:
-            f.write(image_content)
-
-        # Update the question_data with local image path
-        question_data[f'{key}ImageLocal'] = image_filename
 
 # Iterate through each question
 for question_data in questions_data:
@@ -64,13 +43,12 @@ for question_data in questions_data:
         # Check if the selected option is correct
         if selected_option == question_data['Answer']:
             st.success("Correct!")
-            st.image(Image.open(question_data['CorrectImageLocal']), caption='Correct!', use_column_width=True)
+            st.image(question_data['CorrectImage'], caption='Correct!', use_column_width=True, format='auto')
             score += 1
         else:
             st.warning("Incorrect! Try again.")
     else:
         st.warning("Please select an option.")
-
 
 # Display the final score
 st.subheader("Your Final Score:")
