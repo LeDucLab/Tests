@@ -51,6 +51,7 @@ for question_data in questions_data:
             score += 1
         else:
             st.warning("Incorrect! Try again.")
+            st.markdown(f'<img src="{question_data["CorrectImageURL"]}" alt="Correct" width="100%">', unsafe_allow_html=True)
     else:
         st.warning("Please select an option.")
 
