@@ -38,10 +38,10 @@ for question_data in questions_data:
 
     # Check if the selected option is correct
     if selected_option == question_data['Answer']:
-        st.success("Correct!")
+        st.success("Erfolgreich!")
         score += 1
-    else:
-        st.error(f"Wrong! The correct answer is: {question_data['Answer']}")
+     else:
+        st.warning("Nochmals versuchen!")
 
 # Display the final score
 st.subheader("Your Final Score:")
