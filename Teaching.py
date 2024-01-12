@@ -15,7 +15,7 @@ questions_data = [
         'Question': 'Was ist das Hauptziel der personalisierten Medizin?',
         'Options': ['Eine "One-Size-Fits-All" -Ansatz für alle Patienten', 'Eine individualisierte Behandlung basierend auf genetischen, molekularen und anderen individuellen Merkmalen', 'Die ausschließliche Verwendung traditioneller Behandlungsansätze', 'Die Maximierung der Kosteneffizienz bei medizinischen Interventionen'],
         'Answer': 'Eine individualisierte Behandlung basierend auf genetischen, molekularen und anderen individuellen Merkmalen',
-        'CorrectImageURL':'https://raw.github.com/LeDucLab/main/Tests/Images/Personalisierte%20Medizin%20in%20der%20klinischen%20Genetik_v3.png',
+        'CorrectImageURL':'https://github.com/LeDucLab/Tests/raw/main/Images/Personalisierte%20Medizin%20in%20der%20klinischen%20Genetik_v3.png',
     },
     # Add more questions as needed
 ]
