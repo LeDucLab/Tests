@@ -3,7 +3,7 @@ import random
 import requests
 from io import BytesIO
 from PIL import Image, UnidentifiedImageError
-import imageio
+
 
 # Set the title for the page
 st.title("Personalisierte Medizin: Welche Informationen haben Sie mitgenommen")
@@ -50,12 +50,8 @@ for question_data in questions_data:
                 # Use PIL to open the image
                 image = Image.open(BytesIO(requests.get(question_data['CorrectImageURL']).content))
                 st.image(image, caption='Correct!', use_column_width=True)
-            except UnidentifiedImageError:
-                # Use ImageIO as an alternative
-                image = imageio.imread(BytesIO(requests.get(question_data['CorrectImageURL']).content))
-                st.image(image, caption='Correct!', use_column_width=True)
-
-            score += 1
+            except UnidentifiedImageError as e:
+                st.warning(f"Error: {e}")
         else:
             st.warning("Incorrect! Try again.")
     else:
@@ -64,6 +60,7 @@ for question_data in questions_data:
 # Display the final score
 st.subheader("Your Final Score:")
 st.write(f"You got {score} out of {len(questions_data)} questions correct.")
+
 
 
 #from PIL import Image
