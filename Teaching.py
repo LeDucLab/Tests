@@ -17,12 +17,18 @@ questions_data = [
         'Answer': 'Eine individualisierte Behandlung basierend auf genetischen, molekularen und anderen individuellen Merkmalen',
         'CorrectImageURL':'https://github.com/LeDucLab/Tests/raw/main/Images/Personalisierte%20Medizin%20in%20der%20klinischen%20Genetik_v3.png',
         'IncorrectImageURL':'https://github.com/LeDucLab/Tests/raw/main/Images/Personalisierte%20Medizin%20in%20der%20klinischen%20Genetik_v2.png',
+        'QuestionType': 'multiple_choice',
+    },
+     {
+        'Question':'Welche Informationen müssen berücksichtigt werden, um zu entscheiden, welche Therapie für ein Neugeborenes geeignet ist, bei dem im Rahmen des Neugeborenenscreenings eine spinale Muskelatrophie (SMA) diagnostiziert wurde?',
+        'Answer': 'Kopienzahl vom SMN2-Gen',
+        'CorrectImageURL':'https://github.com/LeDucLab/Tests/raw/main/Images/Personalisierte%20Medizin%20in%20der%20klinischen%20Genetik_v3.png',
+        'IncorrectImageURL':'https://github.com/LeDucLab/Tests/raw/main/Images/Personalisierte%20Medizin%20in%20der%20klinischen%20Genetik_v2.png',
+        'QuestionType': 'multiple_choice',
     },
     # Add more questions as needed
 ]
 
-
-random.shuffle(questions_data)
 
 # Set the title for the page
 
