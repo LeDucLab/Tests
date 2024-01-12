@@ -31,12 +31,11 @@ for question_data in questions_data:
     st.subheader(f"Question {question_number}:")
     st.write(question_data['Question'])
 
-    
-    # Check if the selected option is correct
-    selected_option = st.radio("Select an option:", options=['', *question_data['Options']])
+    # Create a selectbox for options with a default value of None
+    selected_option = st.selectbox("Select an option:", options=[None, *question_data['Options']])
 
     # Check if an option is selected
-    if selected_option != '':
+    if selected_option is not None:
         # Check if the selected option is correct
         if selected_option == question_data['Answer']:
             st.success("Correct!")
