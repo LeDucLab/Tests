@@ -4,19 +4,9 @@ import random
 
 # Set the title for the page
 st.title("Interaktive Wissenstest-App")
+github_image_url = 'https://github.com/LeDucLab/Tests/blob/main/Images/112e5d79540c445a8c02114ceda740f1.webp'
+st.image(github_image_url, use_column_width=True)
 
-# Add a background image with DNA theme
-st.markdown(
-    """
-    <style>
-        body {
-            background-image: url('https://example.com/path/to/dna_background.jpg');
-            background-size: cover;
-        }
-    </style>
-    """,
-    unsafe_allow_html=True
-)
 #from PIL import Image
 #from pathlib import Path
 
