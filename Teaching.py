@@ -44,7 +44,7 @@ for question_data in questions_data:
         else:
             st.warning("Incorrect!")
             st.image(question_data['IncorrectImage'], caption='Incorrect!', use_column_width=True)
-    
+
 
 # Display the final score
 
