@@ -46,8 +46,8 @@ for question_data in question_data_1:
 
         if st.button("Nächste Frage", key="Q2"):
             for question_data_2 in question_data_2:
-                st.subheader(f"Frage 1:")
-                st.write(question_data['Question'])
+                st.subheader(f"Frage 2:")
+                st.write(question_data_2['Question'])
                 user_answer_2 = st.radio(f"Ihre Antwort:", question_data_2['','Options'], key=f"user_answer_2")
                 if user_answer_2 !='':
                     if user_answer_2 == question_data_2['Answer']:
