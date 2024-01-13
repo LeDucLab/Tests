@@ -58,8 +58,6 @@ for question_data in question_data_1 + question_data_2[session_state.current_que
     elif question_data['QuestionType'] == 'multiple_choice':
         # Display multiple-choice options as radio buttons
         user_answer = st.radio("Ihre Antwort:", question_data['Options'])
-
-       
         if user_answer == question_data['Answer']:
             st.success("Korrekt!")
             st.markdown(f'<img src="{question_data["CorrectImageURL"]}" alt="Korrekt" width="100%">', unsafe_allow_html=True)
