@@ -64,7 +64,7 @@ for i, question_data in enumerate(questions_data, start=1):
         if selected_option != '':
             # Check if the selected option is correct
             if selected_option == question_data['Answer']:
-                st.success("Correct!")
+                st.success("Korrect!")
                 st.markdown(f'<img src="{question_data["CorrectImageURL"]}" alt="Korrekt" width="100%">', unsafe_allow_html=True)
                 score += 1
             else:
