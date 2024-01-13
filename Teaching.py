@@ -44,13 +44,14 @@ for question_data in question_data_1:
             for question_data_2 in question_data_2:
                 st.subheader(f"Frage 2:")
                 st.write(question_data_2['Question'])
-                user_answer_2 = st.radio("Ihre Antwort:", options=question_data_2['Options'], key="user_answer_2")
-                if user_answer_2 == question_data_2['Answer']:
-                    st.success("Korrekt!")
-                    st.markdown(f'<img src="{question_data_2["CorrectImageURL"]}" alt="Korrekt" width="100%">', unsafe_allow_html=True)
-                else:
-                    st.warning("Falsch! Versuchen Sie nochmal.")
-                    st.markdown(f'<img src="{question_data_2["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
+                user_answer_2 = st.radio("Ihre Antwort:", options=question_data_2['','Options'], key="user_answer_2")
+                if st.button("Einreichen", key="A2"):
+                    if user_answer_2 == question_data_2['Answer']:
+                        st.success("Korrekt!")
+                        st.markdown(f'<img src="{question_data_2["CorrectImageURL"]}" alt="Korrekt" width="100%">', unsafe_allow_html=True)
+                    else:
+                        st.warning("Falsch! Versuchen Sie nochmal.")
+                        st.markdown(f'<img src="{question_data_2["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
         else:
             st.warning("Falsch! Versuchen Sie nochmal.")
             st.markdown(f'<img src="{question_data["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
