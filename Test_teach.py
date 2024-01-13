@@ -1,3 +1,7 @@
+import streamlit as st
+
+# Set the title for the page
+st.title("Student Quiz App")
 
 # Define the questions
 questions = [
@@ -51,3 +55,4 @@ else:
     # Reset the session_state for a new quiz
     st.session_state.score = 0
     st.session_state.current_question = 0
+
