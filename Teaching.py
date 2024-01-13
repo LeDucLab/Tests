@@ -19,14 +19,14 @@ questions_data = [
         'IncorrectImageURL':'https://github.com/LeDucLab/Tests/raw/main/Images/SMN2_v2.png',
         'QuestionType': 'fill_in',
     },
-#    {
- #       'Question': 'Was ist das Hauptziel der personalisierten Medizin?',
-  #      'Options': ['Eine "One-Size-Fits-All" -Ansatz für alle Patienten', 'Eine individualisierte Behandlung basierend auf genetischen, molekularen und anderen individuellen Merkmalen', 'Die ausschließliche Verwendung traditioneller Behandlungsansätze', 'Die Maximierung der Kosteneffizienz bei medizinischen Interventionen'],
-  #      'Answer': 'Eine individualisierte Behandlung basierend auf genetischen, molekularen und anderen individuellen Merkmalen',
-  #      'CorrectImageURL':'https://github.com/LeDucLab/Tests/raw/main/Images/Personalisierte%20Medizin%20in%20der%20klinischen%20Genetik_v3.png',
-  #      'IncorrectImageURL':'https://github.com/LeDucLab/Tests/raw/main/Images/Personalisierte%20Medizin%20in%20der%20klinischen%20Genetik_v2.png',
-   #     'QuestionType': 'multiple_choice',
-   # },
+    {
+       'Question': 'Was ist das Hauptziel der personalisierten Medizin?',
+        'Options': ['Eine "One-Size-Fits-All" -Ansatz für alle Patienten', 'Eine individualisierte Behandlung basierend auf genetischen, molekularen und anderen individuellen Merkmalen', 'Die ausschließliche Verwendung traditioneller Behandlungsansätze', 'Die Maximierung der Kosteneffizienz bei medizinischen Interventionen'],
+        'Answer': 'Eine individualisierte Behandlung basierend auf genetischen, molekularen und anderen individuellen Merkmalen',
+        'CorrectImageURL':'https://github.com/LeDucLab/Tests/raw/main/Images/Personalisierte%20Medizin%20in%20der%20klinischen%20Genetik_v3.png',
+        'IncorrectImageURL':'https://github.com/LeDucLab/Tests/raw/main/Images/Personalisierte%20Medizin%20in%20der%20klinischen%20Genetik_v2.png',
+        'QuestionType': 'multiple_choice',
+    },
     
     # Add more questions as needed
 ]
