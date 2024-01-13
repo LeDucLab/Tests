@@ -74,17 +74,18 @@ if score==1:
         # Check if an option is selected
           if selected_option != '':
             # Check if the selected option is correct
-               if selected_option == question_data['Answer']:
-                    st.success("Korrekt!")
-                    st.markdown(f'<img src="{question_data["CorrectImageURL"]}" alt="Korrekt" width="100%">', unsafe_allow_html=True)
-                    score += 1
-               else:
-                    st.warning("Falsch! Versuchen Sie nochmal.")
-                    st.markdown(f'<img src="{question_data["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
+               if st.button("Submit"):
                     if selected_option == question_data['Answer']:
                          st.success("Korrekt!")
                          st.markdown(f'<img src="{question_data["CorrectImageURL"]}" alt="Korrekt" width="100%">', unsafe_allow_html=True)
                          score += 1
+                    else:
+                         st.warning("Falsch! Versuchen Sie nochmal.")
+                         st.markdown(f'<img src="{question_data["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
+                         if selected_option == question_data['Answer']:
+                              st.success("Korrekt!")
+                              st.markdown(f'<img src="{question_data["CorrectImageURL"]}" alt="Korrekt" width="100%">', unsafe_allow_html=True)
+                              score += 1
           else:
                st.warning("Wählen Sie eine Option.")
 
