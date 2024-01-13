@@ -42,7 +42,7 @@ if 'current_question' not in session_state:
 # Iterate through each question
 while session_state.current_question < len(question_data_1 + question_data_2):
     st.subheader(f"Frage {session_state.current_question + 1}:")
-    question_data = question_data_1 + question_data_2[session_state.current_question]
+    question_data = question_data_1 + [question_data_2[session_state.current_question]]
     st.write(question_data['Question'])
 
     if question_data['QuestionType'] == 'fill_in':
@@ -76,6 +76,7 @@ while session_state.current_question < len(question_data_1 + question_data_2):
 # Display the final score
 st.subheader("Ihr Endergebnis:")
 st.write(f"Sie haben {session_state.score} von {len(question_data_1) + len(question_data_2)} Fragen korrekt beantwortet.")
+
 
 
 
