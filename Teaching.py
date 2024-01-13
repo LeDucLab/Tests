@@ -34,120 +34,48 @@ random.shuffle(questions_data)
 
 # Initialize variables
 score = 0
-current_question = 0
+#current_question = 0
 user_answers = {}
 
-# Check if the user submitted an answer
-if st.button("Submit"):
-    # Check the question type
-    if questions_data[current_question]['QuestionType'] == 'fill_in':
-        # Get user input for the answer
-        user_answer = st.text_input("Your Answer:", key=f"input_{current_question}", value=user_answers.get(f"input_{current_question}", ""))
+Iterate through each question
+for i, question_data in enumerate(questions_data, start=1):
+    st.subheader(f"Frage {i}:")
+    st.write(question_data['Question'])
 
-        # Store the user's answer in the dictionary
-        user_answers[f"input_{current_question}"] = user_answer
-
-        # Check if at least one word from the user's answer matches any word in the correct answer
-        if any(word.lower() in questions_data[current_question]['Answer'].lower() for word in user_answer.split()):
-            st.success("Correct!")
-            st.markdown(f'<img src="{questions_data[current_question]["CorrectImageURL"]}" alt="Correct" width="100%">', unsafe_allow_html=True)
-            score += 1
+    if question_data['QuestionType'] == 'fill_in':
+        user_answer = st.text_input("Your Answer:", key=f"input_{i}", value=user_answers.get(f"input_{i}", ""))
+        user_answers[f"input_{i}"] = user_answer
+         
+    if st.button("Submit"):
+        if any(word.lower() in question_data['Answer'].lower() for word in user_answer.split()):
+            st.success("Korrekt!")
+            st.markdown(f'<img src="{question_data["CorrectImageURL"]}" alt="Korrekt" width="100%">', unsafe_allow_html=True)
+                score += 1
         else:
-            st.warning("Incorrect! Try again.")
-            st.markdown(f'<img src="{questions_data[current_question]["IncorrectImageURL"]}" alt="Incorrect" width="100%">', unsafe_allow_html=True)
-
-    elif questions_data[current_question]['QuestionType'] == 'multiple_choice':
+            st.warning("Falsch! Versuchen Sie nochmal")
+            st.markdown(f'<img src="{question_data["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
+            
+    elif question_data['QuestionType'] == 'multiple_choice':
         # Create radio buttons for options without a default selection
-        selected_option = st.radio("Select an option:", options=questions_data[current_question]['Options'], key=f"radio_{current_question}", index=user_answers.get(f"radio_{current_question}", 0))
-
-        # Store the user's answer in the dictionary
-        user_answers[f"radio_{current_question}"] = selected_option
+        selected_option = st.radio("Select an option:", options=['', *question_data['Options']])
 
         # Check if an option is selected
         if selected_option != '':
             # Check if the selected option is correct
-            if selected_option == questions_data[current_question]['Answer']:
+            if selected_option == question_data['Answer']:
                 st.success("Correct!")
-                st.markdown(f'<img src="{questions_data[current_question]["CorrectImageURL"]}" alt="Correct" width="100%">', unsafe_allow_html=True)
+                st.markdown(f'<img src="{question_data["CorrectImageURL"]}" alt="Korrekt" width="100%">', unsafe_allow_html=True)
                 score += 1
             else:
-                st.warning("Incorrect! Try again.")
-                st.markdown(f'<img src="{questions_data[current_question]["IncorrectImageURL"]}" alt="Incorrect" width="100%">', unsafe_allow_html=True)
+                st.warning("Falsch! Versuchen Sie nochmal.")
+                st.markdown(f'<img src="{question_data["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
         else:
-            st.warning("Please select an option.")
+            st.warning("Wählen Sie eine Option.")
 
-    # Increment the current question index
-    current_question += 1
-
-# Display the current question
-if current_question < len(questions_data):
-    st.subheader(f"Question {current_question + 1}:")
-    st.write(questions_data[current_question]['Question'])
-
-
-
-# Initialize variables
-#score = 0
-#user_answers = {}
-
-# Iterate through each question
-#for i, question_data in enumerate(questions_data, start=1):
-#    st.subheader(f"Frage {i}:")
- #   st.write(question_data['Question'])
-
- #   if question_data['QuestionType'] == 'fill_in':
-   #     user_answer = st.text_input("Your Answer:", key=f"input_{i}", value=user_answers.get(f"input_{i}", ""))
-   #     user_answers[f"input_{i}"] = user_answer
-#
-     #   if st.button("Submit"):
-    #        if any(word.lower() in question_data['Answer'].lower() for word in user_answer.split()):
-    #            st.success("Korrekt!")
-    #            st.markdown(f'<img src="{question_data["CorrectImageURL"]}" alt="Korrekt" width="100%">', unsafe_allow_html=True)
-    #            score += 1
-     #       else:
-   #             st.warning("Falsch! Versuchen Sie nochmal.")
-    #            st.markdown(f'<img src="{question_data["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
-            
-  #  elif question_data['QuestionType'] == 'multiple_choice':
-        # Create radio buttons for options without a default selection
-  #      selected_option = st.radio("Select an option:", options=['', *question_data['Options']])
-
-        # Check if an option is selected
-  #      if selected_option != '':
-            # Check if the selected option is correct
-    #        if selected_option == question_data['Answer']:
-      #          st.success("Correct!")
-    #            st.markdown(f'<img src="{question_data["CorrectImageURL"]}" alt="Korrekt" width="100%">', unsafe_allow_html=True)
-     #           score += 1
-     #       else:
-   #             st.warning("Falsch! Versuchen Sie nochmal.")
-  #              st.markdown(f'<img src="{question_data["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
-   #     else:
-  #          st.warning("Wählen Sie eine Option.")
-
-    # Create radio buttons for options without a default selection
-    #selected_option = st.radio("Wählen Sie eine Option", options=['', *question_data['Options']])
-
-    # Check if an option is selected
-    #if selected_option != '':
-        # Check if the selected option is correct
-     #   if selected_option == question_data['Answer']:
-      #      st.success("Korrekt!")
-       # else:
-        #    st.warning("Falsch! Versuchen Sie nochmal.")
-
-        # Display the image directly from the URL using HTML
-        #image_url = question_data['CorrectImageURL'] if selected_option == question_data['Answer'] else question_data['IncorrectImageURL']
-        #st.markdown(f'<img src="{image_url}" alt="Image" width="100%">', unsafe_allow_html=True)
-
-        #if selected_option == question_data['Answer']:
-         #   score += 1
-    #else:
-     #   st.warning("Please select an option.")
-
-# Display the final score
-#st.subheader("Your Final Score:")
-#st.write(f"You got {score} out of {len(questions_data)} questions correct.")
+   
+#Display the final score
+st.subheader("Your Final Score:")
+st.write(f"You got {score} out of {len(questions_data)} questions correct.")
 
 
 
