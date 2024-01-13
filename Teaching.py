@@ -38,7 +38,7 @@ score = 0
 #current_question = 0
 user_answers = {}
 
-Iterate through each question
+#Iterate through each question
 for i, question_data in enumerate(questions_data, start=1):
     st.subheader(f"Frage {i}:")
     st.write(question_data['Question'])
