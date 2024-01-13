@@ -75,9 +75,11 @@ for i, question_data in enumerate(questions_data, start=1):
 
    
 #Display the final score
-st.subheader("Your Final Score:")
-st.write(f"You got {score} out of {len(questions_data)} questions correct.")
-
+st.subheader("Ergebnis")
+st.write(f"Sie haben {score} von {len(questions_data)} Fragen korrekt beantwortet")
+st.success("Damit ist die Übung abgeschlossen! Ausgezeichnet!:star:")
+if st.button("Belohnung"):
+     st.balloons()
 
 
 
