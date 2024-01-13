@@ -44,7 +44,7 @@ for question_data in question_data_1:
             for question_data in question_data_2:
                 st.subheader(f"Frage 2:")
                 st.write(question_data['Question'])
-                user_answer_2 = st.radio("Ihre Antwort:", options=question_data['','Options'], key="user_answer_2")
+                user_answer_2 = st.radio("Ihre Antwort:", options=question_data['Options'], key="user_answer_2")
                 if st.button("Einreichen", key="A2"):
                     if user_answer_2 == question_data['Answer']:
                         st.success("Korrekt!")
