@@ -15,8 +15,8 @@ questions_data = [
      {
         'Question':'Welche Informationen müssen berücksichtigt werden, um zu entscheiden, welche Therapie für ein Neugeborenes geeignet ist, bei dem im Rahmen des Neugeborenenscreenings eine spinale Muskelatrophie (SMA) diagnostiziert wurde?',
         'Answer': 'Kopienzahl vom SMN2-Gen',
-        'CorrectImageURL':'https://github.com/LeDucLab/Tests/raw/main/Images/SMN2_v1.png',
-        'IncorrectImageURL':'https://github.com/LeDucLab/Tests/raw/main/Images/SMN2_v2.png',
+        'CorrectImageURL':'https://github.com/LeDucLab/Tests/raw/main/Images/SMA_v1.png',
+        'IncorrectImageURL':'https://github.com/LeDucLab/Tests/raw/main/Images/SMA_v2.png',
         'QuestionType': 'fill_in',
     },
     {
