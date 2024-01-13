@@ -59,14 +59,14 @@ for question_data in question_data_1 + question_data_2[session_state.current_que
         # Display multiple-choice options as radio buttons
         user_answer = st.radio("Ihre Antwort:", question_data['Options'])
 
-        if st.button("Submit"):
-            if user_answer == question_data['Answer']:
-                st.success("Korrekt!")
-                st.markdown(f'<img src="{question_data["CorrectImageURL"]}" alt="Korrekt" width="100%">', unsafe_allow_html=True)
-                session_state.score += 1
-            else:
-                st.warning("Falsch! Versuchen Sie nochmal.")
-                st.markdown(f'<img src="{question_data["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
+       
+        if user_answer == question_data['Answer']:
+            st.success("Korrekt!")
+            st.markdown(f'<img src="{question_data["CorrectImageURL"]}" alt="Korrekt" width="100%">', unsafe_allow_html=True)
+            session_state.score += 1
+        else:
+            st.warning("Falsch! Versuchen Sie nochmal.")
+            st.markdown(f'<img src="{question_data["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
 
     if session_state.current_question < len(question_data_2) - 1:
         if st.button("Nächste Frage"):
