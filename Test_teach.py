@@ -28,29 +28,26 @@ if 'score' not in st.session_state:
 if 'current_question' not in st.session_state:
     st.session_state.current_question = 0
 
-# Clear the cache for the app
-st.cache(allow_output_mutation=True)
+# Display the current question
+st.subheader(f"Question {st.session_state.current_question + 1}:")
+current_question = questions[st.session_state.current_question]
+st.write(current_question['Question'])
+
+# Display multiple-choice options
+user_answer = st.radio("Your Answer:", current_question['Options'])
+
+# Check if the answer is correct upon form submission
+if st.form_submit_button("Submit"):
+    if user_answer == current_question['Answer']:
+        st.success("Correct!")
+        st.session_state.score += 1
+    else:
+        st.warning("Incorrect! Try again.")
+
+    st.session_state.current_question += 1
 
 # Check if all questions have been answered
-if st.session_state.current_question < len(questions):
-    # Display the current question
-    st.subheader(f"Question {st.session_state.current_question + 1}:")
-    current_question = questions[st.session_state.current_question]
-    st.write(current_question['Question'])
-
-    # Display multiple-choice options
-    user_answer = st.radio("Your Answer:", current_question['Options'])
-
-    # Check if the answer is correct upon submission
-    if st.button("Submit"):
-        if user_answer == current_question['Answer']:
-            st.success("Correct!")
-            st.session_state.score += 1
-        else:
-            st.warning("Incorrect! Try again.")
-
-        st.session_state.current_question += 1
-else:
+if st.session_state.current_question == len(questions):
     # Display the final score if all questions have been answered
     st.subheader("Your Final Score:")
     st.write(f"You scored {st.session_state.score} out of {len(questions)}")
@@ -58,4 +55,5 @@ else:
     # Reset the session_state for a new quiz
     st.session_state.score = 0
     st.session_state.current_question = 0
+
 
