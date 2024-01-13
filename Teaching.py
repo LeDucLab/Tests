@@ -31,9 +31,6 @@ question_data_2 = [
     },
 ]
 
-# Initialize variables
-score = 0
-
 # Use session_state to store user's progress
 session_state = st.session_state
 
@@ -58,13 +55,13 @@ for question_data in question_data_1 + question_data_2[session_state.current_que
                 st.warning("Falsch! Versuchen Sie nochmal.")
                 st.markdown(f'<img src="{question_data["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
 
-if session_state.current_question < len(question_data_2):
-    if st.button("Nächste Frage"):
-        session_state.current_question += 1
-else:
-    # Display the final score
-    st.subheader("Ihr Endergebnis:")
-    st.write(f"Sie haben {session_state.score} von {len(question_data_1) + len(question_data_2)} Fragen korrekt beantwortet.")
+    if session_state.current_question < len(question_data_2) - 1:
+        if st.button("Nächste Frage"):
+            session_state.current_question += 1
+
+# Display the final score
+st.subheader("Ihr Endergebnis:")
+st.write(f"Sie haben {session_state.score} von {len(question_data_1) + len(question_data_2)} Fragen korrekt beantwortet.")
 
 
 
