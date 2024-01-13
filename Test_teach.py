@@ -36,8 +36,8 @@ st.write(current_question['Question'])
 # Display multiple-choice options
 user_answer = st.radio("Your Answer:", current_question['Options'])
 
-# Check if the answer is correct upon form submission
-if st.form_submit_button("Submit"):
+# Check if the answer is correct upon button click
+if st.button("Submit"):
     if user_answer == current_question['Answer']:
         st.success("Correct!")
         st.session_state.score += 1
@@ -55,5 +55,3 @@ if st.session_state.current_question == len(questions):
     # Reset the session_state for a new quiz
     st.session_state.score = 0
     st.session_state.current_question = 0
-
-
