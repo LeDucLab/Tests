@@ -38,11 +38,11 @@ for question_data in question_data_1:
     if st.button("Einreichen", key="A1"):
         if any(word.lower() in question_data['Answer'].lower() for word in user_answer_1.split()):
             st.success("Korrekt!")
-            st.markdown(f'<img src="{question_data[0]["CorrectImageURL"]}" alt="Korrekt" width="100%">', unsafe_allow_html=True)
+            st.markdown(f'<img src="{question_data["CorrectImageURL"]}" alt="Korrekt" width="100%">', unsafe_allow_html=True)
           
         else:
             st.warning("Falsch! Versuchen Sie nochmal.")
-            st.markdown(f'<img src="{question_data[0]["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
+            st.markdown(f'<img src="{question_data["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
 
         if st.button("Nächste Frage", key="Q2"):
             for question_data in question_data_2:
