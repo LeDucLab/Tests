@@ -11,7 +11,7 @@ st.title("Personalisierte Medizin: Welche Informationen haben Sie mitgenommen")
 #github_image_url = 'https://cdn.pixabay.com/photo/2013/07/18/10/59/dna-163710_1280.jpg'
 #st.image(github_image_url, use_column_width=True)
 
-questions_data_1 = [
+question_data_1 = [
      {
         'Question':'Welche Informationen müssen berücksichtigt werden, um zu entscheiden, welche Therapie für ein Neugeborenes geeignet ist, bei dem im Rahmen des Neugeborenenscreenings eine spinale Muskelatrophie (SMA) diagnostiziert wurde?',
         'Answer': 'Kopienzahl vom SMN2-Gen',
@@ -20,7 +20,7 @@ questions_data_1 = [
         'QuestionType': 'fill_in',
     },]
 
-questions_data_2 = [
+question_data_2 = [
     {
        'Question': 'Was ist das Hauptziel der personalisierten Medizin?',
         'Options': ['Eine "One-Size-Fits-All" -Ansatz für alle Patienten', 'Eine individualisierte Behandlung basierend auf genetischen, molekularen und anderen individuellen Merkmalen', 'Die ausschließliche Verwendung traditioneller Behandlungsansätze', 'Die Maximierung der Kosteneffizienz bei medizinischen Interventionen'],
