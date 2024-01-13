@@ -45,18 +45,18 @@ for question_data in question_data_1:
             st.markdown(f'<img src="{question_data["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
 
         if st.button("Nächste Frage", key="Q2"):
-            for question_data in question_data_2:
+            for question_data_2 in question_data_2:
                 st.subheader(f"Frage 1:")
                 st.write(question_data['Question'])
-                user_answer_2 = st.radio(f"Ihre Antwort:", question_data['','Options'], key=f"user_answer_2")
+                user_answer_2 = st.radio(f"Ihre Antwort:", question_data_2['','Options'], key=f"user_answer_2")
                 if user_answer_2 !='':
-                    if user_answer == question_data['Answer']:
+                    if user_answer_2 == question_data_2['Answer']:
                         st.success("Korrekt!")
-                        st.markdown(f'<img src="{question_data["CorrectImageURL"]}" alt="Korrekt" width="100%">', unsafe_allow_html=True)
+                        st.markdown(f'<img src="{question_data_2["CorrectImageURL"]}" alt="Korrekt" width="100%">', unsafe_allow_html=True)
               
                     else:
                         st.warning("Falsch! Versuchen Sie nochmal.")
-                        st.markdown(f'<img src="{question_data["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
+                        st.markdown(f'<img src="{question_data_2["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
         
 
 
