@@ -69,9 +69,7 @@ for question_data in question_data_1 + question_data_2[session_state.current_que
     if session_state.current_question < len(question_data_2) - 1:
         if st.button("Nächste Frage"):
             session_state.current_question += 1
-    if session_state.current_question < len(question_data_2) - 1:
-        if st.button("Nächste Frage"):
-            session_state.current_question += 1
+   
 
 # Display the final score
 st.subheader("Ihr Endergebnis:")
