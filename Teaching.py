@@ -43,7 +43,7 @@ if 'current_question' not in session_state:
 while session_state.current_question < len(question_data_1 + question_data_2):
     st.subheader(f"Frage {session_state.current_question + 1}:")
     question_data = question_data_1 + [question_data_2[session_state.current_question]]
-    st.write(question_data[0]['Question'])  # Fix this line
+    st.write(question_data[0]['Question'])
 
     if question_data[0]['QuestionType'] == 'fill_in':
         user_answer = st.text_input("Ihre Antwort:")
@@ -52,31 +52,28 @@ while session_state.current_question < len(question_data_1 + question_data_2):
         user_answer = st.radio("Ihre Antwort:", question_data[0]['Options'])
 
     if st.button("Submit"):
-        if question_data['QuestionType'] == 'fill_in':
-            if any(word.lower() in question_data['Answer'].lower() for word in user_answer.split()):
+        if question_data[0]['QuestionType'] == 'fill_in':
+            if any(word.lower() in question_data[0]['Answer'].lower() for word in user_answer.split()):
                 st.success("Korrekt!")
-                st.markdown(f'<img src="{question_data["CorrectImageURL"]}" alt="Korrekt" width="100%">', unsafe_allow_html=True)
+                st.markdown(f'<img src="{question_data[0]["CorrectImageURL"]}" alt="Korrekt" width="100%">', unsafe_allow_html=True)
                 session_state.score += 1
             else:
                 st.warning("Falsch! Versuchen Sie nochmal.")
-                st.markdown(f'<img src="{question_data["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
-        elif question_data['QuestionType'] == 'multiple_choice':
-            if user_answer == question_data['Answer']:
+                st.markdown(f'<img src="{question_data[0]["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
+        elif question_data[0]['QuestionType'] == 'multiple_choice':
+            if user_answer == question_data[0]['Answer']:
                 st.success("Korrekt!")
-                st.markdown(f'<img src="{question_data["CorrectImageURL"]}" alt="Korrekt" width="100%">', unsafe_allow_html=True)
+                st.markdown(f'<img src="{question_data[0]["CorrectImageURL"]}" alt="Korrekt" width="100%">', unsafe_allow_html=True)
                 session_state.score += 1
             else:
                 st.warning("Falsch! Versuchen Sie nochmal.")
-                st.markdown(f'<img src="{question_data["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
+                st.markdown(f'<img src="{question_data[0]["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
 
         session_state.current_question += 1
-
-    st.form_submit_button("Nächste Frage")
 
 # Display the final score
 st.subheader("Ihr Endergebnis:")
 st.write(f"Sie haben {session_state.score} von {len(question_data_1) + len(question_data_2)} Fragen korrekt beantwortet.")
-
 
 
 
