@@ -4,50 +4,43 @@ import requests
 from io import BytesIO
 from PIL import Image, UnidentifiedImageError
 
-
+import streamlit as st
 
 # Set the title for the page
 st.title("Personalisierte Medizin: Welche Informationen haben Sie mitgenommen")
-#github_image_url = 'https://cdn.pixabay.com/photo/2013/07/18/10/59/dna-163710_1280.jpg'
-#st.image(github_image_url, use_column_width=True)
 
+# Define the questions
 question_data_1 = [
-     {
-        'Question':'Welche Informationen müssen berücksichtigt werden, um zu entscheiden, welche Therapie für ein Neugeborenes geeignet ist, bei dem im Rahmen des Neugeborenenscreenings eine spinale Muskelatrophie (SMA) diagnostiziert wurde?',
+    {
+        'Question': 'Welche Informationen müssen berücksichtigt werden, um zu entscheiden, welche Therapie für ein Neugeborenes geeignet ist, bei dem im Rahmen des Neugeborenenscreenings eine spinale Muskelatrophie (SMA) diagnostiziert wurde?',
         'Answer': 'Kopienzahl vom SMN2-Gen',
-        'CorrectImageURL':'https://github.com/LeDucLab/Tests/raw/main/Images/SMA_v1.png',
-        'IncorrectImageURL':'https://github.com/LeDucLab/Tests/raw/main/Images/SMA_v2.png',
+        'CorrectImageURL': 'https://github.com/LeDucLab/Tests/raw/main/Images/SMA_v1.png',
+        'IncorrectImageURL': 'https://github.com/LeDucLab/Tests/raw/main/Images/SMA_v2.png',
         'QuestionType': 'fill_in',
-    },]
+    },
+]
 
 question_data_2 = [
     {
-       'Question': 'Was ist das Hauptziel der personalisierten Medizin?',
-        'Options': ['Eine "One-Size-Fits-All" -Ansatz für alle Patienten', 'Eine individualisierte Behandlung basierend auf genetischen, molekularen und anderen individuellen Merkmalen', 'Die ausschließliche Verwendung traditioneller Behandlungsansätze', 'Die Maximierung der Kosteneffizienz bei medizinischen Interventionen'],
+        'Question': 'Was ist das Hauptziel der personalisierten Medizin?',
+        'Options': ['Eine "One-Size-Fits-All"-Ansatz für alle Patienten', 'Eine individualisierte Behandlung basierend auf genetischen, molekularen und anderen individuellen Merkmalen', 'Die ausschließliche Verwendung traditioneller Behandlungsansätze', 'Die Maximierung der Kosteneffizienz bei medizinischen Interventionen'],
         'Answer': 'Eine individualisierte Behandlung basierend auf genetischen, molekularen und anderen individuellen Merkmalen',
-        'CorrectImageURL':'https://github.com/LeDucLab/Tests/raw/main/Images/Personalisierte%20Medizin%20in%20der%20klinischen%20Genetik_v3.png',
-        'IncorrectImageURL':'https://github.com/LeDucLab/Tests/raw/main/Images/Personalisierte%20Medizin%20in%20der%20klinischen%20Genetik_v2.png',
+        'CorrectImageURL': 'https://github.com/LeDucLab/Tests/raw/main/Images/Personalisierte%20Medizin%20in%20der%20klinischen%20Genetik_v3.png',
+        'IncorrectImageURL': 'https://github.com/LeDucLab/Tests/raw/main/Images/Personalisierte%20Medizin%20in%20der%20klinischen%20Genetik_v2.png',
         'QuestionType': 'multiple_choice',
     },
-    
-    # Add more questions as needed
 ]
-
-
 
 # Initialize variables
 score = 0
-user_answers = {}
 
-#Iterate through each question
+# Iterate through each question
 for question_data in question_data_1:
     st.subheader(f"Frage 1:")
     st.write(question_data['Question'])
 
     if question_data['QuestionType'] == 'fill_in':
-        user_answer_1 = st.text_input("Your Answer:", key=f"input_1", value=user_answers.get(f"input_1", ""))
-        user_answers[f"input_1"] = user_answer_1
-         
+        user_answer_1 = st.text_input("Ihre Antwort:")
         if st.button("Submit"):
             if any(word.lower() in question_data['Answer'].lower() for word in user_answer_1.split()):
                 st.success("Korrekt!")
@@ -56,38 +49,28 @@ for question_data in question_data_1:
             else:
                 st.warning("Falsch! Versuchen Sie nochmal.")
                 st.markdown(f'<img src="{question_data["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
-                if st.button("Submit"):
-                    if any(word.lower() in question_data['Answer'].lower() for word in user_answer_1.split()):
-                     st.success("Korrekt!")
-                     st.markdown(f'<img src="{question_data["CorrectImageURL"]}" alt="Korrekt" width="100%">', unsafe_allow_html=True)
-                     score += 1
 
-if score==1:
-     for question_data in question_data_2:
-          st.subheader(f"Frage 2:")
-          st.write(question_data['Question']) 
-            
-          if question_data['QuestionType'] == 'multiple_choice':
-        # Create radio buttons for options without a default selection
-               selected_option = st.radio("Select an option:", options=['', *question_data['Options']])
+if score == 1:
+    for question_data in question_data_2:
+        st.subheader(f"Frage 2:")
+        st.write(question_data['Question'])
 
-        # Check if an option is selected
-          if selected_option != '':
-            # Check if the selected option is correct
-               if st.button("Submit"):
-                    if selected_option == question_data['Answer']:
-                         st.success("Korrekt!")
-                         st.markdown(f'<img src="{question_data["CorrectImageURL"]}" alt="Korrekt" width="100%">', unsafe_allow_html=True)
-                         score += 1
-                    else:
-                         st.warning("Falsch! Versuchen Sie nochmal.")
-                         st.markdown(f'<img src="{question_data["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
-                         if selected_option == question_data['Answer']:
-                              st.success("Korrekt!")
-                              st.markdown(f'<img src="{question_data["CorrectImageURL"]}" alt="Korrekt" width="100%">', unsafe_allow_html=True)
-                              score += 1
-          else:
-               st.warning("Wählen Sie eine Option.")
+        if question_data['QuestionType'] == 'multiple_choice':
+            selected_option = st.radio("Wählen Sie eine Option:", options=['', *question_data['Options']])
+            if st.button("Submit"):
+                if selected_option == question_data['Answer']:
+                    st.success("Korrekt!")
+                    st.markdown(f'<img src="{question_data["CorrectImageURL"]}" alt="Korrekt" width="100%">', unsafe_allow_html=True)
+                    score += 1
+                else:
+                    st.warning("Falsch! Versuchen Sie nochmal.")
+                    st.markdown(f'<img src="{question_data["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
+
+# Display the final score
+st.subheader("Ihr Endergebnis:")
+st.write(f"Sie haben {score} von {len(question_data_1) + len(question_data_2)} Fragen korrekt beantwortet.")
+
+
 
    
 #Display the final score
