@@ -37,10 +37,10 @@ session_state = st.session_state
 if 'score' not in session_state:
     session_state.score = 0
 if 'current_question' not in session_state:
-    session_state.current_question = 0
+    st.session_state.current_question = 0
 
 # Iterate through each question
-for question_data in question_data_1 + question_data_2[session_state.current_question:]:
+for question_data in question_data_1 + question_data_2[st.session_state.current_question:]:
     st.subheader(f"Frage {session_state.current_question + 1}:")
     st.write(question_data['Question'])
 
@@ -66,9 +66,9 @@ for question_data in question_data_1 + question_data_2[session_state.current_que
             st.warning("Falsch! Versuchen Sie nochmal.")
             st.markdown(f'<img src="{question_data["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
 
-    if session_state.current_question < len(question_data_2) - 1:
+    if st.session_state.current_question < len(question_data_2) - 1:
         if st.button("Nächste Frage"):
-            session_state.current_question += 1
+            st.session_state.current_question += 1
    
 
 # Display the final score
