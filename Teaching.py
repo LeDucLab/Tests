@@ -72,8 +72,8 @@ while session_state.current_question < len(question_data_1 + question_data_2):
         session_state.current_question += 1
 
 # Display the final score
-st.subheader("Ihr Endergebnis:")
-st.write(f"Sie haben {session_state.score} von {len(question_data_1) + len(question_data_2)} Fragen korrekt beantwortet.")
+#st.subheader("Ihr Endergebnis:")
+#st.write(f"Sie haben {session_state.score} von {len(question_data_1) + len(question_data_2)} Fragen korrekt beantwortet.")
 
 
 
