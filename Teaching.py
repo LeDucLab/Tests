@@ -77,7 +77,7 @@ if score==1:
                if selected_option == question_data['Answer']:
                     st.success("Korrekt!")
                     st.markdown(f'<img src="{question_data["CorrectImageURL"]}" alt="Korrekt" width="100%">', unsafe_allow_html=True)
-                     score += 1
+                    score += 1
                else:
                     st.warning("Falsch! Versuchen Sie nochmal.")
                     st.markdown(f'<img src="{question_data["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
