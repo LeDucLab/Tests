@@ -57,14 +57,13 @@ if score == 1:
 
         if question_data['QuestionType'] == 'multiple_choice':
             selected_option = st.radio("Wählen Sie eine Option:", options=['', *question_data['Options']])
-            if st.button("Submit"):
-                if selected_option == question_data['Answer']:
-                    st.success("Korrekt!")
-                    st.markdown(f'<img src="{question_data["CorrectImageURL"]}" alt="Korrekt" width="100%">', unsafe_allow_html=True)
-                    score += 1
-                else:
-                    st.warning("Falsch! Versuchen Sie nochmal.")
-                    st.markdown(f'<img src="{question_data["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
+            if selected_option == question_data['Answer']:
+                st.success("Korrekt!")
+                st.markdown(f'<img src="{question_data["CorrectImageURL"]}" alt="Korrekt" width="100%">', unsafe_allow_html=True)
+                score += 1
+            else:
+                st.warning("Falsch! Versuchen Sie nochmal.")
+                st.markdown(f'<img src="{question_data["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
 
 # Display the final score
 st.subheader("Ihr Endergebnis:")
