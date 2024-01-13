@@ -34,40 +34,38 @@ question_data_2 = [
 # Initialize variables
 score = 0
 
+# Use session_state to store user's progress
+session_state = st.session_state
+
+if 'score' not in session_state:
+    session_state.score = 0
+if 'current_question' not in session_state:
+    session_state.current_question = 0
+
 # Iterate through each question
-for question_data in question_data_1:
-    st.subheader(f"Frage 1:")
+for question_data in question_data_1 + question_data_2[session_state.current_question:]:
+    st.subheader(f"Frage {session_state.current_question + 1}:")
     st.write(question_data['Question'])
 
     if question_data['QuestionType'] == 'fill_in':
-        user_answer_1 = st.text_input("Ihre Antwort:")
+        user_answer = st.text_input("Ihre Antwort:")
         if st.button("Submit"):
-            if any(word.lower() in question_data['Answer'].lower() for word in user_answer_1.split()):
+            if any(word.lower() in question_data['Answer'].lower() for word in user_answer.split()):
                 st.success("Korrekt!")
                 st.markdown(f'<img src="{question_data["CorrectImageURL"]}" alt="Korrekt" width="100%">', unsafe_allow_html=True)
-                score += 1
+                session_state.score += 1
             else:
                 st.warning("Falsch! Versuchen Sie nochmal.")
                 st.markdown(f'<img src="{question_data["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
 
-if score == 1:
-    for question_data in question_data_2:
-        st.subheader(f"Frage 2:")
-        st.write(question_data['Question'])
+if session_state.current_question < len(question_data_2):
+    if st.button("Nächste Frage"):
+        session_state.current_question += 1
+else:
+    # Display the final score
+    st.subheader("Ihr Endergebnis:")
+    st.write(f"Sie haben {session_state.score} von {len(question_data_1) + len(question_data_2)} Fragen korrekt beantwortet.")
 
-        if question_data['QuestionType'] == 'multiple_choice':
-            selected_option = st.radio("Wählen Sie eine Option:", options=['', *question_data['Options']])
-            if selected_option == question_data['Answer']:
-                st.success("Korrekt!")
-                st.markdown(f'<img src="{question_data["CorrectImageURL"]}" alt="Korrekt" width="100%">', unsafe_allow_html=True)
-                score += 1
-            else:
-                st.warning("Falsch! Versuchen Sie nochmal.")
-                st.markdown(f'<img src="{question_data["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
-
-# Display the final score
-st.subheader("Ihr Endergebnis:")
-st.write(f"Sie haben {score} von {len(question_data_1) + len(question_data_2)} Fragen korrekt beantwortet.")
 
 
 
