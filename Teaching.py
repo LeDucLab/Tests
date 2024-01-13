@@ -31,47 +31,33 @@ question_data_2 = [
     },
 ]
 
-# Use session_state to store user's progress
-if 'score' not in st.session_state:
-    st.session_state.score = 0
-if 'current_question' not in st.session_state:
-    st.session_state.current_question = 0
+for question_data in question_data_1:
+    st.subheader(f"Frage 1:")
+    st.write(question_data['Question'])
+    user_answer_1 = st.text_input(f"Ihre Antwort:", key="user_answer_1")
+    if st.button("Einreichen", key="A1"):
+        if any(word.lower() in question_data['Answer'].lower() for word in user_answer_1.split()):
+            st.success("Korrekt!")
+            st.markdown(f'<img src="{question_data[0]["CorrectImageURL"]}" alt="Korrekt" width="100%">', unsafe_allow_html=True)
+          
+        else:
+            st.warning("Falsch! Versuchen Sie nochmal.")
+            st.markdown(f'<img src="{question_data[0]["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
 
-# Iterate through each question
-while st.session_state.current_question < len(question_data_1 + question_data_2):
-    st.subheader(f"Frage {st.session_state.current_question + 1}:")
-    question_data = question_data_1 + [question_data_2[st.session_state.current_question]]
-    st.write(question_data[0]['Question'])
-
-    if question_data[0]['QuestionType'] == 'fill_in':
-        user_answer = st.text_input(f"Ihre Antwort {st.session_state.current_question + 1}:", key=f"fill_in_{st.session_state.current_question}")
-
-    elif question_data[0]['QuestionType'] == 'multiple_choice':
-        user_answer = st.radio(f"Ihre Antwort {st.session_state.current_question + 1}:", question_data[0]['Options'], key=f"mc_{st.session_state.current_question}")
-
-    if st.button("Submit"):
-        if question_data[0]['QuestionType'] == 'fill_in':
-            if any(word.lower() in question_data[0]['Answer'].lower() for word in user_answer.split()):
-                st.success("Korrekt!")
-                st.markdown(f'<img src="{question_data[0]["CorrectImageURL"]}" alt="Korrekt" width="100%">', unsafe_allow_html=True)
-                st.session_state.score += 1
-            else:
-                st.warning("Falsch! Versuchen Sie nochmal.")
-                st.markdown(f'<img src="{question_data[0]["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
-        elif question_data[0]['QuestionType'] == 'multiple_choice':
-            if user_answer == question_data[0]['Answer']:
-                st.success("Korrekt!")
-                st.markdown(f'<img src="{question_data[0]["CorrectImageURL"]}" alt="Korrekt" width="100%">', unsafe_allow_html=True)
-                st.session_state.score += 1
-            else:
-                st.warning("Falsch! Versuchen Sie nochmal.")
-                st.markdown(f'<img src="{question_data[0]["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
-
-        st.session_state.current_question += 1
-
-# Display the final score
-st.subheader("Ihr Endergebnis:")
-st.write(f"Sie haben {st.session_state.score} von {len(question_data_1) + len(question_data_2)} Fragen korrekt beantwortet.")
+        if st.button("Nächste Frage", key="Q2"):
+            for question_data in question_data_2:
+                st.subheader(f"Frage 1:")
+                st.write(question_data['Question'])
+                user_answer_2 = st.radio(f"Ihre Antwort:", question_data['','Options'], key=f"user_answer_2")
+                if user_answer_2 !='':
+                    if user_answer == question_data['Answer']:
+                        st.success("Korrekt!")
+                        st.markdown(f'<img src="{question_data["CorrectImageURL"]}" alt="Korrekt" width="100%">', unsafe_allow_html=True)
+              
+                    else:
+                        st.warning("Falsch! Versuchen Sie nochmal.")
+                        st.markdown(f'<img src="{question_data["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
+        
 
 
 
