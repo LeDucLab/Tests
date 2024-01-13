@@ -23,7 +23,7 @@ question_data_1 = [
 question_data_2 = [
     {
         'Question': 'Was ist das Hauptziel der personalisierten Medizin?',
-        'Options': ['Eine "One-Size-Fits-All"-Ansatz für alle Patienten', 'Eine individualisierte Behandlung basierend auf genetischen, molekularen und anderen individuellen Merkmalen', 'Die ausschließliche Verwendung traditioneller Behandlungsansätze', 'Die Maximierung der Kosteneffizienz bei medizinischen Interventionen'],
+        'Options': ['Eine One-Size-Fits-All-Ansatz für alle Patienten', 'Eine individualisierte Behandlung basierend auf genetischen, molekularen und anderen individuellen Merkmalen', 'Die ausschließliche Verwendung traditioneller Behandlungsansätze', 'Die Maximierung der Kosteneffizienz bei medizinischen Interventionen'],
         'Answer': 'Eine individualisierte Behandlung basierend auf genetischen, molekularen und anderen individuellen Merkmalen',
         'CorrectImageURL': 'https://github.com/LeDucLab/Tests/raw/main/Images/Personalisierte%20Medizin%20in%20der%20klinischen%20Genetik_v3.png',
         'IncorrectImageURL': 'https://github.com/LeDucLab/Tests/raw/main/Images/Personalisierte%20Medizin%20in%20der%20klinischen%20Genetik_v2.png',
@@ -44,7 +44,7 @@ for question_data in question_data_1:
             for question_data_2 in question_data_2:
                 st.subheader(f"Frage 2:")
                 st.write(question_data_2['Question'])
-                user_answer_2 = st.radio("Ihre Antwort:", options=question_data_2['','Options'], key="user_answer_2")
+                user_answer_2 = st.radio("Ihre Antwort:", options=question_data_2['Options'], key="user_answer_2")
                 if st.button("Einreichen Frage 2", key="A2"):
                     if user_answer_2 == question_data_2['Answer']:
                         st.success("Korrekt!")
