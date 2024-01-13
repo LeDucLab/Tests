@@ -40,11 +40,11 @@ score = 0
 user_answers = {}
 
 #Iterate through each question
-for question_data_1:
+for question_data in question_data_1:
     st.subheader(f"Frage 1:")
-    st.write(question_data_1['Question'])
+    st.write(question_data['Question'])
 
-    if question_data_1['QuestionType'] == 'fill_in':
+    if question_data['QuestionType'] == 'fill_in':
         user_answer_1 = st.text_input("Your Answer:", key=f"input_1", value=user_answers.get(f"input_1", ""))
         user_answers[f"input_1"] = user_answer_1
          
@@ -63,11 +63,11 @@ for question_data_1:
                      score += 1
 
 if score==1:
-     for question_data_2:
+     for question_data in question_data_2:
           st.subheader(f"Frage 2:")
-          st.write(question_data_2['Question']) 
+          st.write(question_data['Question']) 
             
-          if question_data_2['QuestionType'] == 'multiple_choice':
+          if question_data['QuestionType'] == 'multiple_choice':
         # Create radio buttons for options without a default selection
                selected_option = st.radio("Select an option:", options=['', *question_data['Options']])
 
