@@ -12,6 +12,13 @@ st.title("Personalisierte Medizin: Welche Informationen haben Sie mitgenommen")
 #st.image(github_image_url, use_column_width=True)
 
 questions_data = [
+     {
+        'Question':'Welche Informationen müssen berücksichtigt werden, um zu entscheiden, welche Therapie für ein Neugeborenes geeignet ist, bei dem im Rahmen des Neugeborenenscreenings eine spinale Muskelatrophie (SMA) diagnostiziert wurde?',
+        'Answer': 'Kopienzahl vom SMN2-Gen',
+        'CorrectImageURL':'https://github.com/LeDucLab/Tests/raw/main/Images/SMN2_v1.png',
+        'IncorrectImageURL':'https://github.com/LeDucLab/Tests/raw/main/Images/SMN2_v2.png',
+        'QuestionType': 'fill_in',
+    },
     {
         'Question': 'Was ist das Hauptziel der personalisierten Medizin?',
         'Options': ['Eine "One-Size-Fits-All" -Ansatz für alle Patienten', 'Eine individualisierte Behandlung basierend auf genetischen, molekularen und anderen individuellen Merkmalen', 'Die ausschließliche Verwendung traditioneller Behandlungsansätze', 'Die Maximierung der Kosteneffizienz bei medizinischen Interventionen'],
@@ -20,13 +27,7 @@ questions_data = [
         'IncorrectImageURL':'https://github.com/LeDucLab/Tests/raw/main/Images/Personalisierte%20Medizin%20in%20der%20klinischen%20Genetik_v2.png',
         'QuestionType': 'multiple_choice',
     },
-     {
-        'Question':'Welche Informationen müssen berücksichtigt werden, um zu entscheiden, welche Therapie für ein Neugeborenes geeignet ist, bei dem im Rahmen des Neugeborenenscreenings eine spinale Muskelatrophie (SMA) diagnostiziert wurde?',
-        'Answer': 'Kopienzahl vom SMN2-Gen',
-        'CorrectImageURL':'https://github.com/LeDucLab/Tests/raw/main/Images/SMN2_v1.png',
-        'IncorrectImageURL':'https://github.com/LeDucLab/Tests/raw/main/Images/SMN2_v2.png',
-        'QuestionType': 'fill_in',
-    },
+    
     # Add more questions as needed
 ]
 
