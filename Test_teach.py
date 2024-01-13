@@ -21,7 +21,6 @@ questions = [
         'Answer': 'William Shakespeare',
     },
 ]
-
 # Use session_state to store user's progress
 if 'score' not in st.session_state:
     st.session_state.score = 0
