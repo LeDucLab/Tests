@@ -43,13 +43,13 @@ if 'current_question' not in session_state:
 while session_state.current_question < len(question_data_1 + question_data_2):
     st.subheader(f"Frage {session_state.current_question + 1}:")
     question_data = question_data_1 + [question_data_2[session_state.current_question]]
-    st.write(question_data['Question'])
+    st.write(question_data[0]['Question'])  # Fix this line
 
-    if question_data['QuestionType'] == 'fill_in':
+    if question_data[0]['QuestionType'] == 'fill_in':
         user_answer = st.text_input("Ihre Antwort:")
 
-    elif question_data['QuestionType'] == 'multiple_choice':
-        user_answer = st.radio("Ihre Antwort:", question_data['Options'])
+    elif question_data[0]['QuestionType'] == 'multiple_choice':
+        user_answer = st.radio("Ihre Antwort:", question_data[0]['Options'])
 
     if st.button("Submit"):
         if question_data['QuestionType'] == 'fill_in':
