@@ -31,33 +31,38 @@ question_data_2 = [
     },
 ]
 
+# Initialize session state variables
+if 'user_answer_1' not in st.session_state:
+    st.session_state.user_answer_1 = ""
+if 'user_answer_2' not in st.session_state:
+    st.session_state.user_answer_2 = ""
+
+# Display the first question
 for question_data in question_data_1:
     st.subheader(f"Frage 1:")
     st.write(question_data['Question'])
-    user_answer_1 = st.text_input(f"Ihre Antwort:", key="user_answer_1")
+    st.session_state.user_answer_1 = st.text_input("Ihre Antwort:", key="user_answer_1")
     if st.button("Einreichen", key="A1"):
-        if any(word.lower() in question_data['Answer'].lower() for word in user_answer_1.split()):
+        if any(word.lower() in question_data['Answer'].lower() for word in st.session_state.user_answer_1.split()):
             st.success("Korrekt!")
             st.markdown(f'<img src="{question_data["CorrectImageURL"]}" alt="Korrekt" width="100%">', unsafe_allow_html=True)
-          
         else:
             st.warning("Falsch! Versuchen Sie nochmal.")
             st.markdown(f'<img src="{question_data["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
 
-        if st.button("Nächste Frage", key="Q2"):
-            for question_data_2 in question_data_2:
-                st.subheader(f"Frage 2:")
-                st.write(question_data_2['Question'])
-                user_answer_2 = st.radio(f"Ihre Antwort:", question_data_2['','Options'], key=f"user_answer_2")
-                if user_answer_2 !='':
-                    if user_answer_2 == question_data_2['Answer']:
-                        st.success("Korrekt!")
-                        st.markdown(f'<img src="{question_data_2["CorrectImageURL"]}" alt="Korrekt" width="100%">', unsafe_allow_html=True)
-              
-                    else:
-                        st.warning("Falsch! Versuchen Sie nochmal.")
-                        st.markdown(f'<img src="{question_data_2["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
-        
+# Display the second question
+if st.button("Nächste Frage", key="Q2"):
+    for question_data in question_data_2:
+        st.subheader(f"Frage 2:")
+        st.write(question_data['Question'])
+        st.session_state.user_answer_2 = st.radio("Ihre Antwort:", options=question_data['Options'], key="user_answer_2")
+        if st.button("Einreichen", key="A2"):
+            if st.session_state.user_answer_2 == question_data['Answer']:
+                st.success("Korrekt!")
+                st.markdown(f'<img src="{question_data["CorrectImageURL"]}" alt="Korrekt" width="100%">', unsafe_allow_html=True)
+            else:
+                st.warning("Falsch! Versuchen Sie nochmal.")
+                st.markdown(f'<img src="{question_data["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
 
 
 
