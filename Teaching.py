@@ -91,7 +91,6 @@ if score==1:
    
 #Display the final score
 st.subheader("Ergebnis")
-#st.write(f"Sie haben {score} von 5 Fragen korrekt beantwortet")
 if score==2:
      st.success("Damit ist die Übung abgeschlossen! Ausgezeichnet!:star:")
      if st.button("Belohnung"):
