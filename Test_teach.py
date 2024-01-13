@@ -1,101 +1,53 @@
-import streamlit as st
-import random
 
-# Define a list of dictionaries with questions, correct answers, options, and images
-questions_data = [
+# Define the questions
+questions = [
     {
         'Question': 'What is the capital of France?',
+        'Options': ['Berlin', 'Paris', 'London', 'Madrid'],
         'Answer': 'Paris',
-        'CorrectImageURL': 'https://github.com/LeDucLab/Tests/raw/main/Images/CorrectImage.png',
-        'IncorrectImageURL': 'https://github.com/LeDucLab/Tests/raw/main/Images/IncorrectImage.png',
-        'QuestionType': 'fill_in',
-    },
-    {
-        'Question': 'Who wrote "Romeo and Juliet"?',
-        'Answer': 'William Shakespeare',
-        'CorrectImageURL': 'https://github.com/LeDucLab/Tests/raw/main/Images/CorrectImage.png',
-        'IncorrectImageURL': 'https://github.com/LeDucLab/Tests/raw/main/Images/IncorrectImage.png',
-        'QuestionType': 'fill_in',
     },
     {
         'Question': 'What is the largest planet in our solar system?',
-        'Options': ['Jupiter', 'Mars', 'Venus'],
+        'Options': ['Earth', 'Jupiter', 'Mars', 'Saturn'],
         'Answer': 'Jupiter',
-        'CorrectImageURL': 'https://github.com/LeDucLab/Tests/raw/main/Images/CorrectImage.png',
-        'IncorrectImageURL': 'https://github.com/LeDucLab/Tests/raw/main/Images/IncorrectImage.png',
-        'QuestionType': 'multiple_choice',
     },
     {
-        'Question': 'In which year did World War II end?',
-        'Options': ['1943', '1945', '1950', '1960'],
-        'Answer': '1945',
-        'CorrectImageURL': 'https://github.com/LeDucLab/Tests/raw/main/Images/CorrectImage.png',
-        'IncorrectImageURL': 'https://github.com/LeDucLab/Tests/raw/main/Images/IncorrectImage.png',
-        'QuestionType': 'multiple_choice',
+        'Question': 'Who wrote "Romeo and Juliet"?',
+        'Options': ['Charles Dickens', 'Jane Austen', 'William Shakespeare', 'Mark Twain'],
+        'Answer': 'William Shakespeare',
     },
-    # Add more questions as needed
 ]
 
-# Shuffle the questions
-random.shuffle(questions_data)
+# Use session_state to store user's progress
+if 'score' not in st.session_state:
+    st.session_state.score = 0
+if 'current_question' not in st.session_state:
+    st.session_state.current_question = 0
 
-# Set the title for the page
-st.title("Interactive Knowledge Testing App")
+# Check if all questions have been answered
+if st.session_state.current_question < len(questions):
+    # Display the current question
+    st.subheader(f"Question {st.session_state.current_question + 1}:")
+    current_question = questions[st.session_state.current_question]
+    st.write(current_question['Question'])
 
-# Initialize variables
-score = 0
-current_question = 0
-user_answers = {}
+    # Display multiple-choice options
+    user_answer = st.radio("Your Answer:", current_question['Options'])
 
-# Display the current question
-if current_question < len(questions_data):
-    st.subheader(f"Question {current_question + 1}:")
-    st.write(questions_data[current_question]['Question'])
-
-    # Check the question type
-    if questions_data[current_question]['QuestionType'] == 'fill_in':
-        # Get user input for the answer
-        user_answer = st.text_input("Your Answer:", key=f"input_{current_question}", value=user_answers.get(f"input_{current_question}", ""))
-
-        # Store the user's answer in the dictionary
-        user_answers[f"input_{current_question}"] = user_answer
-
-    elif questions_data[current_question]['QuestionType'] == 'multiple_choice':
-        # Create radio buttons for options without a default selection
-        selected_option = st.radio("Select an option:", options=questions_data[current_question]['Options'], key=f"radio_{current_question}", index=user_answers.get(f"radio_{current_question}", 0))
-
-        # Store the user's answer in the dictionary
-        user_answers[f"radio_{current_question}"] = selected_option
-
-    # Check if the user submitted an answer
+    # Check if the answer is correct upon submission
     if st.button("Submit"):
-        # Check if at least one word from the user's answer matches any word in the correct answer
-        if questions_data[current_question]['QuestionType'] == 'fill_in':
-            if any(word.lower() in questions_data[current_question]['Answer'].lower() for word in user_answer.split()):
-                st.success("Correct!")
-                st.markdown(f'<img src="{questions_data[current_question]["CorrectImageURL"]}" alt="Correct" width="100%">', unsafe_allow_html=True)
-                score += 1
-            else:
-                st.warning("Incorrect! Try again.")
-                st.markdown(f'<img src="{questions_data[current_question]["IncorrectImageURL"]}" alt="Incorrect" width="100%">', unsafe_allow_html=True)
-        elif questions_data[current_question]['QuestionType'] == 'multiple_choice':
-            if selected_option != '':
-                # Check if the selected option is correct
-                if selected_option == questions_data[current_question]['Answer']:
-                    st.success("Correct!")
-                    st.markdown(f'<img src="{questions_data[current_question]["CorrectImageURL"]}" alt="Correct" width="100%">', unsafe_allow_html=True)
-                    score += 1
-                else:
-                    st.warning("Incorrect! Try again.")
-                    st.markdown(f'<img src="{questions_data[current_question]["IncorrectImageURL"]}" alt="Incorrect" width="100%">', unsafe_allow_html=True)
-            else:
-                st.warning("Please select an option.")
+        if user_answer == current_question['Answer']:
+            st.success("Correct!")
+            st.session_state.score += 1
+        else:
+            st.warning("Incorrect! Try again.")
 
-# Button to go to the next question
-if st.button("Next Question") and current_question < len(questions_data) - 1:
-    current_question += 1
-    st.experimental_rerun()
+        st.session_state.current_question += 1
+else:
+    # Display the final score if all questions have been answered
+    st.subheader("Your Final Score:")
+    st.write(f"You scored {st.session_state.score} out of {len(questions)}")
 
-# Display the final score
-st.subheader("Your Final Score:")
-st.write(f"You got {score} out of {len(questions_data)} questions correct.")
+    # Reset the session_state for a new quiz
+    st.session_state.score = 0
+    st.session_state.current_question = 0
