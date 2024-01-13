@@ -46,10 +46,10 @@ while session_state.current_question < len(question_data_1 + question_data_2):
     st.write(question_data[0]['Question'])
 
     if question_data[0]['QuestionType'] == 'fill_in':
-        user_answer = st.text_input("Ihre Antwort:")
+        user_answer = st.text_input("Ihre Antwort:", key=f"fill_in_{session_state.current_question}")
 
     elif question_data[0]['QuestionType'] == 'multiple_choice':
-        user_answer = st.radio("Ihre Antwort:", question_data[0]['Options'])
+        user_answer = st.radio("Ihre Antwort:", question_data[0]['Options'], key=f"mc_{session_state.current_question}")
 
     if st.button("Submit"):
         if question_data[0]['QuestionType'] == 'fill_in':
@@ -70,6 +70,10 @@ while session_state.current_question < len(question_data_1 + question_data_2):
                 st.markdown(f'<img src="{question_data[0]["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
 
         session_state.current_question += 1
+
+# Display the final score
+st.subheader("Ihr Endergebnis:")
+st.write(f"Sie haben {session_state.score} von {len(question_data_1) + len(question_data_2)} Fragen korrekt beantwortet.")
 
 # Display the final score
 #st.subheader("Ihr Endergebnis:")
