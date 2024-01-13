@@ -28,6 +28,9 @@ if 'score' not in st.session_state:
 if 'current_question' not in st.session_state:
     st.session_state.current_question = 0
 
+# Clear the cache for the app
+st.cache(allow_output_mutation=True)
+
 # Check if all questions have been answered
 if st.session_state.current_question < len(questions):
     # Display the current question
