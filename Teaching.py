@@ -30,7 +30,7 @@ questions_data = [
     # Add more questions as needed
 ]
 
-random.shuffle(questions_data)
+#random.shuffle(questions_data)
 
 # Initialize variables
 score = 0
@@ -43,17 +43,17 @@ for i, question_data in enumerate(questions_data, start=1):
     st.write(question_data['Question'])
 
     if question_data['QuestionType'] == 'fill_in':
-        user_answer = st.text_input("Your Answer:", key=f"input_{i}", value=user_answers.get(f"input_{i}", ""))
+        user_answer = st.markdown("Your Answer:", key=f"input_{i}", value=user_answers.get(f"input_{i}", ""))
         user_answers[f"input_{i}"] = user_answer
          
-    if st.button("Submit"):
-        if any(word.lower() in question_data['Answer'].lower() for word in user_answer.split()):
-            st.success("Korrekt!")
-            st.markdown(f'<img src="{question_data["CorrectImageURL"]}" alt="Korrekt" width="100%">', unsafe_allow_html=True)
+        if st.button("Submit"):
+            if any(word.lower() in question_data['Answer'].lower() for word in user_answer.split()):
+                st.success("Korrekt!")
+                st.markdown(f'<img src="{question_data["CorrectImageURL"]}" alt="Korrekt" width="100%">', unsafe_allow_html=True)
                 score += 1
-        else:
-            st.warning("Falsch! Versuchen Sie nochmal")
-            st.markdown(f'<img src="{question_data["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
+            else:
+                st.warning("Falsch! Versuchen Sie nochmal")
+                st.markdown(f'<img src="{question_data["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
             
     elif question_data['QuestionType'] == 'multiple_choice':
         # Create radio buttons for options without a default selection
