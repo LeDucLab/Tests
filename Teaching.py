@@ -40,7 +40,7 @@ score = 0
 user_answers = {}
 
 #Iterate through each question
-for i, question_data_1:
+for question_data_1:
     st.subheader(f"Frage 1:")
     st.write(question_data_1['Question'])
 
@@ -63,7 +63,7 @@ for i, question_data_1:
                      score += 1
 
 if score==1:
-     for i, question_data_2:
+     for question_data_2:
           st.subheader(f"Frage 2:")
           st.write(question_data_2['Question']) 
             
