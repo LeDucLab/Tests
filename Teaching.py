@@ -52,7 +52,7 @@ for question_data_1_item in question_data_1:
                         st.markdown(f'<img src="{question_data_2_item["CorrectImageURL"]}" alt="Korrekt" width="100%">', unsafe_allow_html=True)
                     else:
                         st.warning("Falsch! Versuchen Sie nochmal.")
-                        st.markdown(f'<img src="{question_data_2_item"IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
+                        st.markdown(f'<img src="{question_data_2_item["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
         else:
             st.warning("Falsch! Versuchen Sie nochmal.")
             st.markdown(f'<img src="{question_data_1_item["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
