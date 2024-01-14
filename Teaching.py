@@ -38,31 +38,33 @@ if 'question_index' not in st.session_state:
 
 # Display the current question
 if st.session_state.question_index == 0:
+    current_question = question_data_1[0]
     st.subheader(f"Frage 1:")
-    st.write(question_data_1[0]['Question'])
+    st.write(current_question['Question'])
     user_answer_1 = st.text_input("Ihre Antwort:", key="user_answer_1")
     if st.button("Einreichen Frage 1", key="A1"):
-        if any(word.lower() in question_data_1[0]['Answer'].lower() for word in user_answer_1.split()):
+        if any(word.lower() in current_question['Answer'].lower() for word in user_answer_1.split()):
             st.success("Korrekt!")
-            st.markdown(f'<img src="{question_data_1[0]["CorrectImageURL"]}" alt="Korrekt" width="100%">', unsafe_allow_html=True)
+            st.markdown(f'<img src="{current_question["CorrectImageURL"]}" alt="Korrekt" width="100%">', unsafe_allow_html=True)
             st.session_state.question_index += 1
             st.write(st.session_state.question_index)
         else:
             st.warning("Falsch! Versuchen Sie nochmal.")
-            st.markdown(f'<img src="{question_data_1[0]["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
+            st.markdown(f'<img src="{current_question["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
 
 # Display the next question
 elif st.session_state.question_index == 1:
+    current_question = question_data_2[0]
     st.subheader(f"Frage 2:")
-    st.write(question_data_2[0]['Question'])
-    user_answer_2 = st.radio("Ihre Antwort:", options=question_data_2[0]['Options'], key="user_answer_2")
+    st.write(current_question['Question'])
+    user_answer_2 = st.radio("Ihre Antwort:", options=current_question['Options'], key="user_answer_2")
     if user_answer_2 != '':
-        if user_answer_2 == question_data_2[0]['Answer']:
+        if user_answer_2 == current_question['Answer']:
             st.success("Korrekt!")
-            st.markdown(f'<img src="{question_data_2[0]["CorrectImageURL"]}" alt="Korrekt" width="100%">', unsafe_allow_html=True)
+            st.markdown(f'<img src="{current_question["CorrectImageURL"]}" alt="Korrekt" width="100%">', unsafe_allow_html=True)
         else:
             st.warning("Falsch! Versuchen Sie nochmal.")
-            st.markdown(f'<img src="{question_data_2[0]["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
+            st.markdown(f'<img src="{current_question["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
         st.session_state.question_index += 1
 
 
