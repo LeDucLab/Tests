@@ -80,6 +80,7 @@ elif st.session_state.question_index == 1:
             st.markdown(f'<img src="{current_question["CorrectImageURL"]}" alt="Korrekt" width="100%">', unsafe_allow_html=True)
             st.session_state.question_index += 1
             st.write(st.session_state.question_index)
+            st.button("Nächste Frage", key="Q3")
         else:
             st.warning("Falsch! Versuchen Sie nochmal.")
             st.markdown(f'<img src="{current_question["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
