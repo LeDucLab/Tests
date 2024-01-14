@@ -65,10 +65,11 @@ elif st.session_state.question_index == 1:
         if user_answer_2 == current_question['Answer']:
             st.success("Korrekt!")
             st.markdown(f'<img src="{current_question["CorrectImageURL"]}" alt="Korrekt" width="100%">', unsafe_allow_html=True)
+            st.session_state.question_index += 1
         else:
             st.warning("Falsch! Versuchen Sie nochmal.")
             st.markdown(f'<img src="{current_question["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
-        st.session_state.question_index += 1
+   
 
 
 # Display the first question
