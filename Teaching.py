@@ -46,6 +46,7 @@ if st.session_state.question_index == 0:
             st.success("Korrekt!")
             st.markdown(f'<img src="{question_data_1[0]["CorrectImageURL"]}" alt="Korrekt" width="100%">', unsafe_allow_html=True)
             st.session_state.question_index += 1
+            st.write(st.session_state.question_index)
         else:
             st.warning("Falsch! Versuchen Sie nochmal.")
             st.markdown(f'<img src="{question_data_1[0]["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
