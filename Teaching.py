@@ -96,7 +96,7 @@ elif st.session_state.question_index == 2:
             st.markdown(f'<img src="{current_question["CorrectImageURL"]}" alt="Korrekt" width="100%">', unsafe_allow_html=True)
             st.session_state.question_index += 1
             st.write(st.session_state.question_index)
-            if st.button("Belohnung", key="End"):
+            st.button("Belohnung", key="End")
             
         else:
             st.warning("Falsch! Versuchen Sie nochmal.")
