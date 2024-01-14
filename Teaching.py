@@ -22,11 +22,11 @@ question_data_1 = [
 
 question_data_2 = [
     {
-        'Question': 'Was ist das Hauptziel der personalisierten Medizin?',
-        'Options': ['','Eine One-Size-Fits-All-Ansatz für alle Patienten', 'Eine individualisierte Behandlung basierend auf genetischen, molekularen und anderen individuellen Merkmalen', 'Die ausschließliche Verwendung traditioneller Behandlungsansätze', 'Die Maximierung der Kosteneffizienz bei medizinischen Interventionen'],
-        'Answer': 'Eine individualisierte Behandlung basierend auf genetischen, molekularen und anderen individuellen Merkmalen',
-        'CorrectImageURL': 'https://github.com/LeDucLab/Tests/raw/main/Images/Personalisierte%20Medizin%20in%20der%20klinischen%20Genetik_v3.png',
-        'IncorrectImageURL': 'https://github.com/LeDucLab/Tests/raw/main/Images/Personalisierte%20Medizin%20in%20der%20klinischen%20Genetik_v2.png',
+        'Question': 'Welche Methode wird voraussichtlich eine Schlüsselrolle in der Zukunft der genetischen Therapie in der personalisierten Medizin spielen?',
+        'Options': ['','Gentechnisch veränderte Organismen', 'Bioprinting von Organen', 'Gezielte Genom-Editierung', 'Stammzelltransplantation'],
+        'Answer': 'Gezielte Genom-Editierung',
+        'CorrectImageURL': 'https://github.com/LeDucLab/Tests/raw/main/Images/Therapie_v1.png',
+        'IncorrectImageURL': 'https://github.com/LeDucLab/Tests/raw/main/Images/Therapie_v2.png',
         'QuestionType': 'multiple_choice',
     },
 ]
@@ -96,6 +96,8 @@ elif st.session_state.question_index == 2:
             st.markdown(f'<img src="{current_question["CorrectImageURL"]}" alt="Korrekt" width="100%">', unsafe_allow_html=True)
             st.session_state.question_index += 1
             st.write(st.session_state.question_index)
+            if st.button("Belohnung", key="End"):
+                st.baloons
         else:
             st.warning("Falsch! Versuchen Sie nochmal.")
             st.markdown(f'<img src="{current_question["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
