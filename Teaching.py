@@ -31,6 +31,11 @@ question_data_2 = [
     },
 ]
 
+# Initialize session state
+if 'question_index' not in st.session_state:
+    st.session_state.question_index = 0
+
+
 # Display the current question
 if st.session_state.question_index == 0:
     st.subheader(f"Frage 1:")
