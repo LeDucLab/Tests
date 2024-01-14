@@ -31,6 +31,18 @@ question_data_2 = [
     },
 ]
 
+question_data_3 = [
+    {
+        'Question': 'Was ist das Hauptziel der personalisierten Medizin?',
+        'Options': ['','Eine One-Size-Fits-All-Ansatz für alle Patienten', 'Eine individualisierte Behandlung basierend auf genetischen, molekularen und anderen individuellen Merkmalen', 'Die ausschließliche Verwendung traditioneller Behandlungsansätze', 'Die Maximierung der Kosteneffizienz bei medizinischen Interventionen'],
+        'Answer': 'Eine individualisierte Behandlung basierend auf genetischen, molekularen und anderen individuellen Merkmalen',
+        'CorrectImageURL': 'https://github.com/LeDucLab/Tests/raw/main/Images/Personalisierte%20Medizin%20in%20der%20klinischen%20Genetik_v3.png',
+        'IncorrectImageURL': 'https://github.com/LeDucLab/Tests/raw/main/Images/Personalisierte%20Medizin%20in%20der%20klinischen%20Genetik_v2.png',
+        'QuestionType': 'multiple_choice',
+    },
+]
+
+
 # Initialize session state
 if 'question_index' not in st.session_state:
     st.session_state.question_index = 0
@@ -72,7 +84,20 @@ elif st.session_state.question_index == 1:
             st.warning("Falsch! Versuchen Sie nochmal.")
             st.markdown(f'<img src="{current_question["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
    
-
+elif st.session_state.question_index == 2:
+    current_question = question_data_3[0]
+    st.subheader(f"Frage 3:")
+    st.write(current_question['Question'])
+    user_answer_3 = st.radio("Ihre Antwort:", options=current_question['Options'], key="user_answer_2")
+    if user_answer_3 != '':
+        if user_answer_3 == current_question['Answer']:
+            st.success("Korrekt!")
+            st.markdown(f'<img src="{current_question["CorrectImageURL"]}" alt="Korrekt" width="100%">', unsafe_allow_html=True)
+            st.session_state.question_index += 1
+            st.write(st.session_state.question_index)
+        else:
+            st.warning("Falsch! Versuchen Sie nochmal.")
+            st.markdown(f'<img src="{current_question["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
 
 # Display the first question
 #for question_data_1_item in question_data_1:
