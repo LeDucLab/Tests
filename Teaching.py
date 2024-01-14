@@ -40,7 +40,7 @@ for question_data_1_item in question_data_1:
     if st.button("Einreichen Frage 1", key="A1"):
         if any(word.lower() in question_data_1_item['Answer'].lower() for word in st.session_state.user_answer_1.split()):
             st.success("Korrekt!")
-            st.markdown(f'<img src="{question_data_1_item"CorrectImageURL"]}" alt="Korrekt" width="100%">', unsafe_allow_html=True)
+            st.markdown(f'<img src="{question_data_1_item["CorrectImageURL"]}" alt="Korrekt" width="100%">', unsafe_allow_html=True)
             for question_data_2_item in question_data_2:
                 st.subheader(f"Frage 2:")
                 st.write(question_data_2_item['Question'])
