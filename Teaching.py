@@ -97,11 +97,13 @@ elif st.session_state.question_index == 2:
             st.session_state.question_index += 1
             st.write(st.session_state.question_index)
             if st.button("Belohnung", key="End"):
-                st.balloons()
+            
         else:
             st.warning("Falsch! Versuchen Sie nochmal.")
             st.markdown(f'<img src="{current_question["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
 
+elif st.session_state.question_index == 3:
+    st.balloons()
 # Display the first question
 #for question_data_1_item in question_data_1:
 #    st.subheader(f"Frage 1:")
