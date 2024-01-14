@@ -48,7 +48,8 @@ if st.session_state.question_index == 0:
             st.markdown(f'<img src="{current_question["CorrectImageURL"]}" alt="Korrekt" width="100%">', unsafe_allow_html=True)
             st.session_state.question_index += 1
             st.write(st.session_state.question_index)
-            button_placeholder.button.on_event('on_click', lambda x: x.js('document.querySelector("button[data-baseweb-id=1]").click()'))
+            #button_placeholder.button.on_event('on_click', lambda x: x.js('document.querySelector("button[data-baseweb-id=1]").click()'))
+            st.button("Nächste Frage", key="Q2")
 
 # Display the next question
         else:
@@ -56,7 +57,7 @@ if st.session_state.question_index == 0:
             st.markdown(f'<img src="{current_question["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
 
 # Display the next question
-elif st.session_state.question_index == 1:
+elif st.session_state.question_index == 1 and st.button("Nächste Frage", key="Q2"):
     current_question = question_data_2[0]
     st.subheader(f"Frage 2:")
     st.write(current_question['Question'])
