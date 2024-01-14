@@ -103,7 +103,7 @@ elif st.session_state.question_index == 2:
             st.markdown(f'<img src="{current_question["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
 
 elif st.session_state.question_index == 3:
-    st.success("Sie haben die Übung erfolgreich abgeschlossen. Viel Spaß beim Lernen!\nLiebe Grüße\n{Diana Le Duc1")
+    st.success("Sie haben die Übung erfolgreich abgeschlossen. Viel Spaß beim Lernen!"\n"Liebe Grüße;"\n"Diana Le Duc2")
     st.balloons()
 # Display the first question
 #for question_data_1_item in question_data_1:
