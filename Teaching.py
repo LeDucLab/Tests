@@ -88,7 +88,7 @@ elif st.session_state.question_index == 1:
             st.markdown(f'<img src="{current_question["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
    
 elif st.session_state.question_index == 2:
-     current_question = question_data_3[0]
+    current_question = question_data_3[0]
     st.subheader(f"Frage 3:")
     st.write(current_question['Question'])
     user_answer_3 = st.text_input("Ihre Antwort:", key="user_answer_1")
