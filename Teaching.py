@@ -93,7 +93,7 @@ elif st.session_state.question_index == 2:
     st.write(current_question['Question'])
     user_answer_3 = st.text_input("Ihre Antwort:", key="user_answer_1")
     if st.button("Antwort einreichen", key="A3"):
-        if any(word.lower() in current_question['Answer'].lower() for word in user_answer_1.split()):
+        if any(word.lower() in current_question['Answer'].lower() for word in user_answer_3.split()):
             st.success("Korrekt!")
             st.markdown(f'<img src="{current_question["CorrectImageURL"]}" alt="Korrekt" width="100%">', unsafe_allow_html=True)
             st.session_state.question_index += 1
