@@ -69,10 +69,6 @@ if st.session_state.question_index == 0:
             st.warning("Falsch! Versuchen Sie nochmal.")
             st.markdown(f'<img src="{current_question["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
 
-# Display the next question
-        else:
-            st.warning("Falsch! Versuchen Sie nochmal.")
-            st.markdown(f'<img src="{current_question["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
 
 # Display the next question
 elif st.session_state.question_index == 1:
