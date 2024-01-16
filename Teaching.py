@@ -99,7 +99,7 @@ elif st.session_state.question_index == 2:
             st.session_state.question_index += 1
             st.write(st.session_state.question_index)
             #button_placeholder.button.on_event('on_click', lambda x: x.js('document.querySelector("button[data-baseweb-id=1]").click()'))
-            #st.button("Nächste Frage", key="Q4")
+            st.button("Belohnung", key="Q4")
         else:
             st.warning("Falsch! Versuchen Sie nochmal.")
             st.markdown(f'<img src="{current_question["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
