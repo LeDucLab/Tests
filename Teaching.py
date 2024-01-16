@@ -105,10 +105,8 @@ elif st.session_state.question_index == 2:
             st.markdown(f'<img src="{current_question["IncorrectImageURL"]}" alt="Falsch" width="100%">', unsafe_allow_html=True)
 
 elif st.session_state.question_index == 3:
-    line1 = "Dynamic content for Line 1"
-    line2 = "Dynamic content for Line 2"
-
-    st.success(f"{line1}\n{line2}")
+    multiline_content = "Line 1\nLine 2"
+    st.markdown(f'<div style="color: green;">{multiline_content}</div>', unsafe_allow_html=True)
 
     #st.success("Sie haben die Übung erfolgreich abgeschlossen. Viel Spaß beim Lernen! Liebe Grüße, Diana Le Duc")
     st.balloons()
