@@ -7,7 +7,7 @@ from PIL import Image, UnidentifiedImageError
 import streamlit as st
 
 # Set the title for the page
-st.title("Personalisierte Medizin: Welche Informationen haben Sie mitgenommen")
+st.title("Personalisierte Medizin: Welche Informationen haben Sie mitgenommen?")
 
 # Define the questions
 
