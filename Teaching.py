@@ -14,7 +14,7 @@ st.title("Personalisierte Medizin: Welche Informationen haben Sie mitgenommen")
 question_data_1 = [
     {
         'Question': 'Was ist das Hauptziel der personalisierten Medizin?',
-        'Options': ['Eine One-Size-Fits-All-Ansatz für alle Patienten', 'Eine individualisierte Behandlung basierend auf genetischen, molekularen und anderen individuellen Merkmalen', 'Die ausschließliche Verwendung traditioneller Behandlungsansätze', 'Die Maximierung der Kosteneffizienz bei medizinischen Interventionen'],
+        'Options': ['','Eine One-Size-Fits-All-Ansatz für alle Patienten', 'Eine individualisierte Behandlung basierend auf genetischen, molekularen und anderen individuellen Merkmalen', 'Die ausschließliche Verwendung traditioneller Behandlungsansätze', 'Die Maximierung der Kosteneffizienz bei medizinischen Interventionen'],
         'Answer': 'Eine individualisierte Behandlung basierend auf genetischen, molekularen und anderen individuellen Merkmalen',
         'CorrectImageURL': 'https://github.com/LeDucLab/Tests/raw/main/Images/Personalisierte%20Medizin%20in%20der%20klinischen%20Genetik_v3.png',
         'IncorrectImageURL': 'https://github.com/LeDucLab/Tests/raw/main/Images/Personalisierte%20Medizin%20in%20der%20klinischen%20Genetik_v2.png',
@@ -57,7 +57,7 @@ if st.session_state.question_index == 0:
     current_question = question_data_1[0]
     st.subheader(f"Frage 1:")
     st.write(current_question['Question'])
-    user_answer_1 = st.radio("Ihre Antwort:", options=current_question['Options'], key="user_answer_1",  index=None)
+    user_answer_1 = st.radio("Ihre Antwort:", options=current_question['Options'], key="user_answer_1")
     if user_answer_1 != '':
         if user_answer_1 == current_question['Answer']:
             st.success("Korrekt!")
@@ -75,7 +75,7 @@ elif st.session_state.question_index == 1:
     current_question = question_data_2[0]
     st.subheader(f"Frage 2:")
     st.write(current_question['Question'])
-    user_answer_2 = st.radio("Ihre Antwort:", options=current_question['Options'], key="user_answer_2", index=None)
+    user_answer_2 = st.radio("Ihre Antwort:", options=current_question['Options'], key="user_answer_2")
     if user_answer_2 != '':
         if user_answer_2 == current_question['Answer']:
             st.success("Korrekt!")
