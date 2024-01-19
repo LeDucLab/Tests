@@ -57,7 +57,7 @@ if st.session_state.question_index == 0:
     current_question = question_data_1[0]
     st.subheader(f"Frage 1:")
     st.write(current_question['Question'])
-    user_answer_1 = st.radio("Ihre Antwort:", options=current_question['Options'], key="user_answer_1",  index=None))
+    user_answer_1 = st.radio("Ihre Antwort:", options=current_question['Options'], key="user_answer_1",  index=None)
     if user_answer_1 != '':
         if user_answer_1 == current_question['Answer']:
             st.success("Korrekt!")
