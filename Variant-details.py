@@ -1,6 +1,9 @@
 import streamlit as st
-import requests
-from bs4 import BeautifulSoup
+try:
+    import requests
+except ImportError:
+    st.error("The 'requests' package is not installed. Add 'requests' to your 'requirements.txt' file and redeploy the app.")
+    st.stop()
 import re
 
 # Streamlit app configuration
@@ -8,7 +11,7 @@ st.set_page_config(page_title="Automated Variant ACMG Retrieval", page_icon="ðŸ§
 
 # Title and description
 st.title("Automated Franklin Genoox ACMG Classification Retrieval")
-st.write("Enter variant details to generate a URL and attempt to automatically retrieve ACMG classification criteria.")
+st.write("Enter variant details to generate a Franklin Genoox URL and attempt to retrieve ACMG classification criteria.")
 
 # Input fields for variant details
 st.subheader("Variant Information")
@@ -22,9 +25,9 @@ with col3:
 with col4:
     alternate = st.text_input("Alternate (e.g., A)", value="A")
 
-# Optional input for cookies or session token
+# Optional input for cookies
 st.subheader("Authentication (Optional)")
-cookies = st.text_area("Browser Cookies (if required)", placeholder="Paste cookies from a logged-in browser session", help="Copy cookies from your browser's developer tools after logging into Franklin Genoox.")
+cookies = st.text_area("Browser Cookies (if required)", placeholder="Paste cookies from a logged-in browser session (e.g., name1=value1; name2=value2)", help="Copy cookies from your browser's developer tools (Network tab > Cookies) after logging into Franklin Genoox.")
 
 # Construct the variant string and URL
 variant = f"chr{chromosome}-{position}-{reference}-{alternate}"
@@ -51,7 +54,6 @@ if st.button("Retrieve ACMG Classification"):
             }
             cookies_dict = {}
             if cookies:
-                # Parse cookies string (e.g., "name1=value1; name2=value2")
                 for cookie in cookies.split(";"):
                     if "=" in cookie:
                         name, value = cookie.strip().split("=", 1)
@@ -62,30 +64,31 @@ if st.button("Retrieve ACMG Classification"):
 
             # Check if the request was successful
             if response.status_code == 200:
-                # Parse the page with BeautifulSoup
-                soup = BeautifulSoup(response.text, "html.parser")
+                # Get the page text
+                page_text = response.text.lower()
 
-                # Attempt to find ACMG classification (adjust based on actual HTML structure)
-                # This is a placeholder; inspect the page to find the correct element
-                acmg_element = soup.find("div", class_=re.compile("acmg|classification", re.I))
-                acmg_classification = acmg_element.get_text(strip=True) if acmg_element else "No ACMG classification found"
-
-                # Alternative: Search for common ACMG terms (e.g., Pathogenic, Benign)
-                page_text = soup.get_text().lower()
-                acmg_terms = ["pathogenic", "likely pathogenic", "benign", "likely benign", "uncertain significance"]
-                found_terms = [term for term in acmg_terms if term in page_text]
+                # Search for ACMG classification terms using regex
+                acmg_terms = [
+                    r"pathogenic",
+                    r"likely pathogenic",
+                    r"benign",
+                    r"likely benign",
+                    r"uncertain significance",
+                    r"\b(P[MSB]\d|BA\d|BP\d)\b"  # Matches ACMG criteria like PM1, PS2, BA1, BP4
+                ]
+                found_terms = []
+                for pattern in acmg_terms:
+                    matches = re.findall(pattern, page_text, re.IGNORECASE)
+                    if matches:
+                        found_terms.extend(matches)
 
                 st.subheader("ACMG Classification Results")
-                if acmg_classification != "No ACMG classification found" or found_terms:
+                if found_terms:
                     st.success("Data retrieved successfully!")
-                    if acmg_classification != "No ACMG classification found":
-                        st.write("**ACMG Classification:**")
-                        st.write(acmg_classification)
-                    if found_terms:
-                        st.write("**Detected ACMG Terms:**")
-                        st.write(", ".join(found_terms))
+                    st.write("**Detected ACMG Terms and Criteria:**")
+                    st.write(", ".join(set(found_terms)))  # Remove duplicates
                 else:
-                    st.warning("No ACMG classification found. The page may require login or have a different structure.")
+                    st.warning("No ACMG classification or criteria found. The page may require login or have a different structure.")
                     st.markdown(f"Please check manually: [Open URL]({api_url})")
             else:
                 st.error(f"Failed to fetch page. Status code: {response.status_code}")
@@ -114,9 +117,9 @@ If automated retrieval fails:
 # Additional notes
 st.subheader("Notes")
 st.write("""
+- **Dependencies**: Ensure 'streamlit' and 'requests' are listed in your 'requirements.txt' file.
 - **Authentication**: Franklin Genoox likely requires login. Provide browser cookies from a logged-in session (copy from browser developer tools).
-- **Web Scraping**: The script assumes ACMG data is in a div with a class like 'acmg' or 'classification'. Inspect the page's HTML (using browser developer tools) to find the correct element and update the script.
-- **Limitations**: Web scraping may violate Franklin Genoox's terms of service. Use responsibly and consider contacting their support for API access.
-- **Dependencies**: Install `streamlit`, `requests`, and `beautifulsoup4` (`pip install streamlit requests beautifulsoup4`).
+- **Parsing**: The script searches for ACMG terms (e.g., Pathogenic, Benign) and criteria (e.g., PM1, PS2) using regex. If results are inaccurate, inspect the page's HTML and adjust the regex patterns.
+- **Terms of Service**: Web scraping may violate Franklin Genoox's terms. Contact their support for API access if needed.
 - **Variant Format**: Ensure the format is correct (e.g., chr17-41276044-ACT-A).
 """)
