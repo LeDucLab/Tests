@@ -26,8 +26,8 @@ with col4:
     alternate = st.text_input("Alternate (e.g., A)", value="A")
 
 # Optional input for cookies
-st.subheader("Authentication (Optional)")
-cookies = st.text_area("Browser Cookies (if required)", placeholder="Paste cookies from a logged-in browser session (e.g., name1=value1; name2=value2)", help="Copy cookies from your browser's developer tools (F12 > Network > Cookies) after logging into Franklin Genoox.")
+st.subheader("Authentication (Required for Franklin Genoox)")
+cookies = st.text_area("Browser Cookies", placeholder="Paste cookies from a logged-in browser session (e.g., name1=value1; name2=value2)", help="Log in to Franklin Genoox, open developer tools (F12 > Network), refresh the variant page, select the request to the URL, and copy the 'Cookie' header from the Request Headers.")
 
 # Construct the variant string and URL
 variant = f"chr{chromosome}-{position}-{reference}-{alternate}"
@@ -58,6 +58,8 @@ if st.button("Retrieve ACMG Classification"):
                     if "=" in cookie:
                         name, value = cookie.strip().split("=", 1)
                         cookies_dict[name] = value
+            else:
+                st.warning("No cookies provided. Franklin Genoox likely requires login, so scraping may fail.")
 
             # Send request to the URL
             response = requests.get(api_url, headers=headers, cookies=cookies_dict, timeout=10)
@@ -71,47 +73,53 @@ if st.button("Retrieve ACMG Classification"):
                 st.subheader("Debug: Page Content Snippet")
                 st.text(page_text[:500] + "..." if len(page_text) > 500 else page_text)
 
-                # Enhanced regex to find "Franklin ACMG Classification" and two lines below
-                pattern = r"Franklin ACMG Classification.*?([\s\S]*?)(?:<[^>]+>|\n|$)(?:[\s\S]*?)(?:<[^>]+>|\n|$)(?:[\s\S]*?)(?:<[^>]+>|\n|$)"
-                match = re.search(pattern, page_text, re.IGNORECASE | re.DOTALL)
-                
-                st.subheader("ACMG Classification Results")
-                if match:
-                    # Split the captured group into lines and take the first two non-empty ones
-                    lines = [line.strip() for line in match.group(0).splitlines() if line.strip()]
-                    classification_lines = [line for line in lines if line.lower() != "franklin acmg classification"][:2]
-                    
-                    if classification_lines:
-                        st.success("Data retrieved successfully!")
-                        st.write("**Franklin ACMG Classification Lines:**")
-                        st.write(f"Line 1: {classification_lines[0] if len(classification_lines) > 0 else 'Not found'}")
-                        st.write(f"Line 2: {classification_lines[1] if len(classification_lines) > 1 else 'Not found'}")
-                    else:
-                        st.warning("Found 'Franklin ACMG Classification' but no valid lines below it.")
-                        st.markdown(f"Please check manually: [Open URL]({api_url})")
+                # Check for login page indicators
+                login_indicators = ["sign in", "login", "authenticate", "unauthorized"]
+                if any(indicator in page_text.lower() for indicator in login_indicators):
+                    st.error("The fetched page appears to be a login page. Please provide valid cookies from a logged-in session.")
+                    st.markdown(f"Please check manually: [Open URL]({api_url})")
                 else:
-                    # Fallback: Search for ACMG terms and criteria
-                    acmg_terms = [
-                        r"pathogenic",
-                        r"likely pathogenic",
-                        r"benign",
-                        r"likely benign",
-                        r"uncertain significance",
-                        r"\b(P[MSB]\d|BA\d|BP\d)\b"
-                    ]
-                    found_terms = []
-                    for pattern in acmg_terms:
-                        matches = re.findall(pattern, page_text.lower(), re.IGNORECASE)
-                        if matches:
-                            found_terms.extend(matches)
+                    # Search for "Franklin ACMG Classification" and two lines below
+                    pattern = r"Franklin ACMG Classification.*?([\s\S]*?)(?:<[^>]+>|\n|$)(?:[\s\S]*?)(?:<[^>]+>|\n|$)(?:[\s\S]*?)(?:<[^>]+>|\n|$)"
+                    match = re.search(pattern, page_text, re.IGNORECASE | re.DOTALL)
                     
-                    if found_terms:
-                        st.success("No exact 'Franklin ACMG Classification' match, but related terms found:")
-                        st.write("**Detected ACMG Terms and Criteria:**")
-                        st.write(", ".join(set(found_terms)))
+                    st.subheader("ACMG Classification Results")
+                    if match:
+                        # Split into lines and take the first two non-empty ones after the header
+                        lines = [line.strip() for line in match.group(0).splitlines() if line.strip()]
+                        classification_lines = [line for line in lines if line.lower() != "franklin acmg classification"][:2]
+                        
+                        if classification_lines:
+                            st.success("Data retrieved successfully!")
+                            st.write("**Franklin ACMG Classification Lines:**")
+                            st.write(f"Line 1: {classification_lines[0] if len(classification_lines) > 0 else 'Not found'}")
+                            st.write(f"Line 2: {classification_lines[1] if len(classification_lines) > 1 else 'Not found'}")
+                        else:
+                            st.warning("Found 'Franklin ACMG Classification' but no valid lines below it.")
+                            st.markdown(f"Please check manually: [Open URL]({api_url})")
                     else:
-                        st.warning("No 'Franklin ACMG Classification' or related terms found. The page may require login or use JavaScript rendering.")
-                        st.markdown(f"Please check manually: [Open URL]({api_url})")
+                        # Fallback: Search for ACMG terms and criteria
+                        acmg_terms = [
+                            r"pathogenic",
+                            r"likely pathogenic",
+                            r"benign",
+                            r"likely benign",
+                            r"uncertain significance",
+                            r"\b(P[MSB]\d|BA\d|BP\d)\b"
+                        ]
+                        found_terms = []
+                        for pattern in acmg_terms:
+                            matches = re.findall(pattern, page_text.lower(), re.IGNORECASE)
+                            if matches:
+                                found_terms.extend(matches)
+                        
+                        if found_terms:
+                            st.success("No exact 'Franklin ACMG Classification' match, but related terms found:")
+                            st.write("**Detected ACMG Terms and Criteria:**")
+                            st.write(", ".join(set(found_terms)))
+                        else:
+                            st.warning("No 'Franklin ACMG Classification' or related terms found. The page may use JavaScript rendering or require login.")
+                            st.markdown(f"Please check manually: [Open URL]({api_url})")
             else:
                 st.error(f"Failed to fetch page. Status code: {response.status_code}")
                 st.write("The page may require authentication or may not be accessible.")
@@ -139,7 +147,7 @@ If automated retrieval fails:
 # Debugging and troubleshooting
 st.subheader("Troubleshooting")
 st.write("""
-- **Authentication**: If the page content shows a login prompt, provide valid cookies from a logged-in browser session (F12 > Network > Cookies).
+- **Authentication**: The debug snippet shows a login page. Provide valid cookies from a logged-in session (F12 > Network > Cookies).
 - **JavaScript Rendering**: If the content is missing, the page may load data via JavaScript. Try manual retrieval or contact Franklin Genoox for API access.
 - **HTML Structure**: If no data is found, inspect the page's HTML (F12 > Elements) around 'Franklin ACMG Classification' and share the structure to refine the regex.
 - **Terms of Service**: Web scraping may violate Franklin Genoox's terms. Contact their support for API access.
