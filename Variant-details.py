@@ -17,13 +17,13 @@ st.write("Enter variant details to query the GeneBe API and display ACMG classif
 st.subheader("Variant Information")
 col1, col2, col3, col4 = st.columns(4)
 with col1:
-    chromosome = st.text_input("Chromosome (e.g., 17)", value="17")
+    chromosome = st.text_input("Chromosome (e.g., 17)")
 with col2:
-    position = st.text_input("Position (e.g., 41276044)", value="41276044")
+    position = st.text_input("Position (e.g., 41276044)")
 with col3:
-    reference = st.text_input("Reference (e.g., ACT)", value="ACT")
+    reference = st.text_input("Reference (e.g., ACT)")
 with col4:
-    alternate = st.text_input("Alternate (e.g., A)", value="A")
+    alternate = st.text_input("Alternate (e.g., A)")
 
 # Optional input for API key
 st.subheader("Authentication (Optional)")
@@ -32,7 +32,7 @@ api_key = st.text_input("API Key (if required)", type="password", help="Enter yo
 # Construct the API URL with query parameters
 base_url = "https://api.genebe.net/cloud/api-public/v1/variant"
 params = {
-    "chr": f"chr{chromosome}",
+    "chr": f"chr{chromosome}" if chromosome else "",
     "pos": position,
     "ref": reference,
     "alt": alternate,
@@ -84,8 +84,29 @@ if st.button("Retrieve ACMG Information"):
                 try:
                     data = response.json()
                     
-                    st.subheader("ACMG Classification and Criteria")
+                    # Validate variant in response
+                    input_variant = {
+                        "chr": f"chr{chromosome}",
+                        "pos": int(position) if position.isdigit() else position,
+                        "ref": reference,
+                        "alt": alternate
+                    }
+                    response_variant = {}
+                    if isinstance(data, dict) and "variants" in data and data["variants"] and isinstance(data["variants"], list):
+                        response_variant = {
+                            "chr": data["variants"][0].get("chr"),
+                            "pos": data["variants"][0].get("pos"),
+                            "ref": data["variants"][0].get("ref"),
+                            "alt": data["variants"][0].get("alt")
+                        }
+                        if response_variant != input_variant:
+                            st.warning(
+                                f"Warning: Response variant ({response_variant}) does not match input variant ({input_variant}). "
+                                "The API may have normalized the variant."
+                            )
+                    
                     # Extract acmg_classification and acmg_criteria from variants[0]
+                    st.subheader("ACMG Classification and Criteria")
                     acmg_classification = "Not found"
                     acmg_criteria = "Not found"
                     if isinstance(data, dict) and "variants" in data and data["variants"] and isinstance(data["variants"], list):
@@ -120,7 +141,4 @@ st.write("""
 - **API Endpoint**: Uses GET /cloud/api-public/v1/variant with query parameters (e.g., chr=chr17, pos=41276044, ref=ACT, alt=A, genome=hg38).
 - **Authentication**: If the endpoint requires an API key, provide it in the input field (Bearer token or query param). Check GeneBe documentation for details.
 - **Response Parsing**: Extracts 'acmg_classification' and 'acmg_criteria' from the first item in the 'variants' list. If the structure changes, share the JSON response to adjust the script.
-- **Dependencies**: Ensure 'streamlit' and 'requests' are listed in your 'requirements.txt' file.
-- **Terms of Service**: Ensure compliance with GeneBe's API usage policies. Contact support if you need an API key.
-- **Variant Format**: Uses chr=chr{chromosome}, pos={position}, ref={reference}, alt={alternate}. Confirm in GeneBe API documentation if a different format is required.
-""")
+- **Variant Mismatch**: The API may normalize the input variant (e.g., ACT to ACC). Check the response variant details in the JSON
