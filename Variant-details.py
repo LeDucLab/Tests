@@ -5,13 +5,14 @@ except ImportError:
     st.error("The 'requests' package is not installed. Add 'requests' to your 'requirements.txt' file and redeploy the app.")
     st.stop()
 import json
+import pandas as pd
 
 # Streamlit app configuration
 st.set_page_config(page_title="GeneBe Variant Information Retrieval", page_icon="🧬")
 
 # Title and description
 st.title("GeneBe Variant Information Retrieval")
-st.write("Enter variant details to query the GeneBe API and display all available information about the variant.")
+st.write("Enter variant details to query the GeneBe API and display all available information, including ACMG classification and criteria in a table.")
 
 # Input fields for variant details
 st.subheader("Variant Information")
@@ -27,7 +28,7 @@ with col4:
 
 # Optional input for API key
 st.subheader("Authentication (Optional)")
-api_key = st.text_input("API Key (if required)", type="password", help="Enter your GeneBe API key if the endpoint requires authentication (e.g., Bearer token or query param). Check the GeneBe Swagger UI or documentation for details.")
+api_key = st.text_input("API Key (if required)", type="password", help="Enter your GeneBe API key if the endpoint requires authentication (e.g., Bearer token or query param). Check the GeneBe documentation for details.")
 
 # Construct the API URL with query parameters
 base_url = "https://api.genebe.net/cloud/api-public/v1/variant"
@@ -56,7 +57,7 @@ if all([chromosome, position, reference, alternate]):
     display_url = f"{base_url}?{'&'.join(f'{k}={v}' for k, v in params.items())}"
     st.success("URL generated successfully!")
     st.markdown(f"[Test URL in Browser]({display_url})")
-    st.write("For manual testing, use the Swagger UI: https://api.genebe.net/cloud/gb-api-doc/swagger-ui/index.html#/variant-public-controller/variant_2")
+    st.write("For manual testing, use the GeneBe API documentation: https://api.genebe.net/cloud/gb-api-doc/swagger-ui/index.html#/variant-public-controller/variant_2")
 else:
     st.warning("Please fill in all variant details to proceed.")
 
@@ -85,16 +86,30 @@ if st.button("Retrieve Variant Information"):
                 try:
                     data = response.json()
                     
-                    st.subheader("Variant Information")
+                    st.subheader("ACMG Classification and Criteria")
+                    # Extract acmg_classification and acmg_criteria for table
+                    acmg_classification = data.get("acmg_classification", "Not found")
+                    acmg_criteria = data.get("acmg_criteria", "Not found")
+                    # Create a DataFrame for the table
+                    acmg_data = {
+                        "ACMG Klassifizierung": [acmg_classification],
+                        "ACMG Kriterien": [acmg_criteria]
+                    }
+                    acmg_df = pd.DataFrame(acmg_data)
+                    st.table(acmg_df)
+
+                    st.subheader("Additional Variant Information")
                     if isinstance(data, dict):
                         st.success("Data retrieved successfully!")
                         st.write("**Variant Details:**")
+                        # Display all fields except acmg_classification and acmg_criteria
                         for key, value in data.items():
-                            if isinstance(value, (dict, list)):
-                                st.write(f"**{key}:**")
-                                st.json(value)
-                            else:
-                                st.write(f"**{key}:** {value}")
+                            if key not in ["acmg_classification", "acmg_criteria"]:
+                                if isinstance(value, (dict, list)):
+                                    st.write(f"**{key}:**")
+                                    st.json(value)
+                                else:
+                                    st.write(f"**{key}:** {value}")
                     elif isinstance(data, list):
                         st.success("Data retrieved successfully!")
                         st.write("**Variant Details (List Format):**")
@@ -120,38 +135,27 @@ if st.button("Retrieve Variant Information"):
                 except json.JSONDecodeError:
                     st.error("Invalid JSON response from the API.")
                     st.text(response.text[:500] + "..." if len(response.text) > 500 else response.text)
-                    st.markdown(f"Test manually in Swagger UI: [GeneBe Swagger UI](https://api.genebe.net/cloud/gb-api-doc/swagger-ui/index.html#/variant-public-controller/variant_2)")
+                    st.markdown(f"Test manually in GeneBe API documentation: [GeneBe Swagger UI](https://api.genebe.net/cloud/gb-api-doc/swagger-ui/index.html#/variant-public-controller/variant_2)")
             else:
                 st.error(f"Failed to fetch data. Status code: {response.status_code}")
                 st.text(response.text[:500] + "..." if len(response.text) > 500 else response.text)
-                st.markdown(f"Test manually in Swagger UI: [GeneBe Swagger UI](https://api.genebe.net/cloud/gb-api-doc/swagger-ui/index.html#/variant-public-controller/variant_2)")
+                st.markdown(f"Test manually in GeneBe API documentation: [GeneBe Swagger UI](https://api.genebe.net/cloud/gb-api-doc/swagger-ui/index.html#/variant-public-controller/variant_2)")
 
         except requests.exceptions.RequestException as e:
             st.error(f"Error fetching data: {str(e)}")
             st.write("Possible issues: invalid API key, network error, or endpoint restrictions.")
-            st.markdown(f"Test manually in Swagger UI: [GeneBe Swagger UI](https://api.genebe.net/cloud/gb-api-doc/swagger-ui/index.html#/variant-public-controller/variant_2)")
+            st.markdown(f"Test manually in GeneBe API documentation: [GeneBe Swagger UI](https://api.genebe.net/cloud/gb-api-doc/swagger-ui/index.html#/variant-public-controller/variant_2)")
         except Exception as e:
             st.error(f"An unexpected error occurred: {str(e)}")
-            st.markdown(f"Test manually in Swagger UI: [GeneBe Swagger UI](https://api.genebe.net/cloud/gb-api-doc/swagger-ui/index.html#/variant-public-controller/variant_2)")
-
-# Instructions for manual retrieval
-st.subheader("Manual Retrieval Instructions")
-st.write("""
-If the API call fails:
-1. Open the Swagger UI: https://api.genebe.net/cloud/gb-api-doc/swagger-ui/index.html#/variant-public-controller/variant_2
-2. Find the `/variant` endpoint and enter the parameters (chr=chr17, pos=41276044, ref=ACT, alt=A, etc.).
-3. Add your API key if required (check GeneBe documentation or contact support).
-4. Execute the request and review the response for all variant details.
-5. If the endpoint requires authentication, sign up for an API key at genebe.net.
-""")
+            st.markdown(f"Test manually in GeneBe API documentation: [GeneBe Swagger UI](https://api.genebe.net/cloud/gb-api-doc/swagger-ui/index.html#/variant-public-controller/variant_2)")
 
 # Additional notes
 st.subheader("Notes")
 st.write("""
 - **API Endpoint**: Uses GET /cloud/api-public/v1/variant with query parameters (e.g., chr=chr17, pos=41276044, ref=ACT, alt=A, genome=hg38).
 - **Authentication**: If the endpoint requires an API key, provide it in the input field (Bearer token or query param). Check GeneBe documentation for details.
-- **Response Parsing**: Displays all fields from the JSON response. If the structure differs, inspect the response in Swagger UI and share it to adjust the script.
-- **Dependencies**: Ensure 'streamlit' and 'requests' are listed in your 'requirements.txt' file.
+- **Response Parsing**: Displays 'acmg_classification' and 'acmg_criteria' in a table as 'ACMG Klassifizierung' and 'ACMG Kriterien'. Other fields are shown as key-value pairs. Share the JSON response if field names differ.
+- **Dependencies**: Ensure 'streamlit', 'requests', and 'pandas' are listed in your 'requirements.txt' file.
 - **Terms of Service**: Ensure compliance with GeneBe's API usage policies. Contact support if you need an API key.
-- **Variant Format**: Uses chr=chr{chromosome}, pos={position}, ref={reference}, alt={alternate}. Confirm in Swagger UI if a different format is required.
+- **Variant Format**: Uses chr=chr{chromosome}, pos={position}, ref={reference}, alt={alternate}. Confirm in GeneBe API documentation if a different format is required.
 """)
