@@ -7,11 +7,11 @@ except ImportError:
 import re
 
 # Streamlit app configuration
-st.set_page_config(page_title="Automated Variant ACMG Retrieval", page_icon="🧬")
+st.set_page_config(page_title="Automated Franklin ACMG Retrieval", page_icon="🧬")
 
 # Title and description
-st.title("Automated Franklin Genoox ACMG Classification Retrieval")
-st.write("Enter variant details to generate a Franklin Genoox URL and attempt to retrieve ACMG classification criteria.")
+st.title("Automated Franklin ACMG Classification Retrieval")
+st.write("Enter variant details to generate a Franklin Genoox URL and retrieve the 'Franklin ACMG Classification' and the two lines below it.")
 
 # Input fields for variant details
 st.subheader("Variant Information")
@@ -65,31 +65,44 @@ if st.button("Retrieve ACMG Classification"):
             # Check if the request was successful
             if response.status_code == 200:
                 # Get the page text
-                page_text = response.text.lower()
+                page_text = response.text
 
-                # Search for ACMG classification terms using regex
-                acmg_terms = [
-                    r"pathogenic",
-                    r"likely pathogenic",
-                    r"benign",
-                    r"likely benign",
-                    r"uncertain significance",
-                    r"\b(P[MSB]\d|BA\d|BP\d)\b"  # Matches ACMG criteria like PM1, PS2, BA1, BP4
-                ]
-                found_terms = []
-                for pattern in acmg_terms:
-                    matches = re.findall(pattern, page_text, re.IGNORECASE)
-                    if matches:
-                        found_terms.extend(matches)
-
+                # Search for "Franklin ACMG Classification" and the two lines below
+                pattern = r"Franklin ACMG Classification.*?(?:<[^>]+>)*([\s\S]*?)(?:<[^>]+>)*([\s\S]*?)(?:<[^>]+>|\n|$)"
+                match = re.search(pattern, page_text, re.IGNORECASE | re.DOTALL)
+                
                 st.subheader("ACMG Classification Results")
-                if found_terms:
+                if match:
+                    line1 = match.group(1).strip()
+                    line2 = match.group(2).strip() if match.group(2) else ""
                     st.success("Data retrieved successfully!")
-                    st.write("**Detected ACMG Terms and Criteria:**")
-                    st.write(", ".join(set(found_terms)))  # Remove duplicates
+                    st.write("**Franklin ACMG Classification:**")
+                    st.write(line1 or "No first line found")
+                    st.write("**Following Line:**")
+                    st.write(line2 or "No second line found")
                 else:
-                    st.warning("No ACMG classification or criteria found. The page may require login or have a different structure.")
-                    st.markdown(f"Please check manually: [Open URL]({api_url})")
+                    # Fallback: Search for common ACMG terms
+                    acmg_terms = [
+                        r"pathogenic",
+                        r"likely pathogenic",
+                        r"benign",
+                        r"likely benign",
+                        r"uncertain significance",
+                        r"\b(P[MSB]\d|BA\d|BP\d)\b"
+                    ]
+                    found_terms = []
+                    for pattern in acmg_terms:
+                        matches = re.findall(pattern, page_text.lower(), re.IGNORECASE)
+                        if matches:
+                            found_terms.extend(matches)
+                    
+                    if found_terms:
+                        st.success("No exact 'Franklin ACMG Classification' match, but related terms found:")
+                        st.write("**Detected ACMG Terms and Criteria:**")
+                        st.write(", ".join(set(found_terms)))
+                    else:
+                        st.warning("No 'Franklin ACMG Classification' or related terms found. The page may require login or have a different structure.")
+                        st.markdown(f"Please check manually: [Open URL]({api_url})")
             else:
                 st.error(f"Failed to fetch page. Status code: {response.status_code}")
                 st.write("The page may require authentication or may not be accessible.")
@@ -110,7 +123,7 @@ If automated retrieval fails:
 1. Click the generated URL to open it in your browser.
 2. Log in to Franklin Genoox if required (you may need an account).
 3. Navigate to the variant details page.
-4. Look for ACMG classification criteria (e.g., Pathogenic, Benign, or criteria like PM1, PS2).
+4. Look for the 'Franklin ACMG Classification' section and note the two lines below it (e.g., classification and criteria).
 5. If no classification is available, check variant reports or annotations.
 """)
 
@@ -118,8 +131,8 @@ If automated retrieval fails:
 st.subheader("Notes")
 st.write("""
 - **Dependencies**: Ensure 'streamlit' and 'requests' are listed in your 'requirements.txt' file.
-- **Authentication**: Franklin Genoox likely requires login. Provide browser cookies from a logged-in session (copy from browser developer tools).
-- **Parsing**: The script searches for ACMG terms (e.g., Pathogenic, Benign) and criteria (e.g., PM1, PS2) using regex. If results are inaccurate, inspect the page's HTML and adjust the regex patterns.
+- **Authentication**: Franklin Genoox likely requires login. Provide browser cookies from a logged-in session (copy from browser developer tools: F12 > Network > Cookies).
+- **Parsing**: The script searches for 'Franklin ACMG Classification' and the two lines below it. If results are inaccurate, inspect the page's HTML (F12 > Elements) and share the structure to refine the regex.
 - **Terms of Service**: Web scraping may violate Franklin Genoox's terms. Contact their support for API access if needed.
 - **Variant Format**: Ensure the format is correct (e.g., chr17-41276044-ACT-A).
 """)
