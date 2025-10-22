@@ -7,11 +7,11 @@ except ImportError:
 import json
 
 # Streamlit app configuration
-st.set_page_config(page_title="Automated GeneBe ACMG Retrieval", page_icon="🧬")
+st.set_page_config(page_title="GeneBe Variant Information Retrieval", page_icon="🧬")
 
 # Title and description
-st.title("Automated GeneBe ACMG Classification Retrieval")
-st.write("Enter variant details to query the GeneBe API and retrieve ACMG classification criteria.")
+st.title("GeneBe Variant Information Retrieval")
+st.write("Enter variant details to query the GeneBe API and display all available information about the variant.")
 
 # Input fields for variant details
 st.subheader("Variant Information")
@@ -27,7 +27,7 @@ with col4:
 
 # Optional input for API key
 st.subheader("Authentication (Optional)")
-api_key = st.text_input("API Key (if required)", type="password", help="Enter your GeneBe API key if the endpoint requires authentication (e.g., Bearer token).")
+api_key = st.text_input("API Key (if required)", type="password", help="Enter your GeneBe API key if the endpoint requires authentication (e.g., Bearer token or query param). Check the GeneBe Swagger UI or documentation for details.")
 
 # Construct the variant string and API URL
 variant = f"chr{chromosome}-{position}-{reference}-{alternate}"
@@ -38,26 +38,28 @@ api_url = f"{base_url}/{variant}"
 st.subheader("Generated API URL")
 if all([chromosome, position, reference, alternate]):
     st.success("URL generated successfully!")
-    st.markdown(f"[Open URL in Browser]({api_url})")
-    st.write("For testing: Use Swagger UI at https://api.genebe.net/cloud/gb-api-doc/swagger-ui/index.html")
+    st.markdown(f"[Test URL in Browser]({api_url})")
+    st.write("For manual testing, use the Swagger UI: https://api.genebe.net/cloud/gb-api-doc/swagger-ui/index.html#/variant-public-controller/variant_2")
 else:
     st.warning("Please fill in all variant details to proceed.")
 
 # Button to fetch data
-if st.button("Retrieve ACMG Classification"):
+if st.button("Retrieve Variant Information"):
     if not all([chromosome, position, reference, alternate]):
         st.error("Please fill in all variant details.")
     else:
         try:
-            # Set up headers
+            # Set up headers and params
             headers = {
                 "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36",
                 "Accept": "application/json"
             }
             params = {}
             if api_key:
-                # Try Bearer token first; adjust if GeneBe uses query param (e.g., params['apiKey'] = api_key)
+                # Try Bearer token; switch to params['apiKey'] = api_key if GeneBe uses query param
                 headers["Authorization"] = f"Bearer {api_key}"
+                # Uncomment the next line and comment the above if query param is needed
+                # params['apiKey'] = api_key
 
             # Send GET request to the API
             response = requests.get(api_url, headers=headers, params=params, timeout=10)
@@ -67,19 +69,35 @@ if st.button("Retrieve ACMG Classification"):
                 try:
                     data = response.json()
                     
-                    # Extract ACMG classification (adjust fields based on actual response structure)
-                    acmg_classification = data.get("acmgClassification", data.get("classification", "No ACMG classification found"))
-                    acmg_criteria = data.get("criteria", data.get("acmgCriteria", "No criteria found"))
-                    
-                    st.subheader("ACMG Classification Results")
-                    if acmg_classification != "No ACMG classification found":
+                    st.subheader("Variant Information")
+                    if isinstance(data, dict):
                         st.success("Data retrieved successfully!")
-                        st.write("**ACMG Classification:**")
-                        st.write(acmg_classification)
-                        st.write("**ACMG Criteria:**")
-                        st.write(acmg_criteria)
+                        # Display all key-value pairs in a table-like format
+                        st.write("**Variant Details:**")
+                        for key, value in data.items():
+                            # Handle nested dictionaries or lists
+                            if isinstance(value, (dict, list)):
+                                st.write(f"**{key}:**")
+                                st.json(value)
+                            else:
+                                st.write(f"**{key}:** {value}")
+                    elif isinstance(data, list):
+                        st.success("Data retrieved successfully!")
+                        st.write("**Variant Details (List Format):**")
+                        for i, item in enumerate(data):
+                            st.write(f"**Item {i+1}:**")
+                            if isinstance(item, dict):
+                                for key, value in item.items():
+                                    if isinstance(value, (dict, list)):
+                                        st.write(f"**{key}:**")
+                                        st.json(value)
+                                    else:
+                                        st.write(f"**{key}:** {value}")
+                            else:
+                                st.write(item)
                     else:
-                        st.warning("No ACMG classification data available in the response.")
+                        st.warning("Unexpected response format.")
+                        st.json(data)
                     
                     # Display raw JSON for debugging
                     with st.expander("Raw JSON Response"):
@@ -88,23 +106,38 @@ if st.button("Retrieve ACMG Classification"):
                 except json.JSONDecodeError:
                     st.error("Invalid JSON response from the API.")
                     st.text(response.text[:500] + "..." if len(response.text) > 500 else response.text)
+                    st.markdown(f"Test manually in Swagger UI: [GeneBe Swagger UI](https://api.genebe.net/cloud/gb-api-doc/swagger-ui/index.html#/variant-public-controller/variant_2)")
             else:
                 st.error(f"Failed to fetch data. Status code: {response.status_code}")
                 st.text(response.text[:500] + "..." if len(response.text) > 500 else response.text)
+                st.markdown(f"Test manually in Swagger UI: [GeneBe Swagger UI](https://api.genebe.net/cloud/gb-api-doc/swagger-ui/index.html#/variant-public-controller/variant_2)")
 
         except requests.exceptions.RequestException as e:
             st.error(f"Error fetching data: {str(e)}")
             st.write("Possible issues: invalid API key, network error, or endpoint restrictions.")
+            st.markdown(f"Test manually in Swagger UI: [GeneBe Swagger UI](https://api.genebe.net/cloud/gb-api-doc/swagger-ui/index.html#/variant-public-controller/variant_2)")
         except Exception as e:
             st.error(f"An unexpected error occurred: {str(e)}")
+            st.markdown(f"Test manually in Swagger UI: [GeneBe Swagger UI](https://api.genebe.net/cloud/gb-api-doc/swagger-ui/index.html#/variant-public-controller/variant_2)")
 
-# Instructions
+# Instructions for manual retrieval
+st.subheader("Manual Retrieval Instructions")
+st.write("""
+If the API call fails:
+1. Open the Swagger UI: https://api.genebe.net/cloud/gb-api-doc/swagger-ui/index.html#/variant-public-controller/variant_2
+2. Find the `/variant` endpoint and enter the variant ID (e.g., chr17-41276044-ACT-A).
+3. Add your API key if required (check GeneBe documentation or contact support).
+4. Execute the request and review the response for all variant details.
+5. If the endpoint requires authentication, sign up for an API key at genebe.net.
+""")
+
+# Additional notes
 st.subheader("Notes")
 st.write("""
 - **API Endpoint**: Uses GET /v1/public/variant/{variant} (e.g., https://api.genebe.net/v1/public/variant/chr17-41276044-ACT-A).
-- **Authentication**: If required, provide your API key. Check GeneBe docs for exact format (Bearer token or query param).
-- **Response Parsing**: Assumes JSON fields like 'acmgClassification' and 'criteria'. Adjust the script if the structure differs (e.g., inspect response in Swagger UI).
-- **Dependencies**: Install `streamlit` and `requests` (`pip install streamlit requests`).
-- **Testing**: Use Swagger UI (https://api.genebe.net/cloud/gb-api-doc/swagger-ui/index.html) to test the endpoint manually.
-- **Terms of Service**: Ensure compliance with GeneBe's API usage policies.
+- **Authentication**: If the endpoint requires an API key, provide it in the input field (Bearer token or query param). Check GeneBe documentation for details.
+- **Response Parsing**: Displays all fields from the JSON response. If the structure differs, inspect the response in Swagger UI and share it to adjust the script.
+- **Dependencies**: Ensure 'streamlit' and 'requests' are listed in your 'requirements.txt' file.
+- **Terms of Service**: Ensure compliance with GeneBe's API usage policies. Contact support if you need an API key.
+- **Variant Format**: Uses chr{chromosome}-{position}-{reference}-{alternate}. Confirm in Swagger UI if a different format is required.
 """)
