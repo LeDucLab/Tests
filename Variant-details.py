@@ -19,7 +19,7 @@ col1, col2, col3, col4 = st.columns(4)
 with col1:
     chromosome = st.text_input("Chromosome (e.g., 17)")
 with col2:
-    position = st.text_input("Position (e.g., 41276044)")
+    position = st.text_input("Position on hg38 (e.g., 41276044)")
 with col3:
     reference = st.text_input("Reference (e.g., ACT)")
 with col4:
@@ -141,4 +141,7 @@ st.write("""
 - **API Endpoint**: Uses GET /cloud/api-public/v1/variant with query parameters (e.g., chr=chr17, pos=41276044, ref=ACT, alt=A, genome=hg38).
 - **Authentication**: If the endpoint requires an API key, provide it in the input field (Bearer token or query param). Check GeneBe documentation for details.
 - **Response Parsing**: Extracts 'acmg_classification' and 'acmg_criteria' from the first item in the 'variants' list. If the structure changes, share the JSON response to adjust the script.
-- **Variant Mismatch**: The API may normalize the input variant (e.g., ACT to ACC). Check the response variant details in the JSON
+- **Variant Mismatch**: The API may normalize the input variant (e.g., ACT to ACC). Check the response variant details in the JSON.
+- **Dependencies**: Ensure 'streamlit' and 'requests' are listed in your 'requirements.txt' file.
+- **Terms of Service**: Ensure compliance with GeneBe's API usage policies. Contact support if you need an API key.
+""")
