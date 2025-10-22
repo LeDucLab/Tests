@@ -85,9 +85,14 @@ if st.button("Retrieve ACMG Information"):
                     data = response.json()
                     
                     st.subheader("ACMG Classification and Criteria")
-                    # Extract acmg_classification and acmg_criteria
-                    acmg_classification = data.get("acmg_classification", "Not found")
-                    acmg_criteria = data.get("acmg_criteria", "Not found")
+                    # Extract acmg_classification and acmg_criteria from variants[0]
+                    acmg_classification = "Not found"
+                    acmg_criteria = "Not found"
+                    if isinstance(data, dict) and "variants" in data and data["variants"] and isinstance(data["variants"], list):
+                        variant_data = data["variants"][0]
+                        acmg_classification = variant_data.get("acmg_classification", "Not found")
+                        acmg_criteria = variant_data.get("acmg_criteria", "Not found")
+                    
                     # Display as bullet points
                     st.write("- **ACMG Klassifizierung**: " + str(acmg_classification))
                     st.write("- **ACMG Kriterien**: " + str(acmg_criteria))
@@ -114,7 +119,7 @@ st.subheader("Notes")
 st.write("""
 - **API Endpoint**: Uses GET /cloud/api-public/v1/variant with query parameters (e.g., chr=chr17, pos=41276044, ref=ACT, alt=A, genome=hg38).
 - **Authentication**: If the endpoint requires an API key, provide it in the input field (Bearer token or query param). Check GeneBe documentation for details.
-- **Response Parsing**: Extracts 'acmg_classification' and 'acmg_criteria' for bullet point display. If field names differ, share the JSON response to adjust the script.
+- **Response Parsing**: Extracts 'acmg_classification' and 'acmg_criteria' from the first item in the 'variants' list. If the structure changes, share the JSON response to adjust the script.
 - **Dependencies**: Ensure 'streamlit' and 'requests' are listed in your 'requirements.txt' file.
 - **Terms of Service**: Ensure compliance with GeneBe's API usage policies. Contact support if you need an API key.
 - **Variant Format**: Uses chr=chr{chromosome}, pos={position}, ref={reference}, alt={alternate}. Confirm in GeneBe API documentation if a different format is required.
