@@ -29,16 +29,33 @@ with col4:
 st.subheader("Authentication (Optional)")
 api_key = st.text_input("API Key (if required)", type="password", help="Enter your GeneBe API key if the endpoint requires authentication (e.g., Bearer token or query param). Check the GeneBe Swagger UI or documentation for details.")
 
-# Construct the variant string and API URL
-variant = f"chr{chromosome}-{position}-{reference}-{alternate}"
-base_url = "https://api.genebe.net/v1/public/variant"
-api_url = f"{base_url}/{variant}"
+# Construct the API URL with query parameters
+base_url = "https://api.genebe.net/cloud/api-public/v1/variant"
+params = {
+    "chr": f"chr{chromosome}",
+    "pos": position,
+    "ref": reference,
+    "alt": alternate,
+    "useRefseq": "true",
+    "useEnsembl": "true",
+    "omitAcmg": "false",
+    "omitCsq": "false",
+    "omitBasic": "false",
+    "omitAdvanced": "false",
+    "omitNormalization": "false",
+    "allGenes": "false",
+    "customAnnotations": "empty",
+    "genome": "hg38"
+}
+api_url = base_url  # Displayed URL will include params via requests.get
 
 # Display the constructed URL
 st.subheader("Generated API URL")
 if all([chromosome, position, reference, alternate]):
+    # Construct display URL with query params for reference
+    display_url = f"{base_url}?{'&'.join(f'{k}={v}' for k, v in params.items())}"
     st.success("URL generated successfully!")
-    st.markdown(f"[Test URL in Browser]({api_url})")
+    st.markdown(f"[Test URL in Browser]({display_url})")
     st.write("For manual testing, use the Swagger UI: https://api.genebe.net/cloud/gb-api-doc/swagger-ui/index.html#/variant-public-controller/variant_2")
 else:
     st.warning("Please fill in all variant details to proceed.")
@@ -49,14 +66,13 @@ if st.button("Retrieve Variant Information"):
         st.error("Please fill in all variant details.")
     else:
         try:
-            # Set up headers and params
+            # Set up headers
             headers = {
                 "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/129.0.0.0 Safari/537.36",
                 "Accept": "application/json"
             }
-            params = {}
             if api_key:
-                # Try Bearer token; switch to params['apiKey'] = api_key if GeneBe uses query param
+                # Try Bearer token; switch to params['apiKey'] = api_key if needed
                 headers["Authorization"] = f"Bearer {api_key}"
                 # Uncomment the next line and comment the above if query param is needed
                 # params['apiKey'] = api_key
@@ -72,10 +88,8 @@ if st.button("Retrieve Variant Information"):
                     st.subheader("Variant Information")
                     if isinstance(data, dict):
                         st.success("Data retrieved successfully!")
-                        # Display all key-value pairs in a table-like format
                         st.write("**Variant Details:**")
                         for key, value in data.items():
-                            # Handle nested dictionaries or lists
                             if isinstance(value, (dict, list)):
                                 st.write(f"**{key}:**")
                                 st.json(value)
@@ -125,7 +139,7 @@ st.subheader("Manual Retrieval Instructions")
 st.write("""
 If the API call fails:
 1. Open the Swagger UI: https://api.genebe.net/cloud/gb-api-doc/swagger-ui/index.html#/variant-public-controller/variant_2
-2. Find the `/variant` endpoint and enter the variant ID (e.g., chr17-41276044-ACT-A).
+2. Find the `/variant` endpoint and enter the parameters (chr=chr17, pos=41276044, ref=ACT, alt=A, etc.).
 3. Add your API key if required (check GeneBe documentation or contact support).
 4. Execute the request and review the response for all variant details.
 5. If the endpoint requires authentication, sign up for an API key at genebe.net.
@@ -134,10 +148,10 @@ If the API call fails:
 # Additional notes
 st.subheader("Notes")
 st.write("""
-- **API Endpoint**: Uses GET /v1/public/variant/{variant} (e.g., https://api.genebe.net/v1/public/variant/chr17-41276044-ACT-A).
+- **API Endpoint**: Uses GET /cloud/api-public/v1/variant with query parameters (e.g., chr=chr17, pos=41276044, ref=ACT, alt=A, genome=hg38).
 - **Authentication**: If the endpoint requires an API key, provide it in the input field (Bearer token or query param). Check GeneBe documentation for details.
 - **Response Parsing**: Displays all fields from the JSON response. If the structure differs, inspect the response in Swagger UI and share it to adjust the script.
 - **Dependencies**: Ensure 'streamlit' and 'requests' are listed in your 'requirements.txt' file.
 - **Terms of Service**: Ensure compliance with GeneBe's API usage policies. Contact support if you need an API key.
-- **Variant Format**: Uses chr{chromosome}-{position}-{reference}-{alternate}. Confirm in Swagger UI if a different format is required.
+- **Variant Format**: Uses chr=chr{chromosome}, pos={position}, ref={reference}, alt={alternate}. Confirm in Swagger UI if a different format is required.
 """)
