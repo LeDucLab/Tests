@@ -17,13 +17,13 @@ st.write("Enter variant details to query the GeneBe API and display ACMG classif
 st.subheader("Variant Information")
 col1, col2, col3, col4 = st.columns(4)
 with col1:
-    chromosome = st.text_input("Chromosome (e.g., 17)")
+    chromosome = st.text_input("Chromosome (e.g. 1)")
 with col2:
-    position = st.text_input("Position (e.g., 41276042)")
+    position = st.text_input("Position hg38")
 with col3:
-    reference = st.text_input("Reference (e.g., C)")
+    reference = st.text_input("Reference")
 with col4:
-    alternate = st.text_input("Alternate (e.g., A)")
+    alternate = st.text_input("Alternate")
 
 # Optional input for API key
 st.subheader("Authentication (Optional)")
@@ -117,14 +117,17 @@ if st.button("Retrieve ACMG Information"):
                     st.subheader("ACMG Classification and Criteria")
                     acmg_classification = "Not found"
                     acmg_criteria = "Not found"
+                    revel = "Not found"
                     if isinstance(data, dict) and "variants" in data and data["variants"] and isinstance(data["variants"], list):
                         variant_data = data["variants"][0]
                         acmg_classification = variant_data.get("acmg_classification", "Not found")
                         acmg_criteria = variant_data.get("acmg_criteria", "Not found")
+                        revel = variant_data.get("revel_score", "Not found")
                     
                     # Display as bullet points
                     st.write("- **ACMG Klassifizierung**: " + str(acmg_classification))
                     st.write("- **ACMG Kriterien**: " + str(acmg_criteria))
+                    st.write("- **Revel**: " + str(revel))
 
                     # Display raw JSON for debugging
                     with st.expander("Raw JSON Response"):
@@ -143,13 +146,3 @@ if st.button("Retrieve ACMG Information"):
         except Exception as e:
             st.error(f"An unexpected error occurred: {str(e)}")
 
-# Additional notes
-st.subheader("Notes")
-st.write("""
-- **API Endpoint**: Uses GET /cloud/api-public/v1/variant with query parameters (e.g., chr=chr17, pos=41276042, ref=C, alt=A, genome=hg38).
-- **Authentication**: If the endpoint requires an API key, provide it in the input field (Bearer token or query param). Check GeneBe documentation for details.
-- **Response Parsing**: Extracts 'acmg_classification' and 'acmg_criteria' from the first item in the 'variants' list. If the structure changes, share the JSON response to adjust the script.
-- **Variant Mismatch**: If the response variant differs from the input, a warning is shown. Check the JSON response for details.
-- **Dependencies**: Ensure 'streamlit' and 'requests' are listed in your 'requirements.txt' file.
-- **Terms of Service**: Ensure compliance with GeneBe's API usage policies. Contact support if you need an API key.
-""")
