@@ -27,7 +27,7 @@ with col4:
 
 # Optional input for cookies
 st.subheader("Authentication (Optional)")
-cookies = st.text_area("Browser Cookies (if required)", placeholder="Paste cookies from a logged-in browser session (e.g., name1=value1; name2=value2)", help="Copy cookies from your browser's developer tools (Network tab > Cookies) after logging into Franklin Genoox.")
+cookies = st.text_area("Browser Cookies (if required)", placeholder="Paste cookies from a logged-in browser session (e.g., name1=value1; name2=value2)", help="Copy cookies from your browser's developer tools (F12 > Network > Cookies) after logging into Franklin Genoox.")
 
 # Construct the variant string and URL
 variant = f"chr{chromosome}-{position}-{reference}-{alternate}"
@@ -67,21 +67,30 @@ if st.button("Retrieve ACMG Classification"):
                 # Get the page text
                 page_text = response.text
 
-                # Search for "Franklin ACMG Classification" and the two lines below
-                pattern = r"Franklin ACMG Classification.*?(?:<[^>]+>)*([\s\S]*?)(?:<[^>]+>)*([\s\S]*?)(?:<[^>]+>|\n|$)"
+                # Debugging: Show a snippet of the page content
+                st.subheader("Debug: Page Content Snippet")
+                st.text(page_text[:500] + "..." if len(page_text) > 500 else page_text)
+
+                # Enhanced regex to find "Franklin ACMG Classification" and two lines below
+                pattern = r"Franklin ACMG Classification.*?([\s\S]*?)(?:<[^>]+>|\n|$)(?:[\s\S]*?)(?:<[^>]+>|\n|$)(?:[\s\S]*?)(?:<[^>]+>|\n|$)"
                 match = re.search(pattern, page_text, re.IGNORECASE | re.DOTALL)
                 
                 st.subheader("ACMG Classification Results")
                 if match:
-                    line1 = match.group(1).strip()
-                    line2 = match.group(2).strip() if match.group(2) else ""
-                    st.success("Data retrieved successfully!")
-                    st.write("**Franklin ACMG Classification:**")
-                    st.write(line1 or "No first line found")
-                    st.write("**Following Line:**")
-                    st.write(line2 or "No second line found")
+                    # Split the captured group into lines and take the first two non-empty ones
+                    lines = [line.strip() for line in match.group(0).splitlines() if line.strip()]
+                    classification_lines = [line for line in lines if line.lower() != "franklin acmg classification"][:2]
+                    
+                    if classification_lines:
+                        st.success("Data retrieved successfully!")
+                        st.write("**Franklin ACMG Classification Lines:**")
+                        st.write(f"Line 1: {classification_lines[0] if len(classification_lines) > 0 else 'Not found'}")
+                        st.write(f"Line 2: {classification_lines[1] if len(classification_lines) > 1 else 'Not found'}")
+                    else:
+                        st.warning("Found 'Franklin ACMG Classification' but no valid lines below it.")
+                        st.markdown(f"Please check manually: [Open URL]({api_url})")
                 else:
-                    # Fallback: Search for common ACMG terms
+                    # Fallback: Search for ACMG terms and criteria
                     acmg_terms = [
                         r"pathogenic",
                         r"likely pathogenic",
@@ -101,7 +110,7 @@ if st.button("Retrieve ACMG Classification"):
                         st.write("**Detected ACMG Terms and Criteria:**")
                         st.write(", ".join(set(found_terms)))
                     else:
-                        st.warning("No 'Franklin ACMG Classification' or related terms found. The page may require login or have a different structure.")
+                        st.warning("No 'Franklin ACMG Classification' or related terms found. The page may require login or use JavaScript rendering.")
                         st.markdown(f"Please check manually: [Open URL]({api_url})")
             else:
                 st.error(f"Failed to fetch page. Status code: {response.status_code}")
@@ -123,16 +132,16 @@ If automated retrieval fails:
 1. Click the generated URL to open it in your browser.
 2. Log in to Franklin Genoox if required (you may need an account).
 3. Navigate to the variant details page.
-4. Look for the 'Franklin ACMG Classification' section and note the two lines below it (e.g., classification and criteria).
+4. Look for the 'Franklin ACMG Classification' section and note the two lines below it (e.g., classification like 'Pathogenic' and criteria like 'PM1, PS2').
 5. If no classification is available, check variant reports or annotations.
 """)
 
-# Additional notes
-st.subheader("Notes")
+# Debugging and troubleshooting
+st.subheader("Troubleshooting")
 st.write("""
-- **Dependencies**: Ensure 'streamlit' and 'requests' are listed in your 'requirements.txt' file.
-- **Authentication**: Franklin Genoox likely requires login. Provide browser cookies from a logged-in session (copy from browser developer tools: F12 > Network > Cookies).
-- **Parsing**: The script searches for 'Franklin ACMG Classification' and the two lines below it. If results are inaccurate, inspect the page's HTML (F12 > Elements) and share the structure to refine the regex.
-- **Terms of Service**: Web scraping may violate Franklin Genoox's terms. Contact their support for API access if needed.
-- **Variant Format**: Ensure the format is correct (e.g., chr17-41276044-ACT-A).
+- **Authentication**: If the page content shows a login prompt, provide valid cookies from a logged-in browser session (F12 > Network > Cookies).
+- **JavaScript Rendering**: If the content is missing, the page may load data via JavaScript. Try manual retrieval or contact Franklin Genoox for API access.
+- **HTML Structure**: If no data is found, inspect the page's HTML (F12 > Elements) around 'Franklin ACMG Classification' and share the structure to refine the regex.
+- **Terms of Service**: Web scraping may violate Franklin Genoox's terms. Contact their support for API access.
+- **Deployment**: Ensure 'streamlit' and 'requests' are in 'requirements.txt' and redeploy the app.
 """)
