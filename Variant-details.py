@@ -5,14 +5,13 @@ except ImportError:
     st.error("The 'requests' package is not installed. Add 'requests' to your 'requirements.txt' file and redeploy the app.")
     st.stop()
 import json
-import pandas as pd
 
 # Streamlit app configuration
-st.set_page_config(page_title="GeneBe Variant Information Retrieval", page_icon="🧬")
+st.set_page_config(page_title="GeneBe ACMG Retrieval", page_icon="🧬")
 
 # Title and description
-st.title("GeneBe Variant Information Retrieval")
-st.write("Enter variant details to query the GeneBe API and display all available information, including ACMG classification and criteria in a table.")
+st.title("GeneBe ACMG Information Retrieval")
+st.write("Enter variant details to query the GeneBe API and display ACMG classification and criteria as bullet points.")
 
 # Input fields for variant details
 st.subheader("Variant Information")
@@ -57,12 +56,11 @@ if all([chromosome, position, reference, alternate]):
     display_url = f"{base_url}?{'&'.join(f'{k}={v}' for k, v in params.items())}"
     st.success("URL generated successfully!")
     st.markdown(f"[Test URL in Browser]({display_url})")
-    st.write("For manual testing, use the GeneBe API documentation: https://api.genebe.net/cloud/gb-api-doc/swagger-ui/index.html#/variant-public-controller/variant_2")
 else:
     st.warning("Please fill in all variant details to proceed.")
 
 # Button to fetch data
-if st.button("Retrieve Variant Information"):
+if st.button("Retrieve ACMG Information"):
     if not all([chromosome, position, reference, alternate]):
         st.error("Please fill in all variant details.")
     else:
@@ -87,47 +85,13 @@ if st.button("Retrieve Variant Information"):
                     data = response.json()
                     
                     st.subheader("ACMG Classification and Criteria")
-                    # Extract acmg_classification and acmg_criteria for table
+                    # Extract acmg_classification and acmg_criteria
                     acmg_classification = data.get("acmg_classification", "Not found")
                     acmg_criteria = data.get("acmg_criteria", "Not found")
-                    # Create a DataFrame for the table
-                    acmg_data = {
-                        "ACMG Klassifizierung": [acmg_classification],
-                        "ACMG Kriterien": [acmg_criteria]
-                    }
-                    acmg_df = pd.DataFrame(acmg_data)
-                    st.table(acmg_df)
+                    # Display as bullet points
+                    st.write("- **ACMG Klassifizierung**: " + str(acmg_classification))
+                    st.write("- **ACMG Kriterien**: " + str(acmg_criteria))
 
-                    st.subheader("Additional Variant Information")
-                    if isinstance(data, dict):
-                        st.success("Data retrieved successfully!")
-                        st.write("**Variant Details:**")
-                        # Display all fields except acmg_classification and acmg_criteria
-                        for key, value in data.items():
-                            if key not in ["acmg_classification", "acmg_criteria"]:
-                                if isinstance(value, (dict, list)):
-                                    st.write(f"**{key}:**")
-                                    st.json(value)
-                                else:
-                                    st.write(f"**{key}:** {value}")
-                    elif isinstance(data, list):
-                        st.success("Data retrieved successfully!")
-                        st.write("**Variant Details (List Format):**")
-                        for i, item in enumerate(data):
-                            st.write(f"**Item {i+1}:**")
-                            if isinstance(item, dict):
-                                for key, value in item.items():
-                                    if isinstance(value, (dict, list)):
-                                        st.write(f"**{key}:**")
-                                        st.json(value)
-                                    else:
-                                        st.write(f"**{key}:** {value}")
-                            else:
-                                st.write(item)
-                    else:
-                        st.warning("Unexpected response format.")
-                        st.json(data)
-                    
                     # Display raw JSON for debugging
                     with st.expander("Raw JSON Response"):
                         st.json(data)
@@ -135,27 +99,23 @@ if st.button("Retrieve Variant Information"):
                 except json.JSONDecodeError:
                     st.error("Invalid JSON response from the API.")
                     st.text(response.text[:500] + "..." if len(response.text) > 500 else response.text)
-                    st.markdown(f"Test manually in GeneBe API documentation: [GeneBe Swagger UI](https://api.genebe.net/cloud/gb-api-doc/swagger-ui/index.html#/variant-public-controller/variant_2)")
             else:
                 st.error(f"Failed to fetch data. Status code: {response.status_code}")
                 st.text(response.text[:500] + "..." if len(response.text) > 500 else response.text)
-                st.markdown(f"Test manually in GeneBe API documentation: [GeneBe Swagger UI](https://api.genebe.net/cloud/gb-api-doc/swagger-ui/index.html#/variant-public-controller/variant_2)")
 
         except requests.exceptions.RequestException as e:
             st.error(f"Error fetching data: {str(e)}")
             st.write("Possible issues: invalid API key, network error, or endpoint restrictions.")
-            st.markdown(f"Test manually in GeneBe API documentation: [GeneBe Swagger UI](https://api.genebe.net/cloud/gb-api-doc/swagger-ui/index.html#/variant-public-controller/variant_2)")
         except Exception as e:
             st.error(f"An unexpected error occurred: {str(e)}")
-            st.markdown(f"Test manually in GeneBe API documentation: [GeneBe Swagger UI](https://api.genebe.net/cloud/gb-api-doc/swagger-ui/index.html#/variant-public-controller/variant_2)")
 
 # Additional notes
 st.subheader("Notes")
 st.write("""
 - **API Endpoint**: Uses GET /cloud/api-public/v1/variant with query parameters (e.g., chr=chr17, pos=41276044, ref=ACT, alt=A, genome=hg38).
 - **Authentication**: If the endpoint requires an API key, provide it in the input field (Bearer token or query param). Check GeneBe documentation for details.
-- **Response Parsing**: Displays 'acmg_classification' and 'acmg_criteria' in a table as 'ACMG Klassifizierung' and 'ACMG Kriterien'. Other fields are shown as key-value pairs. Share the JSON response if field names differ.
-- **Dependencies**: Ensure 'streamlit', 'requests', and 'pandas' are listed in your 'requirements.txt' file.
+- **Response Parsing**: Extracts 'acmg_classification' and 'acmg_criteria' for bullet point display. If field names differ, share the JSON response to adjust the script.
+- **Dependencies**: Ensure 'streamlit' and 'requests' are listed in your 'requirements.txt' file.
 - **Terms of Service**: Ensure compliance with GeneBe's API usage policies. Contact support if you need an API key.
 - **Variant Format**: Uses chr=chr{chromosome}, pos={position}, ref={reference}, alt={alternate}. Confirm in GeneBe API documentation if a different format is required.
 """)
