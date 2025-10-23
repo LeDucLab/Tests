@@ -131,6 +131,7 @@ if st.button("ACMG-Informationen abrufen"):
                         allele_freq = variant_data.get("frequency_reference_population", "Nicht gefunden")
                         allele_count = variant_data.get("allele_count_reference_population", "Nicht gefunden")
                         revel = variant_data.get("revel_score", "Nicht gefunden")
+                        spliceai = variant_data.get("spliceai_max_score", "Nicht gefunden")
                         gene_symbol = variant_data.get("gene_symbol", "Nicht gefunden")
                         # Extract hgvs_c, hgvs_p, and transcript from consequences (prioritize canonical)
                         consequences = variant_data.get("consequences", [{}])
@@ -208,9 +209,9 @@ if st.button("ACMG-Informationen abrufen"):
                         
                         if in_silico_prediction != "Nicht gefunden":
                             prediction_map = {"Benign": "gutartig", "Pathogenic": "pathogen", "Likely_benign": "wahrscheinlich gutartig", "Likely_pathogenic": "wahrscheinlich pathogen"}
-                            spliceai_german = prediction_map.get(spliceai_prediction, spliceai_prediction)
-                            revel_german = prediction_map.get(revel_prediction, revel_prediction)
-                            variant_description += f"Ein In-silico-Tool sagt ein gutartiges Ergebnis für diese Variante voraus: spliceAI ist {spliceai_german} und REVEL ist {revel_german}. "
+                            #spliceai_german = prediction_map.get(spliceai_prediction, spliceai_prediction)
+                            #revel_german = prediction_map.get(revel_prediction, revel_prediction)
+                            variant_description += f"In-silico-Tools sagen ein gutartiges Ergebnis für diese Variante voraus: spliceAI-Score ist {spliceai:,} und REVEL-Score ist {revel:,}. "
                         else:
                             variant_description += "Keine In-silico-Vorhersage verfügbar. "
                         
