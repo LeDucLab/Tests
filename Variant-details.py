@@ -25,9 +25,6 @@ with col3:
 with col4:
     alternate = st.text_input("Alternate")
 
-# Optional input for API key
-st.subheader("Authentication (Optional)")
-api_key = st.text_input("API Key (if required)", type="password", help="Enter your GeneBe API key if the endpoint requires authentication (e.g., Bearer token or query param). Check the GeneBe documentation for details.")
 
 # Construct the API URL with query parameters
 base_url = "https://api.genebe.net/cloud/api-public/v1/variant"
@@ -136,7 +133,7 @@ if st.button("Retrieve ACMG Information"):
                     st.write("- **Revel**: " + str(revel))
 
                     # Display raw JSON for debugging
-                    with st.expander("Raw JSON Response"):
+                    with st.expander("Raw JSON Response - tp check fields"):
                         st.json(data)
                         
                 except json.JSONDecodeError:
