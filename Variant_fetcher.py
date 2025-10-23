@@ -135,7 +135,7 @@ if st.button("Retrieve ACMG Information"):
                     st.write("- **Allel Frequenz**: " + str(allele_freq))
                     st.write("- **Allel Anzahl**: " + str(allele_count))
                     st.write("- **Revel**: " + str(revel))
-                    st.write("- **HGVS_c**: " + str(hgvs_c)
+                    st.write("- **HGVS_c**: " + str(hgvs_c))
                     
                     # Required fields for the formatted output
                     transcript = variant_data.get("transcript", "Not found")
