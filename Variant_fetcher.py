@@ -123,12 +123,15 @@ if st.button("Retrieve ACMG Information"):
                     hgvs_c = "Not found"
                     if isinstance(data, dict) and "variants" in data and data["variants"] and isinstance(data["variants"], list):
                         variant_data = data["variants"][0]
+                        consequences = variant_data.get("consequences", [{}])
+                        hgvs_c = consequences[0].get("hgvs_c", "Nicht gefunden") if consequences else "Nicht gefunden"
+                        hgvs_p = consequences[0].get("hgvs_p", "Nicht gefunden") if consequences else "Nicht gefunden"
                         acmg_classification = variant_data.get("acmg_classification", "Not found")
                         acmg_criteria = variant_data.get("acmg_criteria", "Not found")
                         allele_freq = variant_data.get("frequency_reference_population", "Not found")
                         allele_count = variant_data.get("allele_count_reference_population", "Not found")
                         revel = variant_data.get("revel_score", "Not found")
-                        hgvs_c = variant_data.get("hgvs_c", "Not found")
+                        
                     
                     # Display as bullet points
                     st.write("- **ACMG Klassifizierung**: " + str(acmg_classification))
