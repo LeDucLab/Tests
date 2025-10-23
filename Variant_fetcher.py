@@ -127,6 +127,7 @@ if st.button("Retrieve ACMG Information"):
                         allele_freq = variant_data.get("frequency_reference_population", "Not found")
                         allele_count = variant_data.get("allele_count_reference_population", "Not found")
                         revel = variant_data.get("revel_score", "Not found")
+                        hgvs_c = variant_data.get("hgvs_c", "Not found")
                     
                     # Display as bullet points
                     st.write("- **ACMG Klassifizierung**: " + str(acmg_classification))
@@ -134,6 +135,7 @@ if st.button("Retrieve ACMG Information"):
                     st.write("- **Allel Frequenz**: " + str(allele_freq))
                     st.write("- **Allel Anzahl**: " + str(allele_count))
                     st.write("- **Revel**: " + str(revel))
+                    st.write("- **HGVS_c**: " + str(hgvs_c)
                     
                     # Required fields for the formatted output
                     transcript = variant_data.get("transcript", "Not found")
