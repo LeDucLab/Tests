@@ -149,12 +149,12 @@ if st.button("ACMG-Informationen abrufen"):
                         frequency = variant_data.get("frequency_reference_population", "Nicht gefunden")
                         homozygotes = variant_data.get("hom_count_reference_population", "Nicht gefunden")
                         # Derive total_chromosomes
-                        total_chromosomes = "Nicht gefunden"
-                        if frequency != "Nicht gefunden" and allele_count != "Nicht gefunden":
-                            try:
-                                total_chromosomes = int(float(allele_count) / float(frequency))
-                            except (ValueError, ZeroDivisionError):
-                                total_chromosomes = "Nicht berechenbar"
+                        #total_chromosomes = "Nicht gefunden"
+                        #if frequency != "Nicht gefunden" and allele_count != "Nicht gefunden":
+                        #    try:
+                        #        total_chromosomes = int(float(allele_count) / float(frequency))
+                        #    except (ValueError, ZeroDivisionError):
+                        #        total_chromosomes = "Nicht berechenbar"
                         in_silico_prediction = variant_data.get("computational_prediction_selected", "Nicht gefunden")
                         spliceai_prediction = variant_data.get("spliceai_max_prediction", "Nicht gefunden")
                         revel_prediction = variant_data.get("revel_prediction", "Nicht gefunden")
@@ -201,9 +201,8 @@ if st.button("ACMG-Informationen abrufen"):
                         # Format the variant description to match requested output
                         st.subheader("Variantenbeschreibung")
                         variant_description = f"Die {transcript}({gene_symbol}):{hgvs_c}({hgvs_p}) Variante verursacht eine Missense-Änderung. "
-                        if frequency != "Nicht gefunden" and total_chromosomes != "Nicht gefunden" and total_chromosomes != "Nicht berechenbar":
-                            # Round frequency to 0.129 to match requested output
-                            variant_description += f"Das Variantenallel wurde in der GnomAD-Datenbank mit einer Frequenz von 0,129 in {total_chromosomes:,} Kontrollchromosomen gefunden, einschließlich {homozygotes:,} Homozygoter. "
+                        if frequency != "Nicht gefunden": #and total_chromosomes != "Nicht gefunden" and total_chromosomes != "Nicht berechenbar":
+                            variant_description += f"Das Variantenallel wurde in der GnomAD-Datenbank mit einer Frequenz von {frequency:,} in {allele_count:,} Kontrollen gefunden, einschließlich {homozygotes:,} Homozygoter. "
                         else:
                             variant_description += "Keine Frequenzdaten in der GnomAD-Datenbank verfügbar. "
                         
