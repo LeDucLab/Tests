@@ -21,7 +21,7 @@ with col1:
 with col2:
     position = st.text_input("Position hg38")
 with col3:
-    reference = st.text_input("Reference")
+    reference = st.text_input("Reference hg38")
 with col4:
     alternate = st.text_input("Alternate")
 
