@@ -134,6 +134,45 @@ if st.button("Retrieve ACMG Information"):
                     st.write("- **Allel Frequenz**: " + str(allele_freq))
                     st.write("- **Allel Anzahl**: " + str(allele_count))
                     st.write("- **Revel**: " + str(revel))
+                    
+                    # Required fields for the formatted output
+                    transcript = variant_data.get("transcript", "Not found")
+                    gene_symbol = variant_data.get("gene_symbol", "Not found")
+                    hgvs_c = variant_data.get("hgvs_c", "Not found")
+                    hgvs_p = variant_data.get("hgvs_p", "Not found")
+                    frequency = variant_data.get("frequency_reference_population", "Not found")
+                    homozygotes = variant_data.get("homozygote_count", "Not found")
+                    total_chromosomes = variant_data.get("total_chromosomes", "Not found")  # Assumed field
+                    in_silico_prediction = variant_data.get("in_silico_prediction", "Not found")  # Assumed field
+                    in_silico_tools = variant_data.get("in_silico_tools", {"benign": 0, "total": 0})  # Assumed structure
+                    clinvar_status = variant_data.get("clinvar_status", "Not found")
+
+                    # Format the variant description
+                    variant_description = f"Die {transcript}({gene_symbol}):{hgvs_c}({hgvs_p}) Variante verursacht eine Missense-Änderung, die einen nicht-konservierten Nukleotid betrifft. "
+                    if frequency != "Not found" and total_chromosomes != "Not found":
+                        variant_description += f"Das Variantenallel wurde in der GnomAD-Datenbank mit einer Frequenz von {frequency} in {total_chromosomes:,} Kontrollchromosomen gefunden, einschließlich {homozygotes:,} Homozygoter. "
+                    else:
+                        variant_description += "Keine Frequenzdaten in der GnomAD-Datenbank verfügbar. "
+    
+                    if in_silico_prediction != "Not found":
+                        variant_description += f"Ein In-silico-Tool sagt ein {in_silico_prediction} Ergebnis für diese Variante voraus. "
+                    else:
+                        variant_description += "Keine In-silico-Vorhersage verfügbar. "
+    
+                    if in_silico_tools != "Not found" and isinstance(in_silico_tools, dict):
+                        benign_count = in_silico_tools.get("benign", 0)
+                        total_tools = in_silico_tools.get("total", 0)
+                        variant_description += f"{benign_count}/{total_tools} In-silico-Tools sagen ein gutartiges Ergebnis für diese Variante voraus. "
+                    else:
+                        variant_description += "Keine In-silico-Tool-Daten verfügbar. "
+    
+                    if clinvar_status != "Not found":
+                        variant_description += f"Keine klinischen Diagnoselabore haben Bewertungen zur klinischen Bedeutung dieser Variante an ClinVar übermittelt."
+                    else:
+                        variant_description += "Kein ClinVar-Status verfügbar."
+    
+                    # Display the formatted description
+                    st.write(variant_description)
 
                     # Display raw JSON for debugging
                     with st.expander("Raw JSON Response"):
