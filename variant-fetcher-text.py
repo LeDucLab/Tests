@@ -5,13 +5,16 @@ import json
 st.set_page_config(page_title="GeneBe ACMG Retrieval", page_icon="🧬")
 
 st.title("GeneBe ACMG Information Retrieval")
-st.write("Enter variant as: chr:pos:ref:alt (e.g. chr1:123456:A:T)")
+st.write("Enter variant as: chr pos ref alt (e.g. chr1 123456 A T)")
 
 # -----------------------------
 # SINGLE INPUT FIELD
 # -----------------------------
 st.subheader("Variant Input")
-variant_input = st.text_input("Variant (chr:pos:ref:alt)", placeholder="chr1:123456:A:T")
+variant_input = st.text_input(
+    "Variant (chr pos ref alt)",
+    placeholder="chr1 123456 A T"
+)
 
 # Optional API key
 st.subheader("Authentication (Optional)")
@@ -27,10 +30,12 @@ api_key = st.text_input(
 chromosome = position = reference = alternate = None
 
 if variant_input:
-    try:
-        chromosome, position, reference, alternate = variant_input.split(":")
-    except ValueError:
-        st.error("Invalid format. Use chr:pos:ref:alt (e.g. chr1:123456:A:T)")
+    parts = variant_input.strip().replace(",", " ").split()
+
+    if len(parts) != 4:
+        st.error("Invalid format. Use: chr pos ref alt (e.g. chr1 123456 A T)")
+    else:
+        chromosome, position, reference, alternate = parts
 
 # -----------------------------
 # API CONFIG
@@ -72,7 +77,7 @@ else:
 if st.button("Retrieve ACMG Information"):
 
     if not all([chromosome, position, reference, alternate]):
-        st.error("Please enter a valid variant in chr:pos:ref:alt format.")
+        st.error("Please enter a valid variant in space-separated format.")
     else:
         try:
             headers = {
@@ -115,5 +120,8 @@ if st.button("Retrieve ACMG Information"):
                 st.error(f"Failed: {response.status_code}")
                 st.text(response.text[:500])
 
+        except requests.exceptions.RequestException as e:
+            st.error(f"Network error: {str(e)}")
+
         except Exception as e:
-            st.error(f"Error: {str(e)}")
+            st.error(f"Unexpected error: {str(e)}")
