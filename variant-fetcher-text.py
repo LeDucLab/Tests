@@ -61,53 +61,51 @@ if st.button("Retrieve ACMG Information"):
         data = response.json()
 
         variant = data.get("variants", [{}])[0]
-        consequence_block = variant.get("consequences", [{}])[0]
 
         # -----------------------------
-        # CONSEQUENCE TYPE FIX
+        # NEW JSON STRUCTURE HANDLING
         # -----------------------------
-        consequence_list = consequence_block.get("consequences", [])
+        acmg_by_gene = variant.get("acmg_by_gene", [{}])[0]
 
-        is_frameshift = "frameshift_variant" in consequence_list
-        is_nonsense = "stop_gained" in consequence_list
-        is_missense = "missense_variant" in consequence_list
+        gene = acmg_by_gene.get("gene_symbol", "UnknownGene")
+        transcript = acmg_by_gene.get("transcript", "NA")
 
-        # fallback safety
-        variant_type = None
+        hgvs_c = acmg_by_gene.get("hgvs_c", "NA")
+        hgvs_p = acmg_by_gene.get("hgvs_p", "NA")
+
+        # FINAL HGVS FORMAT
+        hgvs_full = f"{transcript}:{hgvs_c}, p.({hgvs_p.replace('p.', '')})"
+
+        # -----------------------------
+        # VARIANT TYPE (FROM EFFECTS)
+        # -----------------------------
+        effects = acmg_by_gene.get("effects", [])
+        effects = [e.lower() for e in effects]
+
+        is_frameshift = "frameshift_variant" in effects
+        is_nonsense = "stop_gained" in effects
+        is_missense = "missense_variant" in effects
+
         if is_frameshift:
             variant_type = "frameshift"
         elif is_nonsense:
             variant_type = "nonsense"
         elif is_missense:
             variant_type = "missense"
-
-        if not variant_type:
-            st.info("No supported consequence detected (frameshift, nonsense, missense).")
+        else:
+            st.info(f"Unsupported variant type: {effects}")
             st.stop()
 
         # -----------------------------
-        # CORE FIELDS
+        # ACMG DATA
         # -----------------------------
-        gene = consequence_block.get(
-            "gene_symbol",
-            variant.get("gene_symbol", "UnknownGene")
-        )
+        acmg = acmg_by_gene.get("verdict", variant.get("acmg_classification", "NA"))
 
-        hgvs_c = consequence_block.get("hgvs_c", "NA")
-        hgvs_p = consequence_block.get("hgvs_p", "NA")
-
-        exon_rank = consequence_block.get("exon_rank")
-        exon_count = consequence_block.get("exon_count")
-
-        acmg = variant.get("acmg_classification", "NA")
-        acmg_criteria = variant.get("acmg_criteria", "NA").replace(",", ", ")
-
-        gene_md = f"*{gene}*"
-        hgvs_md = f"{hgvs_c}, {hgvs_p}"
-        exon_text = f"Exon {exon_rank} von {exon_count}" if exon_rank and exon_count else "Exon XX von XX"
+        acmg_criteria_list = acmg_by_gene.get("criteria", [])
+        acmg_criteria = ", ".join(acmg_criteria_list)
 
         # -----------------------------
-        # ClinVar
+        # CLINVAR
         # -----------------------------
         clinvar_summary = variant.get("clinvar_submissions_summary", "")
 
@@ -122,59 +120,58 @@ if st.button("Retrieve ACMG Information"):
                 o = item.replace("O:", "")
 
         clinvar_text = (
-            f"Diese Variante wurde in ClinVar {p}× pathogen, {us}× VUS, {o}× benign/sonstige klassifiziert."
+            f"Diese Variante wurde in ClinVar {p}× pathogen, "
+            f"{us}× unklare Signifikanz und {o}× benign/sonstige klassifiziert."
         )
 
         # -----------------------------
         # gnomAD
         # -----------------------------
         af = variant.get("frequency_reference_population")
+
         gnomad_text = (
-            f"In gnomAD ist die Variante mit AF {af} beschrieben."
-            if af else
-            "In gnomAD ist die Variante nicht oder sehr selten beschrieben."
+            f"In gnomAD ist die Variante mit einer Allelfrequenz von {af} beschrieben."
+            if af
+            else "In gnomAD ist die Variante nicht oder nur sehr selten beschrieben."
         )
 
         # -----------------------------
-        # REPORT TEMPLATES
+        # CORE STRINGS
         # -----------------------------
+        gene_md = f"*{gene}*"
 
+        # -----------------------------
+        # REPORTS
+        # -----------------------------
         if variant_type in ["frameshift", "nonsense"]:
 
-            variant_label = (
-                "Leseraster-Variante (Frameshift)"
-                if variant_type == "frameshift"
-                else "Nonsense-Variante"
-            )
+            label = "Leseraster-Variante (Frameshift)" if variant_type == "frameshift" else "Nonsense-Variante"
 
             report = f"""
 Vor Bewertung auf aktuelle VCEP prüfen: https://cspec.genome.network/cspec/ui/svi/
 
-Die o. g. {variant_label} im {gene_md}-Gen ({hgvs_md}) führt zum Auftreten eines vorzeitigen Stopcodons und zum Abbruch der Translation des korrespondierenden Proteins in {exon_text}.
+Die o. g. {label} im {gene_md}-Gen ({hgvs_full}) führt zum Auftreten eines vorzeitigen Stopcodons und zum Abbruch der Translation des korrespondierenden Proteins.
 
 [NMD] Sehr wahrscheinlich kommt es zu Nonsense-Mediated mRNA Decay (NMD).
 [ODER] Alternativ kann ein C-terminal verkürztes Protein entstehen.
 
 Eine funktionelle Auswirkung wurde bislang nicht untersucht.
+
 {clinvar_text}
 {gnomad_text}
 
 Gemäß ClinGen-/ACMG-Kriterien ({acmg_criteria}) ergibt sich eine Bewertung als {acmg}.
 """
 
-        # -----------------------------
-        # MISSENSE TEMPLATE (BASIC SCAFFOLD)
-        # -----------------------------
         elif variant_type == "missense":
-
-            consequence = "Missense-Variante"
 
             report = f"""
 Vor Bewertung auf aktuelle VCEP prüfen: https://cspec.genome.network/cspec/ui/svi/
 
-Die o. g. {consequence} im {gene_md}-Gen ({hgvs_md}) führt zu einem Aminosäureaustausch im korrespondierenden Protein.
+Die o. g. Missense-Variante im {gene_md}-Gen ({hgvs_full}) führt zu einem Aminosäureaustausch im Protein.
 
-Die funktionelle Relevanz hängt von Domäne, Konservierung und Strukturkontext ab.
+Die funktionelle Relevanz hängt von Struktur, Domäne und Konservierung ab.
+
 Eine funktionelle Auswirkung wurde bislang nicht untersucht.
 
 {clinvar_text}
@@ -187,9 +184,9 @@ Gemäß ClinGen-/ACMG-Kriterien ({acmg_criteria}) ergibt sich eine Bewertung als
         # OUTPUT
         # -----------------------------
         st.subheader("🧬 Klinischer Bericht")
-        st.write(report)
+        st.markdown(report)
 
-        # raw JSON
+        # RAW JSON (optional)
         with st.expander("Show Raw JSON"):
             st.json(data)
 
