@@ -8,20 +8,12 @@ st.title("GeneBe ACMG Information Retrieval")
 st.write("Enter variant as: chr pos ref alt (e.g. chr1 123456 A T)")
 
 # -----------------------------
-# SINGLE INPUT FIELD
+# VARIANT INPUT
 # -----------------------------
 st.subheader("Variant Input")
 variant_input = st.text_input(
     "Variant (chr pos ref alt)",
     placeholder="chr1 123456 A T"
-)
-
-# Optional API key
-st.subheader("Authentication (Optional)")
-api_key = st.text_input(
-    "API Key (if required)",
-    type="password",
-    help="Enter your GeneBe API key if needed."
 )
 
 # -----------------------------
@@ -72,7 +64,7 @@ else:
     st.warning("Enter a valid variant to generate URL.")
 
 # -----------------------------
-# FETCH BUTTON
+# FETCH DATA
 # -----------------------------
 if st.button("Retrieve ACMG Information"):
 
@@ -84,9 +76,6 @@ if st.button("Retrieve ACMG Information"):
                 "User-Agent": "Mozilla/5.0",
                 "Accept": "application/json"
             }
-
-            if api_key:
-                headers["Authorization"] = f"Bearer {api_key}"
 
             response = requests.get(base_url, headers=headers, params=params, timeout=10)
 
