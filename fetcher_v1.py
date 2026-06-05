@@ -245,12 +245,10 @@ Gemäß aktuellen ClinGen-/ACMG-Empfehlungen zur Variantenbewertung (PMIDs 25741
         st.error(f"Unexpected error: {e}")
 
 # -----------------------------
-# RAW JSON VIEW
+# RAW JSON VIEW BUTTON
 # -----------------------------
-st.markdown("---")
-st.subheader("🔍 Raw JSON")
-
-if st.session_state["data"] is not None:
-    st.json(st.session_state["data"])
-else:
-    st.info("Run a query to load JSON.")
+if st.button("Show raw JSON"):
+    if st.session_state.get("data") is not None:
+        st.json(st.session_state["data"])
+    else:
+        st.warning("No data loaded yet. Run 'Retrieve ACMG Information' first.")
