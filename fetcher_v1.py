@@ -4,7 +4,13 @@ import requests
 st.set_page_config(page_title="GeneBe ACMG Retrieval", page_icon="🧬")
 
 st.title("GeneBe ACMG Information Retrieval")
-st.write("Enter variant as: chr pos ref alt (e.g. chr22 28695868 C T)")
+st.write("Enter variant as hg38: chr pos ref alt (e.g. chr22 28695868 C T)")
+
+# -----------------------------
+# INIT SESSION STATE
+# -----------------------------
+if "data" not in st.session_state:
+    st.session_state["data"] = None
 
 # -----------------------------
 # INPUT
@@ -58,6 +64,7 @@ if st.button("Retrieve ACMG Information"):
             st.stop()
 
         data = response.json()
+        st.session_state["data"] = data
 
         variant = data.get("variants", [{}])[0]
 
@@ -238,13 +245,12 @@ Gemäß aktuellen ClinGen-/ACMG-Empfehlungen zur Variantenbewertung (PMIDs 25741
         st.error(f"Unexpected error: {e}")
 
 # -----------------------------
-# RAW JSON VIEW (FIXED)
+# RAW JSON VIEW
 # -----------------------------
 st.markdown("---")
 st.subheader("🔍 Raw JSON")
 
-if "data" in st.session_state:
-    if st.checkbox("Show full API response"):
-        st.json(st.session_state["data"])
+if st.session_state["data"] is not None:
+    st.json(st.session_state["data"])
 else:
-    st.info("Run a query first.")
+    st.info("Run a query to load JSON.")
