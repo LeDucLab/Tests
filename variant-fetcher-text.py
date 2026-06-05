@@ -4,13 +4,11 @@ import requests
 st.set_page_config(page_title="GeneBe ACMG Retrieval", page_icon="🧬")
 
 st.title("GeneBe ACMG Information Retrieval")
-st.write("Enter variant as: chr pos ref alt (e.g. chr1 123456 A T)")
+st.write("Enter variant as: chr pos ref alt (e.g. chr22 28695868 C T)")
 
 # -----------------------------
 # INPUT
 # -----------------------------
-st.subheader("Variant Input")
-
 variant_input = st.text_input(
     "Variant (chr pos ref alt)",
     placeholder="chr22 28695868 C T"
@@ -21,10 +19,10 @@ chromosome = position = reference = alternate = None
 if variant_input:
     parts = variant_input.strip().replace(",", " ").split()
 
-    if len(parts) != 4:
-        st.error("Invalid format. Use: chr pos ref alt")
-    else:
+    if len(parts) == 4:
         chromosome, position, reference, alternate = parts
+    else:
+        st.error("Invalid format. Use: chr pos ref alt")
 
 # -----------------------------
 # API
@@ -44,7 +42,7 @@ params = {
 }
 
 # -----------------------------
-# FETCH DATA BUTTON
+# FETCH
 # -----------------------------
 if st.button("Retrieve ACMG Information"):
 
@@ -66,6 +64,19 @@ if st.button("Retrieve ACMG Information"):
         consequence_block = variant.get("consequences", [{}])[0]
 
         # -----------------------------
+        # CONSEQUENCE TYPE (FIXED)
+        # -----------------------------
+        consequence_type = ""
+        if (
+            isinstance(consequence_block, dict)
+            and "consequences" in consequence_block
+            and consequence_block["consequences"]
+        ):
+            consequence_type = consequence_block["consequences"][0]
+
+        is_frameshift = consequence_type == "frameshift_variant"
+
+        # -----------------------------
         # CORE FIELDS
         # -----------------------------
         gene = variant.get("gene_symbol", "UnknownGene")
@@ -77,28 +88,42 @@ if st.button("Retrieve ACMG Information"):
 
         acmg = variant.get("acmg_classification", "NA")
 
-        # IMPORTANT: nested consequence list
-        consequence_list = consequence_block.get("consequences", [])
-        is_frameshift = "frameshift_variant" in consequence_list
+        # -----------------------------
+        # ClinVar PARSING (NEW)
+        # -----------------------------
+        clinvar_summary = variant.get("clinvar_submissions_summary", "")
+
+        clinvar_path = "0"
+        clinvar_us = "0"
+        clinvar_other = "0"
+
+        if clinvar_summary:
+            parts = clinvar_summary.split()
+
+            for p in parts:
+                if p.startswith("P:"):
+                    clinvar_path = p.replace("P:", "")
+                elif p.startswith("US:"):
+                    clinvar_us = p.replace("US:", "")
+                elif p.startswith("O:"):
+                    clinvar_other = p.replace("O:", "")
+
+        clinvar_text = f"""
+Diese Variante wurde in der ClinVar-Datenbank bislang mit {clinvar_path} Einträgen als pathogen, mit {clinvar_us} Einträgen als unklare Signifikanz und mit {clinvar_other} Einträgen als benigne bzw. sonstige klassifiziert.
+"""
 
         # -----------------------------
-        # OUTPUT HEADER
+        # OUTPUT
         # -----------------------------
         st.subheader("ACMG Result")
-
         st.write(f"**Classification:** {acmg}")
 
-        # -----------------------------
-        # FRAMESHIFT REPORT
-        # -----------------------------
         if is_frameshift:
 
-            exon_text = "Exon XX von XX"
-            if exon_rank and exon_count:
-                exon_text = f"Exon {exon_rank} von {exon_count}"
+            exon_text = f"Exon {exon_rank} von {exon_count}" if exon_rank and exon_count else "Exon XX von XX"
 
             gene_md = f"*{gene}*"
-            hgvs_md = f"{hgvs_c}, ({hgvs_p})"
+            hgvs_md = f"{hgvs_c} ({hgvs_p})"
 
             report = f"""
 Die o. g. Leseraster-Variante im {gene_md}-Gen ({hgvs_md}) führt durch eine Leserasterverschiebung (Frameshift) zum Auftreten eines vorzeitigen Stopcodons und zum Abbruch der Translation des korrespondierenden Proteins in {exon_text}.
@@ -106,27 +131,25 @@ Die o. g. Leseraster-Variante im {gene_md}-Gen ({hgvs_md}) führt durch eine Les
 [NMD]Sehr wahrscheinlich wird von dem betroffenen Allel kein Protein gebildet, da mit einem vorzeitigen Abbau der mRNA per Nonsense Mediated mRNA Decay (NMD) gerechnet werden muss.
 
 [ODER]
-Am ehesten wird ein C-terminal [um >10%] verkürztes, möglicherweise // wahrscheinlich funktionsverändertes Protein gebildet [, da es zum Verlust der funktionell kritischen XXX-Domäne kommt (PMID XXX)]. Hingegen muss nicht mit einem vorzeitigen Abbau der mRNA per Nonsense Mediated mRNA Decay (NMD) gerechnet werden (PMID: 33277042). 
+Am ehesten wird ein C-terminal verkürztes, möglicherweise funktionsverändertes Protein gebildet.
 
-Eine tatsächliche Auswirkung der Variante wurde bislang nicht funktionell untersucht. // durch funktionelle Untersuchungen bestätigt (PMID XXX). 
+{clinvar_text}
 
-Diese Variante wurde in ClinVar als: {variant.get("clinvar_classification","NA")} beschrieben.
+Allelzahl gnomAD: {variant.get("allele_count_reference_population","NA")}.
 
-In gnomAD wurde die Variante mit einer Allelzahl von {variant.get("allele_count_reference_population","NA")} beobachtet.
-
-Gemäß ACMG-Kriterien ({variant.get("acmg_criteria","NA")}) ergibt sich eine Bewertung als {acmg}.
+ACMG Kriterien: {variant.get("acmg_criteria","NA")} → Bewertung: {acmg}.
 """
 
-            st.markdown("### 🧬 Klinischer Bericht (Frameshift)")
+            st.markdown("### 🧬 Klinischer Frameshift-Bericht")
             st.write(report)
 
         else:
-            st.info("No frameshift variant detected — no frameshift report generated.")
+            st.info(f"Kein Frameshift erkannt (Typ: {consequence_type})")
 
         # -----------------------------
-        # OPTIONAL RAW JSON BUTTON
+        # RAW JSON (optional only)
         # -----------------------------
-        with st.expander("Show raw JSON (optional)"):
+        with st.expander("Raw JSON"):
             st.json(data)
 
     except requests.exceptions.RequestException as e:
