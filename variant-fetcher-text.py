@@ -132,9 +132,9 @@ if st.button("Retrieve ACMG Information"):
         af = variant.get("frequency_reference_population")
 
         gnomad_text = (
-            f"In gnomAD beträgt die Allelfrequenz {af}."
+            f"In der Populationsdatenbank gnomAD v4.1.1 beträgt die Allelfrequenz {af}."
             if af
-            else "In gnomAD ist die Variante nicht oder sehr selten vertreten."
+            else "In der Populationsdatenbank gnomAD v4.1.1 ist die Variante nicht vorhanden."
         )
 
         # -----------------------------
@@ -147,15 +147,16 @@ Vor Bewertung auf aktuelle VCEP prüfen: https://cspec.genome.network/cspec/ui/s
 
 Die o. g. Leseraster-Variante im {gene_md}-Gen ({hgvs_md}) führt durch eine Leserasterverschiebung (Frameshift) zum Auftreten eines vorzeitigen Stopcodons und zum Abbruch der Translation des korrespondierenden Proteins in {exon_text}.
 
-[NMD] Sehr wahrscheinlich kommt es zu Nonsense-Mediated mRNA Decay (NMD).
-[ODER] Alternativ kann ein C-terminal verkürztes Protein entstehen.
+[NMD] Sehr wahrscheinlich wird von dem betroffenen Allel kein Protein gebildet, da mit einem vorzeitigen Abbau der mRNA per Nonsense Mediated mRNA Decay (NMD) gerechnet werden muss.
+[ODER][kein NMD]Am ehesten wird ein C-terminal [um >10%] verkürztes, möglicherweise // wahrscheinlich funktionsverändertes Protein gebildet [, da es zum Verlust der funktionell kritischen XXX-Domäne kommt (PMID XXX)]. Hingegen muss nicht mit einem vorzeitigen Abbau der mRNA per Nonsense Mediated mRNA Decay (NMD) gerechnet werden (PMID: 33277042).
 
-Eine tatsächliche Auswirkung wurde bislang nicht funktionell untersucht.
+Eine tatsächliche Auswirkung der Variante wurde bislang nicht funktionell untersucht. 
+[ODER] Eine tatsächliche Auswirkung der Variante wurde durch funktionelle Untersuchungen bestätigt (PMID XXX). 
 
 {clinvar_text}
 {gnomad_text}
 
-Gemäß ClinGen-/ACMG-Kriterien ({acmg_criteria}) ergibt sich eine Bewertung als {acmg}.
+Gemäß aktuellen ClinGen-/ACMG-Empfehlungen zur Variantenbewertung (PMIDs 25741868, 30192042) sind die Kriterien({acmg_criteria}) erfüllt erfüllt, sodass sich eine Bewertung als {acmg} ergibt.
 """
 
         elif variant_type == "nonsense":
@@ -165,15 +166,16 @@ Vor Bewertung auf aktuelle VCEP prüfen: https://cspec.genome.network/cspec/ui/s
 
 Die o. g. Nonsense-Variante im {gene_md}-Gen ({hgvs_md}) führt zum Auftreten eines vorzeitigen Stopcodons und zum Abbruch der Translation des korrespondierenden Proteins in {exon_text}.
 
-[NMD] Sehr wahrscheinlich kommt es zu Nonsense-Mediated mRNA Decay (NMD).
-[ODER] Alternativ kann ein verkürztes Protein entstehen.
+[NMD] Sehr wahrscheinlich wird von dem betroffenen Allel kein Protein gebildet, da mit einem vorzeitigen Abbau der mRNA per Nonsense Mediated mRNA Decay (NMD) gerechnet werden muss.
+[ODER][kein NMD]Am ehesten wird ein C-terminal [um >10%] verkürztes, möglicherweise // wahrscheinlich funktionsverändertes Protein gebildet [, da es zum Verlust der funktionell kritischen XXX-Domäne kommt (PMID XXX)]. Hingegen muss nicht mit einem vorzeitigen Abbau der mRNA per Nonsense Mediated mRNA Decay (NMD) gerechnet werden (PMID: 33277042).
 
-Eine tatsächliche Auswirkung wurde bislang nicht funktionell untersucht.
+Eine tatsächliche Auswirkung der Variante wurde bislang nicht funktionell untersucht. 
+[ODER] Eine tatsächliche Auswirkung der Variante wurde durch funktionelle Untersuchungen bestätigt (PMID XXX). 
 
 {clinvar_text}
 {gnomad_text}
 
-Gemäß ClinGen-/ACMG-Kriterien ({acmg_criteria}) ergibt sich eine Bewertung als {acmg}.
+Gemäß aktuellen ClinGen-/ACMG-Empfehlungen zur Variantenbewertung (PMIDs 25741868, 30192042) sind die Kriterien({acmg_criteria}) erfüllt erfüllt, sodass sich eine Bewertung als {acmg} ergibt.
 """
 
         elif variant_type == "missense":
