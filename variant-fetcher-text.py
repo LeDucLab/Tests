@@ -156,7 +156,7 @@ if st.button("Retrieve ACMG Information"):
             )
         else:
             gnomad_text = (
-                f"In der Populationsdatenbank gnomAD ist die Variante "
+                f"In der Populationsdatenbank gnomAD v4.1.1 ist die Variante "
                 f"mit einer Allelfrequenz von {allele_frequency} "
                 f"aufgeführt."
             )
@@ -175,23 +175,18 @@ if st.button("Retrieve ACMG Information"):
                 exon_text = f"Exon {exon_rank} von {exon_count}"
 
             gene_md = f"*{gene}*"
-            hgvs_md = f"{hgvs_c} ({hgvs_p})"
+            hgvs_md = f"{hgvs_c}, ({hgvs_p})"
 
             report = f"""
 Die o. g. Leseraster-Variante im {gene_md}-Gen ({hgvs_md}) führt durch eine Leserasterverschiebung (Frameshift) zum Auftreten eines vorzeitigen Stopcodons und zum Abbruch der Translation des korrespondierenden Proteins in {exon_text}.
-
 [NMD] Sehr wahrscheinlich wird von dem betroffenen Allel kein Protein gebildet, da mit einem vorzeitigen Abbau der mRNA per Nonsense Mediated mRNA Decay (NMD) gerechnet werden muss.
-
 [ODER]
-
 Am ehesten wird ein C-terminal verkürztes, möglicherweise funktionsverändertes Protein gebildet. Hingegen muss nicht mit einem vorzeitigen Abbau der mRNA per Nonsense Mediated mRNA Decay (NMD) gerechnet werden (PMID: 33277042).
-
 Eine tatsächliche Auswirkung der Variante wurde bislang nicht funktionell untersucht.
-
+[ODER]
+Eine tatsächliche Auswirkung der Variante wurde durch funktionelle Untersuchungen bestätigt (PMID XXX).
 {clinvar_text}
-
 {gnomad_text}
-
 Gemäß aktuellen ClinGen-/ACMG-Empfehlungen zur Variantenbewertung (PMIDs 25741868, 30192042) sind die Kriterien {acmg_criteria} erfüllt, sodass sich eine Bewertung als {acmg_german} Variante ergibt.
 """
 
