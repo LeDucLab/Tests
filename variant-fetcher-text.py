@@ -57,11 +57,15 @@ if st.button("Retrieve ACMG Information"):
             st.text(response.text[:500])
             st.stop()
 
-        data = response.json()
+        # ✅ STORE IN SESSION STATE (IMPORTANT FIX)
+        st.session_state["data"] = response.json()
+        data = st.session_state["data"]
 
         variant = data.get("variants", [{}])[0]
 
-        # IMPORTANT FIX: correct consequence extraction
+        # -----------------------------
+        # CONSEQUENCE EXTRACTION (FIXED)
+        # -----------------------------
         csq = variant.get("consequences", [{}])[0]
 
         effects = csq.get("consequences", []) or csq.get("effects", [])
@@ -147,16 +151,15 @@ Vor Bewertung auf aktuelle VCEP prüfen: https://cspec.genome.network/cspec/ui/s
 
 Die o. g. Leseraster-Variante im {gene_md}-Gen ({hgvs_md}) führt durch eine Leserasterverschiebung (Frameshift) zum Auftreten eines vorzeitigen Stopcodons und zum Abbruch der Translation des korrespondierenden Proteins in {exon_text}.
 
-[NMD] Sehr wahrscheinlich wird von dem betroffenen Allel kein Protein gebildet, da mit einem vorzeitigen Abbau der mRNA per Nonsense Mediated mRNA Decay (NMD) gerechnet werden muss.
-[ODER][kein NMD]Am ehesten wird ein C-terminal [um >10%] verkürztes, möglicherweise // wahrscheinlich funktionsverändertes Protein gebildet [, da es zum Verlust der funktionell kritischen XXX-Domäne kommt (PMID XXX)]. Hingegen muss nicht mit einem vorzeitigen Abbau der mRNA per Nonsense Mediated mRNA Decay (NMD) gerechnet werden (PMID: 33277042).
+[NMD] Sehr wahrscheinlich wird von dem betroffenen Allel kein Protein gebildet.
+[ODER] Alternativ kann ein C-terminal verkürztes Protein entstehen.
 
-Eine tatsächliche Auswirkung der Variante wurde bislang nicht funktionell untersucht. 
-[ODER] Eine tatsächliche Auswirkung der Variante wurde durch funktionelle Untersuchungen bestätigt (PMID XXX). 
+Eine tatsächliche Auswirkung wurde bislang nicht funktionell untersucht.
 
 {clinvar_text}
 {gnomad_text}
 
-Gemäß aktuellen ClinGen-/ACMG-Empfehlungen zur Variantenbewertung (PMIDs 25741868, 30192042) sind die Kriterien({acmg_criteria}) erfüllt erfüllt, sodass sich eine Bewertung als {acmg} ergibt.
+Gemäß ClinGen-/ACMG-Kriterien ({acmg_criteria}) ergibt sich eine Bewertung als {acmg}.
 """
 
         elif variant_type == "nonsense":
@@ -166,16 +169,15 @@ Vor Bewertung auf aktuelle VCEP prüfen: https://cspec.genome.network/cspec/ui/s
 
 Die o. g. Nonsense-Variante im {gene_md}-Gen ({hgvs_md}) führt zum Auftreten eines vorzeitigen Stopcodons und zum Abbruch der Translation des korrespondierenden Proteins in {exon_text}.
 
-[NMD] Sehr wahrscheinlich wird von dem betroffenen Allel kein Protein gebildet, da mit einem vorzeitigen Abbau der mRNA per Nonsense Mediated mRNA Decay (NMD) gerechnet werden muss.
-[ODER][kein NMD]Am ehesten wird ein C-terminal [um >10%] verkürztes, möglicherweise // wahrscheinlich funktionsverändertes Protein gebildet [, da es zum Verlust der funktionell kritischen XXX-Domäne kommt (PMID XXX)]. Hingegen muss nicht mit einem vorzeitigen Abbau der mRNA per Nonsense Mediated mRNA Decay (NMD) gerechnet werden (PMID: 33277042).
+[NMD] Sehr wahrscheinlich wird von dem betroffenen Allel kein Protein gebildet.
+[ODER] Alternativ kann ein verkürztes Protein entstehen.
 
-Eine tatsächliche Auswirkung der Variante wurde bislang nicht funktionell untersucht. 
-[ODER] Eine tatsächliche Auswirkung der Variante wurde durch funktionelle Untersuchungen bestätigt (PMID XXX). 
+Eine tatsächliche Auswirkung wurde bislang nicht funktionell untersucht.
 
 {clinvar_text}
 {gnomad_text}
 
-Gemäß aktuellen ClinGen-/ACMG-Empfehlungen zur Variantenbewertung (PMIDs 25741868, 30192042) sind die Kriterien({acmg_criteria}) erfüllt erfüllt, sodass sich eine Bewertung als {acmg} ergibt.
+Gemäß ClinGen-/ACMG-Kriterien ({acmg_criteria}) ergibt sich eine Bewertung als {acmg}.
 """
 
         elif variant_type == "missense":
@@ -206,12 +208,15 @@ Gemäß ClinGen-/ACMG-Kriterien ({acmg_criteria}) ergibt sich eine Bewertung als
         st.error(f"Unexpected error: {e}")
 
 # -----------------------------
-# OPTIONAL: SHOW RAW JSON
+# RAW JSON VIEW (FIXED)
 # -----------------------------
 st.markdown("---")
 st.subheader("🔍 Raw JSON (Debug / Transparency)")
 
-show_json = st.checkbox("Show full API response")
+if "data" in st.session_state:
+    show_json = st.checkbox("Show full API response")
 
-if show_json:
-    st.json(data)
+    if show_json:
+        st.json(st.session_state["data"])
+else:
+    st.info("Run a variant query to load JSON data.")
