@@ -18,13 +18,16 @@ variant_input = st.text_input(
 
 chromosome = position = reference = alternate = None
 
+# -----------------------------
+# PARSE VARIANT
+# -----------------------------
 if variant_input:
     parts = variant_input.strip().replace(",", " ").split()
 
-    if len(parts) == 4:
-        chromosome, position, reference, alternate = parts
+    if len(parts) != 4:
+        st.error("Invalid format. Use: chr pos ref alt (e.g. chr1 123456 A T)")
     else:
-        st.error("Invalid format. Use: chr pos ref alt")
+        chromosome, position, reference, alternate = parts
 
 # -----------------------------
 # API CONFIG
@@ -49,40 +52,6 @@ params = {
 }
 
 # -----------------------------
-# REPORT TEMPLATE
-# -----------------------------
-def build_report(v, c):
-    gene = v.get("gene_symbol", "NA")
-    hgvs_c = c.get("hgvs_c", "NA")
-    hgvs_p = c.get("hgvs_p", "NA")
-    exon_rank = c.get("exon_rank", "NA")
-    exon_count = c.get("exon_count", "NA")
-
-    clinvar = v.get("clinvar_classification", "NA")
-    acmg = v.get("acmg_criteria", "NA")
-    classification = v.get("acmg_classification", "NA")
-
-    af = v.get("gnomad_exomes_af", "NA")
-    ac_exome = v.get("gnomad_exomes_ac", "NA")
-    ac_genome = v.get("gnomad_genomes_ac", "NA")
-
-    return f"""
-Vor Bewertung auf aktuelle VCEP prüfen: https://cspec.genome.network/cspec/ui/svi/
-
-Die o. g. Leseraster-Variante im {gene}-Gen ({hgvs_c}; {hgvs_p}) führt durch eine Leserasterverschiebung (Frameshift) zum Auftreten eines vorzeitigen Stopcodons und zum Abbruch der Translation des korrespondierenden Proteins in Exon {exon_rank} von {exon_count}.
-
-[NMD] Sehr wahrscheinlich wird von dem betroffenen Allel kein Protein gebildet, da mit einem vorzeitigen Abbau der mRNA per Nonsense Mediated mRNA Decay (NMD) gerechnet werden muss.
-
-Diese Variante wurde in ClinVar beschrieben als: {clinvar}.
-
-In gnomAD ist die Variante mit einer Allelfrequenz von {af} nachweisbar (Exome AC: {ac_exome}, Genomes AC: {ac_genome}).
-
-ACMG-Kriterien: {acmg}
-
-Gesamtbewertung: {classification}
-"""
-
-# -----------------------------
 # URL DISPLAY
 # -----------------------------
 st.subheader("Generated API URL")
@@ -100,7 +69,7 @@ else:
 if st.button("Retrieve ACMG Information"):
 
     if not all([chromosome, position, reference, alternate]):
-        st.error("Please enter a valid variant.")
+        st.error("Please enter a valid variant in space-separated format.")
     else:
         try:
             headers = {
@@ -113,38 +82,100 @@ if st.button("Retrieve ACMG Information"):
             if response.status_code == 200:
                 data = response.json()
 
-                st.subheader("ACMG Classification and Criteria")
+                st.subheader("ACMG Classification and Report")
 
                 variant_data = data["variants"][0] if data.get("variants") else {}
-                consequences = variant_data.get("consequences", [{}])
-                consequence = consequences[0] if consequences else {}
-
-                st.write(f"- **ACMG Klassifizierung**: {variant_data.get('acmg_classification')}")
-                st.write(f"- **ACMG Kriterien**: {variant_data.get('acmg_criteria')}")
-                st.write(f"- **Allel Frequenz**: {variant_data.get('frequency_reference_population')}")
-                st.write(f"- **Allel Anzahl**: {variant_data.get('allele_count_reference_population')}")
-                st.write(f"- **Revel**: {variant_data.get('revel_score')}")
-                st.write(f"- **HGVS_c**: {consequence.get('hgvs_c')}")
 
                 # -----------------------------
-                # FRAMESHIFT-CONDITIONAL REPORT
+                # SAFE EXTRACTION
+                # -----------------------------
+                acmg_classification = variant_data.get("acmg_classification", "Not found")
+                acmg_criteria = variant_data.get("acmg_criteria", "Not found")
+
+                gene_name = variant_data.get("gene_symbol", "XXX")
+                hgvs = variant_data.get("hgvs_c", "XXX")
+
+                allele_freq = variant_data.get("frequency_reference_population", "Not found")
+                allele_count = variant_data.get("allele_count_reference_population", "Not found")
+                revel = variant_data.get("revel_score", "Not found")
+
+                consequences = variant_data.get("consequences", [{}])
+                consequence = consequences[0].get("consequence", "unknown") if consequences else "unknown"
+                hgvs_c = consequences[0].get("hgvs_c", hgvs) if consequences else hgvs
+
+                # -----------------------------
+                # REPORT TEMPLATES
+                # -----------------------------
+
+                frameshift_report = f"""
+Die o. g. Leseraster-Variante im {gene_name}-Gen ({hgvs_c}) führt durch eine Leserasterverschiebung (Frameshift) zum Auftreten eines vorzeitigen Stopcodons und zum Abbruch der Translation des korrespondierenden Proteins.
+
+[NMD] Sehr wahrscheinlich wird von dem betroffenen Allel kein Protein gebildet, da mit einem vorzeitigen Abbau der mRNA per Nonsense Mediated mRNA Decay (NMD) gerechnet wird.
+
+[ODER]
+[kein NMD] Am ehesten wird ein C-terminal verkürztes, möglicherweise funktionsverändertes Protein gebildet.
+
+Gemäß ClinGen-/ACMG-Empfehlungen sind die Kriterien {acmg_criteria} erfüllt, sodass sich eine Bewertung ergibt.
+"""
+
+                nonsense_report = f"""
+Die o. g. Nonsense-Variante im {gene_name}-Gen ({hgvs_c}) führt zum Auftreten eines vorzeitigen Stopcodons und zum Abbruch der Translation des korrespondierenden Proteins.
+
+[NMD] Sehr wahrscheinlich kein Protein durch NMD.
+
+[ODER]
+[kein NMD] Verkürztes Protein möglich.
+
+Gemäß ClinGen-/ACMG-Empfehlungen sind die Kriterien {acmg_criteria} erfüllt.
+"""
+
+                missense_report = f"""
+Die o. g. Missense-Variante im {gene_name}-Gen ({hgvs_c}) führt zu einem Aminosäureaustausch im korrespondierenden Protein.
+
+Die bioinformatische Bewertung ergibt einen REVEL-Score von {revel}.
+
+Gemäß ClinGen-/ACMG-Empfehlungen sind die Kriterien {acmg_criteria} erfüllt.
+"""
+
+                # -----------------------------
+                # SELECT REPORT
+                # -----------------------------
+                consequence_lower = str(consequence).lower()
+
+                if "frameshift" in consequence_lower:
+                    report = frameshift_report
+
+                elif "stop_gained" in consequence_lower or "nonsense" in consequence_lower:
+                    report = nonsense_report
+
+                elif "missense" in consequence_lower:
+                    report = missense_report
+
+                else:
+                    report = f"""
+Keine spezifische Vorlage verfügbar.
+
+Consequence: {consequence}
+
+ACMG Klassifikation: {acmg_classification}
+
+ACMG Kriterien: {acmg_criteria}
+"""
+
+                # -----------------------------
+                # OUTPUT
                 # -----------------------------
                 st.subheader("Generated Clinical Report")
+                st.write(report)
 
-                is_frameshift = "frameshift_variant" in consequence.get("consequences", [])
-
-                if is_frameshift:
-                    report = build_report(variant_data, consequence)
-
-                    st.text_area("Report", report, height=500)
-
-                    st.download_button(
-                        "Download Report",
-                        report,
-                        file_name="acmg_report.txt"
-                    )
-                else:
-                    st.info("No frameshift_variant detected → No clinical report generated.")
+                st.subheader("Key Variant Data")
+                st.write(f"- ACMG Classification: {acmg_classification}")
+                st.write(f"- Gene: {gene_name}")
+                st.write(f"- HGVS: {hgvs_c}")
+                st.write(f"- Consequence: {consequence}")
+                st.write(f"- REVEL: {revel}")
+                st.write(f"- Allele Frequency: {allele_freq}")
+                st.write(f"- Allele Count: {allele_count}")
 
                 with st.expander("Raw JSON Response"):
                     st.json(data)
