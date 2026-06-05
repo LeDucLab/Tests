@@ -98,7 +98,7 @@ if st.button("Retrieve ACMG Information"):
                 exon_text = f"Exon {exon_rank} von {exon_count}"
 
             gene_md = f"*{gene}*"
-            hgvs_md = f"{hgvs_c} ({hgvs_p})"
+            hgvs_md = f"{hgvs_c}, ({hgvs_p})"
 
             report = f"""
 Die o. g. Leseraster-Variante im {gene_md}-Gen ({hgvs_md}) führt durch eine Leserasterverschiebung (Frameshift) zum Auftreten eines vorzeitigen Stopcodons und zum Abbruch der Translation des korrespondierenden Proteins in {exon_text}.
@@ -106,7 +106,9 @@ Die o. g. Leseraster-Variante im {gene_md}-Gen ({hgvs_md}) führt durch eine Les
 [NMD]Sehr wahrscheinlich wird von dem betroffenen Allel kein Protein gebildet, da mit einem vorzeitigen Abbau der mRNA per Nonsense Mediated mRNA Decay (NMD) gerechnet werden muss.
 
 [ODER]
-[kein NMD]Am ehesten wird ein C-terminal verkürztes, möglicherweise funktionsverändertes Protein gebildet. Eine tatsächliche Auswirkung der Variante wurde bislang nicht funktionell untersucht.
+Am ehesten wird ein C-terminal [um >10%] verkürztes, möglicherweise // wahrscheinlich funktionsverändertes Protein gebildet [, da es zum Verlust der funktionell kritischen XXX-Domäne kommt (PMID XXX)]. Hingegen muss nicht mit einem vorzeitigen Abbau der mRNA per Nonsense Mediated mRNA Decay (NMD) gerechnet werden (PMID: 33277042). 
+
+Eine tatsächliche Auswirkung der Variante wurde bislang nicht funktionell untersucht. // durch funktionelle Untersuchungen bestätigt (PMID XXX). 
 
 Diese Variante wurde in ClinVar als: {variant.get("clinvar_classification","NA")} beschrieben.
 
