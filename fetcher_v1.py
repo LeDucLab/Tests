@@ -179,18 +179,50 @@ Gemäß aktuellen ClinGen-/ACMG-Empfehlungen zur Variantenbewertung (PMIDs 25741
 """
 
         elif variant_type == "missense":
+            # -----------------------------
+            # COMPUTATIONAL SCORES
+            # -----------------------------
+            revel = variant.get("revel_score")
+            alphamissense = variant.get("alphamissense_score")
+            comp_call = variant.get("computational_prediction_selected")
+
+            # choose score source
+            if revel is not None:
+                score_text = f"REVEL-Score {revel} (PMID: 27666373)"
+            elif alphamissense is not None:
+                score_text = f"AlphaMissense-Score {alphamissense} (PMID: 37733863)"
+            else:
+                score_text = "kein verfügbarer Score"
+
+            # map computational prediction into German phrasing if present
+            comp_map = {
+        "Pathogenic": "hoch wahrscheinlich",
+        "Likely pathogenic": "moderat wahrscheinlich",
+        "Benign": "unwahrscheinlich",
+        "Likely benign": "niedrig wahrscheinlich",
+        "Uncertain significance": "unklar"}
 
             report = f"""
 Vor Bewertung auf aktuelle VCEP prüfen: https://cspec.genome.network/cspec/ui/svi/
 
 Die o. g. Missense-Variante im {gene_md}-Gen ({hgvs_md}) führt zu einem Aminosäureaustausch im korrespondierenden Protein.
 
-Eine funktionelle Auswirkung wurde bislang nicht untersucht.
+[Das Gen weist empirisch eine // keine signifikante Intoleranz gegenüber genetischer Variation auf (Z-Score >3,09 // <3,10, PMID: 27535533). für PP2 nur alleine verwenden wenn lt. spezifischer VCEP zulässig, sonst zusätzlich regionaler Constraint erforderlich (s.u.)]
+[ODER]
+[Das Gen weist empirisch zwar eine allgemein, die betroffene Proteindomäne jedoch keine regional signifikante Intoleranz gegenüber genetischer Variation auf (Z-Score >3,09, PMID: 27535533; MCR missense OE > 0,37, PMID: 38645134) [ODER] MetaDome dN/dS-Score >0,52, PMID: 31116477).] 
+[ODER]
+[Das Gen und die betroffene Proteindomäne weisen empirisch eine signifikante Intoleranz gegenüber genetischer Variation auf (Z-Score >3,09 PMID: 27535533; MCR missense OE ≤ 0,37, PMID: 38645134) [ODER] MetaDome dN/dS-Score <0,53, PMID: 31116477).]
+[ggf. PM1 ergänzen] 
+
+Die bioinformatische Proteineffektprädiktion beurteilt eine Pathogenität der Variante als {comp_class} ({score_text}).
+
+Eine tatsächliche Auswirkung der Variante wurde bislang nicht funktionell untersucht. 
+[ODER] Eine tatsächliche Auswirkung der Variante wurde durch funktionelle Untersuchungen bestätigt (PMID XXX). 
 
 {clinvar_text}
 {gnomad_text}
 
-Gemäß ClinGen-/ACMG-Kriterien ({acmg_criteria}) ergibt sich eine Bewertung als {acmg}.
+Gemäß aktuellen ClinGen-/ACMG-Empfehlungen zur Variantenbewertung (PMIDs 25741868, 30192042) sind die Kriterien({acmg_criteria}) erfüllt erfüllt, sodass sich eine Bewertung als {acmg} ergibt.
 """
 
         # -----------------------------
