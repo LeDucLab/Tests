@@ -201,6 +201,7 @@ Gemäß aktuellen ClinGen-/ACMG-Empfehlungen zur Variantenbewertung (PMIDs 25741
         "Benign": "unwahrscheinlich",
         "Likely benign": "niedrig wahrscheinlich",
         "Uncertain significance": "unklar"}
+            comp_class = comp_map.get(comp_call, "unklar")
 
             report = f"""
 Vor Bewertung auf aktuelle VCEP prüfen: https://cspec.genome.network/cspec/ui/svi/
