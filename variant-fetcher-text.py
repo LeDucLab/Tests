@@ -61,48 +61,55 @@ if st.button("Retrieve ACMG Information"):
         data = response.json()
 
         variant = data.get("variants", [{}])[0]
-
-        # -----------------------------
-        # NEW JSON STRUCTURE HANDLING
-        # -----------------------------
         acmg_by_gene = variant.get("acmg_by_gene", [{}])[0]
 
+        # -----------------------------
+        # CORE DATA
+        # -----------------------------
         gene = acmg_by_gene.get("gene_symbol", "UnknownGene")
         transcript = acmg_by_gene.get("transcript", "NA")
 
         hgvs_c = acmg_by_gene.get("hgvs_c", "NA")
         hgvs_p = acmg_by_gene.get("hgvs_p", "NA")
 
-        # FINAL HGVS FORMAT
         hgvs_full = f"{transcript}:{hgvs_c}, p.({hgvs_p.replace('p.', '')})"
 
+        exon_rank = acmg_by_gene.get("exon_rank")
+        exon_count = acmg_by_gene.get("exon_count")
+
+        exon_text = (
+            f"Exon {exon_rank} von {exon_count}"
+            if exon_rank and exon_count
+            else "Exon XX von XX"
+        )
+
+        gene_md = f"*{gene}*"
+
         # -----------------------------
-        # VARIANT TYPE (FROM EFFECTS)
+        # EFFECTS → VARIANT TYPE
         # -----------------------------
         effects = acmg_by_gene.get("effects", [])
         effects = [e.lower() for e in effects]
 
-        is_frameshift = "frameshift_variant" in effects
-        is_nonsense = "stop_gained" in effects
-        is_missense = "missense_variant" in effects
+        variant_type = None
 
-        if is_frameshift:
+        if "frameshift_variant" in effects:
             variant_type = "frameshift"
-        elif is_nonsense:
+        elif "stop_gained" in effects:
             variant_type = "nonsense"
-        elif is_missense:
+        elif "missense_variant" in effects:
             variant_type = "missense"
-        else:
+
+        if not variant_type:
             st.info(f"Unsupported variant type: {effects}")
             st.stop()
 
         # -----------------------------
         # ACMG DATA
         # -----------------------------
-        acmg = acmg_by_gene.get("verdict", variant.get("acmg_classification", "NA"))
-
-        acmg_criteria_list = acmg_by_gene.get("criteria", [])
-        acmg_criteria = ", ".join(acmg_criteria_list)
+        acmg = acmg_by_gene.get("verdict", "NA")
+        acmg_criteria = acmg_by_gene.get("criteria", [])
+        acmg_criteria = ", ".join(acmg_criteria)
 
         # -----------------------------
         # CLINVAR
@@ -136,48 +143,53 @@ if st.button("Retrieve ACMG Information"):
         )
 
         # -----------------------------
-        # CORE STRINGS
-        # -----------------------------
-        gene_md = f"*{gene}*"
-
-        # -----------------------------
         # REPORTS
         # -----------------------------
-        if variant_type in ["frameshift", "nonsense"]:
-
-            label = "Leseraster-Variante (Frameshift)" if variant_type == "frameshift" else "Nonsense-Variante"
+        if variant_type == "frameshift":
 
             report = f"""
-Vor Bewertung auf aktuelle VCEP prüfen: https://cspec.genome.network/cspec/ui/svi/
+Die o. g. Leseraster-Variante im {gene_md}-Gen ({hgvs_full}) führt durch eine Leserasterverschiebung (Frameshift) zum Auftreten eines vorzeitigen Stopcodons und zum Abbruch der Translation des korrespondierenden Proteins in {exon_text}.
 
-Die o. g. {label} im {gene_md}-Gen ({hgvs_full}) führt zum Auftreten eines vorzeitigen Stopcodons und zum Abbruch der Translation des korrespondierenden Proteins.
+[NMD] Sehr wahrscheinlich wird von dem betroffenen Allel kein Protein gebildet, da mit einem vorzeitigen Abbau der mRNA per Nonsense Mediated mRNA Decay (NMD) gerechnet werden muss.
 
-[NMD] Sehr wahrscheinlich kommt es zu Nonsense-Mediated mRNA Decay (NMD).
-[ODER] Alternativ kann ein C-terminal verkürztes Protein entstehen.
+[ODER] Am ehesten wird ein C-terminal verkürztes, möglicherweise funktionsverändertes Protein gebildet.
 
-Eine funktionelle Auswirkung wurde bislang nicht untersucht.
+Eine tatsächliche Auswirkung wurde bislang nicht untersucht.
 
 {clinvar_text}
 {gnomad_text}
 
-Gemäß ClinGen-/ACMG-Kriterien ({acmg_criteria}) ergibt sich eine Bewertung als {acmg}.
+Gemäß ClinGen-/ACMG-Empfehlungen ({acmg_criteria}) ergibt sich eine Bewertung als {acmg}.
+"""
+
+        elif variant_type == "nonsense":
+
+            report = f"""
+Die o. g. Nonsense-Variante im {gene_md}-Gen ({hgvs_full}) führt zum Auftreten eines vorzeitigen Stopcodons und zum Abbruch der Translation des korrespondierenden Proteins in {exon_text}.
+
+[NMD] Sehr wahrscheinlich wird von dem betroffenen Allel kein Protein gebildet, da mit einem vorzeitigen Abbau der mRNA per Nonsense Mediated mRNA Decay (NMD) gerechnet werden muss.
+
+[ODER] Am ehesten wird ein C-terminal verkürztes, möglicherweise funktionsverändertes Protein gebildet.
+
+Eine tatsächliche Auswirkung wurde bislang nicht untersucht.
+
+{clinvar_text}
+{gnomad_text}
+
+Gemäß ClinGen-/ACMG-Empfehlungen ({acmg_criteria}) ergibt sich eine Bewertung als {acmg}.
 """
 
         elif variant_type == "missense":
 
             report = f"""
-Vor Bewertung auf aktuelle VCEP prüfen: https://cspec.genome.network/cspec/ui/svi/
-
-Die o. g. Missense-Variante im {gene_md}-Gen ({hgvs_full}) führt zu einem Aminosäureaustausch im Protein.
-
-Die funktionelle Relevanz hängt von Struktur, Domäne und Konservierung ab.
+Die o. g. Missense-Variante im {gene_md}-Gen ({hgvs_full}) führt zu einem Aminosäureaustausch im korrespondierenden Protein.
 
 Eine funktionelle Auswirkung wurde bislang nicht untersucht.
 
 {clinvar_text}
 {gnomad_text}
 
-Gemäß ClinGen-/ACMG-Kriterien ({acmg_criteria}) ergibt sich eine Bewertung als {acmg}.
+Gemäß ClinGen-/ACMG-Empfehlungen ({acmg_criteria}) ergibt sich eine Bewertung als {acmg}.
 """
 
         # -----------------------------
@@ -186,7 +198,6 @@ Gemäß ClinGen-/ACMG-Kriterien ({acmg_criteria}) ergibt sich eine Bewertung als
         st.subheader("🧬 Klinischer Bericht")
         st.markdown(report)
 
-        # RAW JSON (optional)
         with st.expander("Show Raw JSON"):
             st.json(data)
 
