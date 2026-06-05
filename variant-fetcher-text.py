@@ -204,3 +204,14 @@ Gemäß ClinGen-/ACMG-Kriterien ({acmg_criteria}) ergibt sich eine Bewertung als
 
     except Exception as e:
         st.error(f"Unexpected error: {e}")
+
+# -----------------------------
+# OPTIONAL: SHOW RAW JSON
+# -----------------------------
+st.markdown("---")
+st.subheader("🔍 Raw JSON (Debug / Transparency)")
+
+show_json = st.checkbox("Show full API response")
+
+if show_json:
+    st.json(data)
