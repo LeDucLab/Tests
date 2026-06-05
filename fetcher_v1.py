@@ -156,7 +156,7 @@ Eine tatsächliche Auswirkung der Variante wurde bislang nicht funktionell unter
 {clinvar_text}
 {gnomad_text}
 
-Gemäß aktuellen ClinGen-/ACMG-Empfehlungen zur Variantenbewertung (PMIDs 25741868, 30192042) sind die Kriterien({acmg_criteria}) erfüllt erfüllt, sodass sich eine Bewertung als {acmg} ergibt.
+Gemäß aktuellen ClinGen-/ACMG-Empfehlungen zur Variantenbewertung (PMIDs 25741868, 30192042) sind die Kriterien({acmg_criteria}) erfüllt, sodass sich eine Bewertung als {acmg} ergibt.
 """
 
         elif variant_type == "nonsense":
@@ -175,7 +175,7 @@ Eine tatsächliche Auswirkung der Variante wurde bislang nicht funktionell unter
 {clinvar_text}
 {gnomad_text}
 
-Gemäß aktuellen ClinGen-/ACMG-Empfehlungen zur Variantenbewertung (PMIDs 25741868, 30192042) sind die Kriterien({acmg_criteria}) erfüllt erfüllt, sodass sich eine Bewertung als {acmg} ergibt.
+Gemäß aktuellen ClinGen-/ACMG-Empfehlungen zur Variantenbewertung (PMIDs 25741868, 30192042) sind die Kriterien({acmg_criteria}) erfüllt, sodass sich eine Bewertung als {acmg} ergibt.
 """
 
         elif variant_type == "missense":
@@ -223,7 +223,7 @@ Eine tatsächliche Auswirkung der Variante wurde bislang nicht funktionell unter
 {clinvar_text}
 {gnomad_text}
 
-Gemäß aktuellen ClinGen-/ACMG-Empfehlungen zur Variantenbewertung (PMIDs 25741868, 30192042) sind die Kriterien({acmg_criteria}) erfüllt erfüllt, sodass sich eine Bewertung als {acmg} ergibt.
+Gemäß aktuellen ClinGen-/ACMG-Empfehlungen zur Variantenbewertung (PMIDs 25741868, 30192042) sind die Kriterien({acmg_criteria}) erfüllt, sodass sich eine Bewertung als {acmg} ergibt.
 """
 
         # -----------------------------
