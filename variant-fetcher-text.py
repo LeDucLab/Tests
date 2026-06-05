@@ -1,6 +1,5 @@
 import streamlit as st
 import requests
-import json
 
 st.set_page_config(page_title="GeneBe ACMG Retrieval", page_icon="🧬")
 
@@ -27,16 +26,18 @@ if variant_input:
     else:
         chromosome, position, reference, alternate = parts
 
+
 # -----------------------------
 # API CONFIG
 # -----------------------------
 base_url = "https://api.genebe.net/cloud/api-public/v1/variant"
 
+
 params = {
-    "chr": f"chr{chromosome}" if chromosome else "",
-    "pos": position if position else "",
-    "ref": reference if reference else "",
-    "alt": alternate if alternate else "",
+    "chr": f"chr{chromosome.strip()}" if chromosome else "",
+    "pos": position.strip() if position else "",
+    "ref": reference.strip() if reference else "",
+    "alt": alternate.strip() if alternate else "",
     "useRefseq": "true",
     "useEnsembl": "true",
     "omitAcmg": "false",
@@ -49,43 +50,77 @@ params = {
     "genome": "hg38"
 }
 
+
 # -----------------------------
-# REPORT TEMPLATES
+# URL PREVIEW
 # -----------------------------
-def frameshift_report(gene, hgvs, acmg):
-    return f"""
+st.subheader("Generated API URL")
+
+if all([chromosome, position, reference, alternate]):
+    display_url = f"{base_url}?{'&'.join(f'{k}={v}' for k, v in params.items())}"
+    st.success("URL generated successfully!")
+    st.markdown(f"[Open API URL]({display_url})")
+else:
+    st.warning("Enter a valid variant to generate URL.")
+
+
+# -----------------------------
+# REPORT FUNCTION
+# -----------------------------
+def generate_report(gene, hgvs, consequence_type):
+    """
+    Generates clinical text depending on variant consequence.
+    """
+
+    if consequence_type == "frameshift":
+
+        return f"""
 Die o. g. Leseraster-Variante im {gene}-Gen ({hgvs}) führt durch eine Leserasterverschiebung (Frameshift) zum Auftreten eines vorzeitigen Stopcodons und zum Abbruch der Translation des korrespondierenden Proteins.
 
-Sehr wahrscheinlich wird kein Protein gebildet, da mit einem vorzeitigen Abbau der mRNA per Nonsense Mediated mRNA Decay (NMD) gerechnet wird.
+Sehr wahrscheinlich wird von dem betroffenen Allel kein Protein gebildet, da mit einem vorzeitigen Abbau der mRNA per Nonsense Mediated mRNA Decay (NMD) gerechnet werden muss.
 
-Gemäß ClinGen-/ACMG-Empfehlungen sind die Kriterien {acmg} erfüllt.
+Am ehesten ist daher von einem Funktionsverlust des Proteins auszugehen.
+
+Eine tatsächliche Auswirkung der Variante wurde bislang nicht funktionell untersucht. Die Variante wurde in Datenbanken bislang unzureichend charakterisiert.
+
+Gemäß aktuellen ACMG-/ClinGen-Empfehlungen erfolgt die Bewertung basierend auf den verfügbaren Kriterien.
 """
 
-def nonsense_report(gene, hgvs, acmg):
-    return f"""
-Die o. g. Nonsense-Variante im {gene}-Gen ({hgvs}) führt zum Auftreten eines vorzeitigen Stopcodons.
+    elif consequence_type == "nonsense":
 
-Sehr wahrscheinlich kein Protein durch NMD.
+        return f"""
+Die o. g. Nonsense-Variante im {gene}-Gen ({hgvs}) führt zum Auftreten eines vorzeitigen Stopcodons und damit zum Abbruch der Proteintranslation.
 
-ACMG Kriterien: {acmg}
+Sehr wahrscheinlich kommt es zu einem vorzeitigen Abbau der mRNA durch Nonsense Mediated mRNA Decay (NMD).
+
+Alternativ kann ein verkürztes Protein entstehen, dessen Funktion stark eingeschränkt oder aufgehoben ist.
+
+Die funktionellen Auswirkungen sind bislang nicht vollständig untersucht.
 """
 
-def missense_report(gene, hgvs, acmg, revel):
-    return f"""
-Die o. g. Missense-Variante im {gene}-Gen ({hgvs}) führt zu einem Aminosäureaustausch.
+    elif consequence_type == "missense":
 
-REVEL Score: {revel}
+        return f"""
+Die o. g. Missense-Variante im {gene}-Gen ({hgvs}) führt zu einem Aminosäureaustausch im korrespondierenden Protein.
 
-ACMG Kriterien: {acmg}
+Die funktionellen Auswirkungen sind abhängig von Konservierung, Domänenstruktur und in silico Vorhersagen.
+
+Eine abschließende Bewertung erfordert zusätzliche funktionelle und klinische Daten.
 """
+
+    else:
+        return f"""
+Die o. g. Variante im {gene}-Gen ({hgvs}) konnte keinem standardisierten Konsequenztyp zugeordnet werden.
+"""
+
 
 # -----------------------------
-# RUN
+# FETCH DATA
 # -----------------------------
 if st.button("Retrieve ACMG Information"):
 
     if not all([chromosome, position, reference, alternate]):
-        st.error("Please enter valid variant first.")
+        st.error("Please enter a valid variant.")
     else:
         try:
             headers = {
@@ -93,92 +128,88 @@ if st.button("Retrieve ACMG Information"):
                 "Accept": "application/json"
             }
 
-            response = requests.get(base_url, headers=headers, params=params, timeout=10)
+            response = requests.get(base_url, headers=headers, params=params, timeout=15)
 
-            if response.status_code == 200:
+            if response.status_code != 200:
+                st.error(f"API Error: {response.status_code}")
+                st.text(response.text[:500])
+            else:
                 data = response.json()
 
-                st.subheader("Raw API Response")
-                st.json(data)
-
-                variant_data = data["variants"][0] if data.get("variants") else {}
-
-                st.subheader("Variant Data")
-                st.json(variant_data)
+                variant_data = (data.get("variants") or [{}])[0]
 
                 # -----------------------------
-                # SAFE EXTRACTION
+                # BASIC FIELDS
                 # -----------------------------
-                gene_name = variant_data.get("gene_symbol", "XXX")
-                hgvs = variant_data.get("hgvs_c", "XXX")
-                acmg = variant_data.get("acmg_classification", "Not found")
+                acmg_classification = variant_data.get("acmg_classification", "Not found")
+                acmg_criteria = variant_data.get("acmg_criteria", "Not found")
+                allele_freq = variant_data.get("frequency_reference_population", "Not found")
+                allele_count = variant_data.get("allele_count_reference_population", "Not found")
                 revel = variant_data.get("revel_score", "Not found")
+
+                consequences_block = (variant_data.get("consequences") or [])
+                hgvs_c = "Not found"
+
+                consequence_type = None
 
                 # -----------------------------
                 # FIXED CONSEQUENCE PARSING
                 # -----------------------------
-                consequences = variant_data.get("consequences", [])
+                if consequences_block:
+                    first = consequences_block[0]
 
-                consequence = "unknown"
+                    hgvs_c = first.get("hgvs_c", "Not found")
 
-                if (
-                    isinstance(consequences, list)
-                    and len(consequences) > 0
-                    and isinstance(consequences[0], dict)
-                ):
-                    inner = consequences[0].get("consequences", [])
+                    csq_list = first.get("consequences", [])
 
-                    if isinstance(inner, list) and len(inner) > 0:
-                        consequence = inner[0]  # <-- FIXED LINE
+                    if isinstance(csq_list, list) and len(csq_list) > 0:
+                        csq = csq_list[0]
 
-                st.subheader("DEBUG: Parsed Consequence")
-                st.write(consequence)
-
-                # -----------------------------
-                # REPORT SELECTION
-                # -----------------------------
-                c = str(consequence).lower()
-
-                if "frameshift" in c:
-                    report = frameshift_report(gene_name, hgvs, acmg)
-
-                elif "stop" in c or "nonsense" in c:
-                    report = nonsense_report(gene_name, hgvs, acmg)
-
-                elif "missense" in c:
-                    report = missense_report(gene_name, hgvs, acmg, revel)
-
-                else:
-                    report = f"""
-Keine spezifische Vorlage gefunden.
-
-Consequence: {consequence}
-Gene: {gene_name}
-HGVS: {hgvs}
-ACMG: {acmg}
-"""
+                        if "frameshift" in csq:
+                            consequence_type = "frameshift"
+                        elif "stop_gained" in csq or "nonsense" in csq:
+                            consequence_type = "nonsense"
+                        elif "missense" in csq:
+                            consequence_type = "missense"
+                        else:
+                            consequence_type = "other"
 
                 # -----------------------------
-                # OUTPUT
+                # GENE NAME (best effort)
                 # -----------------------------
-                st.subheader("Generated Clinical Report")
-                st.write(report)
+                gene_name = (
+                    variant_data.get("gene")
+                    or variant_data.get("gene_name")
+                    or "@@Genname@@"
+                )
 
-                st.subheader("Key Data")
-                st.write({
-                    "gene": gene_name,
-                    "hgvs": hgvs,
-                    "consequence": consequence,
-                    "acmg": acmg,
-                    "revel": revel
-                })
+                # -----------------------------
+                # DISPLAY ACMG SUMMARY
+                # -----------------------------
+                st.subheader("ACMG Summary")
 
-                with st.expander("Raw JSON"):
-                    st.json(data)
+                st.write(f"- **ACMG Klassifizierung**: {acmg_classification}")
+                st.write(f"- **ACMG Kriterien**: {acmg_criteria}")
+                st.write(f"- **Allel Frequenz**: {allele_freq}")
+                st.write(f"- **Allel Anzahl**: {allele_count}")
+                st.write(f"- **REVEL Score**: {revel}")
+                st.write(f"- **HGVS_c**: {hgvs_c}")
+                st.write(f"- **Consequence Type**: {consequence_type}")
 
-            else:
-                st.error(f"API Error: {response.status_code}")
-                st.text(response.text[:500])
+                # -----------------------------
+                # GENERATE REPORT
+                # -----------------------------
+                report_text = generate_report(
+                    gene=gene_name,
+                    hgvs=hgvs_c,
+                    consequence_type=consequence_type
+                )
+
+                st.subheader("Automated Clinical Report")
+                st.text(report_text)
+
+        except requests.exceptions.RequestException as e:
+            st.error(f"Network error: {str(e)}")
 
         except Exception as e:
-            st.error(f"Error: {e}")
+            st.error(f"Unexpected error: {str(e)}")
