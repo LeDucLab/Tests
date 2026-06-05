@@ -64,18 +64,26 @@ if st.button("Retrieve ACMG Information"):
         consequence_block = variant.get("consequences", [{}])[0]
 
         # -----------------------------
-        # CONSEQUENCE TYPE
+        # CONSEQUENCE TYPE FIX
         # -----------------------------
-        consequence_type = ""
+        consequence_list = consequence_block.get("consequences", [])
 
-        if (
-            isinstance(consequence_block, dict)
-            and "consequences" in consequence_block
-            and consequence_block["consequences"]
-        ):
-            consequence_type = consequence_block["consequences"][0]
+        is_frameshift = "frameshift_variant" in consequence_list
+        is_nonsense = "stop_gained" in consequence_list
+        is_missense = "missense_variant" in consequence_list
 
-        is_frameshift = consequence_type == "frameshift_variant"
+        # fallback safety
+        variant_type = None
+        if is_frameshift:
+            variant_type = "frameshift"
+        elif is_nonsense:
+            variant_type = "nonsense"
+        elif is_missense:
+            variant_type = "missense"
+
+        if not variant_type:
+            st.info("No supported consequence detected (frameshift, nonsense, missense).")
+            st.stop()
 
         # -----------------------------
         # CORE FIELDS
@@ -92,115 +100,96 @@ if st.button("Retrieve ACMG Information"):
         exon_count = consequence_block.get("exon_count")
 
         acmg = variant.get("acmg_classification", "NA")
+        acmg_criteria = variant.get("acmg_criteria", "NA").replace(",", ", ")
 
-        acmg_german = {
-            "Pathogenic": "pathogene",
-            "Likely pathogenic": "wahrscheinlich pathogene",
-            "Uncertain significance": "unklarer Signifikanz",
-            "Likely benign": "wahrscheinlich benigne",
-            "Benign": "benigne"
-        }.get(acmg, acmg)
+        gene_md = f"*{gene}*"
+        hgvs_md = f"{hgvs_c}, {hgvs_p}"
+        exon_text = f"Exon {exon_rank} von {exon_count}" if exon_rank and exon_count else "Exon XX von XX"
 
         # -----------------------------
-        # ACMG CRITERIA FORMAT
+        # ClinVar
         # -----------------------------
-        acmg_criteria = variant.get("acmg_criteria", "NA")
+        clinvar_summary = variant.get("clinvar_submissions_summary", "")
 
-        if acmg_criteria:
-            acmg_criteria = acmg_criteria.replace(",", ", ")
+        p = us = o = "0"
 
-        # -----------------------------
-        # ClinVar PARSING
-        # -----------------------------
-        clinvar_summary = variant.get(
-            "clinvar_submissions_summary",
-            ""
-        )
-
-        pathogenic_count = "0"
-        vus_count = "0"
-        benign_count = "0"
-
-        if clinvar_summary:
-
-            for item in clinvar_summary.split():
-
-                if item.startswith("P:"):
-                    pathogenic_count = item.replace("P:", "")
-
-                elif item.startswith("US:"):
-                    vus_count = item.replace("US:", "")
-
-                elif item.startswith("O:"):
-                    benign_count = item.replace("O:", "")
+        for item in clinvar_summary.split():
+            if item.startswith("P:"):
+                p = item.replace("P:", "")
+            elif item.startswith("US:"):
+                us = item.replace("US:", "")
+            elif item.startswith("O:"):
+                o = item.replace("O:", "")
 
         clinvar_text = (
-            f"Diese Variante wurde in der ClinVar-Datenbank bislang "
-            f"mit {pathogenic_count} Einträgen als pathogen, "
-            f"mit {vus_count} Einträgen als unklare Signifikanz "
-            f"und mit {benign_count} Einträgen als benigne bzw. sonstige "
-            f"Klassifikationen beschrieben."
+            f"Diese Variante wurde in ClinVar {p}× pathogen, {us}× VUS, {o}× benign/sonstige klassifiziert."
         )
 
         # -----------------------------
         # gnomAD
         # -----------------------------
-        allele_frequency = variant.get(
-            "frequency_reference_population"
+        af = variant.get("frequency_reference_population")
+        gnomad_text = (
+            f"In gnomAD ist die Variante mit AF {af} beschrieben."
+            if af else
+            "In gnomAD ist die Variante nicht oder sehr selten beschrieben."
         )
 
-        if allele_frequency is None:
-            gnomad_text = (
-                "In der Populationsdatenbank gnomAD ist die Variante "
-                "nicht aufgeführt."
+        # -----------------------------
+        # REPORT TEMPLATES
+        # -----------------------------
+
+        if variant_type in ["frameshift", "nonsense"]:
+
+            variant_label = (
+                "Leseraster-Variante (Frameshift)"
+                if variant_type == "frameshift"
+                else "Nonsense-Variante"
             )
-        else:
-            gnomad_text = (
-                f"In der Populationsdatenbank gnomAD v4.1.1 ist die Variante "
-                f"mit einer Allelfrequenz von {allele_frequency} "
-                f"aufgeführt."
-            )
+
+            report = f"""
+Vor Bewertung auf aktuelle VCEP prüfen: https://cspec.genome.network/cspec/ui/svi/
+
+Die o. g. {variant_label} im {gene_md}-Gen ({hgvs_md}) führt zum Auftreten eines vorzeitigen Stopcodons und zum Abbruch der Translation des korrespondierenden Proteins in {exon_text}.
+
+[NMD] Sehr wahrscheinlich kommt es zu Nonsense-Mediated mRNA Decay (NMD).
+[ODER] Alternativ kann ein C-terminal verkürztes Protein entstehen.
+
+Eine funktionelle Auswirkung wurde bislang nicht untersucht.
+{clinvar_text}
+{gnomad_text}
+
+Gemäß ClinGen-/ACMG-Kriterien ({acmg_criteria}) ergibt sich eine Bewertung als {acmg}.
+"""
+
+        # -----------------------------
+        # MISSENSE TEMPLATE (BASIC SCAFFOLD)
+        # -----------------------------
+        elif variant_type == "missense":
+
+            consequence = "Missense-Variante"
+
+            report = f"""
+Vor Bewertung auf aktuelle VCEP prüfen: https://cspec.genome.network/cspec/ui/svi/
+
+Die o. g. {consequence} im {gene_md}-Gen ({hgvs_md}) führt zu einem Aminosäureaustausch im korrespondierenden Protein.
+
+Die funktionelle Relevanz hängt von Domäne, Konservierung und Strukturkontext ab.
+Eine funktionelle Auswirkung wurde bislang nicht untersucht.
+
+{clinvar_text}
+{gnomad_text}
+
+Gemäß ClinGen-/ACMG-Kriterien ({acmg_criteria}) ergibt sich eine Bewertung als {acmg}.
+"""
 
         # -----------------------------
         # OUTPUT
         # -----------------------------
-        st.subheader("ACMG Result")
-        st.write(f"**Classification:** {acmg}")
+        st.subheader("🧬 Klinischer Bericht")
+        st.write(report)
 
-        if is_frameshift:
-
-            exon_text = "Exon XX von XX"
-
-            if exon_rank and exon_count:
-                exon_text = f"Exon {exon_rank} von {exon_count}"
-
-            gene_md = f"*{gene}*"
-            hgvs_md = f"{hgvs_c}, ({hgvs_p})"
-
-            report = f"""
-Die o. g. Leseraster-Variante im {gene_md}-Gen ({hgvs_md}) führt durch eine Leserasterverschiebung (Frameshift) zum Auftreten eines vorzeitigen Stopcodons und zum Abbruch der Translation des korrespondierenden Proteins in {exon_text}.
-[NMD] Sehr wahrscheinlich wird von dem betroffenen Allel kein Protein gebildet, da mit einem vorzeitigen Abbau der mRNA per Nonsense Mediated mRNA Decay (NMD) gerechnet werden muss.
-[ODER]
-Am ehesten wird ein C-terminal verkürztes, möglicherweise funktionsverändertes Protein gebildet. Hingegen muss nicht mit einem vorzeitigen Abbau der mRNA per Nonsense Mediated mRNA Decay (NMD) gerechnet werden (PMID: 33277042).
-Eine tatsächliche Auswirkung der Variante wurde bislang nicht funktionell untersucht.
-[ODER]
-Eine tatsächliche Auswirkung der Variante wurde durch funktionelle Untersuchungen bestätigt (PMID XXX).
-{clinvar_text}
-{gnomad_text}
-Gemäß aktuellen ClinGen-/ACMG-Empfehlungen zur Variantenbewertung (PMIDs 25741868, 30192042) sind die Kriterien {acmg_criteria} erfüllt, sodass sich eine Bewertung als {acmg_german} Variante ergibt.
-"""
-
-            st.markdown("### 🧬 Klinischer Frameshift-Bericht")
-            st.markdown(report)
-
-        else:
-            st.info(
-                f"Kein Frameshift erkannt (Typ: {consequence_type})"
-            )
-
-        # -----------------------------
-        # RAW JSON
-        # -----------------------------
+        # raw JSON
         with st.expander("Show Raw JSON"):
             st.json(data)
 
