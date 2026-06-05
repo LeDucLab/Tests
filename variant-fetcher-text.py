@@ -142,7 +142,7 @@ Gemäß ClinGen-/ACMG-Empfehlungen sind die Kriterien {acmg_criteria} erfüllt.
                 # -----------------------------
                 consequence_lower = str(consequence).lower()
 
-                if "frameshift" in consequence_lower:
+                if "frameshift_variant" in consequence_lower:
                     report = frameshift_report
 
                 elif "stop_gained" in consequence_lower or "nonsense" in consequence_lower:
