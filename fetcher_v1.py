@@ -226,7 +226,9 @@ Eine tatsächliche Auswirkung der Variante wurde bislang nicht funktionell unter
 Gemäß aktuellen ClinGen-/ACMG-Empfehlungen zur Variantenbewertung (PMIDs 25741868, 30192042) sind die Kriterien({acmg_criteria}) erfüllt, sodass sich eine Bewertung als {acmg} ergibt.
 """
 
-        # -----------------------------
+    except Exception as e:
+        st.error(f"Unexpected error: {e}")
+          # -----------------------------
         # OUTPUT
         # -----------------------------
         st.subheader("🧬 Klinischer Bericht")
@@ -237,3 +239,18 @@ Gemäß aktuellen ClinGen-/ACMG-Empfehlungen zur Variantenbewertung (PMIDs 25741
 
     except Exception as e:
         st.error(f"Unexpected error: {e}")
+
+# -----------------------------
+# RAW JSON VIEW (FIXED)
+# -----------------------------
+st.markdown("---")
+st.subheader("🔍 Raw JSON (Debug / Transparency)")
+
+if "data" in st.session_state:
+    show_json = st.checkbox("Show full API response")
+
+    if show_json:
+        st.json(st.session_state["data"])
+else:
+    st.info("Run a variant query to load JSON data.")
+
