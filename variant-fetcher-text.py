@@ -7,6 +7,12 @@ st.title("GeneBe ACMG Information Retrieval")
 st.write("Enter variant as: chr pos ref alt (e.g. chr1 123456 A T)")
 
 # -----------------------------
+# SESSION STATE (IMPORTANT FIX)
+# -----------------------------
+if "api_data" not in st.session_state:
+    st.session_state.api_data = None
+
+# -----------------------------
 # INPUT
 # -----------------------------
 st.subheader("Variant Input")
@@ -89,9 +95,9 @@ Die o. g. Nonsense-Variante im {gene_fmt}-Gen führt zum Auftreten eines vorzeit
 
 Sehr wahrscheinlich kommt es zu einem vorzeitigen Abbau der mRNA durch Nonsense Mediated mRNA Decay (NMD).
 
-Alternativ kann ein verkürztes Protein entstehen, dessen Funktion stark eingeschränkt ist.
+Alternativ kann ein verkürztes Protein entstehen.
 
-Eine funktionelle Validierung liegt bislang nicht vor.
+Die funktionellen Auswirkungen sind bislang nicht vollständig untersucht.
 """
 
     elif consequence_type == "missense":
@@ -101,10 +107,11 @@ Die o. g. Missense-Variante im {gene_fmt}-Gen führt zu einem Aminosäureaustaus
 
 Die funktionellen Auswirkungen hängen von Struktur und Konservierung ab.
 
-Weitere funktionelle Untersuchungen sind erforderlich.
+Weitere Untersuchungen sind erforderlich.
 """
 
     else:
+
         return f"""
 Die o. g. Variante im {gene_fmt}-Gen konnte keinem standardisierten Konsequenztyp zugeordnet werden.
 """
@@ -129,27 +136,32 @@ if st.button("Retrieve ACMG Information"):
             if response.status_code != 200:
                 st.error(f"API Error: {response.status_code}")
                 st.text(response.text[:500])
+
             else:
                 data = response.json()
-                variant_data = (data.get("variants") or [{}])[0]
 
                 # -----------------------------
-                # BASIC FIELDS
+                # SAVE JSON (FIX)
                 # -----------------------------
+                st.session_state.api_data = data
+
+                variant_data = (data.get("variants") or [{}])[0]
+
                 acmg_classification = variant_data.get("acmg_classification", "Not found")
                 acmg_criteria = variant_data.get("acmg_criteria", "Not found")
                 allele_freq = variant_data.get("frequency_reference_population", "Not found")
                 allele_count = variant_data.get("allele_count_reference_population", "Not found")
                 revel = variant_data.get("revel_score", "Not found")
 
-                consequences_block = (variant_data.get("consequences") or [])
+                consequences_block = variant_data.get("consequences") or []
+
                 hgvs_c = "Not found"
                 gene_name = variant_data.get("gene") or variant_data.get("gene_name") or "Unknown"
 
                 consequence_type = None
 
                 # -----------------------------
-                # CONSEQUENCE PARSING (FIXED)
+                # CONSEQUENCE PARSING FIXED
                 # -----------------------------
                 if consequences_block:
                     first = consequences_block[0]
@@ -192,16 +204,14 @@ if st.button("Retrieve ACMG Information"):
 
                 st.text(report_text)
 
-                # -----------------------------
-                # JSON BUTTON (NEW)
-                # -----------------------------
-                st.subheader("Debug Options")
 
-                if st.button("Show Raw JSON Response"):
-                    st.json(data)
+# -----------------------------
+# RAW JSON VIEW (FIXED)
+# -----------------------------
+st.subheader("Debug")
 
-        except requests.exceptions.RequestException as e:
-            st.error(f"Network error: {str(e)}")
-
-        except Exception as e:
-            st.error(f"Unexpected error: {str(e)}")
+if st.session_state.api_data is not None:
+    if st.button("Show Raw JSON Response"):
+        st.json(st.session_state.api_data)
+else:
+    st.info("No API response yet. Run 'Retrieve ACMG Information' first.")
