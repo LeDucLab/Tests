@@ -7,10 +7,11 @@ st.title("GeneBe ACMG Information Retrieval")
 st.write("Enter variant as: chr pos ref alt (e.g. chr1 123456 A T)")
 
 # -----------------------------
-# SESSION STATE (IMPORTANT FIX)
+# SESSION STATE (IMPORTANT)
 # -----------------------------
 if "api_data" not in st.session_state:
     st.session_state.api_data = None
+
 
 # -----------------------------
 # INPUT
@@ -66,7 +67,7 @@ if all([chromosome, position, reference, alternate]):
     st.success("URL generated successfully!")
     st.markdown(f"[Open API URL]({display_url})")
 else:
-    st.warning("Enter a valid variant to generate URL.")
+    st.warning("Enter a valid variant to generate URL")
 
 
 # -----------------------------
@@ -77,53 +78,46 @@ def generate_report(gene, hgvs, consequence_type):
     gene_fmt = f"*{gene}* ({hgvs})"
 
     if consequence_type == "frameshift":
-
         return f"""
-Die o. g. Leseraster-Variante im {gene_fmt}-Gen führt durch eine Leserasterverschiebung (Frameshift) zum Auftreten eines vorzeitigen Stopcodons und zum Abbruch der Translation des korrespondierenden Proteins.
+Die o. g. Leseraster-Variante im {gene_fmt}-Gen führt durch eine Leserasterverschiebung (Frameshift) zum Auftreten eines vorzeitigen Stopcodons und zum Abbruch der Translation des Proteins.
 
-Sehr wahrscheinlich wird von dem betroffenen Allel kein Protein gebildet, da mit einem vorzeitigen Abbau der mRNA per Nonsense Mediated mRNA Decay (NMD) gerechnet wird.
+Sehr wahrscheinlich wird kein funktionsfähiges Protein gebildet (NMD wahrscheinlich).
 
-Am ehesten ist daher von einem Funktionsverlust des Proteins auszugehen.
-
-Eine tatsächliche Auswirkung der Variante wurde bislang nicht funktionell untersucht.
+Die funktionelle Auswirkung gilt daher als loss-of-function.
 """
 
     elif consequence_type == "nonsense":
-
         return f"""
-Die o. g. Nonsense-Variante im {gene_fmt}-Gen führt zum Auftreten eines vorzeitigen Stopcodons und damit zum Abbruch der Proteintranslation.
+Die o. g. Nonsense-Variante im {gene_fmt}-Gen führt zu einem vorzeitigen Stopcodon und damit zu einer verkürzten Proteintranslation.
 
-Sehr wahrscheinlich kommt es zu einem vorzeitigen Abbau der mRNA durch Nonsense Mediated mRNA Decay (NMD).
+Sehr wahrscheinlich erfolgt ein mRNA-Abbau durch Nonsense-mediated decay (NMD).
 
-Alternativ kann ein verkürztes Protein entstehen.
-
-Die funktionellen Auswirkungen sind bislang nicht vollständig untersucht.
+Funktionsverlust ist wahrscheinlich.
 """
 
     elif consequence_type == "missense":
-
         return f"""
-Die o. g. Missense-Variante im {gene_fmt}-Gen führt zu einem Aminosäureaustausch im korrespondierenden Protein.
+Die o. g. Missense-Variante im {gene_fmt}-Gen führt zu einem Aminosäureaustausch im Protein.
 
-Die funktionellen Auswirkungen hängen von Struktur und Konservierung ab.
+Die funktionelle Relevanz hängt von Struktur und Konservierung ab.
 
-Weitere Untersuchungen sind erforderlich.
+Weitere Analysen sind erforderlich.
 """
 
     else:
-
         return f"""
-Die o. g. Variante im {gene_fmt}-Gen konnte keinem standardisierten Konsequenztyp zugeordnet werden.
+Die o. g. Variante im {gene_fmt}-Gen konnte keinem bekannten Konsequenztyp zugeordnet werden.
 """
 
 
 # -----------------------------
-# FETCH DATA
+# FETCH DATA (FIXED TRY/EXCEPT)
 # -----------------------------
 if st.button("Retrieve ACMG Information"):
 
     if not all([chromosome, position, reference, alternate]):
         st.error("Please enter a valid variant.")
+
     else:
         try:
             headers = {
@@ -140,9 +134,7 @@ if st.button("Retrieve ACMG Information"):
             else:
                 data = response.json()
 
-                # -----------------------------
-                # SAVE JSON (FIX)
-                # -----------------------------
+                # SAVE FOR DEBUG BUTTON
                 st.session_state.api_data = data
 
                 variant_data = (data.get("variants") or [{}])[0]
@@ -161,7 +153,7 @@ if st.button("Retrieve ACMG Information"):
                 consequence_type = None
 
                 # -----------------------------
-                # CONSEQUENCE PARSING FIXED
+                # CONSEQUENCE PARSING
                 # -----------------------------
                 if consequences_block:
                     first = consequences_block[0]
@@ -174,7 +166,7 @@ if st.button("Retrieve ACMG Information"):
 
                         if "frameshift" in csq:
                             consequence_type = "frameshift"
-                        elif "stop_gained" in csq or "nonsense" in csq:
+                        elif "stop_gained" in csq:
                             consequence_type = "nonsense"
                         elif "missense" in csq:
                             consequence_type = "missense"
@@ -196,17 +188,24 @@ if st.button("Retrieve ACMG Information"):
 
                 st.subheader("Automated Clinical Report")
 
-                report_text = generate_report(
+                report = generate_report(
                     gene=gene_name,
                     hgvs=hgvs_c,
                     consequence_type=consequence_type
                 )
 
-                st.text(report_text)
+                st.text(report)
+
+
+        except requests.exceptions.RequestException as e:
+            st.error(f"Network error: {str(e)}")
+
+        except Exception as e:
+            st.error(f"Unexpected error: {str(e)}")
 
 
 # -----------------------------
-# RAW JSON VIEW (FIXED)
+# DEBUG JSON BUTTON (SAFE)
 # -----------------------------
 st.subheader("Debug")
 
