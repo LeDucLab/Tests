@@ -64,9 +64,10 @@ if st.button("Retrieve ACMG Information"):
         consequence_block = variant.get("consequences", [{}])[0]
 
         # -----------------------------
-        # CONSEQUENCE TYPE (FIXED)
+        # CONSEQUENCE TYPE
         # -----------------------------
         consequence_type = ""
+
         if (
             isinstance(consequence_block, dict)
             and "consequences" in consequence_block
@@ -79,7 +80,11 @@ if st.button("Retrieve ACMG Information"):
         # -----------------------------
         # CORE FIELDS
         # -----------------------------
-        gene = variant.get("gene_symbol", "UnknownGene")
+        gene = consequence_block.get(
+            "gene_symbol",
+            variant.get("gene_symbol", "UnknownGene")
+        )
+
         hgvs_c = consequence_block.get("hgvs_c", "NA")
         hgvs_p = consequence_block.get("hgvs_p", "NA")
 
@@ -88,29 +93,73 @@ if st.button("Retrieve ACMG Information"):
 
         acmg = variant.get("acmg_classification", "NA")
 
-        # -----------------------------
-        # ClinVar PARSING (NEW)
-        # -----------------------------
-        clinvar_summary = variant.get("clinvar_submissions_summary", "")
+        acmg_german = {
+            "Pathogenic": "pathogene",
+            "Likely pathogenic": "wahrscheinlich pathogene",
+            "Uncertain significance": "unklarer Signifikanz",
+            "Likely benign": "wahrscheinlich benigne",
+            "Benign": "benigne"
+        }.get(acmg, acmg)
 
-        clinvar_path = "0"
-        clinvar_us = "0"
-        clinvar_other = "0"
+        # -----------------------------
+        # ACMG CRITERIA FORMAT
+        # -----------------------------
+        acmg_criteria = variant.get("acmg_criteria", "NA")
+
+        if acmg_criteria:
+            acmg_criteria = acmg_criteria.replace(",", ", ")
+
+        # -----------------------------
+        # ClinVar PARSING
+        # -----------------------------
+        clinvar_summary = variant.get(
+            "clinvar_submissions_summary",
+            ""
+        )
+
+        pathogenic_count = "0"
+        vus_count = "0"
+        benign_count = "0"
 
         if clinvar_summary:
-            parts = clinvar_summary.split()
 
-            for p in parts:
-                if p.startswith("P:"):
-                    clinvar_path = p.replace("P:", "")
-                elif p.startswith("US:"):
-                    clinvar_us = p.replace("US:", "")
-                elif p.startswith("O:"):
-                    clinvar_other = p.replace("O:", "")
+            for item in clinvar_summary.split():
 
-        clinvar_text = f"""
-Diese Variante wurde in der ClinVar-Datenbank bislang mit {clinvar_path} Einträgen als pathogen, mit {clinvar_us} Einträgen als unklare Signifikanz und mit {clinvar_other} Einträgen als benigne bzw. sonstige klassifiziert.
-"""
+                if item.startswith("P:"):
+                    pathogenic_count = item.replace("P:", "")
+
+                elif item.startswith("US:"):
+                    vus_count = item.replace("US:", "")
+
+                elif item.startswith("O:"):
+                    benign_count = item.replace("O:", "")
+
+        clinvar_text = (
+            f"Diese Variante wurde in der ClinVar-Datenbank bislang "
+            f"mit {pathogenic_count} Einträgen als pathogen, "
+            f"mit {vus_count} Einträgen als unklare Signifikanz "
+            f"und mit {benign_count} Einträgen als benigne bzw. sonstige "
+            f"Klassifikationen beschrieben."
+        )
+
+        # -----------------------------
+        # gnomAD
+        # -----------------------------
+        allele_frequency = variant.get(
+            "frequency_reference_population"
+        )
+
+        if allele_frequency is None:
+            gnomad_text = (
+                "In der Populationsdatenbank gnomAD ist die Variante "
+                "nicht aufgeführt."
+            )
+        else:
+            gnomad_text = (
+                f"In der Populationsdatenbank gnomAD ist die Variante "
+                f"mit einer Allelfrequenz von {allele_frequency} "
+                f"aufgeführt."
+            )
 
         # -----------------------------
         # OUTPUT
@@ -120,7 +169,10 @@ Diese Variante wurde in der ClinVar-Datenbank bislang mit {clinvar_path} Einträ
 
         if is_frameshift:
 
-            exon_text = f"Exon {exon_rank} von {exon_count}" if exon_rank and exon_count else "Exon XX von XX"
+            exon_text = "Exon XX von XX"
+
+            if exon_rank and exon_count:
+                exon_text = f"Exon {exon_rank} von {exon_count}"
 
             gene_md = f"*{gene}*"
             hgvs_md = f"{hgvs_c} ({hgvs_p})"
@@ -128,28 +180,33 @@ Diese Variante wurde in der ClinVar-Datenbank bislang mit {clinvar_path} Einträ
             report = f"""
 Die o. g. Leseraster-Variante im {gene_md}-Gen ({hgvs_md}) führt durch eine Leserasterverschiebung (Frameshift) zum Auftreten eines vorzeitigen Stopcodons und zum Abbruch der Translation des korrespondierenden Proteins in {exon_text}.
 
-[NMD]Sehr wahrscheinlich wird von dem betroffenen Allel kein Protein gebildet, da mit einem vorzeitigen Abbau der mRNA per Nonsense Mediated mRNA Decay (NMD) gerechnet werden muss.
+[NMD] Sehr wahrscheinlich wird von dem betroffenen Allel kein Protein gebildet, da mit einem vorzeitigen Abbau der mRNA per Nonsense Mediated mRNA Decay (NMD) gerechnet werden muss.
 
 [ODER]
-Am ehesten wird ein C-terminal verkürztes, möglicherweise funktionsverändertes Protein gebildet.
+
+Am ehesten wird ein C-terminal verkürztes, möglicherweise funktionsverändertes Protein gebildet. Hingegen muss nicht mit einem vorzeitigen Abbau der mRNA per Nonsense Mediated mRNA Decay (NMD) gerechnet werden (PMID: 33277042).
+
+Eine tatsächliche Auswirkung der Variante wurde bislang nicht funktionell untersucht.
 
 {clinvar_text}
 
-Allelzahl gnomAD: {variant.get("allele_count_reference_population","NA")}.
+{gnomad_text}
 
-ACMG Kriterien: {variant.get("acmg_criteria","NA")} → Bewertung: {acmg}.
+Gemäß aktuellen ClinGen-/ACMG-Empfehlungen zur Variantenbewertung (PMIDs 25741868, 30192042) sind die Kriterien {acmg_criteria} erfüllt, sodass sich eine Bewertung als {acmg_german} Variante ergibt.
 """
 
             st.markdown("### 🧬 Klinischer Frameshift-Bericht")
-            st.write(report)
+            st.markdown(report)
 
         else:
-            st.info(f"Kein Frameshift erkannt (Typ: {consequence_type})")
+            st.info(
+                f"Kein Frameshift erkannt (Typ: {consequence_type})"
+            )
 
         # -----------------------------
-        # RAW JSON (optional only)
+        # RAW JSON
         # -----------------------------
-        with st.expander("Raw JSON"):
+        with st.expander("Show Raw JSON"):
             st.json(data)
 
     except requests.exceptions.RequestException as e:
