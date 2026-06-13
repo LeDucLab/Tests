@@ -220,8 +220,10 @@ Gemäß aktuellen ClinGen-/ACMG-Empfehlungen zur Variantenbewertung (PMIDs 25741
             comp_call = variant.get("computational_prediction_selected")
 
             # choose score source
-            if revel is not None:
-                score_text = f"REVEL-Score {revel} (PMID: 27666373)"
+            if revel is not None and alphamissense is not None:
+                score_text = f"REVEL-Score {revel}, AlphaMissense-Score {alphamissense} (PMID: 27666373)"
+            elif revel is not None:
+                score_text = f"REVEL-Score {revel}, AlphaMissense-Score {alphamissense} (PMID: 27666373)"
             elif alphamissense is not None:
                 score_text = f"AlphaMissense-Score {alphamissense} (PMID: 37733863)"
             else:
