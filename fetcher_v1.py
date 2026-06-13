@@ -129,7 +129,7 @@ if st.button("Retrieve ACMG Information"):
         acmg_criteria = variant.get("acmg_criteria", "NA").replace(",", ", ")
 
         gene_md = f"<b><i>{gene}</i>-Gene</b>"
-        hgvs_md = f"*{transcript}:{hgvs_c}, p({hgvs_p})*"
+        hgvs_md = f"<b>{transcript}:{hgvs_c}, p({hgvs_p})</b>"
 
         exon_text = (
             f"Exon {exon_rank} von {exon_count}"
@@ -180,7 +180,7 @@ if st.button("Retrieve ACMG Information"):
             report = f"""
 {bewertung_html}
 
-Die o. g. Leseraster-Variante im {gene_md}-Gen ({hgvs_md}) führt durch eine Leserasterverschiebung (Frameshift) zum Auftreten eines vorzeitigen Stopcodons und zum Abbruch der Translation des korrespondierenden Proteins in {exon_text}.
+Die o. g. Leseraster-Variante im {gene_md} ({hgvs_md}) führt durch eine Leserasterverschiebung (Frameshift) zum Auftreten eines vorzeitigen Stopcodons und zum Abbruch der Translation des korrespondierenden Proteins in {exon_text}.
 
 {nmd_html}
 
