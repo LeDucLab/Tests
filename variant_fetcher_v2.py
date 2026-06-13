@@ -117,7 +117,7 @@ if st.button("Retrieve ACMG Information"):
         # -----------------------------
         gene = csq.get("gene_symbol", variant.get("gene_symbol", "UnknownGene"))
         #transcript = csq.get("transcript", csq.get("feature", "NA"))
-        transcript = variant.get("transcript",csq.get("transcript", csq.get("feature", "NA"))
+        transcript = variant.get("transcript",csq.get("transcript", csq.get("feature", "NA")))
 
 
         hgvs_c = csq.get("hgvs_c", "NA")
