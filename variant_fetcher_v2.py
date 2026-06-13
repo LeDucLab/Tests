@@ -230,8 +230,11 @@ if st.button("Retrieve ACMG Information"):
             #elif item.startswith("O:"):
               #  o = item.replace("O:", "")
         #clinvar_data = fetch_clinvar_counts(f"{chromosome} {position} {reference} {alternate}")
-        query = csq.get("hgvs_c", f"{gene} {chromosome}:{position}{reference}>{alternate}")
+        #query = csq.get("hgvs_c", f"{gene} {chromosome}:{position}{reference}>{alternate}")
+        query = hgvs_c if hgvs_c != "NA" else f"{gene} {chromosome}:{position}{reference}>{alternate}"
         clinvar_data = fetch_clinvar_counts(query)
+        clinvar_json = fetch_clinvar_json(query)
+       
 
         p = clinvar_data["P"]
         lp = clinvar_data["LP"]
@@ -370,7 +373,7 @@ if st.button("Show ClinVar JSON"):
         st.warning("Enter a variant first.")
         st.stop()
 
-    query = f"{chromosome} {position} {reference} {alternate}"
+    query = hgvs_c if hgvs_c != "NA" else f"{gene} {chromosome}:{position}{reference}>{alternate}"
 
     clinvar_json = fetch_clinvar_json(query)
 
