@@ -167,12 +167,11 @@ if st.button("Retrieve ACMG Information"):
                 if hom_count == 0
                 else f"{hom_count} homozygote Träger")
 
-       gnomad_text = (
+        gnomad_text = (
         f"In der Populationsdatenbank gnomAD v4.1.1 beträgt die Allelfrequenz {af} "
         f"und es wurden {homo_text} beobachtet.")
-        else:
-        gnomad_text = (
-        "In der Populationsdatenbank gnomAD v4.1.1 ist die Variante nicht vorhanden.")
+            else:
+            gnomad_text = ("In der Populationsdatenbank gnomAD v4.1.1 ist die Variante nicht vorhanden.")
         nmd_text = (f"[NMD] Sehr wahrscheinlich wird von dem betroffenen Allel kein Protein gebildet, da mit einem vorzeitigen Abbau der mRNA per Nonsense Mediated mRNA Decay (NMD) gerechnet werden muss.[ODER][kein NMD]Am ehesten wird ein C-terminal [um >10%] verkürztes, möglicherweise // wahrscheinlich funktionsverändertes Protein gebildet [, da es zum Verlust der funktionell kritischen XXX-Domäne kommt (PMID XXX)]. Hingegen muss nicht mit einem vorzeitigen Abbau der mRNA per Nonsense Mediated mRNA Decay (NMD) gerechnet werden (PMID: 33277042).")
         bewertung_text = (f"Vor Bewertung auf aktuelle VCEP prüfen: https://cspec.genome.network/cspec/ui/svi/")
         funktionell_text = (f"Eine tatsächliche Auswirkung der Variante wurde bislang nicht funktionell untersucht. [ODER] Eine tatsächliche Auswirkung der Variante wurde durch funktionelle Untersuchungen bestätigt (PMID XXX).")
