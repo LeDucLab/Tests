@@ -1,5 +1,6 @@
 import streamlit as st
 import requests
+import xml.etree.ElementTree as ET
 
 st.set_page_config(page_title="GeneBe ACMG Retrieval", page_icon="🧬")
 
@@ -67,7 +68,62 @@ params = {
     "omitCsq": "false",
     "genome": "hg38"
 }
+# -----------------------------
+# CLINVAR API
+# -----------------------------
+def fetch_clinvar_counts(hgvs_or_id: str):
+    """
+    Fetch ClinVar data via NCBI E-utilities and compute P/LP/VUS/O counts.
+    """
 
+    base = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/"
+
+    # 1. Search ClinVar
+    search = requests.get(
+        base + "esearch.fcgi",
+        params={"db": "clinvar", "term": hgvs_or_id, "retmode": "json"},
+        timeout=15
+    ).json()
+
+    ids = search.get("esearchresult", {}).get("idlist", [])
+    if not ids:
+        return {"P": 0, "LP": 0, "VUS": 0, "O": 0}
+
+    clinvar_id = ids[0]
+
+    # 2. Fetch full record (XML)
+    fetch = requests.get(
+        base + "efetch.fcgi",
+        params={"db": "clinvar", "id": clinvar_id, "retmode": "xml"},
+        timeout=15
+    )
+
+    root = ET.fromstring(fetch.text)
+
+    p = lp = vus = o = 0
+
+    # 3. Parse ClinicalSignificance tags
+    for sig in root.findall(".//ClinicalSignificance/Description"):
+        val = sig.text
+
+        if not val:
+            continue
+
+        val = val.lower()
+
+        if "pathogenic" == val:
+            p += 1
+        elif "likely pathogenic" == val:
+            lp += 1
+        elif "uncertain" in val:
+            vus += 1
+        elif "benign" in val or "likely benign" in val:
+            o += 1
+        else:
+            o += 1
+
+    return {"P": p, "LP": lp, "VUS": vus, "O": o}
+    
 # -----------------------------
 # FETCH
 # -----------------------------
