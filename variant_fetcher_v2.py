@@ -361,19 +361,24 @@ Gemäß aktuellen ClinGen-/ACMG-Empfehlungen zur Variantenbewertung (PMIDs 25741
 # -----------------------------
 # RAW JSON VIEW BUTTON
 # -----------------------------
-if st.button("Show raw JSON"):
-    if st.session_state.get("data") is not None:
-        st.json(st.session_state["data"])
-    else:
-        st.warning("No data loaded yet. Run 'Retrieve ACMG Information' first.")
-
-
 if st.button("Show ClinVar JSON"):
+
     if not all([chromosome, position, reference, alternate]):
         st.warning("Enter a variant first.")
         st.stop()
 
+    variant = st.session_state.get("variant", {})
+    csq = st.session_state.get("csq", {})
+
+    gene = csq.get("gene_symbol", "UnknownGene")
+    hgvs_c = csq.get("hgvs_c", "NA")
+
     query = hgvs_c if hgvs_c != "NA" else f"{gene} {chromosome}:{position}{reference}>{alternate}"
+
+    clinvar_json = fetch_clinvar_json(query)
+
+    st.subheader("🧬 ClinVar JSON (ESearch + ESummary)")
+    st.json(clinvar_json)
 
     clinvar_json = fetch_clinvar_json(query)
 
