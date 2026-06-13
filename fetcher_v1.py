@@ -129,7 +129,7 @@ if st.button("Retrieve ACMG Information"):
         acmg_criteria = variant.get("acmg_criteria", "NA").replace(",", ", ")
 
         gene_md = f"<b><i>{gene}</i>-Gene</b>"
-        hgvs_md = f"<b>({transcript}:{hgvs_c}, p({hgvs_p})=</b>"
+        hgvs_md = f"<b>({transcript}:{hgvs_c}, p({hgvs_p}))</b>"
 
         exon_text = (
             f"Exon {exon_rank} von {exon_count}"
