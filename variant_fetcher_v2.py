@@ -97,6 +97,53 @@ def fetch_clinvar_json(query: str):
         "search": search,
         "summary": summary
     }
+def fetch_clinvar_counts(query: str):
+    base = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/"
+
+    search = requests.get(
+        base + "esearch.fcgi",
+        params={"db": "clinvar", "term": query, "retmode": "json", "retmax": 5},
+        timeout=15
+    ).json()
+
+    ids = search.get("esearchresult", {}).get("idlist", [])
+
+    if not ids:
+        return {"P": 0, "LP": 0, "VUS": 0, "O": 0}
+
+    p = lp = vus = o = 0
+
+    for clinvar_id in ids[:5]:
+
+        fetch = requests.get(
+            base + "efetch.fcgi",
+            params={"db": "clinvar", "id": clinvar_id, "retmode": "xml"},
+            timeout=15
+        )
+
+        try:
+            root = ET.fromstring(fetch.text)
+        except Exception:
+            continue
+
+        for sig in root.findall(".//ClinicalSignificance/Description"):
+            if sig.text is None:
+                continue
+
+            val = sig.text.lower()
+
+            if val == "pathogenic":
+                p += 1
+            elif "likely pathogenic" in val:
+                lp += 1
+            elif "uncertain" in val:
+                vus += 1
+            elif "benign" in val:
+                o += 1
+            else:
+                o += 1
+
+    return {"P": p, "LP": lp, "VUS": vus, "O": o}
     
 # -----------------------------
 # FETCH
