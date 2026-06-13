@@ -15,20 +15,42 @@ if "data" not in st.session_state:
 # -----------------------------
 # INPUT
 # -----------------------------
+import re
+
 variant_input = st.text_input(
-    "Variant (chr pos ref alt)",
-    placeholder="chr22 28695868 C T"
+    "Variant",
+    placeholder="chr11-108325416 C>T"
 )
 
 chromosome = position = reference = alternate = None
 
 if variant_input:
-    parts = variant_input.strip().replace(",", " ").split()
-    if len(parts) == 4:
-        chromosome, position, reference, alternate = parts
-    else:
-        st.error("Invalid format. Use: chr pos ref alt")
 
+    text = variant_input.strip()
+
+    # Format: chr11-108325416 C>T
+    m = re.match(
+        r"^(chr[\w]+)-(\d+)\s+([ACGT]+)>([ACGT]+)$",
+        text,
+        re.IGNORECASE
+    )
+
+    if m:
+        chromosome, position, reference, alternate = m.groups()
+
+    else:
+        # Format: chr11 108325416 C T
+        parts = text.replace(",", " ").split()
+
+        if len(parts) == 4:
+            chromosome, position, reference, alternate = parts
+        else:
+            st.error(
+                "Use either:\n"
+                "chr11-108325416 C>T\n"
+                "or\n"
+                "chr11 108325416 C T"
+            )
 # -----------------------------
 # API
 # -----------------------------
