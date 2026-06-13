@@ -164,12 +164,13 @@ if st.button("Retrieve ACMG Information"):
 
         data = response.json()
         st.session_state["data"] = data
-        st.session_state["csq"] = csq
+        
 
         variant = data.get("variants", [{}])[0]
 
         # IMPORTANT FIX: correct consequence extraction
         csq = variant.get("consequences", [{}])[0]
+        st.session_state["csq"] = csq
 
         effects = csq.get("consequences", []) or csq.get("effects", [])
 
