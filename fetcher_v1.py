@@ -179,9 +179,13 @@ if st.button("Retrieve ACMG Information"):
 
             report = f"""
 {bewertung_html}
+
 Die o. g. Leseraster-Variante im {gene_md}-Gen ({hgvs_md}) führt durch eine Leserasterverschiebung (Frameshift) zum Auftreten eines vorzeitigen Stopcodons und zum Abbruch der Translation des korrespondierenden Proteins in {exon_text}.
+
 {nmd_html}
+
 {funktionell_html}
+
 {clinvar_text}
 {gnomad_text}
 
