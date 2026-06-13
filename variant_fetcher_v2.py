@@ -229,7 +229,9 @@ if st.button("Retrieve ACMG Information"):
              #   us = item.replace("US:", "")
             #elif item.startswith("O:"):
               #  o = item.replace("O:", "")
-        clinvar_data = fetch_clinvar_counts(f"{chromosome} {position} {reference} {alternate}")
+        #clinvar_data = fetch_clinvar_counts(f"{chromosome} {position} {reference} {alternate}")
+        query = csq.get("hgvs_c", f"{gene} {chromosome}:{position}{reference}>{alternate}")
+        clinvar_data = fetch_clinvar_counts(query)
 
         p = clinvar_data["P"]
         lp = clinvar_data["LP"]
