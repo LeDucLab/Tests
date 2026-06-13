@@ -166,11 +166,9 @@ if st.button("Retrieve ACMG Information"):
             if af
             else "In der Populationsdatenbank gnomAD v4.1.1 ist die Variante nicht vorhanden."
         )
-        nmd_text = (f"[NMD] Sehr wahrscheinlich wird von dem betroffenen Allel kein Protein gebildet, da mit einem vorzeitigen Abbau der mRNA per Nonsense Mediated mRNA Decay (NMD) gerechnet werden muss.
-[ODER][kein NMD]Am ehesten wird ein C-terminal [um >10%] verkürztes, möglicherweise // wahrscheinlich funktionsverändertes Protein gebildet [, da es zum Verlust der funktionell kritischen XXX-Domäne kommt (PMID XXX)]. Hingegen muss nicht mit einem vorzeitigen Abbau der mRNA per Nonsense Mediated mRNA Decay (NMD) gerechnet werden (PMID: 33277042).")
+        nmd_text = (f"[NMD] Sehr wahrscheinlich wird von dem betroffenen Allel kein Protein gebildet, da mit einem vorzeitigen Abbau der mRNA per Nonsense Mediated mRNA Decay (NMD) gerechnet werden muss.[ODER][kein NMD]Am ehesten wird ein C-terminal [um >10%] verkürztes, möglicherweise // wahrscheinlich funktionsverändertes Protein gebildet [, da es zum Verlust der funktionell kritischen XXX-Domäne kommt (PMID XXX)]. Hingegen muss nicht mit einem vorzeitigen Abbau der mRNA per Nonsense Mediated mRNA Decay (NMD) gerechnet werden (PMID: 33277042).")
         bewertung_text = (f"Vor Bewertung auf aktuelle VCEP prüfen: https://cspec.genome.network/cspec/ui/svi/")
-        funktionell_text = (f"Eine tatsächliche Auswirkung der Variante wurde bislang nicht funktionell untersucht. 
-[ODER] Eine tatsächliche Auswirkung der Variante wurde durch funktionelle Untersuchungen bestätigt (PMID XXX).")
+        funktionell_text = (f"Eine tatsächliche Auswirkung der Variante wurde bislang nicht funktionell untersucht. [ODER] Eine tatsächliche Auswirkung der Variante wurde durch funktionelle Untersuchungen bestätigt (PMID XXX).")
         bewertung_html = f"<span style='color:orange;'>{bewertung_text}</span>"
         nmd_html = f"<span style='color:orange;'>{nmd_text}</span>"
         funktionell_html = f"<span style='color:orange;'>{funktionell_text}</span>"
