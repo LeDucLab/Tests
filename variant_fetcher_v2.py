@@ -164,6 +164,7 @@ if st.button("Retrieve ACMG Information"):
 
         data = response.json()
         st.session_state["data"] = data
+        st.session_state["csq"] = csq
 
         variant = data.get("variants", [{}])[0]
 
@@ -363,24 +364,25 @@ Gemäß aktuellen ClinGen-/ACMG-Empfehlungen zur Variantenbewertung (PMIDs 25741
 # -----------------------------
 if st.button("Show ClinVar JSON"):
 
-    if not all([chromosome, position, reference, alternate]):
-        st.warning("Enter a variant first.")
+    if not st.session_state.get("variant"):
+        st.warning("Run GeneBe retrieval first.")
         st.stop()
 
-    variant = st.session_state.get("variant", {})
-    csq = st.session_state.get("csq", {})
+    variant = st.session_state["variant"]
+    csq = st.session_state["csq"]
 
     gene = csq.get("gene_symbol", "UnknownGene")
+    transcript = variant.get("transcript", csq.get("transcript", "NA"))
     hgvs_c = csq.get("hgvs_c", "NA")
 
-    query = f"{transcript}:{hgvs_c}"
+    if hgvs_c != "NA" and transcript != "NA":
+        query = f"{transcript}:{hgvs_c}"
+    elif hgvs_c != "NA":
+        query = f"{gene} {hgvs_c}"
+    else:
+        query = f"{gene} {chromosome}:{position}{reference}>{alternate}"
 
     clinvar_json = fetch_clinvar_json(query)
 
-    st.subheader("🧬 ClinVar JSON (ESearch + ESummary)")
-    st.json(clinvar_json)
-
-    clinvar_json = fetch_clinvar_json(query)
-
-    st.subheader("🧬 ClinVar JSON (ESearch + ESummary)")
+    st.subheader("🧬 ClinVar JSON")
     st.json(clinvar_json)
