@@ -197,21 +197,29 @@ if st.button("Retrieve ACMG Information"):
         # -----------------------------
         # ClinVar parsing
         # -----------------------------
-        clinvar_summary = variant.get("clinvar_submissions_summary", "")
+        #clinvar_summary = variant.get("clinvar_submissions_summary", "")
 
-        p = us = o = "0"
+        #p = us = o = "0"
 
-        for item in clinvar_summary.split():
-            if item.startswith("P:"):
-                p = item.replace("P:", "")
-            elif item.startswith("US:"):
-                us = item.replace("US:", "")
-            elif item.startswith("O:"):
-                o = item.replace("O:", "")
+        #for item in clinvar_summary.split():
+            #if item.startswith("P:"):
+               # p = item.replace("P:", "")
+            #elif item.startswith("US:"):
+             #   us = item.replace("US:", "")
+            #elif item.startswith("O:"):
+              #  o = item.replace("O:", "")
+        clinvar_data = fetch_clinvar_counts(f"{chromosome} {position} {reference} {alternate}")
 
+        p = clinvar_data["P"]
+        lp = clinvar_data["LP"]
+        vus = clinvar_data["VUS"]
+        o = clinvar_data["O"]
         clinvar_text = (
             f"Diese Variante wurde in ClinVar {p}× pathogen, {us}× unklar, {o}× benign/sonstige klassifiziert."
         )
+        #clinvar_text = (
+         #   f"Diese Variante wurde in ClinVar {p}× pathogen, {us}× unklar, {o}× benign/sonstige klassifiziert."
+        #)
 
         # -----------------------------
         # gnomAD
