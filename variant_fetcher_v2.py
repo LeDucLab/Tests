@@ -215,7 +215,7 @@ if st.button("Retrieve ACMG Information"):
         vus = clinvar_data["VUS"]
         o = clinvar_data["O"]
         clinvar_text = (
-            f"Diese Variante wurde in ClinVar {p}× pathogen, {us}× unklar, {o}× benign/sonstige klassifiziert."
+            f"Diese Variante wurde in ClinVar {p}× pathogen, {lp}× wahrscheinlich pathogen, {vus}× unklar, {o}× benign/sonstige klassifiziert."
         )
         #clinvar_text = (
          #   f"Diese Variante wurde in ClinVar {p}× pathogen, {us}× unklar, {o}× benign/sonstige klassifiziert."
