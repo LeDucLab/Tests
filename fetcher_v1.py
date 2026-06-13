@@ -258,7 +258,7 @@ Gemäß aktuellen ClinGen-/ACMG-Empfehlungen zur Variantenbewertung (PMIDs 25741
         # OUTPUT (ONLY HERE!)
         # -----------------------------
         st.subheader("🧬 Klinischer Bericht")
-        st.write(report)
+        st.markdown(report, unsafe_allow_html=True)
 
     except requests.exceptions.RequestException as e:
         st.error(f"Network error: {e}")
