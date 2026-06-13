@@ -231,7 +231,7 @@ if st.button("Retrieve ACMG Information"):
               #  o = item.replace("O:", "")
         #clinvar_data = fetch_clinvar_counts(f"{chromosome} {position} {reference} {alternate}")
         #query = csq.get("hgvs_c", f"{gene} {chromosome}:{position}{reference}>{alternate}")
-        query = hgvs_c if hgvs_c != "NA" else f"{gene} {chromosome}:{position}{reference}>{alternate}"
+        query = f"{transcript}:{hgvs_c}"
         clinvar_data = fetch_clinvar_counts(query)
         clinvar_json = fetch_clinvar_json(query)
        
@@ -373,7 +373,7 @@ if st.button("Show ClinVar JSON"):
     gene = csq.get("gene_symbol", "UnknownGene")
     hgvs_c = csq.get("hgvs_c", "NA")
 
-    query = hgvs_c if hgvs_c != "NA" else f"{gene} {chromosome}:{position}{reference}>{alternate}"
+    query = f"{transcript}:{hgvs_c}"
 
     clinvar_json = fetch_clinvar_json(query)
 
