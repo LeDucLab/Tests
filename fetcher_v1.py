@@ -169,9 +169,11 @@ if st.button("Retrieve ACMG Information"):
         nmd_text = (f"[NMD] Sehr wahrscheinlich wird von dem betroffenen Allel kein Protein gebildet, da mit einem vorzeitigen Abbau der mRNA per Nonsense Mediated mRNA Decay (NMD) gerechnet werden muss.[ODER][kein NMD]Am ehesten wird ein C-terminal [um >10%] verkürztes, möglicherweise // wahrscheinlich funktionsverändertes Protein gebildet [, da es zum Verlust der funktionell kritischen XXX-Domäne kommt (PMID XXX)]. Hingegen muss nicht mit einem vorzeitigen Abbau der mRNA per Nonsense Mediated mRNA Decay (NMD) gerechnet werden (PMID: 33277042).")
         bewertung_text = (f"Vor Bewertung auf aktuelle VCEP prüfen: https://cspec.genome.network/cspec/ui/svi/")
         funktionell_text = (f"Eine tatsächliche Auswirkung der Variante wurde bislang nicht funktionell untersucht. [ODER] Eine tatsächliche Auswirkung der Variante wurde durch funktionelle Untersuchungen bestätigt (PMID XXX).")
+        intoleranz_text = (f"[Das Gen weist empirisch eine // keine signifikante Intoleranz gegenüber genetischer Variation auf (Z-Score >3,09 // <3,10, PMID: 27535533). für PP2 nur alleine verwenden wenn lt. spezifischer VCEP zulässig, sonst zusätzlich regionaler Constraint erforderlich (s.u.)] [ODER][Das Gen weist empirisch zwar eine allgemein, die betroffene Proteindomäne jedoch keine regional signifikante Intoleranz gegenüber genetischer Variation auf (Z-Score >3,09, PMID: 27535533; MCR missense OE > 0,37, PMID: 38645134) [ODER] MetaDome dN/dS-Score >0,52, PMID: 31116477).] [ODER] [Das Gen und die betroffene Proteindomäne weisen empirisch eine signifikante Intoleranz gegenüber genetischer Variation auf (Z-Score >3,09 PMID: 27535533; MCR missense OE ≤ 0,37, PMID: 38645134) [ODER] MetaDome dN/dS-Score <0,53, PMID: 31116477).] [ggf. PM1 ergänzen]")
         bewertung_html = f"<span style='color:orange;'>{bewertung_text}</span>"
         nmd_html = f"<span style='color:orange;'>{nmd_text}</span>"
         funktionell_html = f"<span style='color:orange;'>{funktionell_text}</span>"
+        intoleranz_html = f"<span style='color:orange;'>{intoleranz_text}</span>"
         # -----------------------------
         # REPORT TEMPLATES
         # -----------------------------
@@ -195,15 +197,13 @@ Gemäß aktuellen ClinGen-/ACMG-Empfehlungen zur Variantenbewertung (PMIDs 25741
         elif variant_type == "nonsense":
 
             report = f"""
-Vor Bewertung auf aktuelle VCEP prüfen: https://cspec.genome.network/cspec/ui/svi/
+{bewertung_html}
 
-Die o. g. Nonsense-Variante im {gene_md}-Gen ({hgvs_md}) führt zum Auftreten eines vorzeitigen Stopcodons und zum Abbruch der Translation des korrespondierenden Proteins in {exon_text}.
+Die o. g. Nonsense-Variante im {gene_md} {hgvs_md} führt zum Auftreten eines vorzeitigen Stopcodons und zum Abbruch der Translation des korrespondierenden Proteins in {exon_text}.
 
-[NMD] Sehr wahrscheinlich wird von dem betroffenen Allel kein Protein gebildet, da mit einem vorzeitigen Abbau der mRNA per Nonsense Mediated mRNA Decay (NMD) gerechnet werden muss.
-[ODER][kein NMD]Am ehesten wird ein C-terminal [um >10%] verkürztes, möglicherweise // wahrscheinlich funktionsverändertes Protein gebildet [, da es zum Verlust der funktionell kritischen XXX-Domäne kommt (PMID XXX)]. Hingegen muss nicht mit einem vorzeitigen Abbau der mRNA per Nonsense Mediated mRNA Decay (NMD) gerechnet werden (PMID: 33277042).
+{nmd_html}
 
-Eine tatsächliche Auswirkung der Variante wurde bislang nicht funktionell untersucht. 
-[ODER] Eine tatsächliche Auswirkung der Variante wurde durch funktionelle Untersuchungen bestätigt (PMID XXX). 
+{funktionell_html}
 
 {clinvar_text}
 {gnomad_text}
@@ -229,29 +229,23 @@ Gemäß aktuellen ClinGen-/ACMG-Empfehlungen zur Variantenbewertung (PMIDs 25741
 
             # map computational prediction into German phrasing if present
             comp_map = {
-        "Pathogenic": "hoch wahrscheinlich",
-        "Likely pathogenic": "moderat wahrscheinlich",
+        "Pathogenic": "pathogen",
+        "Likely pathogenic": "wahrscheinlich pathogen",
         "Benign": "unwahrscheinlich",
-        "Likely benign": "niedrig wahrscheinlich",
+        "Likely benign": "wahrscheinlich benigne",
         "Uncertain significance": "unklar"}
             comp_class = comp_map.get(comp_call, "unklar")
 
             report = f"""
-Vor Bewertung auf aktuelle VCEP prüfen: https://cspec.genome.network/cspec/ui/svi/
+{bewertung_html}
 
-Die o. g. Missense-Variante im {gene_md}-Gen ({hgvs_md}) führt zu einem Aminosäureaustausch im korrespondierenden Protein.
+Die o. g. Missense-Variante im {gene_md} {hgvs_md} führt zu einem Aminosäureaustausch im korrespondierenden Protein.
 
-[Das Gen weist empirisch eine // keine signifikante Intoleranz gegenüber genetischer Variation auf (Z-Score >3,09 // <3,10, PMID: 27535533). für PP2 nur alleine verwenden wenn lt. spezifischer VCEP zulässig, sonst zusätzlich regionaler Constraint erforderlich (s.u.)]
-[ODER]
-[Das Gen weist empirisch zwar eine allgemein, die betroffene Proteindomäne jedoch keine regional signifikante Intoleranz gegenüber genetischer Variation auf (Z-Score >3,09, PMID: 27535533; MCR missense OE > 0,37, PMID: 38645134) [ODER] MetaDome dN/dS-Score >0,52, PMID: 31116477).] 
-[ODER]
-[Das Gen und die betroffene Proteindomäne weisen empirisch eine signifikante Intoleranz gegenüber genetischer Variation auf (Z-Score >3,09 PMID: 27535533; MCR missense OE ≤ 0,37, PMID: 38645134) [ODER] MetaDome dN/dS-Score <0,53, PMID: 31116477).]
-[ggf. PM1 ergänzen] 
+{intoleranz_html}
 
 Die bioinformatische Proteineffektprädiktion beurteilt eine Pathogenität der Variante als {comp_class} ({score_text}).
 
-Eine tatsächliche Auswirkung der Variante wurde bislang nicht funktionell untersucht. 
-[ODER] Eine tatsächliche Auswirkung der Variante wurde durch funktionelle Untersuchungen bestätigt (PMID XXX). 
+{funktionell_html}
 
 {clinvar_text}
 {gnomad_text}
