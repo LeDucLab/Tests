@@ -4,7 +4,8 @@ import requests
 st.set_page_config(page_title="GeneBe ACMG Retrieval", page_icon="🧬")
 
 st.title("GeneBe ACMG Information Retrieval")
-st.write("Enter variant as hg38: chr pos ref alt (e.g. chr22 28695868 C T)")
+st.write("Enter variant in hg38 as e.g. chr11 108325416 C T or chr11-108325416 C>T")
+
 
 # -----------------------------
 # INIT SESSION STATE
