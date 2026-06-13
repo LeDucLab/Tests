@@ -71,58 +71,32 @@ params = {
 # -----------------------------
 # CLINVAR API
 # -----------------------------
-def fetch_clinvar_counts(hgvs_or_id: str):
-    """
-    Fetch ClinVar data via NCBI E-utilities and compute P/LP/VUS/O counts.
-    """
-
+def fetch_clinvar_json(query: str):
     base = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/"
 
-    # 1. Search ClinVar
+    # 1. search
     search = requests.get(
         base + "esearch.fcgi",
-        params={"db": "clinvar", "term": hgvs_or_id, "retmode": "json"},
+        params={"db": "clinvar", "term": query, "retmode": "json", "retmax": 5},
         timeout=15
     ).json()
 
     ids = search.get("esearchresult", {}).get("idlist", [])
+
     if not ids:
-        return {"P": 0, "LP": 0, "VUS": 0, "O": 0}
+        return {"search": search, "summary": None}
 
-    clinvar_id = ids[0]
-
-    # 2. Fetch full record (XML)
-    fetch = requests.get(
-        base + "efetch.fcgi",
-        params={"db": "clinvar", "id": clinvar_id, "retmode": "xml"},
+    # 2. summary (THIS is JSON)
+    summary = requests.get(
+        base + "esummary.fcgi",
+        params={"db": "clinvar", "id": ",".join(ids), "retmode": "json"},
         timeout=15
-    )
+    ).json()
 
-    root = ET.fromstring(fetch.text)
-
-    p = lp = vus = o = 0
-
-    # 3. Parse ClinicalSignificance tags
-    for sig in root.findall(".//ClinicalSignificance/Description"):
-        val = sig.text
-
-        if not val:
-            continue
-
-        val = val.lower()
-
-        if "pathogenic" == val:
-            p += 1
-        elif "likely pathogenic" == val:
-            lp += 1
-        elif "uncertain" in val:
-            vus += 1
-        elif "benign" in val or "likely benign" in val:
-            o += 1
-        else:
-            o += 1
-
-    return {"P": p, "LP": lp, "VUS": vus, "O": o}
+    return {
+        "search": search,
+        "summary": summary
+    }
     
 # -----------------------------
 # FETCH
@@ -340,3 +314,16 @@ if st.button("Show raw JSON"):
         st.json(st.session_state["data"])
     else:
         st.warning("No data loaded yet. Run 'Retrieve ACMG Information' first.")
+
+
+if st.button("Show ClinVar JSON"):
+    if not all([chromosome, position, reference, alternate]):
+        st.warning("Enter a variant first.")
+        st.stop()
+
+    query = f"{chromosome} {position} {reference} {alternate}"
+
+    clinvar_json = fetch_clinvar_json(query)
+
+    st.subheader("🧬 ClinVar JSON (ESearch + ESummary)")
+    st.json(clinvar_json)
