@@ -219,7 +219,7 @@ Die o. g. Leseraster-Variante im {gene_md} {hgvs_md} führt durch eine Leseraste
 {clinvar_text}
 {gnomad_text}
 
-Gemäß aktuellen ClinGen-/ACMG-Empfehlungen zur Variantenbewertung (PMIDs 25741868, 30192042) sind die Kriterien({acmg_criteria}) erfüllt, sodass sich eine Bewertung als {acmg} ergibt.
+Gemäß aktuellen ClinGen-/ACMG-Empfehlungen zur Variantenbewertung (PMIDs 25741868, 30192042) sind die Kriterien ({acmg_criteria}) erfüllt, sodass sich eine Bewertung als {acmg} ergibt.
 """
 
         elif variant_type == "nonsense":
@@ -236,7 +236,7 @@ Die o. g. Nonsense-Variante im {gene_md} {hgvs_md} führt zum Auftreten eines vo
 {clinvar_text}
 {gnomad_text}
 
-Gemäß aktuellen ClinGen-/ACMG-Empfehlungen zur Variantenbewertung (PMIDs 25741868, 30192042) sind die Kriterien({acmg_criteria}) erfüllt, sodass sich eine Bewertung als {acmg} ergibt.
+Gemäß aktuellen ClinGen-/ACMG-Empfehlungen zur Variantenbewertung (PMIDs 25741868, 30192042) sind die Kriterien ({acmg_criteria}) erfüllt, sodass sich eine Bewertung als {acmg} ergibt.
 """
 
         elif variant_type == "missense":
@@ -280,7 +280,7 @@ Die bioinformatische Proteineffektprädiktion beurteilt eine Pathogenität der V
 {clinvar_text}
 {gnomad_text}
 
-Gemäß aktuellen ClinGen-/ACMG-Empfehlungen zur Variantenbewertung (PMIDs 25741868, 30192042) sind die Kriterien({acmg_criteria}) erfüllt, sodass sich eine Bewertung als {acmg} ergibt.
+Gemäß aktuellen ClinGen-/ACMG-Empfehlungen zur Variantenbewertung (PMIDs 25741868, 30192042) sind die Kriterien ({acmg_criteria}) erfüllt, sodass sich eine Bewertung als {acmg} ergibt.
 """
         # -----------------------------
         # OUTPUT (ONLY HERE!)
