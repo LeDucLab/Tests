@@ -110,8 +110,7 @@ if st.button("Retrieve ACMG Information"):
         elif is_missense:
             variant_type = "missense"
         else:
-            st.info("No supported variant type detected.")
-            st.stop()
+            variant_type = "other"
 
         # -----------------------------
         # CORE FIELDS
