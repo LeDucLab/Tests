@@ -89,10 +89,18 @@ if st.button("Retrieve ACMG Information"):
         data = response.json()
         st.session_state["data"] = data
 
-        variant = data.get("variants", [{}])[0]
+        variants = data.get("variants", [])
 
-        # IMPORTANT FIX: correct consequence extraction
-        csq = variant.get("consequences", [{}])[0]
+        if not variants:
+            st.error(
+                "The reference allele is invalid or the variant could not be found.")
+            st.stop()
+        variant = variants[0]
+        if not variant.get("consequences"):
+            st.error(
+                "The reference allele is invalid or the variant could not be found.")
+            st.stop()
+        csq = variant["consequences"][0]
 
         effects = csq.get("consequences", []) or csq.get("effects", [])
 
