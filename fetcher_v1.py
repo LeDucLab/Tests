@@ -138,7 +138,14 @@ if st.button("Retrieve ACMG Information"):
         exon_rank = csq.get("exon_rank")
         exon_count = csq.get("exon_count")
 
-        acmg = variant.get("acmg_classification", "NA")
+        acmg_raw = variant.get("acmg_classification", "NA")
+        acmg_map = {"Pathogenic": "pathogen", 
+                    "Likely pathogenic": "wahrscheinlich pathogen",
+                    "Benign": "benigne",
+                    "Likely benign": "wahrscheinlich benigne",
+                    "Uncertain significance": "unklare Signifikanz",
+                    "NA": "nicht verfügbar"}
+        acmg = acmg_map.get(acmg_raw, acmg_raw)
         acmg_criteria = variant.get("acmg_criteria", "NA").replace(",", ", ")
 
         gene_md = f"<b><i>{gene}</i>-Gene</b>"
