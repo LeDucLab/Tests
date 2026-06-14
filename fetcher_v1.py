@@ -140,10 +140,10 @@ if st.button("Retrieve ACMG Information"):
 
         acmg_raw = variant.get("acmg_classification", "NA")
         acmg_map = {"Pathogenic": "pathogen", 
-                    "Likely pathogenic": "wahrscheinlich pathogen",
+                    "Likely_pathogenic": "wahrscheinlich pathogen",
                     "Benign": "benigne",
-                    "Likely benign": "wahrscheinlich benigne",
-                    "Uncertain significance": "unklare Signifikanz",
+                    "Likely_benign": "wahrscheinlich benigne",
+                    "Uncertain_significance": "unklare Signifikanz",
                     "NA": "nicht verfügbar"}
         acmg = acmg_map.get(acmg_raw, acmg_raw)
         acmg_criteria = variant.get("acmg_criteria", "NA").replace(",", ", ")
