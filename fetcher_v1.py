@@ -96,6 +96,12 @@ if st.button("Retrieve ACMG Information"):
                 "The reference allele is invalid or the variant could not be found.")
             st.stop()
         variant = variants[0]
+        returned_ref = variant.get("ref")
+        returned_alt = variant.get("alt")
+        if returned_ref and returned_ref.upper() != reference.upper():
+            st.error(
+                f"Reference allele mismatch. You entered {reference}, "f"but the hg38 reference allele at this position is {returned_ref}.")
+            st.stop()
         if not variant.get("consequences"):
             st.error(
                 "The reference allele is invalid or the variant could not be found.")
