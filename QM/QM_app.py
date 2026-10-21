@@ -1,10 +1,12 @@
 import csv
 import io
 import os
+import hashlib
+from pathlib import Path
 from datetime import datetime
 from zoneinfo import ZoneInfo
 import streamlit as st
-from core import TOPICS, connect, import_staff, submit
+from core import TOPICS, connect, import_staff, submit, export_pdfs
 
 st.set_page_config(page_title='Belehrungen · CMTD & GYN', page_icon='📋', layout='wide')
 st.title('Belehrungen · CMTD & GYN')
@@ -14,19 +16,32 @@ with connect(os.environ.get('BELEHRUNGEN_DB', 'data/belehrungen_ohne_login.db'))
     db.execute('CREATE TABLE IF NOT EXISTS app_settings(key TEXT PRIMARY KEY, value TEXT NOT NULL)')
     if not db.execute("SELECT 1 FROM app_settings WHERE key='initialized'").fetchone():
         with db:
-            db.executemany('INSERT OR IGNORE INTO employees VALUES(?,?,?,?)', [
-                ('test-cmtd', 'Mustermann', 'Erika', 'CMTD'),
-                ('test-gyn', 'Musterfrau', 'Anna', 'GYN')])
             db.execute('INSERT OR IGNORE INTO requirements VALUES(?,?)', (datetime.now(ZoneInfo('Europe/Berlin')).year, '|'.join(TOPICS)))
             db.execute("INSERT INTO app_settings VALUES('initialized','1')")
+    roster_path = Path(__file__).resolve().parent / 'mitarbeiter.csv'
+    if not roster_path.exists():
+        st.error('mitarbeiter.csv fehlt. Bitte die CSV im selben Ordner wie app.py ablegen.')
+        st.stop()
+    try:
+        roster_bytes = roster_path.read_bytes()
+        roster_hash = hashlib.sha256(roster_bytes).hexdigest()
+        previous = db.execute("SELECT value FROM app_settings WHERE key='roster_hash'").fetchone()
+        if previous is None or previous['value'] != roster_hash:
+            import_staff(db, roster_bytes, 'csv-datei')
+            with db:
+                db.execute("INSERT INTO app_settings VALUES('roster_hash',?) ON CONFLICT(key) DO UPDATE SET value=excluded.value", (roster_hash,))
+        roster_ids = [r['subject'].strip() for r in csv.DictReader(io.StringIO(roster_bytes.decode('utf-8-sig')), delimiter=';')]
+    except (OSError, ValueError, UnicodeError, csv.Error) as exc:
+        st.error(f'mitarbeiter.csv konnte nicht geladen werden: {exc}')
+        st.stop()
     view = st.sidebar.radio('Ansicht wählen', ['Mitarbeiter', 'Verwaltung'])
     admin = view == 'Verwaltung'
     employee = None
     subject = 'verwaltung-ohne-login'
     if not admin:
-        staff_choices = db.execute('SELECT * FROM employees ORDER BY nachname,vorname,subject').fetchall()
+        staff_choices = [r for r in db.execute('SELECT * FROM employees ORDER BY nachname,vorname,subject') if r['subject'] in roster_ids]
         if not staff_choices:
-            st.info('Bitte zuerst in der Verwaltung Mitarbeiter importieren.')
+            st.info('Bitte Mitarbeiter in mitarbeiter.csv neben app.py eintragen.')
             st.stop()
         selected = st.sidebar.selectbox('Mitarbeiter auswählen', range(len(staff_choices)), format_func=lambda i: f"{staff_choices[i]['vorname']} {staff_choices[i]['nachname']} · {staff_choices[i]['bereich']} · {staff_choices[i]['subject']}")
         employee = staff_choices[selected]
@@ -72,6 +87,19 @@ with connect(os.environ.get('BELEHRUNGEN_DB', 'data/belehrungen_ohne_login.db'))
             for row in rows:
                 writer.writerow({k: "'"+v if isinstance(v,str) and v.startswith(('=', '+', '-', '@', '\t', '\r')) else v for k,v in row.items()})
             st.download_button('Übersicht als CSV', out.getvalue().encode('utf-8-sig'), f'Belehrungen_{year}.csv', 'text/csv')
+        st.subheader('PDFs als Ordner herunterladen')
+        scope = st.radio('ZIP-Inhalt', ['Alle PDFs aus allen Jahren und Bereichen', 'Gewähltes Jahr und gefilterter Bereich'])
+        if st.button('ZIP erstellen'):
+            all_records = scope == 'Alle PDFs aus allen Jahren und Bereichen'
+            archive, count = export_pdfs(db, year=None if all_records else year,
+                                         department=None if all_records or department == 'Alle' else department)
+            if count:
+                st.success(f'{count} PDFs bereit. Nach dem Download die ZIP-Datei entpacken.')
+                st.download_button('ZIP herunterladen', archive,
+                                   'Belehrungen_Alle.zip' if all_records else f'Belehrungen_{year}_{department}.zip',
+                                   'application/zip')
+            else:
+                st.info('Für diese Auswahl sind keine PDFs vorhanden.')
         st.subheader('Eingereichte Nachweise prüfen')
         visible = {e['subject'] for e in staff if department == 'Alle' or e['bereich'] == department}
         for r in evidence.values():
@@ -94,12 +122,7 @@ with connect(os.environ.get('BELEHRUNGEN_DB', 'data/belehrungen_ohne_login.db'))
                 db.execute('INSERT INTO requirements VALUES(?,?) ON CONFLICT(year) DO UPDATE SET topics=excluded.topics', (year, '|'.join(chosen)))
                 db.execute('INSERT INTO audit(actor,action) VALUES(?,?)', (subject, f'Pflichtbelehrungen {year}: {chosen}'))
             st.rerun()
-        st.subheader('Mitarbeiterliste importieren')
-        st.write('CSV mit Semikolon: subject;nachname;vorname;bereich. Bereich: CMTD oder GYN. subject ist eine frei vergebene, eindeutige Mitarbeiter-ID (z. B. MA001). Bestehende Personen werden aktualisiert; fehlende nicht gelöscht.')
-        file = st.file_uploader('Mitarbeiterliste', type=['csv'])
-        if st.button('Liste importieren', disabled=file is None):
-            try:
-                count = import_staff(db, file.getvalue(), subject)
-                st.success(f'{count} Mitarbeiter übernommen.')
-            except (ValueError, UnicodeError, csv.Error) as exc:
-                st.error(str(exc))
+        st.subheader('Mitarbeiterliste')
+        st.write('Die Mitarbeiter werden automatisch aus mitarbeiter.csv im selben Ordner wie app.py geladen. Änderungen an der Datei werden beim nächsten Laden übernommen. Die subject-ID muss pro Person eindeutig und dauerhaft gleich bleiben.')
+        st.dataframe([dict(r) for r in db.execute('SELECT * FROM employees ORDER BY nachname,vorname') if r['subject'] in roster_ids], hide_index=True)
+        st.caption('Aus der CSV entfernte Personen sind nicht mehr auswählbar. Bereits gespeicherte Nachweise bleiben für den Export und die Gesamtübersicht erhalten.')
