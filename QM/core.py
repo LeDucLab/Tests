@@ -42,8 +42,8 @@ def import_staff(db, content, actor):
         raise ValueError('Spalten benötigt: subject;nachname;vorname;bereich')
     seen = set()
     for row in rows:
-        if any(not (row.get(k) or '').strip() for k in required) or row['bereich'].strip() not in ['CMTD', 'GYN']:
-            raise ValueError('Alle Felder ausfüllen; Bereich muss CMTD oder GYN sein.')
+        if any(not (row.get(k) or '').strip() for k in required) or row['bereich'].strip() not in ['KGE', 'CMTD', 'GYN']:
+            raise ValueError('Alle Felder ausfüllen; Bereich muss KGE, CMTD oder GYN sein.')
         if row['subject'].strip() in seen:
             raise ValueError('Doppelte subject-ID in der Mitarbeiterliste.')
         seen.add(row['subject'].strip())
