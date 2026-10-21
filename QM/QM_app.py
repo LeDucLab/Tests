@@ -8,8 +8,8 @@ from zoneinfo import ZoneInfo
 import streamlit as st
 from core import TOPICS, connect, import_staff, submit, export_pdfs
 
-st.set_page_config(page_title='Belehrungen · CMTD & GYN', page_icon='📋', layout='wide')
-st.title('Belehrungen · CMTD & GYN')
+st.set_page_config(page_title='Belehrungen · KGE, CMTD & GYN', page_icon='📋', layout='wide')
+st.title('Belehrungen · KGE, CMTD & GYN')
 st.caption('Jährliche Nachweise zentral einreichen und ihren Status verfolgen.')
 with connect(os.environ.get('BELEHRUNGEN_DB', 'data/belehrungen_ohne_login.db')) as db:
     db.execute('CREATE TABLE IF NOT EXISTS app_settings(key TEXT PRIMARY KEY, value TEXT NOT NULL)')
@@ -70,7 +70,7 @@ with connect(os.environ.get('BELEHRUNGEN_DB', 'data/belehrungen_ohne_login.db'))
                     st.error(f'{file.name}: {exc}')
     elif page == 'Gesamtübersicht' and admin:
         st.subheader(f'Gesamtübersicht {year}')
-        department = st.selectbox('Bereich filtern', ['Alle', 'CMTD', 'GYN'])
+        department = st.selectbox('Bereich filtern', ['Alle', 'KGE', 'CMTD', 'GYN'])
         staff = db.execute('SELECT * FROM employees ORDER BY nachname,vorname').fetchall()
         evidence = {(r['subject'], r['topic']): r for r in db.execute('SELECT id,subject,topic,status,filename,submitted FROM evidence WHERE year=?', (year,))}
         rows = []
