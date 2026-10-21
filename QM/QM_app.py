@@ -11,7 +11,6 @@ from core import TOPICS, connect, import_staff, submit, export_pdfs
 st.set_page_config(page_title='Belehrungen · CMTD & GYN', page_icon='📋', layout='wide')
 st.title('Belehrungen · CMTD & GYN')
 st.caption('Jährliche Nachweise zentral einreichen und ihren Status verfolgen.')
-st.warning('Testversion ohne Anmeldung: Alle Besucher können sämtliche Ansichten und Nachweise aufrufen und ändern. Bitte nur Testdaten verwenden.')
 with connect(os.environ.get('BELEHRUNGEN_DB', 'data/belehrungen_ohne_login.db')) as db:
     db.execute('CREATE TABLE IF NOT EXISTS app_settings(key TEXT PRIMARY KEY, value TEXT NOT NULL)')
     if not db.execute("SELECT 1 FROM app_settings WHERE key='initialized'").fetchone():
