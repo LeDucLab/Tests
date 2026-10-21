@@ -68,3 +68,29 @@ def submit(db, actor, filename, data, year, topics):
         except sqlite3.IntegrityError as exc:
             raise ValueError('Für diese Belehrung und dieses Jahr liegt bereits ein Nachweis vor. Bitte Verwaltung kontaktieren.') from exc
         db.execute('INSERT INTO audit(actor,action) VALUES(?,?)', (actor, f'Eingereicht: {topic}, {year}'))
+
+
+def export_pdfs(db, year=None, department=None):
+    """Create a ZIP with safe, unique paths and the original PDF bytes."""
+    import zipfile
+    def safe(value):
+        return re.sub(r'[^\w .-]', '_', str(value)).strip(' .')[:100] or 'Unbekannt'
+    query = '''SELECT e.id,e.year,e.topic,e.body,m.nachname,m.vorname,m.bereich
+               FROM evidence e JOIN employees m ON m.subject=e.subject WHERE 1=1'''
+    args = []
+    if year is not None:
+        query += ' AND e.year=?'
+        args.append(year)
+    if department is not None:
+        query += ' AND m.bereich=?'
+        args.append(department)
+    query += ' ORDER BY e.year,m.bereich,m.nachname,m.vorname,e.id'
+    output = io.BytesIO()
+    count = 0
+    with zipfile.ZipFile(output, 'w', zipfile.ZIP_DEFLATED) as archive:
+        for row in db.execute(query, args):
+            # The evidence ID avoids collisions even for identical employee names.
+            name = f"{row['year']}/{safe(row['bereich'])}/{safe(row['nachname'])}_{safe(row['vorname'])}/{safe(row['topic'])}_{row['id']}.pdf"
+            archive.writestr(name, row['body'])
+            count += 1
+    return output.getvalue(), count
