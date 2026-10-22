@@ -1,122 +1,125 @@
 import csv
 import io
-import re
-import sqlite3
-import unicodedata
+import os
+import hashlib
 from pathlib import Path
+from datetime import datetime
+from zoneinfo import ZoneInfo
 
-
-def norm(value):
-    value = value.casefold().replace('ä', 'ae').replace('ö', 'oe').replace('ü', 'ue').replace('ß', 'ss')
-    return ''.join(c for c in unicodedata.normalize('NFKD', value) if c.isalnum())
-
-def recognize(filename, employee, topics):
-    parts = Path(filename).stem.split('_')
-    if len(parts) != 4 or not re.fullmatch(r'\d{4}', parts[-1]):
-        raise ValueError('Erwartet: Belehrung_Nachname_Vorname_Jahr.pdf (Belehrung durch die konkrete Art ersetzen).')
-    topic = next((t for t in topics if norm(t) == norm(parts[0])), None)
-    if not topic:
-        raise ValueError('Belehrungsart nicht erkannt.')
-    if norm(parts[1]) != norm(employee['nachname']) or norm(parts[2]) != norm(employee['vorname']):
-        raise ValueError('Der Name im Dateinamen gehört nicht zum ausgewählten Mitarbeiter.')
-    return topic, int(parts[-1])
-
-def connect(path):
-    Path(path).parent.mkdir(parents=True, exist_ok=True)
-    db = sqlite3.connect(path, timeout=20)
-    db.row_factory = sqlite3.Row
-    db.execute('PRAGMA foreign_keys=ON')
-    db.executescript('''
-    CREATE TABLE IF NOT EXISTS employees(subject TEXT PRIMARY KEY, nachname TEXT NOT NULL, vorname TEXT NOT NULL, bereich TEXT NOT NULL);
-    CREATE TABLE IF NOT EXISTS requirements(year INTEGER PRIMARY KEY, topics TEXT NOT NULL);
-    CREATE TABLE IF NOT EXISTS evidence(id INTEGER PRIMARY KEY, subject TEXT NOT NULL REFERENCES employees(subject), topic TEXT NOT NULL, year INTEGER NOT NULL, filename TEXT NOT NULL, body BLOB NOT NULL, status TEXT NOT NULL DEFAULT 'Eingereicht', submitted TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP, reviewer TEXT, reviewed TEXT, UNIQUE(subject,topic,year));
-    CREATE TABLE IF NOT EXISTS audit(id INTEGER PRIMARY KEY, actor TEXT NOT NULL, action TEXT NOT NULL, at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP);
-    ''')
-    return db
-
-def import_staff(db, content, actor):
-    rows = list(csv.DictReader(io.StringIO(content.decode('utf-8-sig')), delimiter=';'))
-    required = {'subject', 'nachname', 'vorname', 'bereich'}
-    if not rows or not required.issubset(rows[0]):
-        raise ValueError('Spalten benötigt: subject;nachname;vorname;bereich')
-    seen = set()
-    for row in rows:
-        if any(not (row.get(k) or '').strip() for k in required) or row['bereich'].strip() not in ['KGE', 'CMTD', 'GYN']:
-            raise ValueError('Alle Felder ausfüllen; Bereich muss KGE, CMTD oder GYN sein.')
-        if row['subject'].strip() in seen:
-            raise ValueError('Doppelte subject-ID in der Mitarbeiterliste.')
-        seen.add(row['subject'].strip())
-    with db:
-        for r in rows:
-            db.execute('INSERT INTO employees VALUES(?,?,?,?) ON CONFLICT(subject) DO UPDATE SET nachname=excluded.nachname,vorname=excluded.vorname,bereich=excluded.bereich', tuple(r[k].strip() for k in ['subject','nachname','vorname','bereich']))
-        db.execute('INSERT INTO audit(actor,action) VALUES(?,?)', (actor, f'Mitarbeiterimport: {len(rows)}'))
-    return len(rows)
-
-def submit(db, actor, filename, data, year, topics):
-    employee = db.execute('SELECT * FROM employees WHERE subject=?', (actor,)).fetchone()
-    if employee is None:
-        raise ValueError('Kein Mitarbeiterkonto freigeschaltet.')
-    topic, file_year = recognize(filename, employee, topics)
-    if file_year != year or topic not in topics:
-        raise ValueError('Jahr oder Belehrung entspricht nicht den gewählten Pflichtbelehrungen.')
-    if Path(filename).suffix.lower() != '.pdf' or not data.startswith(b'%PDF-') or len(data) > 10 * 1024 * 1024:
-        raise ValueError('Bitte eine PDF-Datei mit höchstens 10 MB hochladen.')
-    with db:
-        try:
-            db.execute('INSERT INTO evidence(subject,topic,year,filename,body) VALUES(?,?,?,?,?)', (actor, topic, year, Path(filename).name, data))
-        except sqlite3.IntegrityError as exc:
-            raise ValueError('Für diese Belehrung und dieses Jahr liegt bereits ein Nachweis vor. Bitte Verwaltung kontaktieren.') from exc
-        db.execute('INSERT INTO audit(actor,action) VALUES(?,?)', (actor, f'Eingereicht: {topic}, {year}'))
-
-
-def export_pdfs(db, year=None, department=None):
-    """Create a ZIP with safe, unique paths and the original PDF bytes."""
-    import zipfile
-    def safe(value):
-        return re.sub(r'[^\w .-]', '_', str(value)).strip(' .')[:100] or 'Unbekannt'
-    query = '''SELECT e.id,e.year,e.topic,e.body,m.nachname,m.vorname,m.bereich
-               FROM evidence e JOIN employees m ON m.subject=e.subject WHERE 1=1'''
-    args = []
-    if year is not None:
-        query += ' AND e.year=?'
-        args.append(year)
-    if department is not None:
-        query += ' AND m.bereich=?'
-        args.append(department)
-    query += ' ORDER BY e.year,m.bereich,m.nachname,m.vorname,e.id'
-    output = io.BytesIO()
-    count = 0
-    with zipfile.ZipFile(output, 'w', zipfile.ZIP_DEFLATED) as archive:
-        for row in db.execute(query, args):
-            # The evidence ID avoids collisions even for identical employee names.
-            name = f"{row['year']}/{safe(row['bereich'])}/{safe(row['nachname'])}_{safe(row['vorname'])}/{safe(row['topic'])}_{row['id']}.pdf"
-            archive.writestr(name, row['body'])
-            count += 1
-    return output.getvalue(), count
-
-
-def load_requirements(path):
-    """Read the authoritative yearly configuration; never use database defaults."""
-    with Path(path).open('r', encoding='utf-8-sig', newline='') as file:
-        reader = csv.DictReader(file, delimiter=';')
-        if reader.fieldnames != ['jahr', 'belehrung']:
-            raise ValueError('Spalten müssen exakt jahr;belehrung heißen.')
-        result = {}
-        for line, row in enumerate(reader, start=2):
-            if None in row:
-                raise ValueError(f'Zeile {line}: Zu viele Spalten.')
-            year_text = (row.get('jahr') or '').strip()
-            topic = (row.get('belehrung') or '').strip()
-            if not year_text and not topic:
+st.set_page_config(page_title='Belehrungen · KGE, CMTD & GYN', page_icon='📋', layout='wide')
+st.title('Belehrungen · KGE, CMTD & GYN')
+st.caption('Jährliche Nachweise zentral einreichen und ihren Status verfolgen.')
+with connect(os.environ.get('BELEHRUNGEN_DB', 'data/belehrungen_ohne_login.db')) as db:
+    db.execute('CREATE TABLE IF NOT EXISTS app_settings(key TEXT PRIMARY KEY, value TEXT NOT NULL)')
+    if not db.execute("SELECT 1 FROM app_settings WHERE key='initialized'").fetchone():
+        with db:
+            db.execute('INSERT OR IGNORE INTO requirements VALUES(?,?)', (datetime.now(ZoneInfo('Europe/Berlin')).year, '|'.join(TOPICS)))
+            db.execute("INSERT INTO app_settings VALUES('initialized','1')")
+    roster_path = Path(__file__).resolve().parent / 'mitarbeiter.csv'
+    if not roster_path.exists():
+        st.error('mitarbeiter.csv fehlt. Bitte die CSV im selben Ordner wie app.py ablegen.')
+        st.stop()
+    try:
+        roster_bytes = roster_path.read_bytes()
+        roster_hash = hashlib.sha256(roster_bytes).hexdigest()
+        previous = db.execute("SELECT value FROM app_settings WHERE key='roster_hash'").fetchone()
+        if previous is None or previous['value'] != roster_hash:
+            import_staff(db, roster_bytes, 'csv-datei')
+            with db:
+                db.execute("INSERT INTO app_settings VALUES('roster_hash',?) ON CONFLICT(key) DO UPDATE SET value=excluded.value", (roster_hash,))
+        roster_ids = [r['subject'].strip() for r in csv.DictReader(io.StringIO(roster_bytes.decode('utf-8-sig')), delimiter=';')]
+    except (OSError, ValueError, UnicodeError, csv.Error) as exc:
+        st.error(f'mitarbeiter.csv konnte nicht geladen werden: {exc}')
+        st.stop()
+    view = st.sidebar.radio('Ansicht wählen', ['Mitarbeiter', 'Verwaltung'])
+    admin = view == 'Verwaltung'
+    employee = None
+    subject = 'verwaltung-ohne-login'
+    if not admin:
+        staff_choices = [r for r in db.execute('SELECT * FROM employees ORDER BY nachname,vorname,subject') if r['subject'] in roster_ids]
+        if not staff_choices:
+            st.info('Bitte Mitarbeiter in mitarbeiter.csv neben app.py eintragen.')
+            st.stop()
+        selected = st.sidebar.selectbox('Mitarbeiter auswählen', range(len(staff_choices)), format_func=lambda i: f"{staff_choices[i]['vorname']} {staff_choices[i]['nachname']} · {staff_choices[i]['bereich']} · {staff_choices[i]['subject']}")
+        employee = staff_choices[selected]
+        subject = employee['subject']
+    year = st.sidebar.number_input('Belehrungsjahr', 2020, 2100, datetime.now(ZoneInfo('Europe/Berlin')).year)
+    req = db.execute('SELECT topics FROM requirements WHERE year=?', (year,)).fetchone()
+    topics = req['topics'].split('|') if req and req['topics'] else []
+    pages = (['Meine Nachweise', 'Nachweis einreichen'] if employee else []) + (['Gesamtübersicht', 'Verwaltung'] if admin else [])
+    page = st.sidebar.radio('Bereich', pages)
+    if not topics:
+        st.info('Für dieses Jahr wurden noch keine Pflichtbelehrungen festgelegt.')
+    if page == 'Meine Nachweise':
+        st.subheader(f"{employee['vorname']} {employee['nachname']} · {year}")
+        own = {r['topic']: r for r in db.execute('SELECT id,topic,status,submitted FROM evidence WHERE subject=? AND year=?', (subject, year))}
+        st.dataframe([{'Belehrung': t, 'Status': own[t]['status'] if t in own else 'Offen', 'Eingereicht am': own[t]['submitted'] if t in own else '—'} for t in topics], hide_index=True, use_container_width=True)
+    elif page == 'Nachweis einreichen':
+        st.subheader('Nachweise hochladen')
+        st.write('Dateiname: Datenschutz_Nachname_Vorname_Jahr.pdf. Möglich sind die für das Jahr festgelegten Belehrungen. Keine automatische Inhaltsprüfung oder OCR.')
+        files = st.file_uploader('PDF-Nachweise · maximal 10 MB je Datei', type=['pdf'], accept_multiple_files=True)
+        st.caption('Uploads zählen als eingereicht. Die Verwaltung prüft und bestätigt den Nachweis.')
+        if st.button('Nachweise verbindlich einreichen', disabled=not files or not topics):
+            for file in files:
+                try:
+                    submit(db, subject, file.name, file.getvalue(), year, topics)
+                    st.success(f'{file.name}: eingereicht')
+                except ValueError as exc:
+                    st.error(f'{file.name}: {exc}')
+    elif page == 'Gesamtübersicht' and admin:
+        st.subheader(f'Gesamtübersicht {year}')
+        department = st.selectbox('Bereich filtern', ['Alle', 'KGE', 'CMTD', 'GYN'])
+        staff = db.execute('SELECT * FROM employees ORDER BY nachname,vorname').fetchall()
+        evidence = {(r['subject'], r['topic']): r for r in db.execute('SELECT id,subject,topic,status,filename,submitted FROM evidence WHERE year=?', (year,))}
+        rows = []
+        for e in staff:
+            if department != 'Alle' and e['bereich'] != department:
                 continue
-            if not re.fullmatch(r'[0-9]{4}', year_text) or not 2020 <= int(year_text) <= 2100:
-                raise ValueError(f'Zeile {line}: Jahr muss zwischen 2020 und 2100 liegen.')
-            if not topic or not norm(topic) or any(c in topic for c in '_/\\|\r\n'):
-                raise ValueError(f'Zeile {line}: Belehrungsname fehlt oder enthält ungültige Zeichen (z. B. Unterstrich).')
-            topics = result.setdefault(int(year_text), [])
-            if any(norm(existing) == norm(topic) for existing in topics):
-                raise ValueError(f'Zeile {line}: Doppelte oder mehrdeutige Belehrung für {year_text}.')
-            topics.append(topic)
-    if not result:
-        raise ValueError('Mindestens eine Pflichtbelehrung mit Jahr eintragen.')
-    return result
+            rows.append({'Nachname': e['nachname'], 'Vorname': e['vorname'], 'Bereich': e['bereich'], **{t: evidence[(e['subject'], t)]['status'] if (e['subject'], t) in evidence else 'Offen' for t in topics}})
+        st.dataframe(rows, hide_index=True, use_container_width=True)
+        if rows:
+            out = io.StringIO()
+            writer = csv.DictWriter(out, fieldnames=list(rows[0]), delimiter=';')
+            writer.writeheader()
+            for row in rows:
+                writer.writerow({k: "'"+v if isinstance(v,str) and v.startswith(('=', '+', '-', '@', '\t', '\r')) else v for k,v in row.items()})
+            st.download_button('Übersicht als CSV', out.getvalue().encode('utf-8-sig'), f'Belehrungen_{year}.csv', 'text/csv')
+        st.subheader('PDFs als Ordner herunterladen')
+        scope = st.radio('ZIP-Inhalt', ['Alle PDFs aus allen Jahren und Bereichen', 'Gewähltes Jahr und gefilterter Bereich'])
+        if st.button('ZIP erstellen'):
+            all_records = scope == 'Alle PDFs aus allen Jahren und Bereichen'
+            archive, count = export_pdfs(db, year=None if all_records else year,
+                                         department=None if all_records or department == 'Alle' else department)
+            if count:
+                st.success(f'{count} PDFs bereit. Nach dem Download die ZIP-Datei entpacken.')
+                st.download_button('ZIP herunterladen', archive,
+                                   'Belehrungen_Alle.zip' if all_records else f'Belehrungen_{year}_{department}.zip',
+                                   'application/zip')
+            else:
+                st.info('Für diese Auswahl sind keine PDFs vorhanden.')
+        st.subheader('Eingereichte Nachweise prüfen')
+        visible = {e['subject'] for e in staff if department == 'Alle' or e['bereich'] == department}
+        for r in evidence.values():
+            if r['subject'] not in visible:
+                continue
+            with st.expander(f"{r['filename']} · {r['status']}"):
+                body = db.execute('SELECT body FROM evidence WHERE id=?', (r['id'],)).fetchone()['body']
+                st.download_button('PDF herunterladen', body, r['filename'], 'application/pdf', key=f"download{r['id']}")
+                status = st.selectbox('Prüfergebnis', ['Eingereicht', 'Bestätigt', 'Rückfrage'], index=['Eingereicht','Bestätigt','Rückfrage'].index(r['status']), key=f"status{r['id']}")
+                if st.button('Prüfergebnis speichern', key=f"save{r['id']}"):
+                    with db:
+                        db.execute('UPDATE evidence SET status=?,reviewer=?,reviewed=CURRENT_TIMESTAMP WHERE id=?', (status,subject,r['id']))
+                        db.execute('INSERT INTO audit(actor,action) VALUES(?,?)', (subject, f"Nachweis {r['id']}: {status}"))
+                    st.rerun()
+    elif page == 'Verwaltung' and admin:
+        st.subheader('Pflichtbelehrungen festlegen')
+        chosen = st.multiselect('Pflichtbelehrungen für das gewählte Jahr', TOPICS, default=topics)
+        if st.button('Jahreskonfiguration speichern'):
+            with db:
+                db.execute('INSERT INTO requirements VALUES(?,?) ON CONFLICT(year) DO UPDATE SET topics=excluded.topics', (year, '|'.join(chosen)))
+                db.execute('INSERT INTO audit(actor,action) VALUES(?,?)', (subject, f'Pflichtbelehrungen {year}: {chosen}'))
+            st.rerun()
+        st.subheader('Mitarbeiterliste')
+        st.write('Die Mitarbeiter werden automatisch aus mitarbeiter.csv im selben Ordner wie app.py geladen. Änderungen an der Datei werden beim nächsten Laden übernommen. Die subject-ID muss pro Person eindeutig und dauerhaft gleich bleiben.')
+        st.dataframe([dict(r) for r in db.execute('SELECT * FROM employees ORDER BY nachname,vorname') if r['subject'] in roster_ids], hide_index=True)
+        st.caption('Aus der CSV entfernte Personen sind nicht mehr auswählbar. Bereits gespeicherte Nachweise bleiben für den Export und die Gesamtübersicht erhalten.')
