@@ -11,7 +11,7 @@ from core import connect, import_staff, submit, export_pdfs, load_requirements, 
 
 st.set_page_config(page_title='Belehrungen · KGE, CMTD & GYN', page_icon='📋', layout='wide')
 st.title('Belehrungen · KGE, CMTD & GYN')
-st.caption('Jährliche Nachweise zentral einreichen und ihren Status verfolgen.')
+st.caption('Jährliche Nachweise zentral einreichen und ihren Status verfolgen. Mit ♥️ Dank für Andrea 😉')
 with connect(os.environ.get('BELEHRUNGEN_DB', 'data/belehrungen_ohne_login.db')) as db:
     db.execute('CREATE TABLE IF NOT EXISTS app_settings(key TEXT PRIMARY KEY, value TEXT NOT NULL)')
     roster_path = Path(__file__).resolve().parent / 'mitarbeiter.csv'
