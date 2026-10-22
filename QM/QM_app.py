@@ -90,7 +90,7 @@ with connect(os.environ.get('BELEHRUNGEN_DB', 'data/belehrungen_ohne_login.db'))
         st.dataframe([{'Belehrung': t, 'Status': own[t]['status'] if t in own else 'Offen', 'Eingereicht am': own[t]['submitted'] if t in own else '—'} for t in topics], hide_index=True, use_container_width=True)
     elif page == 'Nachweis einreichen':
         st.subheader('Nachweise hochladen')
-        st.write('Dateiname: Datenschutz_Nachname_Vorname_Jahr.pdf. Möglich sind die für das Jahr festgelegten Belehrungen. Keine automatische Inhaltsprüfung oder OCR.')
+        st.write('Dateiname soll erfasst als "Art der Belehrung_Nachname_Vorname_Jahr.pdf" z.B. Datenschutz_Nachname_Vorname_Jahr.pdf. Möglich sind die für das Jahr (links gewählt) festgelegten Belehrungen.')
         files = st.file_uploader('PDF-Nachweise · maximal 10 MB je Datei', type=['pdf'], accept_multiple_files=True)
         st.caption('Uploads zählen als eingereicht. Bei Status Rückfrage kann eine korrigierte PDF erneut hochgeladen werden. Die Verwaltung prüft und bestätigt den Nachweis.')
         if st.button('Nachweise verbindlich einreichen', disabled=not files or not topics):
