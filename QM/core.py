@@ -5,8 +5,6 @@ import hashlib
 from pathlib import Path
 from datetime import datetime
 from zoneinfo import ZoneInfo
-import streamlit as st
-from core import TOPICS, connect, import_staff, submit, export_pdfs
 
 st.set_page_config(page_title='Belehrungen · KGE, CMTD & GYN', page_icon='📋', layout='wide')
 st.title('Belehrungen · KGE, CMTD & GYN')
